@@ -36,18 +36,13 @@ export default function Box() {
         return a.paldeaDex - b.paldeaDex;
       })
     );
-    setBoxQuantity(Math.ceil(pokedex.length / 30));
-  }, []);
 
-  useEffect(() => {
     setBoxQuantity(Math.ceil(pokedex.length / 30));
-  }, [pokedex]);
 
-  useEffect(() => {
     if (boxQuantity > 0) {
       setPokeBox(handleBoxQuantity());
     }
-  }, [boxQuantity]);
+  }, [pokedex, boxQuantity]);
 
   function handleBoxQuantity() {
     const newPokeBox = [];
@@ -70,12 +65,12 @@ export default function Box() {
     <div className={styles.container}>
       {pokeBox.map((box) => {
         return (
-          <div className={styles.boxContainer}>
+          <div key={box.box} className={styles.boxContainer}>
             <div className={styles.boxHeader}>Box {box.box}</div>
             <div className={styles.boxGrid}>
               {box.pokemon.map((pkmn) => {
                 return (
-                  <div className={styles.card}>
+                  <div key={pkmn.id} className={styles.card}>
                     <img src={`svicons/${pkmn.icon}`} alt={pkmn.name} />
                   </div>
                 );
