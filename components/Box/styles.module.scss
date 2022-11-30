@@ -1,5 +1,16 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top:1rem;
+}
+
+.filterControl {
+    display: flex;
+    gap: 1rem;
+}
+
 .boxContainer {
-    margin-top: 1rem;
     max-width: 720px;
     border-radius: 1rem;
 }
@@ -39,6 +50,10 @@
 }
 
 @media (max-width: 720px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
     .boxHeader {
         border-radius: 1rem 1rem 0 0;
         padding: 0.25rem;

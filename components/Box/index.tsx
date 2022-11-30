@@ -38,7 +38,6 @@ export default function Box() {
   const [orderList, setOrderList] = useState<"p" | "n">("p");
 
   useEffect(() => {
-    console.log("effect");
     setBoxQuantity(Math.ceil(pokedex.length / 30));
 
     if (orderList === "p") {
@@ -53,7 +52,6 @@ export default function Box() {
   }, [pokedex, boxQuantity, orderList]);
 
   function handleBoxQuantity() {
-    console.log("chamou handlebox");
     const newPokeBox = [];
 
     if (boxQuantity > 0) {
@@ -133,61 +131,64 @@ export default function Box() {
 
     if (newOrder === "p") {
       setPokedex(sortByPaldeanDex());
-      console.log(sortByPaldeanDex());
-      console.log("chegou no p");
     } else {
       setPokedex(sortByNationalDex());
-      console.log(sortByNationalDex());
-      console.log("chegou no n");
     }
   }
 
   return (
-    <div className={styles.container}>
-      <select onChange={(e) => handleSorting(e.target.value)} value={orderList}>
-        <option value="p">Sort by Paldean Dex</option>
-        <option value="n">Sort by National Dex</option>
-      </select>
-      <label>
-        <input
-          type="checkbox"
-          checked={viewGenderDifference}
-          onChange={handleViewGenderDifference}
-          name="Gender Difference"
-          id="genderDifference"
-        />
-        Gender Difference
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={viewOnlyOneForm}
-          onChange={handleViewOnlyOneForm}
-          name="Only One Form"
-          id="onlyOneForm"
-        />
-        Only 1 Form
-      </label>
-      {pokeBox.map((box) => {
-        return (
-          <div key={box.box} className={styles.boxContainer}>
-            <div className={styles.boxHeader}>Box {box.box}</div>
-            <div className={styles.boxGrid}>
-              {box.pokemon.map((pkmn) => {
-                return (
-                  <div key={pkmn.id} className={styles.card}>
-                    <img src={`svicons/${pkmn.icon}`} alt={pkmn.name} />
-                  </div>
-                );
-              })}
-              {box.pokemon.length < 30 &&
-                [...Array(30 - box.pokemon.length)].map((x, i) => (
-                  <div className={styles.card} key={i} />
-                ))}
+    <div>
+      <div className={styles.filterControl}>
+        <select
+          onChange={(e) => handleSorting(e.target.value)}
+          value={orderList}
+        >
+          <option value="p">Sort by Paldean Dex</option>
+          <option value="n">Sort by National Dex</option>
+        </select>
+        <label>
+          <input
+            type="checkbox"
+            checked={viewGenderDifference}
+            onChange={handleViewGenderDifference}
+            name="Gender Difference"
+            id="genderDifference"
+          />
+          Gender Difference
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={viewOnlyOneForm}
+            onChange={handleViewOnlyOneForm}
+            name="Only One Form"
+            id="onlyOneForm"
+          />
+          Only 1 Form
+        </label>
+      </div>
+      <div className={styles.container}>
+        {pokeBox.map((box) => {
+          return (
+            <div key={box.box} className={styles.boxContainer}>
+              <div className={styles.boxHeader}>Box {box.box}</div>
+              <div className={styles.boxGrid}>
+                {box.pokemon.map((pkmn) => {
+                  return (
+                    <div key={pkmn.id} className={styles.card}>
+                      <img src={`svicons/${pkmn.icon}`} alt={pkmn.name} />
+                    </div>
+                  );
+                })}
+                {box.pokemon.length < 30 &&
+                  [...Array(30 - box.pokemon.length)].map((x, i) => (
+                    <div className={styles.card} key={i} />
+                  ))}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Box />
+      <div className={styles.background} />
     </div>
   );
 }
