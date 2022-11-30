@@ -79,9 +79,9 @@ export default function Box() {
 
     if (!newSetting) {
       if (viewGenderDifference) {
-        setPokedex(filterByGender());
-      } else {
         setPokedex(pokelist);
+      } else {
+        setPokedex(filterByGender());
       }
     } else {
       setViewGenderDifference(false);
