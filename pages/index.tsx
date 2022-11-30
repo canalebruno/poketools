@@ -5,7 +5,6 @@ import Box from "../components/Box";
 export default function Home() {
   return (
     <div className={styles.container}>
-      Hello World
       <Box />
     </div>
   );

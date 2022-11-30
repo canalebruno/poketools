@@ -12,7 +12,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1010.png"
  },
  {
@@ -26,9 +26,9 @@
    "generation": 9,
    "type1": "Grass",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1011.png"
  },
  {
@@ -44,7 +44,7 @@
    "type2": "Dark",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1012.png"
  },
  {
@@ -58,9 +58,9 @@
    "generation": 9,
    "type1": "Fire",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1013.png"
  },
  {
@@ -76,7 +76,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1014.png"
  },
  {
@@ -92,7 +92,7 @@
    "type2": "Ghost",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1015.png"
  },
  {
@@ -108,7 +108,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1016.png"
  },
  {
@@ -124,7 +124,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1017.png"
  },
  {
@@ -138,9 +138,9 @@
    "generation": 9,
    "type1": "Water",
    "type2": "Fighting",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1018.png"
  },
  {
@@ -156,7 +156,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1019.png"
  },
  {
@@ -172,7 +172,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1020.png"
  },
  {
@@ -188,7 +188,7 @@
    "type2": "",
    "genderDifference": true,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1020-f.png"
  },
  {
@@ -204,7 +204,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1022.png"
  },
  {
@@ -220,7 +220,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1023.png"
  },
  {
@@ -236,7 +236,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1024.png"
  },
  {
@@ -252,7 +252,7 @@
    "type2": "Dark",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1025.png"
  },
  {
@@ -266,7 +266,7 @@
    "generation": 2,
    "type1": "Grass",
    "type2": "Flying",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "187.png"
@@ -298,7 +298,7 @@
    "generation": 2,
    "type1": "Grass",
    "type2": "Flying",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "189.png"
@@ -396,7 +396,7 @@
    "type2": "Fighting",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1060.png"
  },
  {
@@ -410,7 +410,7 @@
    "generation": 2,
    "type1": "Dark",
    "type2": "Fire",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "228.png"
@@ -646,14 +646,14 @@
    "generalForm": "",
    "uniqueForm": "Fancy",
    "paldeaDex": 37,
-   "uniqueCode": "f",
+   "uniqueCode": "",
    "generation": 6,
    "type1": "Bug",
    "type2": "Flying",
    "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
-   "icon": "666-f.png"
+   "icon": "666.png"
  },
  {
    "id": "415",
@@ -972,7 +972,7 @@
    "type2": "Flying",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "426.png"
  },
  {
@@ -1066,7 +1066,7 @@
    "generation": 2,
    "type1": "Normal",
    "type2": "Fairy",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "174.png"
@@ -1194,7 +1194,7 @@
    "generation": 1,
    "type1": "Psychic",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "097.png"
@@ -1210,7 +1210,7 @@
    "generation": 1,
    "type1": "Psychic",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "097.png"
@@ -1242,7 +1242,7 @@
    "generation": 1,
    "type1": "Ghost",
    "type2": "Poison",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "093.png"
@@ -1260,7 +1260,7 @@
    "type2": "Poison",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "094.png"
  },
  {
@@ -1274,7 +1274,7 @@
    "generation": 9,
    "type1": "Normal",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": false,
    "icon": "1049.png"
@@ -1286,30 +1286,30 @@
    "generalForm": "",
    "uniqueForm": "Family of Four",
    "paldeaDex": 72,
-   "uniqueCode": "4",
+   "uniqueCode": "",
    "generation": 9,
    "type1": "Normal",
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": false,
-   "icon": "1050-4.png"
+   "icon": "1050.png"
  },
  {
-   "id": "1050",
+   "id": "1050-t",
    "nationalDex": 1050,
    "name": "Maushold",
    "generalForm": "",
    "uniqueForm": "Family of Three",
    "paldeaDex": 72,
-   "uniqueCode": "3",
+   "uniqueCode": "t",
    "generation": 9,
    "type1": "Normal",
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": false,
-   "icon": "1050-3.png"
+   "shinyAvailable": true,
+   "icon": "1050-t.png"
  },
  {
    "id": "172",
@@ -1338,7 +1338,7 @@
    "generation": 1,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "025.png"
@@ -1354,7 +1354,7 @@
    "generation": 1,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "025.png"
@@ -1370,7 +1370,7 @@
    "generation": 1,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "026.png"
@@ -1386,9 +1386,9 @@
    "generation": 1,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "026.png"
  },
  {
@@ -1404,7 +1404,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1074.png"
  },
  {
@@ -1516,7 +1516,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "763.png"
  },
  {
@@ -1532,7 +1532,7 @@
    "type2": "Normal",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1039.png"
  },
  {
@@ -1548,7 +1548,7 @@
    "type2": "Normal",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1040.png"
  },
  {
@@ -1578,7 +1578,7 @@
    "generation": 4,
    "type1": "Rock",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "438.png"
@@ -1594,7 +1594,7 @@
    "generation": 2,
    "type1": "Rock",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "185.png"
@@ -1610,7 +1610,7 @@
    "generation": 2,
    "type1": "Rock",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "185.png"
@@ -1648,7 +1648,7 @@
    "icon": "745.png"
  },
  {
-   "id": "745",
+   "id": "745-m",
    "nationalDex": 745,
    "name": "Lycanroc",
    "generalForm": "",
@@ -1664,7 +1664,7 @@
    "icon": "745-m.png"
  },
  {
-   "id": "745",
+   "id": "745-d",
    "nationalDex": 745,
    "name": "Lycanroc",
    "generalForm": "",
@@ -1738,7 +1738,7 @@
    "generation": 4,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "403.png"
@@ -1754,7 +1754,7 @@
    "generation": 4,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "403.png"
@@ -1770,7 +1770,7 @@
    "generation": 4,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "404.png"
@@ -1786,7 +1786,7 @@
    "generation": 4,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "404.png"
@@ -1802,7 +1802,7 @@
    "generation": 4,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "405.png"
@@ -1818,7 +1818,7 @@
    "generation": 4,
    "type1": "Electric",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "405.png"
@@ -1834,7 +1834,7 @@
    "generation": 4,
    "type1": "Normal",
    "type2": "Flying",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "396.png"
@@ -1850,7 +1850,7 @@
    "generation": 4,
    "type1": "Normal",
    "type2": "Flying",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "396.png"
@@ -1866,7 +1866,7 @@
    "generation": 4,
    "type1": "Normal",
    "type2": "Flying",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "397.png"
@@ -1882,7 +1882,7 @@
    "generation": 4,
    "type1": "Normal",
    "type2": "Flying",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "397.png"
@@ -1914,7 +1914,7 @@
    "generation": 4,
    "type1": "Normal",
    "type2": "Flying",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "398.png"
@@ -1936,7 +1936,7 @@
    "icon": "741.png"
  },
  {
-   "id": "741",
+   "id": "741-p",
    "nationalDex": 741,
    "name": "Oricorio",
    "generalForm": "",
@@ -1952,7 +1952,7 @@
    "icon": "741-p.png"
  },
  {
-   "id": "741",
+   "id": "741-s",
    "nationalDex": 741,
    "name": "Oricorio",
    "generalForm": "",
@@ -1968,7 +1968,7 @@
    "icon": "741-s.png"
  },
  {
-   "id": "741",
+   "id": "741-pau",
    "nationalDex": 741,
    "name": "Oricorio",
    "generalForm": "",
@@ -2058,7 +2058,7 @@
    "generation": 5,
    "type1": "Grass",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "549.png"
@@ -2172,11 +2172,11 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "326.png"
  },
  {
-   "id": "1064",
+   "id": "1064-b",
    "nationalDex": 1064,
    "name": "Squawkabilly",
    "generalForm": "",
@@ -2188,11 +2188,11 @@
    "type2": "Flying",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1064-b.png"
  },
  {
-   "id": "1064",
+   "id": "1064-y",
    "nationalDex": 1064,
    "name": "Squawkabilly",
    "generalForm": "",
@@ -2204,11 +2204,11 @@
    "type2": "Flying",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1064-y.png"
  },
  {
-   "id": "1064",
+   "id": "1064-w",
    "nationalDex": 1064,
    "name": "Squawkabilly",
    "generalForm": "",
@@ -2230,14 +2230,14 @@
    "generalForm": "",
    "uniqueForm": "Green Plumage",
    "paldeaDex": 113,
-   "uniqueCode": "g",
+   "uniqueCode": "",
    "generation": 9,
    "type1": "Normal",
    "type2": "Flying",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": false,
-   "icon": "1064-g.png"
+   "shinyAvailable": true,
+   "icon": "1064.png"
  },
  {
    "id": "200",
@@ -2266,7 +2266,7 @@
    "generation": 4,
    "type1": "Ghost",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "429.png"
@@ -2362,7 +2362,7 @@
    "generation": 7,
    "type1": "Poison",
    "type2": "Fire",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "758.png"
@@ -2394,7 +2394,7 @@
    "generation": 2,
    "type1": "Ground",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "232.png"
@@ -2410,7 +2410,7 @@
    "generation": 2,
    "type1": "Ground",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "232.png"
@@ -2458,7 +2458,7 @@
    "generation": 4,
    "type1": "Dragon",
    "type2": "Ground",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "443.png"
@@ -2474,7 +2474,7 @@
    "generation": 4,
    "type1": "Dragon",
    "type2": "Ground",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "443.png"
@@ -2490,7 +2490,7 @@
    "generation": 4,
    "type1": "Dragon",
    "type2": "Ground",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "444.png"
@@ -2506,7 +2506,7 @@
    "generation": 4,
    "type1": "Dragon",
    "type2": "Ground",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "444.png"
@@ -2522,7 +2522,7 @@
    "generation": 4,
    "type1": "Dragon",
    "type2": "Ground",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "445.png"
@@ -2538,9 +2538,9 @@
    "generation": 4,
    "type1": "Dragon",
    "type2": "Ground",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "445.png"
  },
  {
@@ -2556,7 +2556,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1067.png"
  },
  {
@@ -2570,9 +2570,9 @@
    "generation": 9,
    "type1": "Rock",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1068.png"
  },
  {
@@ -2618,7 +2618,7 @@
    "generation": 3,
    "type1": "Water",
    "type2": "Flying",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "279.png"
@@ -2634,7 +2634,7 @@
    "generation": 1,
    "type1": "Water",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "129.png"
@@ -2650,7 +2650,7 @@
    "generation": 1,
    "type1": "Water",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "129.png"
@@ -2666,7 +2666,7 @@
    "generation": 1,
    "type1": "Water",
    "type2": "Flying",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "130.png"
@@ -2682,7 +2682,7 @@
    "generation": 1,
    "type1": "Water",
    "type2": "Flying",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "130.png"
@@ -2736,7 +2736,7 @@
    "icon": "550.png"
  },
  {
-   "id": "550",
+   "id": "550-b",
    "nationalDex": 550,
    "name": "Basculin",
    "generalForm": "",
@@ -2762,7 +2762,7 @@
    "generation": 3,
    "type1": "Poison",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "316.png"
@@ -2778,7 +2778,7 @@
    "generation": 3,
    "type1": "Poison",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "316.png"
@@ -2794,7 +2794,7 @@
    "generation": 3,
    "type1": "Poison",
    "type2": "",
-   "genderDifference": false,
+   "genderDifference": true,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "317.png"
@@ -2810,7 +2810,7 @@
    "generation": 3,
    "type1": "Poison",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "317.png"
@@ -2842,7 +2842,7 @@
    "generation": 1,
    "type1": "Normal",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "053.png"
@@ -2880,7 +2880,7 @@
    "icon": "669.png"
  },
  {
-   "id": "669",
+   "id": "669-b",
    "nationalDex": 669,
    "name": "Flabébé",
    "generalForm": "",
@@ -2896,7 +2896,7 @@
    "icon": "669-b.png"
  },
  {
-   "id": "669",
+   "id": "669-y",
    "nationalDex": 669,
    "name": "Flabébé",
    "generalForm": "",
@@ -2912,7 +2912,7 @@
    "icon": "669-y.png"
  },
  {
-   "id": "669",
+   "id": "669-w",
    "nationalDex": 669,
    "name": "Flabébé",
    "generalForm": "",
@@ -2928,7 +2928,7 @@
    "icon": "669-w.png"
  },
  {
-   "id": "669",
+   "id": "669-o",
    "nationalDex": 669,
    "name": "Flabébé",
    "generalForm": "",
@@ -2960,7 +2960,7 @@
    "icon": "670.png"
  },
  {
-   "id": "670",
+   "id": "670-y",
    "nationalDex": 670,
    "name": "Floette",
    "generalForm": "",
@@ -2976,7 +2976,7 @@
    "icon": "670-y.png"
  },
  {
-   "id": "670",
+   "id": "670-w",
    "nationalDex": 670,
    "name": "Floette",
    "generalForm": "",
@@ -2992,7 +2992,7 @@
    "icon": "670-w.png"
  },
  {
-   "id": "670",
+   "id": "670-o",
    "nationalDex": 670,
    "name": "Floette",
    "generalForm": "",
@@ -3008,7 +3008,7 @@
    "icon": "670-o.png"
  },
  {
-   "id": "670",
+   "id": "670-b",
    "nationalDex": 670,
    "name": "Floette",
    "generalForm": "",
@@ -3040,7 +3040,7 @@
    "icon": "671.png"
  },
  {
-   "id": "671",
+   "id": "671-w",
    "nationalDex": 671,
    "name": "Florges",
    "generalForm": "",
@@ -3056,7 +3056,7 @@
    "icon": "671-w.png"
  },
  {
-   "id": "671",
+   "id": "671-y",
    "nationalDex": 671,
    "name": "Florges",
    "generalForm": "",
@@ -3072,7 +3072,7 @@
    "icon": "671-y.png"
  },
  {
-   "id": "671",
+   "id": "671-b",
    "nationalDex": 671,
    "name": "Florges",
    "generalForm": "",
@@ -3088,7 +3088,7 @@
    "icon": "671-b.png"
  },
  {
-   "id": "671",
+   "id": "671-o",
    "nationalDex": 671,
    "name": "Florges",
    "generalForm": "",
@@ -3340,7 +3340,7 @@
    "type2": "Ghost",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1114.png"
  },
  {
@@ -3532,7 +3532,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1044.png"
  },
  {
@@ -3548,7 +3548,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1045.png"
  },
  {
@@ -3676,7 +3676,7 @@
    "type2": "Flying",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1061.png"
  },
  {
@@ -3692,7 +3692,7 @@
    "type2": "Flying",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1062.png"
  },
  {
@@ -3706,7 +3706,7 @@
    "generation": 1,
    "type1": "Normal",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "133.png"
@@ -3738,7 +3738,7 @@
    "generation": 1,
    "type1": "Water",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "134.png"
@@ -3884,23 +3884,23 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1021.png"
  },
  {
-   "id": "1021",
+   "id": "1021-3",
    "nationalDex": 1021,
    "name": "Dudunsparce",
    "generalForm": "",
    "uniqueForm": "Three-Segment",
    "paldeaDex": 189,
-   "uniqueCode": "",
+   "uniqueCode": "3",
    "generation": 9,
    "type1": "Normal",
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1021.png"
  },
  {
@@ -3920,7 +3920,7 @@
    "icon": "585.png"
  },
  {
-   "id": "585",
+   "id": "585-s",
    "nationalDex": 585,
    "name": "Deerling",
    "generalForm": "",
@@ -3936,7 +3936,7 @@
    "icon": "585-s.png"
  },
  {
-   "id": "585",
+   "id": "585-a",
    "nationalDex": 585,
    "name": "Deerling",
    "generalForm": "",
@@ -3952,7 +3952,7 @@
    "icon": "585-a.png"
  },
  {
-   "id": "585",
+   "id": "585-w",
    "nationalDex": 585,
    "name": "Deerling",
    "generalForm": "",
@@ -3984,7 +3984,7 @@
    "icon": "586.png"
  },
  {
-   "id": "586",
+   "id": "586-s",
    "nationalDex": 586,
    "name": "Sawsbuck",
    "generalForm": "",
@@ -4000,7 +4000,7 @@
    "icon": "586-s.png"
  },
  {
-   "id": "586",
+   "id": "586-a",
    "nationalDex": 586,
    "name": "Sawsbuck",
    "generalForm": "",
@@ -4016,7 +4016,7 @@
    "icon": "586-a.png"
  },
  {
-   "id": "586",
+   "id": "586-w",
    "nationalDex": 586,
    "name": "Sawsbuck",
    "generalForm": "",
@@ -4074,9 +4074,9 @@
    "generation": 9,
    "type1": "Normal",
    "type2": "Psychic",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1032.png"
  },
  {
@@ -4124,7 +4124,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1076.png"
  },
  {
@@ -4138,9 +4138,9 @@
    "generation": 9,
    "type1": "Dark",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1077.png"
  },
  {
@@ -4176,7 +4176,7 @@
    "icon": "849.png"
  },
  {
-   "id": "849",
+   "id": "849-l",
    "nationalDex": 849,
    "name": "Toxtricity",
    "generalForm": "",
@@ -4252,7 +4252,7 @@
    "type2": "Normal",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1072.png"
  },
  {
@@ -4268,7 +4268,7 @@
    "type2": "Normal",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1073.png"
  },
  {
@@ -4394,7 +4394,7 @@
    "generation": 4,
    "type1": "Electric",
    "type2": "Steel",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "462.png"
@@ -4474,7 +4474,7 @@
    "generation": 2,
    "type1": "Normal",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "217.png"
@@ -4576,52 +4576,52 @@
    "icon": "673.png"
  },
  {
-   "id": "128-pa",
+   "id": "128-p-a",
    "nationalDex": 128,
    "name": "Tauros",
    "generalForm": "Paldean",
    "uniqueForm": "Aqua Breed",
    "paldeaDex": 223,
-   "uniqueCode": "pa",
+   "uniqueCode": "a",
    "generation": 1,
    "type1": "Fighting",
    "type2": "Water",
    "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
-   "icon": "128-pa.png"
+   "icon": "128-p-a.png"
  },
  {
-   "id": "128-pb",
+   "id": "128-p-b",
    "nationalDex": 128,
    "name": "Tauros",
    "generalForm": "Paldean",
    "uniqueForm": "Blaze Breed",
    "paldeaDex": 223,
-   "uniqueCode": "pb",
+   "uniqueCode": "b",
    "generation": 1,
    "type1": "Fighting",
    "type2": "Fire",
    "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
-   "icon": "128-pb.png"
+   "icon": "128-p-b.png"
  },
  {
-   "id": "128-pc",
+   "id": "128-p",
    "nationalDex": 128,
    "name": "Tauros",
    "generalForm": "Paldean",
    "uniqueForm": "Combat Breed",
    "paldeaDex": 223,
-   "uniqueCode": "pc",
+   "uniqueCode": "",
    "generation": 1,
    "type1": "Fighting",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
-   "icon": "128-pc.png"
+   "icon": "128-p.png"
  },
  {
    "id": "667",
@@ -4714,7 +4714,7 @@
    "generation": 5,
    "type1": "Dark",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "570.png"
@@ -4912,13 +4912,13 @@
    "icon": "854.png"
  },
  {
-   "id": "854",
+   "id": "854-a",
    "nationalDex": 854,
    "name": "Sinistea",
    "generalForm": "",
    "uniqueForm": "Antique Form",
    "paldeaDex": 237,
-   "uniqueCode": "",
+   "uniqueCode": "a",
    "generation": 8,
    "type1": "Ghost",
    "type2": "",
@@ -4944,13 +4944,13 @@
    "icon": "855.png"
  },
  {
-   "id": "855",
+   "id": "855-a",
    "nationalDex": 855,
    "name": "Polteageist",
    "generalForm": "",
    "uniqueForm": "Antique Form",
    "paldeaDex": 238,
-   "uniqueCode": "",
+   "uniqueCode": "a",
    "generation": 8,
    "type1": "Ghost",
    "type2": "",
@@ -5036,7 +5036,7 @@
    "type2": "Ghost",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1078.png"
  },
  {
@@ -5050,9 +5050,9 @@
    "generation": 9,
    "type1": "Grass",
    "type2": "Ghost",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1079.png"
  },
  {
@@ -5068,7 +5068,7 @@
    "type2": "Grass",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1110.png"
  },
  {
@@ -5084,7 +5084,7 @@
    "type2": "Grass",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1111.png"
  },
  {
@@ -5098,7 +5098,7 @@
    "generation": 3,
    "type1": "Grass",
    "type2": "Flying",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "357.png"
@@ -5130,7 +5130,7 @@
    "generation": 7,
    "type1": "Grass",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "754.png"
@@ -5148,7 +5148,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1066.png"
  },
  {
@@ -5164,7 +5164,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1042.png"
  },
  {
@@ -5180,7 +5180,7 @@
    "type2": "Fire",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1043.png"
  },
  {
@@ -5244,7 +5244,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1026.png"
  },
  {
@@ -5260,7 +5260,7 @@
    "type2": "Psychic",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1027.png"
  },
  {
@@ -5434,9 +5434,9 @@
    "generation": 9,
    "type1": "Psychic",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1030.png"
  },
  {
@@ -5452,7 +5452,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1031.png"
  },
  {
@@ -5546,7 +5546,7 @@
    "generation": 5,
    "type1": "Ground",
    "type2": "Dark",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "552.png"
@@ -5676,7 +5676,7 @@
    "type2": "Steel",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1104.png"
  },
  {
@@ -5692,7 +5692,7 @@
    "type2": "Steel",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1105.png"
  },
  {
@@ -5820,7 +5820,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1033.png"
  },
  {
@@ -5834,9 +5834,9 @@
    "generation": 9,
    "type1": "Water",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1034.png"
  },
  {
@@ -5852,7 +5852,7 @@
    "type2": "Dark",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1063.png"
  },
  {
@@ -5868,7 +5868,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1037.png"
  },
  {
@@ -5878,13 +5878,13 @@
    "generalForm": "",
    "uniqueForm": "Zero Form",
    "paldeaDex": 292,
-   "uniqueCode": "z",
+   "uniqueCode": "",
    "generation": 9,
    "type1": "Water",
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1038-z.png"
  },
  {
@@ -5900,7 +5900,7 @@
    "type2": "Poison",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1046.png"
  },
  {
@@ -5930,9 +5930,9 @@
    "generation": 9,
    "type1": "Dragon",
    "type2": "Normal",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1057.png"
  },
  {
@@ -5962,7 +5962,7 @@
    "generation": 3,
    "type1": "Dark",
    "type2": "Ghost",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "302.png"
@@ -6042,7 +6042,7 @@
    "generation": 4,
    "type1": "Ghost",
    "type2": "Dark",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "442.png"
@@ -6058,7 +6058,7 @@
    "generation": 6,
    "type1": "Flying",
    "type2": "Dragon",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "714.png"
@@ -6140,7 +6140,7 @@
    "type2": "Poison",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1070.png"
  },
  {
@@ -6156,7 +6156,7 @@
    "type2": "Poison",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1071.png"
  },
  {
@@ -6176,7 +6176,7 @@
    "icon": "479.png"
  },
  {
-   "id": "479h",
+   "id": "479-h",
    "nationalDex": 479,
    "name": "Rotom",
    "generalForm": "",
@@ -6192,7 +6192,7 @@
    "icon": "479-h.png"
  },
  {
-   "id": "479w",
+   "id": "479-w",
    "nationalDex": 479,
    "name": "Rotom",
    "generalForm": "",
@@ -6208,7 +6208,7 @@
    "icon": "479-w.png"
  },
  {
-   "id": "479f",
+   "id": "479-f",
    "nationalDex": 479,
    "name": "Rotom",
    "generalForm": "",
@@ -6218,13 +6218,13 @@
    "generation": 4,
    "type1": "Electric",
    "type2": "Ice",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "479-f.png"
  },
  {
-   "id": "479s",
+   "id": "479-s",
    "nationalDex": 479,
    "name": "Rotom",
    "generalForm": "",
@@ -6240,7 +6240,7 @@
    "icon": "479-s.png"
  },
  {
-   "id": "479m",
+   "id": "479-m",
    "nationalDex": 479,
    "name": "Rotom",
    "generalForm": "",
@@ -6250,7 +6250,7 @@
    "generation": 4,
    "type1": "Electric",
    "type2": "Grass",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "479-m.png"
@@ -6268,7 +6268,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1028.png"
  },
  {
@@ -6284,7 +6284,7 @@
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1029.png"
  },
  {
@@ -6378,7 +6378,7 @@
    "generation": 2,
    "type1": "Rock",
    "type2": "Dark",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "248.png"
@@ -6528,7 +6528,7 @@
    "icon": "422.png"
  },
  {
-   "id": "422e",
+   "id": "422-e",
    "nationalDex": 422,
    "name": "Shellos",
    "generalForm": "",
@@ -6560,7 +6560,7 @@
    "icon": "423.png"
  },
  {
-   "id": "423e",
+   "id": "423-e",
    "nationalDex": 423,
    "name": "Gastrodon",
    "generalForm": "",
@@ -7178,7 +7178,7 @@
    "generation": 6,
    "type1": "Ice",
    "type2": "",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
    "shinyAvailable": true,
    "icon": "712.png"
@@ -7276,7 +7276,7 @@
    "type2": "Steel",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1112.png"
  },
  {
@@ -7312,7 +7312,7 @@
    "icon": "633.png"
  },
  {
-   "id": "634",
+   "id": "371",
    "nationalDex": 634,
    "name": "Zweilous",
    "generalForm": "",
@@ -7328,7 +7328,7 @@
    "icon": "634.png"
  },
  {
-   "id": "371",
+   "id": "634",
    "nationalDex": 371,
    "name": "Bagon",
    "generalForm": "",
@@ -7376,7 +7376,7 @@
    "icon": "635.png"
  },
  {
-   "id": "373",
+   "id": "1036",
    "nationalDex": 373,
    "name": "Salamence",
    "generalForm": "",
@@ -7392,7 +7392,7 @@
    "icon": "373.png"
  },
  {
-   "id": "1036",
+   "id": "373",
    "nationalDex": 1036,
    "name": "Veluza",
    "generalForm": "",
@@ -7404,7 +7404,7 @@
    "type2": "Psychic",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1036.png"
  },
  {
@@ -7430,17 +7430,17 @@
    "generalForm": "",
    "uniqueForm": "Curly Form",
    "paldeaDex": 375,
-   "uniqueCode": "c",
+   "uniqueCode": "",
    "generation": 9,
    "type1": "Dragon",
    "type2": "Water",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
-   "icon": "1056-c.png"
+   "shinyAvailable": false,
+   "icon": "1056.png"
  },
  {
-   "id": "1056",
+   "id": "1056-d",
    "nationalDex": 1056,
    "name": "Tatsugiri",
    "generalForm": "",
@@ -7452,11 +7452,11 @@
    "type2": "Water",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1056-d.png"
  },
  {
-   "id": "1056",
+   "id": "1056-s",
    "nationalDex": 1056,
    "name": "Tatsugiri",
    "generalForm": "",
@@ -7468,7 +7468,7 @@
    "type2": "Water",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1056-s.png"
  },
  {
@@ -7484,7 +7484,7 @@
    "type2": "Fighting",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1082.png"
  },
  {
@@ -7498,9 +7498,9 @@
    "generation": 9,
    "type1": "Fairy",
    "type2": "Psychic",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1086.png"
  },
  {
@@ -7514,9 +7514,9 @@
    "generation": 9,
    "type1": "Grass",
    "type2": "Dark",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1083.png"
  },
  {
@@ -7532,7 +7532,7 @@
    "type2": "Fairy",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1087.png"
  },
  {
@@ -7546,9 +7546,9 @@
    "generation": 9,
    "type1": "Bug",
    "type2": "Fighting",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1088.png"
  },
  {
@@ -7564,7 +7564,7 @@
    "type2": "Ground",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1085.png"
  },
  {
@@ -7580,7 +7580,7 @@
    "type2": "Steel",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1090.png"
  },
  {
@@ -7596,7 +7596,7 @@
    "type2": "Water",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1096.png"
  },
  {
@@ -7612,7 +7612,7 @@
    "type2": "Electric",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1093.png"
  },
  {
@@ -7628,7 +7628,7 @@
    "type2": "Flying",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1094.png"
  },
  {
@@ -7644,7 +7644,7 @@
    "type2": "Poison",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1092.png"
  },
  {
@@ -7660,7 +7660,7 @@
    "type2": "Electric",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1095.png"
  },
  {
@@ -7708,7 +7708,7 @@
    "type2": "Ice",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1055.png"
  },
  {
@@ -7718,14 +7718,14 @@
    "generalForm": "",
    "uniqueForm": "Chest Form",
    "paldeaDex": 391,
-   "uniqueCode": "c",
+   "uniqueCode": "",
    "generation": 9,
    "type1": "Ghost",
    "type2": "",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
-   "icon": "1080-c.png"
+   "shinyAvailable": false,
+   "icon": "1080.png"
  },
  {
    "id": "1081",
@@ -7738,9 +7738,9 @@
    "generation": 9,
    "type1": "Steel",
    "type2": "Ghost",
-   "genderDifference": true,
+   "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1081.png"
  },
  {
@@ -7756,7 +7756,7 @@
    "type2": "Grass",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1100.png"
  },
  {
@@ -7772,7 +7772,7 @@
    "type2": "Ice",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1099.png"
  },
  {
@@ -7788,7 +7788,7 @@
    "type2": "Ground",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1098.png"
  },
  {
@@ -7804,7 +7804,7 @@
    "type2": "Fire",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1101.png"
  },
  {
@@ -7820,7 +7820,7 @@
    "type2": "Dark",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1089.png"
  },
  {
@@ -7836,7 +7836,7 @@
    "type2": "Fighting",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1097.png"
  },
  {
@@ -7852,7 +7852,7 @@
    "type2": "Dragon",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1102.png"
  },
  {
@@ -7868,7 +7868,7 @@
    "type2": "Dragon",
    "genderDifference": false,
    "homeAvailable": true,
-   "shinyAvailable": true,
+   "shinyAvailable": false,
    "icon": "1103.png"
  }
 ]

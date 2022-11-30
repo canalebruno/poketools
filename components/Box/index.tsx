@@ -1,5 +1,5 @@
 import pokedexJson from "../../json/pokedex.json";
-import paldeaDexJson from "../../json/paldeaDex.json";
+import pokelist from "../../json/paldeaDex.json";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 
@@ -26,17 +26,17 @@ interface Box {
 }
 
 export default function Box() {
-  const [pokedex, setPokedex] = useState<Pokemon[]>([] as Pokemon[]);
+  const [pokedex, setPokedex] = useState<Pokemon[]>(
+    pokelist.sort((a, b) => {
+      return a.paldeaDex - b.paldeaDex;
+    })
+  );
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
+  const [viewGenderDifference, setViewGenderDifference] = useState(true);
+  const [viewOnlyOneForm, setViewOnlyOneForm] = useState(false);
 
   useEffect(() => {
-    setPokedex(
-      paldeaDexJson.sort((a, b) => {
-        return a.paldeaDex - b.paldeaDex;
-      })
-    );
-
     setBoxQuantity(Math.ceil(pokedex.length / 30));
 
     if (boxQuantity > 0) {
@@ -59,10 +59,70 @@ export default function Box() {
     return newPokeBox;
   }
 
-  useEffect(() => {}, [boxQuantity]);
+  function handleViewGenderDifference() {
+    const newSetting = !viewGenderDifference;
+
+    setViewGenderDifference(newSetting);
+
+    if (newSetting) {
+      setViewOnlyOneForm(false);
+      setPokedex(pokelist);
+    } else {
+      setPokedex(filterByGender());
+    }
+  }
+
+  function handleViewOnlyOneForm() {
+    const newSetting = !viewOnlyOneForm;
+
+    setViewOnlyOneForm(newSetting);
+
+    if (!newSetting) {
+      if (viewGenderDifference) {
+        setPokedex(filterByGender());
+      } else {
+        setPokedex(pokelist);
+      }
+    } else {
+      setViewGenderDifference(false);
+      setPokedex(filterByOnlyOneForm());
+    }
+  }
+
+  function filterByGender() {
+    return pokelist.filter((pkmn) => {
+      return !pkmn.genderDifference;
+    });
+  }
+
+  function filterByOnlyOneForm() {
+    return filterByGender().filter((pkmn) => {
+      return !pkmn.uniqueCode;
+    });
+  }
 
   return (
     <div className={styles.container}>
+      <label>
+        <input
+          type="checkbox"
+          checked={viewGenderDifference}
+          onChange={handleViewGenderDifference}
+          name="Gender Difference"
+          id="genderDifference"
+        />
+        Gender Difference
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          checked={viewOnlyOneForm}
+          onChange={handleViewOnlyOneForm}
+          name="Only One Form"
+          id="onlyOneForm"
+        />
+        Only 1 Form
+      </label>
       {pokeBox.map((box) => {
         return (
           <div key={box.box} className={styles.boxContainer}>
