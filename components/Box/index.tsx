@@ -180,6 +180,10 @@ export default function Box() {
                   </div>
                 );
               })}
+              {box.pokemon.length < 30 &&
+                [...Array(30 - box.pokemon.length)].map((x, i) => (
+                  <div className={styles.card} key={i} />
+                ))}
             </div>
           </div>
         );
