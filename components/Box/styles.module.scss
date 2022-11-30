@@ -1,0 +1,56 @@
+.boxContainer {
+    margin-top: 1rem;
+    max-width: 720px;
+    border-radius: 1rem;
+}
+
+.boxHeader {
+    border-radius: 1rem 1rem 0 0;
+    padding: 0.5rem;
+    text-align: center;
+    background-color: #1ca3a6;
+}
+
+.boxGrid {
+    background-color: #cef1ad;
+    border: 5px solid #4bcdcf;
+    border-top: none;
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    gap: 0.5rem;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0,0,0,0.05);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    
+    img {
+        width: 100%;
+        filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+    }
+}
+
+@media (max-width: 720px) {
+    .boxHeader {
+        border-radius: 1rem 1rem 0 0;
+        padding: 0.25rem;
+    }
+    
+    .boxGrid {
+        border-width: 3px;
+        padding: 0.5rem;
+        gap: 0.25rem;
+    }
+
+    .card {
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+    }
+}
