@@ -35,16 +35,25 @@ export default function Box() {
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
   const [viewGenderDifference, setViewGenderDifference] = useState(true);
   const [viewOnlyOneForm, setViewOnlyOneForm] = useState(false);
+  const [orderList, setOrderList] = useState<"p" | "n">("p");
 
   useEffect(() => {
+    console.log("effect");
     setBoxQuantity(Math.ceil(pokedex.length / 30));
+
+    if (orderList === "p") {
+      setPokedex(sortByPaldeanDex());
+    } else {
+      setPokedex(sortByNationalDex());
+    }
 
     if (boxQuantity > 0) {
       setPokeBox(handleBoxQuantity());
     }
-  }, [pokedex, boxQuantity]);
+  }, [pokedex, boxQuantity, orderList]);
 
   function handleBoxQuantity() {
+    console.log("chamou handlebox");
     const newPokeBox = [];
 
     if (boxQuantity > 0) {
@@ -101,8 +110,44 @@ export default function Box() {
     });
   }
 
+  function sortByNationalDex() {
+    return pokedex.sort((a, b) => {
+      return a.nationalDex - b.nationalDex;
+    });
+  }
+
+  function sortByPaldeanDex() {
+    return pokedex.sort((a, b) => {
+      return a.paldeaDex - b.paldeaDex;
+    });
+  }
+
+  function handleSorting(value: string) {
+    const newOrder = value;
+
+    if (newOrder !== "p" && newOrder !== "n") {
+      return;
+    }
+
+    setOrderList(newOrder);
+
+    if (newOrder === "p") {
+      setPokedex(sortByPaldeanDex());
+      console.log(sortByPaldeanDex());
+      console.log("chegou no p");
+    } else {
+      setPokedex(sortByNationalDex());
+      console.log(sortByNationalDex());
+      console.log("chegou no n");
+    }
+  }
+
   return (
     <div className={styles.container}>
+      <select onChange={(e) => handleSorting(e.target.value)} value={orderList}>
+        <option value="p">Sort by Paldean Dex</option>
+        <option value="n">Sort by National Dex</option>
+      </select>
       <label>
         <input
           type="checkbox"
