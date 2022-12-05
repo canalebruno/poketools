@@ -1,0 +1,40 @@
+.container {
+    background-color: #1ca3a6;
+    border-bottom: 3px solid #4bcdcf ;
+    
+    .nav {
+        padding: 2rem;
+        max-width: 1440px;
+        margin: 0 auto;
+        
+        a {
+            padding: 2rem;
+            font-weight: bold;
+            
+            transition: 0.2s;
+            
+            &.active {
+                background-color: #4bcdcf;
+            }
+            
+            &:hover {
+                background-color: #4bcdcf;
+            }
+        }
+    }
+    
+}
+
+@media(max-width: 700px) {
+    .container {
+        .nav {
+            padding: 1rem;
+
+            a {
+                padding: 1rem;
+                margin: 0 auto;
+            }
+        }
+    }
+    
+}

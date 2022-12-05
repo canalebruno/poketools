@@ -1,23 +1,28 @@
-import pokedexJson from "../../json/pokedex.json";
-import pokelist from "../../json/paldeaDex.json";
 import { useEffect, useState } from "react";
+import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
+
+interface BoxProps {
+  imageSource: "svicons" | "home";
+}
 
 interface Pokemon {
   id: string;
   nationalDex: number;
-  paldeaDex: number;
+  name: string;
   generalForm: string;
   uniqueForm: string;
+  paldeaDex: null | number;
   uniqueCode: string;
-  name: string;
   generation: number;
   type1: string;
   type2: string;
-  icon: string;
   genderDifference: boolean;
   homeAvailable: boolean;
   shinyAvailable: boolean;
+  icon: string;
+  homePic: string;
+  homeShinyPic: string;
 }
 
 interface Box {
@@ -25,26 +30,14 @@ interface Box {
   pokemon: Pokemon[];
 }
 
-export default function Box() {
-  const [pokedex, setPokedex] = useState<Pokemon[]>(
-    pokelist.sort((a, b) => {
-      return a.paldeaDex - b.paldeaDex;
-    })
-  );
+export default function Box({ imageSource }: BoxProps) {
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
-  const [viewGenderDifference, setViewGenderDifference] = useState(true);
-  const [viewOnlyOneForm, setViewOnlyOneForm] = useState(false);
-  const [orderList, setOrderList] = useState<"p" | "n">("p");
+
+  const { orderList, pokedex } = usePokedex();
 
   useEffect(() => {
     setBoxQuantity(Math.ceil(pokedex.length / 30));
-
-    if (orderList === "p") {
-      setPokedex(sortByPaldeanDex());
-    } else {
-      setPokedex(sortByNationalDex());
-    }
 
     if (boxQuantity > 0) {
       setPokeBox(handleBoxQuantity());
@@ -66,107 +59,8 @@ export default function Box() {
     return newPokeBox;
   }
 
-  function handleViewGenderDifference() {
-    const newSetting = !viewGenderDifference;
-
-    setViewGenderDifference(newSetting);
-
-    if (newSetting) {
-      setViewOnlyOneForm(false);
-      setPokedex(pokelist);
-    } else {
-      setPokedex(filterByGender());
-    }
-  }
-
-  function handleViewOnlyOneForm() {
-    const newSetting = !viewOnlyOneForm;
-
-    setViewOnlyOneForm(newSetting);
-
-    if (!newSetting) {
-      if (viewGenderDifference) {
-        setPokedex(pokelist);
-      } else {
-        setPokedex(filterByGender());
-      }
-    } else {
-      setViewGenderDifference(false);
-      setPokedex(filterByOnlyOneForm());
-    }
-  }
-
-  function filterByGender() {
-    return pokelist.filter((pkmn) => {
-      return !pkmn.genderDifference;
-    });
-  }
-
-  function filterByOnlyOneForm() {
-    return filterByGender().filter((pkmn) => {
-      return !pkmn.uniqueCode;
-    });
-  }
-
-  function sortByNationalDex() {
-    return pokedex.sort((a, b) => {
-      return a.nationalDex - b.nationalDex;
-    });
-  }
-
-  function sortByPaldeanDex() {
-    return pokedex.sort((a, b) => {
-      return a.paldeaDex - b.paldeaDex;
-    });
-  }
-
-  function handleSorting(value: string) {
-    const newOrder = value;
-
-    if (newOrder !== "p" && newOrder !== "n") {
-      return;
-    }
-
-    setOrderList(newOrder);
-
-    if (newOrder === "p") {
-      setPokedex(sortByPaldeanDex());
-    } else {
-      setPokedex(sortByNationalDex());
-    }
-  }
-
   return (
     <div>
-      <div className={styles.filterControl}>
-        <select
-          onChange={(e) => handleSorting(e.target.value)}
-          value={orderList}
-        >
-          <option value="p">Sort by Paldean Dex</option>
-          <option value="n">Sort by National Dex</option>
-        </select>
-        <label>
-          <input
-            type="checkbox"
-            checked={viewGenderDifference}
-            onChange={handleViewGenderDifference}
-            name="Gender Difference"
-            id="genderDifference"
-          />
-          Gender Difference
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={viewOnlyOneForm}
-            onChange={handleViewOnlyOneForm}
-            name="Only One Form"
-            id="onlyOneForm"
-          />
-          Only 1 Form
-        </label>
-      </div>
       <div className={styles.container}>
         {pokeBox.map((box) => {
           return (
@@ -176,7 +70,12 @@ export default function Box() {
                 {box.pokemon.map((pkmn) => {
                   return (
                     <div key={pkmn.id} className={styles.card}>
-                      <img src={`svicons/${pkmn.icon}`} alt={pkmn.name} />
+                      <img
+                        src={`${imageSource}/${
+                          imageSource === "svicons" ? pkmn.icon : pkmn.homePic
+                        }`}
+                        alt={pkmn.name}
+                      />
                     </div>
                   );
                 })}
