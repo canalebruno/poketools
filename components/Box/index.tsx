@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
@@ -36,6 +38,8 @@ export default function Box({ imageSource }: BoxProps) {
 
   const { orderList, pokedex } = usePokedex();
 
+  const router = useRouter();
+
   useEffect(() => {
     setBoxQuantity(Math.ceil(pokedex.length / 30));
 
@@ -70,11 +74,18 @@ export default function Box({ imageSource }: BoxProps) {
                 {box.pokemon.map((pkmn) => {
                   return (
                     <div key={pkmn.id} className={styles.card}>
-                      <img
-                        src={`${imageSource}/${
+                      <Image
+                        width={80}
+                        height={80}
+                        quality={60}
+                        src={`/${imageSource}/${
                           imageSource === "svicons" ? pkmn.icon : pkmn.homePic
                         }`}
-                        alt={pkmn.name}
+                        alt={`#${
+                          router.pathname === "/"
+                            ? pkmn.paldeaDex
+                            : pkmn.nationalDex
+                        } - ${pkmn.name}`}
                       />
                     </div>
                   );

@@ -44,7 +44,6 @@
     border-radius: 1rem;
     
     img {
-        width: 100%;
         filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
     }
 }
@@ -68,5 +67,10 @@
     .card {
         padding: 0.25rem;
         border-radius: 0.25rem;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
     }
 }
