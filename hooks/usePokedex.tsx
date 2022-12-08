@@ -30,7 +30,7 @@ interface Pokemon {
   generalForm: string;
   uniqueForm: string;
   paldeaDex: null | number;
-  uniqueCode: string;
+  formOrder: string;
   generation: number;
   type1: string;
   type2: string;
@@ -121,9 +121,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     return filterByGender().filter((pkmn) => {
       switch (router.pathname) {
         case "/":
-          return !pkmn.uniqueCode || pkmn.id === "128-p" || pkmn.id === "194-p";
+          return !pkmn.formOrder || pkmn.id === "128-p" || pkmn.id === "194-p";
         default:
-          return !pkmn.uniqueCode && !pkmn.generalForm;
+          return !pkmn.formOrder && !pkmn.generalForm;
       }
     });
   }

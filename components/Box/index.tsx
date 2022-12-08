@@ -15,7 +15,7 @@ interface Pokemon {
   generalForm: string;
   uniqueForm: string;
   paldeaDex: null | number;
-  uniqueCode: string;
+  formOrder: string;
   generation: number;
   type1: string;
   type2: string;
