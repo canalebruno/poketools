@@ -121,9 +121,14 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     return filterByGender().filter((pkmn) => {
       switch (router.pathname) {
         case "/":
-          return !pkmn.formOrder || pkmn.id === "128-p" || pkmn.id === "194-p";
+          return (
+            pkmn.formOrder === "0" ||
+            pkmn.formOrder === "00" ||
+            pkmn.id === "128_1" ||
+            pkmn.id === "194_1"
+          );
         default:
-          return !pkmn.formOrder && !pkmn.generalForm;
+          return pkmn.formOrder === "0" || pkmn.formOrder === "00";
       }
     });
   }
