@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
+import getWindowSize from "../../util/getWindowSize";
 import styles from "../Box/styles.module.scss";
 
 interface FilterControlProps {
