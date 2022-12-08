@@ -57,10 +57,12 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
           Only 1 Form
         </label>
       </div>
-      <span>
-        <br />
-        Showing: {pokedex.length} Pokemon
-      </span>
+      {pokedex && (
+        <span>
+          <br />
+          Showing: {pokedex.length} Pokemon
+        </span>
+      )}
     </>
   );
 }

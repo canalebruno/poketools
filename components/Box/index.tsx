@@ -75,6 +75,7 @@ export default function Box({ imageSource }: BoxProps) {
                   return (
                     <div key={pkmn.id} className={styles.card}>
                       <Image
+                        unoptimized
                         width={80}
                         height={80}
                         src={`/${imageSource}/${
