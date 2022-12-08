@@ -5,10 +5,11 @@ import FilterControl from "../components/FilterControl";
 import { useEffect } from "react";
 
 export default function HomeBoxes() {
-  const { setNewPokedex, pagePokedex, sortByNationalDex } = usePokedex();
+  const { firstLoadPokedex, pagePokedex, sortByNationalDex, updatePokedex } =
+    usePokedex();
 
   useEffect(() => {
-    setNewPokedex(pagePokedex());
+    firstLoadPokedex(pagePokedex());
     sortByNationalDex();
   }, []);
 

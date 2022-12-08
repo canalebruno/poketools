@@ -6,10 +6,11 @@ import FilterControl from "../components/FilterControl";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { setNewPokedex, pagePokedex, sortByPaldeanDex } = usePokedex();
+  const { firstLoadPokedex, pagePokedex, sortByPaldeanDex, updatePokedex } =
+    usePokedex();
 
   useEffect(() => {
-    setNewPokedex(pagePokedex());
+    firstLoadPokedex(pagePokedex());
     sortByPaldeanDex();
   }, []);
 

@@ -16,11 +16,14 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
     handleViewOnlyOneForm,
     handleSorting,
     orderList,
+    resetControls,
+    pokedex,
   } = usePokedex();
 
   useEffect(() => {
     handleSorting(sortingDefault);
     setPagePath(window.location.pathname);
+    resetControls();
   }, []);
 
   return (
@@ -49,6 +52,11 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
         />
         Only 1 Form
       </label>
+      <div>
+        <span>Order list: {orderList} | </span>
+        <span>Showing: {pokedex.length} Pokemon | </span>
+        <span>First: {pokedex[0].name} </span>
+      </div>
     </div>
   );
 }

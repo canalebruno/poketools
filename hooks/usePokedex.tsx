@@ -20,7 +20,9 @@ interface PokedexContextData {
   sortByPaldeanDex: () => Pokemon[];
   handleSorting: (value: string) => void;
   resetPokedex: () => void;
-  setNewPokedex: (newPokedex: Pokemon[]) => void;
+  firstLoadPokedex: (loadingPokedex: Pokemon[]) => void;
+  resetControls: () => void;
+  updatePokedex: (pokedexToUpdate: Pokemon[]) => void;
 }
 
 interface Pokemon {
@@ -54,8 +56,24 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   const router = useRouter();
 
-  function setNewPokedex(newPokedex: Pokemon[]) {
-    setPokedex(newPokedex);
+  function firstLoadPokedex(loadingPokedex: Pokemon[]) {
+    let sortedPokedes = [] as Pokemon[];
+
+    if (router.pathname === "/") {
+      sortedPokedes = loadingPokedex.sort((a, b) => {
+        if (a.paldeaDex !== b.paldeaDex) {
+          return a.paldeaDex! - b.paldeaDex!;
+        } else {
+          return a.id > b.id ? 1 : -1;
+        }
+      });
+    } else {
+      sortedPokedes = loadingPokedex.sort((a, b) => {
+        return a.nationalDex - b.nationalDex;
+      });
+    }
+
+    setPokedex(sortedPokedes);
   }
 
   function resetPokedex() {
@@ -77,6 +95,43 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
   }
 
+  function resetControls() {
+    switch (router.pathname) {
+      case "/":
+        handleSorting("p");
+        break;
+      default:
+        handleSorting("n");
+    }
+
+    setViewGenderDifference(true);
+    setViewOnlyOneForm(false);
+  }
+
+  function updatePokedex(pokedexToUpdate: Pokemon[]) {
+    if (orderList !== "p" && orderList !== "n") {
+      return;
+    }
+
+    let pokedexToUpdateOrederd = [] as Pokemon[];
+
+    if (orderList === "p") {
+      pokedexToUpdateOrederd = pokedexToUpdate.sort((a, b) => {
+        if (a.paldeaDex !== b.paldeaDex) {
+          return a.paldeaDex! - b.paldeaDex!;
+        } else {
+          return a.id > b.id ? 1 : -1;
+        }
+      });
+    } else {
+      pokedexToUpdateOrederd = pokedexToUpdate.sort((a, b) => {
+        return a.nationalDex - b.nationalDex;
+      });
+    }
+
+    setPokedex(pokedexToUpdateOrederd);
+  }
+
   function handleViewGenderDifference() {
     const newSetting = !viewGenderDifference;
 
@@ -84,9 +139,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     if (newSetting) {
       setViewOnlyOneForm(false);
-      setPokedex(pagePokedex());
+      updatePokedex(pagePokedex());
     } else {
-      setPokedex(filterByGender());
+      updatePokedex(filterByGender());
     }
   }
 
@@ -99,7 +154,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       if (viewGenderDifference) {
         handleViewGenderDifference();
       } else {
-        setPokedex(
+        updatePokedex(
           pagePokedex().filter((pkmn) => {
             return !pkmn.genderDifference;
           })
@@ -107,7 +162,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       }
     } else {
       setViewGenderDifference(false);
-      setPokedex(filterByOnlyOneForm());
+      updatePokedex(filterByOnlyOneForm());
     }
   }
 
@@ -124,8 +179,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           return (
             pkmn.formOrder === "0" ||
             pkmn.formOrder === "00" ||
-            pkmn.id === "128_1" ||
-            pkmn.id === "194_1"
+            pkmn.id === "128_01" ||
+            pkmn.id === "194_01"
           );
         default:
           return pkmn.formOrder === "0" || pkmn.formOrder === "00";
@@ -181,7 +236,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         sortByNationalDex,
         sortByPaldeanDex,
         handleSorting,
-        setNewPokedex,
+        firstLoadPokedex,
+        resetControls,
+        updatePokedex,
       }}
     >
       {children}
