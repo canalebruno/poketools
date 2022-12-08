@@ -27,36 +27,40 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
   }, []);
 
   return (
-    <div className={styles.filterControl}>
-      <select onChange={(e) => handleSorting(e.target.value)} value={orderList}>
-        <option value="n">Sort by National Dex</option>
-        {pagePath === "/" && <option value="p">Sort by Paldean Dex</option>}
-      </select>
-      <label>
-        <input
-          type="checkbox"
-          checked={viewGenderDifference}
-          onChange={handleViewGenderDifference}
-          name="Gender Difference"
-          id="genderDifference"
-        />
-        Gender Difference
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={viewOnlyOneForm}
-          onChange={handleViewOnlyOneForm}
-          name="Only One Form"
-          id="onlyOneForm"
-        />
-        Only 1 Form
-      </label>
-      <div>
-        <span>Order list: {orderList} | </span>
-        <span>Showing: {pokedex.length} Pokemon | </span>
-        <span>First: {pokedex[0].name} </span>
+    <>
+      <div className={styles.filterControl}>
+        <select
+          onChange={(e) => handleSorting(e.target.value)}
+          value={orderList}
+        >
+          <option value="n">Sort by National Dex</option>
+          {pagePath === "/" && <option value="p">Sort by Paldean Dex</option>}
+        </select>
+        <label>
+          <input
+            type="checkbox"
+            checked={viewGenderDifference}
+            onChange={handleViewGenderDifference}
+            name="Gender Difference"
+            id="genderDifference"
+          />
+          Gender Difference
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={viewOnlyOneForm}
+            onChange={handleViewOnlyOneForm}
+            name="Only One Form"
+            id="onlyOneForm"
+          />
+          Only 1 Form
+        </label>
       </div>
-    </div>
+      <span>
+        <br />
+        Showing: {pokedex.length} Pokemon
+      </span>
+    </>
   );
 }
