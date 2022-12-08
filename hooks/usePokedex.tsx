@@ -69,7 +69,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       });
     } else {
       sortedPokedes = loadingPokedex.sort((a, b) => {
-        return a.nationalDex - b.nationalDex;
+        return a.id > b.id ? 1 : -1;
       });
     }
 
@@ -88,7 +88,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         });
       case "/homeboxes":
         return pokelist.filter((pkmn) => {
-          return pkmn.generation === 1 && pkmn.homeAvailable;
+          return pkmn.homeAvailable;
         });
       default:
         return pokelist;

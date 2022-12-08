@@ -296,7 +296,7 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 192_00,192,Sunflora,,,032,00,2,Grass,,FALSE,TRUE,TRUE,192_00.png,192_00.png,192_00_S.png
 193_00,193,Yanma,,,,00,2,Bug,Flying,FALSE,TRUE,TRUE,193_00.png,193_00.png,193_00_S.png
 194_00,194,Wooper,,,,00,2,Water,Ground,FALSE,TRUE,TRUE,194_00.png,194_00.png,194_00_S.png
-194_01,194,Wooper,Paldean,,053,01,2,Poison,Ground,FALSE,TRUE,TRUE,194_01.png,194_01.png,194_01_S.png
+194_01,194,Wooper,Paldean,,053,01,2,Poison,Ground,FALSE,FALSE,TRUE,194_01.png,194_01.png,194_01_S.png
 194_00_F,194,Wooper,,,,00,2,Water,Ground,TRUE,TRUE,TRUE,194_00.png,194_00_F.png,194_00_F_S.png
 195_00,195,Quagsire,,,,00,2,Water,Ground,FALSE,TRUE,TRUE,195_00.png,195_00.png,195_00_S.png
 195_00_F,195,Quagsire,,,,00,2,Water,Ground,TRUE,TRUE,TRUE,195_00.png,195_00_F.png,195_00_F_S.png
@@ -411,7 +411,7 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 254_00,254,Sceptile,,,,00,3,Grass,,FALSE,TRUE,TRUE,254_00.png,254_00.png,254_00_S.png
 254_01,254,Sceptile,Mega,,,01,3,Grass,Dragon,FALSE,FALSE,TRUE,254_01.png,254_01.png,254_01_S.png
 255_00,255,Torchic,,,,00,3,Fire,,FALSE,TRUE,TRUE,255_00.png,255_00.png,255_00_S.png
-255_00_F,255,Torchic,,,,00,3,Fire,,TRUE,TRUE,TRUE,255_00.png,255_00_F.png,255_00_F_S.png
+255_00_F,255,Torchic,,,,00,3,Fire,,TRUE,TRUE,TRUE,255_00.png,255_00.png,255_00_S.png
 256_00,256,Combusken,,,,00,3,Fire,Fighting,FALSE,TRUE,TRUE,256_00.png,256_00.png,256_00_S.png
 256_00_F,256,Combusken,,,,00,3,Fire,Fighting,TRUE,TRUE,TRUE,256_00.png,256_00_F.png,256_00_F_S.png
 257_00,257,Blaziken,,,,00,3,Fire,Fighting,FALSE,TRUE,TRUE,257_00.png,257_00.png,257_00_S.png
@@ -1082,8 +1082,8 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 718_00,718,Zygarde,,50% Forme,,00,6,Dragon,Ground,FALSE,TRUE,TRUE,718_00.png,718_00.png,718_00_S.png
 718_01,718,Zygarde,,10% Forme,,01,6,Dragon,Ground,FALSE,TRUE,TRUE,718_01.png,718_01.png,718_01_S.png
 718_02,718,Zygarde,,Complete Forme,,02,6,Dragon,Ground,FALSE,FALSE,TRUE,718_02.png,718_02.png,718_02_S.png
-718_03,718,Zygarde,,50% Forme Power Construct,,03,6,Dragon,Ground,FALSE,TRUE,TRUE,718_03.png,718_03.png,718_03_S.png
-718_04,718,Zygarde,,10% Forme Power Construct,,04,6,Dragon,Ground,FALSE,TRUE,TRUE,718_04.png,718_04.png,718_04_S.png
+718_03,718,Zygarde,,50% Forme Power Construct,,03,6,Dragon,Ground,FALSE,TRUE,TRUE,718_00.png,718_00.png,718_00_S.png
+718_04,718,Zygarde,,10% Forme Power Construct,,04,6,Dragon,Ground,FALSE,TRUE,TRUE,718_01.png,718_01.png,718_01_S.png
 719_00,719,Diancie,,,,00,6,Rock,Fairy,FALSE,TRUE,TRUE,719_00.png,719_00.png,719_00_S.png
 719_01,719,Diancie,Mega,,,01,6,Rock,Fairy,FALSE,FALSE,TRUE,719_01.png,719_01.png,719_01_S.png
 720_00,720,Hoopa,,Hoopa Confined,,00,6,Psychic,Ghost,FALSE,TRUE,FALSE,720_00.png,720_00.png,720_00_S.png
@@ -1268,16 +1268,16 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 849_00,849,Toxtricity,,Amped Form,199,00,8,Electric,Poison,FALSE,TRUE,TRUE,849_00.png,849_00.png,849_00_S.png
 849_01,849,Toxtricity,Gigantamax,Amped Form,,01,8,Electric,Poison,FALSE,FALSE,TRUE,849_01.png,849_01.png,849_01_S.png
 849_02,849,Toxtricity,,Low Key Form,199,02,8,Electric,Poison,FALSE,TRUE,TRUE,849_02.png,849_02.png,849_02_S.png
-849_03,849,Toxtricity,Gigantamax,Low Key Form,,03,8,Electric,Poison,FALSE,FALSE,TRUE,849_03.png,849_03.png,849_03_S.png
+849_03,849,Toxtricity,Gigantamax,Low Key Form,,03,8,Electric,Poison,FALSE,FALSE,TRUE,849_01.png,849_01.png,849_01_S.png
 850_00,850,Sizzlipede,,,,00,8,Fire,Bug,FALSE,TRUE,TRUE,850_00.png,850_00.png,850_00_S.png
 851_00,851,Centiskorch,,,,00,8,Fire,Bug,FALSE,TRUE,TRUE,851_00.png,851_00.png,851_00_S.png
 851_01,851,Centiskorch,Gigantamax,,,01,8,Fire,Bug,FALSE,FALSE,TRUE,851_01.png,851_01.png,851_01_S.png
 852_00,852,Clobbopus,,,,00,8,Fighting,,FALSE,TRUE,TRUE,852_00.png,852_00.png,852_00_S.png
 853_00,853,Grapploct,,,,00,8,Fighting,,FALSE,TRUE,TRUE,853_00.png,853_00.png,853_00_S.png
 854_00,854,Sinistea,,Phony Form,237,00,8,Ghost,,FALSE,TRUE,TRUE,854_00.png,854_00.png,854_00_S.png
-854_01,854,Sinistea,,Antique Form,237,01,8,Ghost,,FALSE,TRUE,TRUE,854_00.png,854_01.png,854_01_S.png
+854_01,854,Sinistea,,Antique Form,237,01,8,Ghost,,FALSE,TRUE,TRUE,854_00.png,854_00.png,854_00_S.png
 855_00,855,Polteageist,,Phony Form,238,00,8,Ghost,,FALSE,TRUE,TRUE,855_00.png,855_00.png,855_00_S.png
-855_01,855,Polteageist,,Antique Form,238,01,8,Ghost,,FALSE,TRUE,TRUE,855_00.png,855_01.png,855_01_S.png
+855_01,855,Polteageist,,Antique Form,238,01,8,Ghost,,FALSE,TRUE,TRUE,855_00.png,855_00.png,855_00_S.png
 856_00,856,Hatenna,,,282,00,8,Psychic,,FALSE,TRUE,TRUE,856_00.png,856_00.png,856_00_S.png
 857_00,857,Hattrem,,,283,00,8,Psychic,,FALSE,TRUE,TRUE,857_00.png,857_00.png,857_00_S.png
 858_00,858,Hatterene,,,284,00,8,Psychic,Fairy,FALSE,TRUE,TRUE,858_00.png,858_00.png,858_00_S.png
@@ -1294,7 +1294,7 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 867_00,867,Runerigus,,,,00,8,Ground,Ghost,FALSE,TRUE,TRUE,867_00.png,867_00.png,867_00_S.png
 868_00,868,Milcery,,,,00,8,Fairy,,FALSE,TRUE,TRUE,868_00.png,868_00.png,868_00_S.png
 869_00,869,Alcremie,,Vanilla Cream Strawberry,,00,8,Fairy,,FALSE,TRUE,TRUE,869_00.png,869_00.png,869_00_S.png
-869_64,869,Alcremie,Gigantamax,,,64,8,Fairy,,FALSE,FALSE,TRUE,869_64.png,869_64.png,869_64_S.png
+869_63,869,Alcremie,Gigantamax,,,63,8,Fairy,,FALSE,FALSE,TRUE,869_63.png,869_63.png,869_63_S.png
 869_01,869,Alcremie,,Vanilla Cream Berry,,01,8,Fairy,,FALSE,TRUE,TRUE,869_01.png,869_01.png,869_01_S.png
 869_02,869,Alcremie,,Vanilla Cream Love,,02,8,Fairy,,FALSE,TRUE,TRUE,869_02.png,869_02.png,869_02_S.png
 869_05,869,Alcremie,,Vanilla Cream Flower,,05,8,Fairy,,FALSE,TRUE,TRUE,869_05.png,869_05.png,869_05_S.png
@@ -1409,116 +1409,116 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 904_00,904,Overqwil,,,,00,8.5,Dark,Poison,FALSE,TRUE,TRUE,904_00.png,904_00.png,904_00_S.png
 905_00,905,Enamorus,,Incarnate Forme,,00,8.5,Fairy,Flying,FALSE,TRUE,FALSE,905_00.png,905_00.png,905_00_S.png
 905_01,905,Enamorus,,Therian Forme,,01,8.5,Fairy,Flying,FALSE,TRUE,FALSE,905_01.png,905_01.png,905_01_S.png
-1010_00,1010,Sprigatito,,,1,00,9,Grass,,FALSE,TRUE,FALSE,1010_00.png,1010_00.png,1010_00_S.png
-1011_00,1011,Floragato,,,2,00,9,Grass,,FALSE,TRUE,FALSE,1011_00.png,1011_00.png,1011_00_S.png
-1012_00,1012,Meowscarada,,,3,00,9,Grass,Dark,FALSE,TRUE,FALSE,1012_00.png,1012_00.png,1012_00_S.png
-1013_00,1013,Fuecoco,,,4,00,9,Fire,,FALSE,TRUE,FALSE,1013_00.png,1013_00.png,1013_00_S.png
-1014_00,1014,Crocalor,,,5,00,9,Fire,,FALSE,TRUE,FALSE,1014_00.png,1014_00.png,1014_00_S.png
-1015_00,1015,Skeledirge,,,6,00,9,Fire,Ghost,FALSE,TRUE,FALSE,1015_00.png,1015_00.png,1015_00_S.png
-1016_00,1016,Quaxly,,,7,00,9,Water,,FALSE,TRUE,FALSE,1016_00.png,1016_00.png,1016_00_S.png
-1017_00,1017,Quaxwell,,,8,00,9,Water,,FALSE,TRUE,FALSE,1017_00.png,1017_00.png,1017_00_S.png
-1018_00,1018,Quaquaval,,,9,00,9,Water,Fighting,FALSE,TRUE,FALSE,1018_00.png,1018_00.png,1018_00_S.png
-1019_00,1019,Lechonk,,,10,00,9,Normal,,FALSE,TRUE,FALSE,1019_00.png,1019_00.png,1019_00_S.png
-1020_00,1020,Oinkologne,,,11,00,9,Normal,,FALSE,TRUE,FALSE,1020_00.png,1020_00.png,1020_00_S.png
-1020_00_F,1020,Oinkologne,,,11,00,9,Normal,,TRUE,TRUE,FALSE,1020_00_F.png,1020_00_F.png,1020_00_F_S.png
-1021_00,1021,Dudunsparce,,Two-Segment,189,00,9,Normal,,FALSE,TRUE,FALSE,1021_00.png,1021_00.png,1021_00_S.png
-1021_01,1021,Dudunsparce,,Three-Segment,189,01,9,Normal,,FALSE,TRUE,FALSE,1021_00.png,1021_01.png,1021_01_S.png
-1022_00,1022,Tarountula,,,12,00,9,Bug,,FALSE,TRUE,FALSE,1022_00.png,1022_00.png,1022_00_S.png
-1023_00,1023,Spidops,,,13,00,9,Bug,,FALSE,TRUE,FALSE,1023_00.png,1023_00.png,1023_00_S.png
-1024_00,1024,Nymble,,,14,00,9,Bug,,FALSE,TRUE,FALSE,1024_00.png,1024_00.png,1024_00_S.png
-1025_00,1025,Lokix,,,15,00,9,Bug,Dark,FALSE,TRUE,FALSE,1025_00.png,1025_00.png,1025_00_S.png
-1026_00,1026,Rellor,,,254,00,9,Bug,,FALSE,TRUE,FALSE,1026_00.png,1026_00.png,1026_00_S.png
-1027_00,1027,Rabsca,,,255,00,9,Bug,Psychic,FALSE,TRUE,FALSE,1027_00.png,1027_00.png,1027_00_S.png
-1028_00,1028,Greavard,,,311,00,9,Ghost,,FALSE,TRUE,FALSE,1028_00.png,1028_00.png,1028_00_S.png
-1029_00,1029,Houndstone,,,312,00,9,Ghost,,FALSE,TRUE,FALSE,1029_00.png,1029_00.png,1029_00_S.png
-1030_00,1030,Flittle,,,263,00,9,Psychic,,FALSE,TRUE,FALSE,1030_00.png,1030_00.png,1030_00_S.png
-1031_00,1031,Espathra,,,264,00,9,Psychic,,FALSE,TRUE,FALSE,1031_00.png,1031_00.png,1031_00_S.png
-1032_00,1032,Farigiraf,,,193,00,9,Normal,Psychic,FALSE,TRUE,FALSE,1032_00.png,1032_00.png,1032_00_S.png
-1033_00,1033,Wiglett,,,288,00,9,Water,,FALSE,TRUE,FALSE,1033_00.png,1033_00.png,1033_00_S.png
-1034_00,1034,Wugtrio,,,289,00,9,Water,,FALSE,TRUE,FALSE,1034_00.png,1034_00.png,1034_00_S.png
-1035_00,1035,Dondozo,,,374,00,9,Water,,FALSE,TRUE,FALSE,1035_00.png,1035_00.png,1035_00_S.png
-1036_00,1036,Veluza,,,373,00,9,Water,Psychic,FALSE,TRUE,FALSE,1036_00.png,1036_00.png,1036_00_S.png
-1037_00,1037,Finizen,,,291,00,9,Water,,FALSE,TRUE,FALSE,1037_00.png,1037_00.png,1037_00_S.png
-1038_00,1038,Palafin,,Zero Form,292,00,9,Water,,FALSE,TRUE,FALSE,1038_00.png,1038_00.png,1038_00_S.png
+1010_00,1010,Sprigatito,,,1,00,9,Grass,,FALSE,FALSE,FALSE,1010_00.png,1010_00.png,1010_00_S.png
+1011_00,1011,Floragato,,,2,00,9,Grass,,FALSE,FALSE,FALSE,1011_00.png,1011_00.png,1011_00_S.png
+1012_00,1012,Meowscarada,,,3,00,9,Grass,Dark,FALSE,FALSE,FALSE,1012_00.png,1012_00.png,1012_00_S.png
+1013_00,1013,Fuecoco,,,4,00,9,Fire,,FALSE,FALSE,FALSE,1013_00.png,1013_00.png,1013_00_S.png
+1014_00,1014,Crocalor,,,5,00,9,Fire,,FALSE,FALSE,FALSE,1014_00.png,1014_00.png,1014_00_S.png
+1015_00,1015,Skeledirge,,,6,00,9,Fire,Ghost,FALSE,FALSE,FALSE,1015_00.png,1015_00.png,1015_00_S.png
+1016_00,1016,Quaxly,,,7,00,9,Water,,FALSE,FALSE,FALSE,1016_00.png,1016_00.png,1016_00_S.png
+1017_00,1017,Quaxwell,,,8,00,9,Water,,FALSE,FALSE,FALSE,1017_00.png,1017_00.png,1017_00_S.png
+1018_00,1018,Quaquaval,,,9,00,9,Water,Fighting,FALSE,FALSE,FALSE,1018_00.png,1018_00.png,1018_00_S.png
+1019_00,1019,Lechonk,,,10,00,9,Normal,,FALSE,FALSE,FALSE,1019_00.png,1019_00.png,1019_00_S.png
+1020_00,1020,Oinkologne,,,11,00,9,Normal,,FALSE,FALSE,FALSE,1020_00.png,1020_00.png,1020_00_S.png
+1020_00_F,1020,Oinkologne,,,11,00,9,Normal,,TRUE,FALSE,FALSE,1020_00_F.png,1020_00_F.png,1020_00_F_S.png
+1021_00,1021,Dudunsparce,,Two-Segment,189,00,9,Normal,,FALSE,FALSE,FALSE,1021_00.png,1021_00.png,1021_00_S.png
+1021_01,1021,Dudunsparce,,Three-Segment,189,01,9,Normal,,FALSE,FALSE,FALSE,1021_00.png,1021_01.png,1021_01_S.png
+1022_00,1022,Tarountula,,,12,00,9,Bug,,FALSE,FALSE,FALSE,1022_00.png,1022_00.png,1022_00_S.png
+1023_00,1023,Spidops,,,13,00,9,Bug,,FALSE,FALSE,FALSE,1023_00.png,1023_00.png,1023_00_S.png
+1024_00,1024,Nymble,,,14,00,9,Bug,,FALSE,FALSE,FALSE,1024_00.png,1024_00.png,1024_00_S.png
+1025_00,1025,Lokix,,,15,00,9,Bug,Dark,FALSE,FALSE,FALSE,1025_00.png,1025_00.png,1025_00_S.png
+1026_00,1026,Rellor,,,254,00,9,Bug,,FALSE,FALSE,FALSE,1026_00.png,1026_00.png,1026_00_S.png
+1027_00,1027,Rabsca,,,255,00,9,Bug,Psychic,FALSE,FALSE,FALSE,1027_00.png,1027_00.png,1027_00_S.png
+1028_00,1028,Greavard,,,311,00,9,Ghost,,FALSE,FALSE,FALSE,1028_00.png,1028_00.png,1028_00_S.png
+1029_00,1029,Houndstone,,,312,00,9,Ghost,,FALSE,FALSE,FALSE,1029_00.png,1029_00.png,1029_00_S.png
+1030_00,1030,Flittle,,,263,00,9,Psychic,,FALSE,FALSE,FALSE,1030_00.png,1030_00.png,1030_00_S.png
+1031_00,1031,Espathra,,,264,00,9,Psychic,,FALSE,FALSE,FALSE,1031_00.png,1031_00.png,1031_00_S.png
+1032_00,1032,Farigiraf,,,193,00,9,Normal,Psychic,FALSE,FALSE,FALSE,1032_00.png,1032_00.png,1032_00_S.png
+1033_00,1033,Wiglett,,,288,00,9,Water,,FALSE,FALSE,FALSE,1033_00.png,1033_00.png,1033_00_S.png
+1034_00,1034,Wugtrio,,,289,00,9,Water,,FALSE,FALSE,FALSE,1034_00.png,1034_00.png,1034_00_S.png
+1035_00,1035,Dondozo,,,374,00,9,Water,,FALSE,FALSE,FALSE,1035_00.png,1035_00.png,1035_00_S.png
+1036_00,1036,Veluza,,,373,00,9,Water,Psychic,FALSE,FALSE,FALSE,1036_00.png,1036_00.png,1036_00_S.png
+1037_00,1037,Finizen,,,291,00,9,Water,,FALSE,FALSE,FALSE,1037_00.png,1037_00.png,1037_00_S.png
+1038_00,1038,Palafin,,Zero Form,292,00,9,Water,,FALSE,FALSE,FALSE,1038_00.png,1038_00.png,1038_00_S.png
 1038_00,1038,Palafin,,Hero Form,,00,9,Water,,FALSE,FALSE,FALSE,1038_00.png,1038_00.png,1038_00_S.png
-1039_00,1039,Smoliv,,,84,00,9,Grass,Normal,FALSE,TRUE,FALSE,1039_00.png,1039_00.png,1039_00_S.png
-1040_00,1040,Dolliv,,,85,00,9,Grass,Normal,FALSE,TRUE,FALSE,1040_00.png,1040_00.png,1040_00_S.png
-1041_00,1041,Arboliva,,,86,00,9,Grass,Normal,FALSE,TRUE,FALSE,1041_00.png,1041_00.png,1041_00_S.png
-1042_00,1042,Capsakid,,,250,00,9,Grass,,FALSE,TRUE,FALSE,1042_00.png,1042_00.png,1042_00_S.png
-1043_00,1043,Scovillain,,,251,00,9,Grass,Fire,FALSE,TRUE,FALSE,1043_00.png,1043_00.png,1043_00_S.png
-1044_00,1044,Tadbulb,,,170,00,9,Electric,,FALSE,TRUE,FALSE,1044_00.png,1044_00.png,1044_00_S.png
-1045_00,1045,Bellibolt,,,171,00,9,Electric,,FALSE,TRUE,FALSE,1045_00.png,1045_00.png,1045_00_S.png
-1046_00,1046,Varoom,,,293,00,9,Steel,Poison,FALSE,TRUE,FALSE,1046_00.png,1046_00.png,1046_00_S.png
-1047_00,1047,Revavroom,,,294,00,9,Steel,Poison,FALSE,TRUE,FALSE,1047_00.png,1047_00.png,1047_00_S.png
-1048_00,1048,Orthworm,,,296,00,9,Steel,,FALSE,TRUE,FALSE,1048_00.png,1048_00.png,1048_00_S.png
-1049_00,1049,Tandemaus,,,71,00,9,Normal,,FALSE,TRUE,FALSE,1049_00.png,1049_00.png,1049_00_S.png
-1050_00,1050,Maushold,,Family of Four,72,00,9,Normal,,FALSE,TRUE,FALSE,1050_00.png,1050_00.png,1050_00_S.png
-1050_01,1050,Maushold,,Family of Three,72,01,9,Normal,,FALSE,TRUE,FALSE,1050_01.png,1050_01.png,1050_01_S.png
-1051_00,1051,Cetoddle,,,361,00,9,Ice,,FALSE,TRUE,FALSE,1051_00.png,1051_00.png,1051_00_S.png
-1052_00,1052,Cetitan,,,362,00,9,Ice,,FALSE,TRUE,FALSE,1052_00.png,1052_00.png,1052_00_S.png
-1053_00,1053,Frigibax,,,388,00,9,Dragon,Ice,FALSE,TRUE,FALSE,1053_00.png,1053_00.png,1053_00_S.png
-1054_00,1054,Arctibax,,,389,00,9,Dragon,Ice,FALSE,TRUE,FALSE,1054_00.png,1054_00.png,1054_00_S.png
-1055_00,1055,Baxcalibur,,,390,00,9,Dragon,Ice,FALSE,TRUE,FALSE,1055_00.png,1055_00.png,1055_00_S.png
-1056_00,1056,Tatsugiri,,Curly Form,375,00,9,Dragon,Water,FALSE,TRUE,FALSE,1056_00.png,1056_00.png,1056_00_S.png
-1056_01,1056,Tatsugiri,,Droopy Form,375,01,9,Dragon,Water,FALSE,TRUE,FALSE,1056_01.png,1056_01.png,1056_01_S.png
-1056_02,1056,Tatsugiri,,Stretchy Form,375,02,9,Dragon,Water,FALSE,TRUE,FALSE,1056_02.png,1056_02.png,1056_02_S.png
-1057_00,1057,Cyclizar,,,295,00,9,Dragon,Normal,FALSE,TRUE,FALSE,1057_00.png,1057_00.png,1057_00_S.png
-1058_00,1058,Pawmi,,,22,00,9,Electric,,FALSE,TRUE,FALSE,1058_00.png,1058_00.png,1058_00_S.png
-1059_00,1059,Pawmo,,,23,00,9,Electric,Fighting,FALSE,TRUE,FALSE,1059_00.png,1059_00.png,1059_00_S.png
-1060_00,1060,Pawmot,,,24,00,9,Electric,Fighting,FALSE,TRUE,FALSE,1060_00.png,1060_00.png,1060_00_S.png
-1061_00,1061,Wattrel,,,177,00,9,Electric,Flying,FALSE,TRUE,FALSE,1061_00.png,1061_00.png,1061_00_S.png
-1062_00,1062,Kilowattrel,,,178,00,9,Electric,Flying,FALSE,TRUE,FALSE,1062_00.png,1062_00.png,1062_00_S.png
-1063_00,1063,Bombirdier,,,290,00,9,Flying,Dark,FALSE,TRUE,FALSE,1063_00.png,1063_00.png,1063_00_S.png
-1064_01,1064,Squawkabilly,,Blue Plumage,113,01,9,Normal,Flying,FALSE,TRUE,FALSE,1064_01.png,1064_01.png,1064_01_S.png
-1064_02,1064,Squawkabilly,,Yellow Plumage,113,02,9,Normal,Flying,FALSE,TRUE,FALSE,1064_02.png,1064_02.png,1064_02_S.png
-1064_03,1064,Squawkabilly,,White Plumage,113,03,9,Normal,Flying,FALSE,TRUE,FALSE,1064_03.png,1064_03.png,1064_03_S.png
-1064_00,1064,Squawkabilly,,Green Plumage,113,00,9,Normal,Flying,FALSE,TRUE,FALSE,1064_00.png,1064_00.png,1064_00_S.png
-1065_00,1065,Flamigo,,,346,00,9,Flying,Fighting,FALSE,TRUE,FALSE,1065_00.png,1065_00.png,1065_00_S.png
-1066_00,1066,Klawf,,,249,00,9,Rock,,FALSE,TRUE,FALSE,1066_00.png,1066_00.png,1066_00_S.png
-1067_00,1067,Nacli,,,129,00,9,Rock,,FALSE,TRUE,FALSE,1067_00.png,1067_00.png,1067_00_S.png
-1068_00,1068,Naclstack,,,130,00,9,Rock,,FALSE,TRUE,FALSE,1068_00.png,1068_00.png,1068_00_S.png
-1069_00,1069,Garganacl,,,131,00,9,Rock,,FALSE,TRUE,FALSE,1069_00.png,1069_00.png,1069_00_S.png
-1070_00,1070,Glimmet,,,308,00,9,Rock,Poison,FALSE,TRUE,FALSE,1070_00.png,1070_00.png,1070_00_S.png
-1071_00,1071,Glimmora,,,309,00,9,Rock,Poison,FALSE,TRUE,FALSE,1071_00.png,1071_00.png,1071_00_S.png
-1072_00,1072,Shroodle,,,202,00,9,Poison,Normal,FALSE,TRUE,FALSE,1072_00.png,1072_00.png,1072_00_S.png
-1073_00,1073,Grafaiai,,,203,00,9,Poison,Normal,FALSE,TRUE,FALSE,1073_00.png,1073_00.png,1073_00_S.png
-1074_00,1074,Fidough,,,76,00,9,Fairy,,FALSE,TRUE,FALSE,1074_00.png,1074_00.png,1074_00_S.png
-1075_00,1075,Dachsbun,,,77,00,9,Fairy,,FALSE,TRUE,FALSE,1075_00.png,1075_00.png,1075_00_S.png
-1076_00,1076,Maschiff,,,196,00,9,Dark,,FALSE,TRUE,FALSE,1076_00.png,1076_00.png,1076_00_S.png
-1077_00,1077,Mabosstiff,,,197,00,9,Dark,,FALSE,TRUE,FALSE,1077_00.png,1077_00.png,1077_00_S.png
-1078_00,1078,Bramblin,,,242,00,9,Grass,Ghost,FALSE,TRUE,FALSE,1078_00.png,1078_00.png,1078_00_S.png
-1079_00,1079,Brambleghast,,,243,00,9,Grass,Ghost,FALSE,TRUE,FALSE,1079_00.png,1079_00.png,1079_00_S.png
-1080_00,1080,Gimmighoul,,Chest Form,391,00,9,Ghost,,FALSE,TRUE,FALSE,1080_00.png,1080_00.png,1080_00_S.png
-1080_01,1080,Gimmighoul,,Roaming Form,,01,9,Ghost,,FALSE,TRUE,FALSE,1080_01.png,1080_01.png,1080_01_S.png
-1081_00,1081,Gholdengo,,,392,00,9,Steel,Ghost,FALSE,TRUE,FALSE,1081_00.png,1081_00.png,1081_00_S.png
-1082_00,1082,Great Tusk,,,376,00,9,Ground,Fighting,FALSE,TRUE,FALSE,1082_00.png,1082_00.png,1082_00_S.png
-1083_00,1083,Brute Bonnet,,,378,00,9,Grass,Dark,FALSE,TRUE,FALSE,1083_00.png,1083_00.png,1083_00_S.png
-1085_00,1085,Sandy Shocks,,,381,00,9,Electric,Ground,FALSE,TRUE,FALSE,1085_00.png,1085_00.png,1085_00_S.png
-1086_00,1086,Scream Tail,,,377,00,9,Fairy,Psychic,FALSE,TRUE,FALSE,1086_00.png,1086_00.png,1086_00_S.png
-1087_00,1087,Flutter Mane,,,379,00,9,Ghost,Fairy,FALSE,TRUE,FALSE,1087_00.png,1087_00.png,1087_00_S.png
-1088_00,1088,Slither Wing,,,380,00,9,Bug,Fighting,FALSE,TRUE,FALSE,1088_00.png,1088_00.png,1088_00_S.png
-1089_00,1089,Roaring Moon,,,397,00,9,Dragon,Dark,FALSE,TRUE,FALSE,1089_00.png,1089_00.png,1089_00_S.png
-1090_00,1090,Iron Treads,,,382,00,9,Ground,Steel,FALSE,TRUE,FALSE,1090_00.png,1090_00.png,1090_00_S.png
-1092_00,1092,Iron Moth,,,386,00,9,Fire,Poison,FALSE,TRUE,FALSE,1092_00.png,1092_00.png,1092_00_S.png
-1093_00,1093,Iron Hands,,,384,00,9,Fighting,Electric,FALSE,TRUE,FALSE,1093_00.png,1093_00.png,1093_00_S.png
-1094_00,1094,Iron Jugulis,,,385,00,9,Dark,Flying,FALSE,TRUE,FALSE,1094_00.png,1094_00.png,1094_00_S.png
-1095_00,1095,Iron Thorns,,,387,00,9,Rock,Electric,FALSE,TRUE,FALSE,1095_00.png,1095_00.png,1095_00_S.png
-1096_00,1096,Iron Bundle,,,383,00,9,Ice,Water,FALSE,TRUE,FALSE,1096_00.png,1096_00.png,1096_00_S.png
-1097_00,1097,Iron Valiant,,,398,00,9,Fairy,Fighting,FALSE,TRUE,FALSE,1097_00.png,1097_00.png,1097_00_S.png
-1098_00,1098,Ting-Lu,,,395,00,9,Dark,Ground,FALSE,TRUE,FALSE,1098_00.png,1098_00.png,1098_00_S.png
-1099_00,1099,Chien-Pao,,,394,00,9,Dark,Ice,FALSE,TRUE,FALSE,1099_00.png,1099_00.png,1099_00_S.png
-1100_00,1100,Wo-Chien,,,393,00,9,Dark,Grass,FALSE,TRUE,FALSE,1100_00.png,1100_00.png,1100_00_S.png
-1101_00,1101,Chi-Yu,,,396,00,9,Dark,Fire,FALSE,TRUE,FALSE,1101_00.png,1101_00.png,1101_00_S.png
-1102_00,1102,Koraidon,,,399,00,9,Fighting,Dragon,FALSE,TRUE,FALSE,1102_00.png,1102_00.png,1102_00_S.png
-1103_00,1103,Miraidon,,,400,00,9,Electric,Dragon,FALSE,TRUE,FALSE,1103_00.png,1103_00.png,1103_00_S.png
-1104_00,1104,Tinkatink,,,279,00,9,Fairy,Steel,FALSE,TRUE,FALSE,1104_00.png,1104_00.png,1104_00_S.png
-1105_00,1105,Tinkatuff,,,280,00,9,Fairy,Steel,FALSE,TRUE,FALSE,1105_00.png,1105_00.png,1105_00_S.png
-1106_00,1106,Tinkaton,,,281,00,9,Fairy,Steel,FALSE,TRUE,FALSE,1106_00.png,1106_00.png,1106_00_S.png
-1107_00,1107,Charcadet,,,165,00,9,Fire,,FALSE,TRUE,FALSE,1107_00.png,1107_00.png,1107_00_S.png
-1108_00,1108,Armarouge,,,166,00,9,Fire,Psychic,FALSE,TRUE,FALSE,1108_00.png,1108_00.png,1108_00_S.png
-1109_00,1109,Ceruledge,,,167,00,9,Fire,Ghost,FALSE,TRUE,FALSE,1109_00.png,1109_00.png,1109_00_S.png
-1110_00,1110,Toedscool,,,244,00,9,Ground,Grass,FALSE,TRUE,FALSE,1110_00.png,1110_00.png,1110_00_S.png
-1111_00,1111,Toedscruel,,,245,00,9,Ground,Grass,FALSE,TRUE,FALSE,1111_00.png,1111_00.png,1111_00_S.png
-1112_00,1112,Kingambit,,,369,00,9,Dark,Steel,FALSE,TRUE,FALSE,1112_00.png,1112_00.png,1112_00_S.png
-1113_00,1113,Clodsire,,,54,00,9,Poison,Ground,FALSE,TRUE,FALSE,1113_00.png,1113_00.png,1113_00_S.png
-1114_00,1114,Annihilape,,,160,00,9,Fighting,Ghost,FALSE,TRUE,FALSE,1114_00.png,1114_00.png,1114_00_S.png
+1039_00,1039,Smoliv,,,84,00,9,Grass,Normal,FALSE,FALSE,FALSE,1039_00.png,1039_00.png,1039_00_S.png
+1040_00,1040,Dolliv,,,85,00,9,Grass,Normal,FALSE,FALSE,FALSE,1040_00.png,1040_00.png,1040_00_S.png
+1041_00,1041,Arboliva,,,86,00,9,Grass,Normal,FALSE,FALSE,FALSE,1041_00.png,1041_00.png,1041_00_S.png
+1042_00,1042,Capsakid,,,250,00,9,Grass,,FALSE,FALSE,FALSE,1042_00.png,1042_00.png,1042_00_S.png
+1043_00,1043,Scovillain,,,251,00,9,Grass,Fire,FALSE,FALSE,FALSE,1043_00.png,1043_00.png,1043_00_S.png
+1044_00,1044,Tadbulb,,,170,00,9,Electric,,FALSE,FALSE,FALSE,1044_00.png,1044_00.png,1044_00_S.png
+1045_00,1045,Bellibolt,,,171,00,9,Electric,,FALSE,FALSE,FALSE,1045_00.png,1045_00.png,1045_00_S.png
+1046_00,1046,Varoom,,,293,00,9,Steel,Poison,FALSE,FALSE,FALSE,1046_00.png,1046_00.png,1046_00_S.png
+1047_00,1047,Revavroom,,,294,00,9,Steel,Poison,FALSE,FALSE,FALSE,1047_00.png,1047_00.png,1047_00_S.png
+1048_00,1048,Orthworm,,,296,00,9,Steel,,FALSE,FALSE,FALSE,1048_00.png,1048_00.png,1048_00_S.png
+1049_00,1049,Tandemaus,,,71,00,9,Normal,,FALSE,FALSE,FALSE,1049_00.png,1049_00.png,1049_00_S.png
+1050_00,1050,Maushold,,Family of Four,72,00,9,Normal,,FALSE,FALSE,FALSE,1050_00.png,1050_00.png,1050_00_S.png
+1050_01,1050,Maushold,,Family of Three,72,01,9,Normal,,FALSE,FALSE,FALSE,1050_01.png,1050_01.png,1050_01_S.png
+1051_00,1051,Cetoddle,,,361,00,9,Ice,,FALSE,FALSE,FALSE,1051_00.png,1051_00.png,1051_00_S.png
+1052_00,1052,Cetitan,,,362,00,9,Ice,,FALSE,FALSE,FALSE,1052_00.png,1052_00.png,1052_00_S.png
+1053_00,1053,Frigibax,,,388,00,9,Dragon,Ice,FALSE,FALSE,FALSE,1053_00.png,1053_00.png,1053_00_S.png
+1054_00,1054,Arctibax,,,389,00,9,Dragon,Ice,FALSE,FALSE,FALSE,1054_00.png,1054_00.png,1054_00_S.png
+1055_00,1055,Baxcalibur,,,390,00,9,Dragon,Ice,FALSE,FALSE,FALSE,1055_00.png,1055_00.png,1055_00_S.png
+1056_00,1056,Tatsugiri,,Curly Form,375,00,9,Dragon,Water,FALSE,FALSE,FALSE,1056_00.png,1056_00.png,1056_00_S.png
+1056_01,1056,Tatsugiri,,Droopy Form,375,01,9,Dragon,Water,FALSE,FALSE,FALSE,1056_01.png,1056_01.png,1056_01_S.png
+1056_02,1056,Tatsugiri,,Stretchy Form,375,02,9,Dragon,Water,FALSE,FALSE,FALSE,1056_02.png,1056_02.png,1056_02_S.png
+1057_00,1057,Cyclizar,,,295,00,9,Dragon,Normal,FALSE,FALSE,FALSE,1057_00.png,1057_00.png,1057_00_S.png
+1058_00,1058,Pawmi,,,22,00,9,Electric,,FALSE,FALSE,FALSE,1058_00.png,1058_00.png,1058_00_S.png
+1059_00,1059,Pawmo,,,23,00,9,Electric,Fighting,FALSE,FALSE,FALSE,1059_00.png,1059_00.png,1059_00_S.png
+1060_00,1060,Pawmot,,,24,00,9,Electric,Fighting,FALSE,FALSE,FALSE,1060_00.png,1060_00.png,1060_00_S.png
+1061_00,1061,Wattrel,,,177,00,9,Electric,Flying,FALSE,FALSE,FALSE,1061_00.png,1061_00.png,1061_00_S.png
+1062_00,1062,Kilowattrel,,,178,00,9,Electric,Flying,FALSE,FALSE,FALSE,1062_00.png,1062_00.png,1062_00_S.png
+1063_00,1063,Bombirdier,,,290,00,9,Flying,Dark,FALSE,FALSE,FALSE,1063_00.png,1063_00.png,1063_00_S.png
+1064_01,1064,Squawkabilly,,Blue Plumage,113,01,9,Normal,Flying,FALSE,FALSE,FALSE,1064_01.png,1064_01.png,1064_01_S.png
+1064_02,1064,Squawkabilly,,Yellow Plumage,113,02,9,Normal,Flying,FALSE,FALSE,FALSE,1064_02.png,1064_02.png,1064_02_S.png
+1064_03,1064,Squawkabilly,,White Plumage,113,03,9,Normal,Flying,FALSE,FALSE,FALSE,1064_03.png,1064_03.png,1064_03_S.png
+1064_00,1064,Squawkabilly,,Green Plumage,113,00,9,Normal,Flying,FALSE,FALSE,FALSE,1064_00.png,1064_00.png,1064_00_S.png
+1065_00,1065,Flamigo,,,346,00,9,Flying,Fighting,FALSE,FALSE,FALSE,1065_00.png,1065_00.png,1065_00_S.png
+1066_00,1066,Klawf,,,249,00,9,Rock,,FALSE,FALSE,FALSE,1066_00.png,1066_00.png,1066_00_S.png
+1067_00,1067,Nacli,,,129,00,9,Rock,,FALSE,FALSE,FALSE,1067_00.png,1067_00.png,1067_00_S.png
+1068_00,1068,Naclstack,,,130,00,9,Rock,,FALSE,FALSE,FALSE,1068_00.png,1068_00.png,1068_00_S.png
+1069_00,1069,Garganacl,,,131,00,9,Rock,,FALSE,FALSE,FALSE,1069_00.png,1069_00.png,1069_00_S.png
+1070_00,1070,Glimmet,,,308,00,9,Rock,Poison,FALSE,FALSE,FALSE,1070_00.png,1070_00.png,1070_00_S.png
+1071_00,1071,Glimmora,,,309,00,9,Rock,Poison,FALSE,FALSE,FALSE,1071_00.png,1071_00.png,1071_00_S.png
+1072_00,1072,Shroodle,,,202,00,9,Poison,Normal,FALSE,FALSE,FALSE,1072_00.png,1072_00.png,1072_00_S.png
+1073_00,1073,Grafaiai,,,203,00,9,Poison,Normal,FALSE,FALSE,FALSE,1073_00.png,1073_00.png,1073_00_S.png
+1074_00,1074,Fidough,,,76,00,9,Fairy,,FALSE,FALSE,FALSE,1074_00.png,1074_00.png,1074_00_S.png
+1075_00,1075,Dachsbun,,,77,00,9,Fairy,,FALSE,FALSE,FALSE,1075_00.png,1075_00.png,1075_00_S.png
+1076_00,1076,Maschiff,,,196,00,9,Dark,,FALSE,FALSE,FALSE,1076_00.png,1076_00.png,1076_00_S.png
+1077_00,1077,Mabosstiff,,,197,00,9,Dark,,FALSE,FALSE,FALSE,1077_00.png,1077_00.png,1077_00_S.png
+1078_00,1078,Bramblin,,,242,00,9,Grass,Ghost,FALSE,FALSE,FALSE,1078_00.png,1078_00.png,1078_00_S.png
+1079_00,1079,Brambleghast,,,243,00,9,Grass,Ghost,FALSE,FALSE,FALSE,1079_00.png,1079_00.png,1079_00_S.png
+1080_00,1080,Gimmighoul,,Chest Form,391,00,9,Ghost,,FALSE,FALSE,FALSE,1080_00.png,1080_00.png,1080_00_S.png
+1080_01,1080,Gimmighoul,,Roaming Form,,01,9,Ghost,,FALSE,FALSE,FALSE,1080_01.png,1080_01.png,1080_01_S.png
+1081_00,1081,Gholdengo,,,392,00,9,Steel,Ghost,FALSE,FALSE,FALSE,1081_00.png,1081_00.png,1081_00_S.png
+1082_00,1082,Great Tusk,,,376,00,9,Ground,Fighting,FALSE,FALSE,FALSE,1082_00.png,1082_00.png,1082_00_S.png
+1083_00,1083,Brute Bonnet,,,378,00,9,Grass,Dark,FALSE,FALSE,FALSE,1083_00.png,1083_00.png,1083_00_S.png
+1085_00,1085,Sandy Shocks,,,381,00,9,Electric,Ground,FALSE,FALSE,FALSE,1085_00.png,1085_00.png,1085_00_S.png
+1086_00,1086,Scream Tail,,,377,00,9,Fairy,Psychic,FALSE,FALSE,FALSE,1086_00.png,1086_00.png,1086_00_S.png
+1087_00,1087,Flutter Mane,,,379,00,9,Ghost,Fairy,FALSE,FALSE,FALSE,1087_00.png,1087_00.png,1087_00_S.png
+1088_00,1088,Slither Wing,,,380,00,9,Bug,Fighting,FALSE,FALSE,FALSE,1088_00.png,1088_00.png,1088_00_S.png
+1089_00,1089,Roaring Moon,,,397,00,9,Dragon,Dark,FALSE,FALSE,FALSE,1089_00.png,1089_00.png,1089_00_S.png
+1090_00,1090,Iron Treads,,,382,00,9,Ground,Steel,FALSE,FALSE,FALSE,1090_00.png,1090_00.png,1090_00_S.png
+1092_00,1092,Iron Moth,,,386,00,9,Fire,Poison,FALSE,FALSE,FALSE,1092_00.png,1092_00.png,1092_00_S.png
+1093_00,1093,Iron Hands,,,384,00,9,Fighting,Electric,FALSE,FALSE,FALSE,1093_00.png,1093_00.png,1093_00_S.png
+1094_00,1094,Iron Jugulis,,,385,00,9,Dark,Flying,FALSE,FALSE,FALSE,1094_00.png,1094_00.png,1094_00_S.png
+1095_00,1095,Iron Thorns,,,387,00,9,Rock,Electric,FALSE,FALSE,FALSE,1095_00.png,1095_00.png,1095_00_S.png
+1096_00,1096,Iron Bundle,,,383,00,9,Ice,Water,FALSE,FALSE,FALSE,1096_00.png,1096_00.png,1096_00_S.png
+1097_00,1097,Iron Valiant,,,398,00,9,Fairy,Fighting,FALSE,FALSE,FALSE,1097_00.png,1097_00.png,1097_00_S.png
+1098_00,1098,Ting-Lu,,,395,00,9,Dark,Ground,FALSE,FALSE,FALSE,1098_00.png,1098_00.png,1098_00_S.png
+1099_00,1099,Chien-Pao,,,394,00,9,Dark,Ice,FALSE,FALSE,FALSE,1099_00.png,1099_00.png,1099_00_S.png
+1100_00,1100,Wo-Chien,,,393,00,9,Dark,Grass,FALSE,FALSE,FALSE,1100_00.png,1100_00.png,1100_00_S.png
+1101_00,1101,Chi-Yu,,,396,00,9,Dark,Fire,FALSE,FALSE,FALSE,1101_00.png,1101_00.png,1101_00_S.png
+1102_00,1102,Koraidon,,,399,00,9,Fighting,Dragon,FALSE,FALSE,FALSE,1102_00.png,1102_00.png,1102_00_S.png
+1103_00,1103,Miraidon,,,400,00,9,Electric,Dragon,FALSE,FALSE,FALSE,1103_00.png,1103_00.png,1103_00_S.png
+1104_00,1104,Tinkatink,,,279,00,9,Fairy,Steel,FALSE,FALSE,FALSE,1104_00.png,1104_00.png,1104_00_S.png
+1105_00,1105,Tinkatuff,,,280,00,9,Fairy,Steel,FALSE,FALSE,FALSE,1105_00.png,1105_00.png,1105_00_S.png
+1106_00,1106,Tinkaton,,,281,00,9,Fairy,Steel,FALSE,FALSE,FALSE,1106_00.png,1106_00.png,1106_00_S.png
+1107_00,1107,Charcadet,,,165,00,9,Fire,,FALSE,FALSE,FALSE,1107_00.png,1107_00.png,1107_00_S.png
+1108_00,1108,Armarouge,,,166,00,9,Fire,Psychic,FALSE,FALSE,FALSE,1108_00.png,1108_00.png,1108_00_S.png
+1109_00,1109,Ceruledge,,,167,00,9,Fire,Ghost,FALSE,FALSE,FALSE,1109_00.png,1109_00.png,1109_00_S.png
+1110_00,1110,Toedscool,,,244,00,9,Ground,Grass,FALSE,FALSE,FALSE,1110_00.png,1110_00.png,1110_00_S.png
+1111_00,1111,Toedscruel,,,245,00,9,Ground,Grass,FALSE,FALSE,FALSE,1111_00.png,1111_00.png,1111_00_S.png
+1112_00,1112,Kingambit,,,369,00,9,Dark,Steel,FALSE,FALSE,FALSE,1112_00.png,1112_00.png,1112_00_S.png
+1113_00,1113,Clodsire,,,54,00,9,Poison,Ground,FALSE,FALSE,FALSE,1113_00.png,1113_00.png,1113_00_S.png
+1114_00,1114,Annihilape,,,160,00,9,Fighting,Ghost,FALSE,FALSE,FALSE,1114_00.png,1114_00.png,1114_00_S.png
