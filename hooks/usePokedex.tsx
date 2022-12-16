@@ -23,6 +23,8 @@ interface PokedexContextData {
   firstLoadPokedex: (loadingPokedex: Pokemon[]) => void;
   resetControls: () => void;
   updatePokedex: (pokedexToUpdate: Pokemon[]) => void;
+  handleBreakByGen: () => void;
+  breakByGen: boolean;
 }
 
 interface Pokemon {
@@ -52,6 +54,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const [pokedex, setPokedex] = useState<Pokemon[]>(pokelist);
   const [viewGenderDifference, setViewGenderDifference] = useState(true);
   const [viewOnlyOneForm, setViewOnlyOneForm] = useState(false);
+  const [breakByGen, setBreakByGen] = useState(false);
   const [orderList, setOrderList] = useState<"p" | "n">("p");
 
   const router = useRouter();
@@ -72,7 +75,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         return a.id > b.id ? 1 : -1;
       });
     }
-
     setPokedex(sortedPokedes);
   }
 
@@ -220,6 +222,12 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
   }
 
+  function handleBreakByGen() {
+    const newSetting = !breakByGen;
+
+    setBreakByGen(newSetting);
+  }
+
   return (
     <PokedexContext.Provider
       value={{
@@ -239,6 +247,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         firstLoadPokedex,
         resetControls,
         updatePokedex,
+        breakByGen,
+        handleBreakByGen,
       }}
     >
       {children}

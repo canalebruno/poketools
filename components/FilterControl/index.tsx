@@ -18,6 +18,8 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
     orderList,
     resetControls,
     pokedex,
+    breakByGen,
+    handleBreakByGen,
   } = usePokedex();
 
   useEffect(() => {
@@ -55,6 +57,16 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
             id="onlyOneForm"
           />
           Only 1 Form
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={breakByGen}
+            onChange={handleBreakByGen}
+            name="New Box by Gen"
+            id="newBoxByGen"
+          />
+          Break by Gen
         </label>
       </div>
       {pokedex && (

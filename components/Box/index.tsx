@@ -36,7 +36,7 @@ export default function Box({ imageSource }: BoxProps) {
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
 
-  const { orderList, pokedex } = usePokedex();
+  const { orderList, pokedex, breakByGen } = usePokedex();
 
   const router = useRouter();
 
@@ -46,17 +46,69 @@ export default function Box({ imageSource }: BoxProps) {
     if (boxQuantity > 0) {
       setPokeBox(handleBoxQuantity());
     }
-  }, [pokedex, boxQuantity, orderList]);
+  }, [pokedex, boxQuantity, orderList, breakByGen]);
 
   function handleBoxQuantity() {
     const newPokeBox = [];
 
     if (boxQuantity > 0) {
-      for (let i = 1; i <= boxQuantity; i++) {
-        newPokeBox.push({
-          box: i,
-          pokemon: pokedex.slice(30 * i - 30, 30 * i),
-        });
+      if (!breakByGen) {
+        for (let i = 1; i <= boxQuantity; i++) {
+          newPokeBox.push({
+            box: i,
+            pokemon: pokedex.slice(30 * i - 30, 30 * i),
+          });
+        }
+      } else {
+        const latestGen = pokedex.reduce(
+          (a, b) => Math.max(a, b.generation),
+          -Infinity
+        );
+
+        let boxNumber = 1;
+
+        // Generation Iteration
+        for (let g = 1; g <= latestGen; g++) {
+          const generationDex = pokedex.filter((pkmn) => {
+            return pkmn.generation === g;
+          });
+
+          // Quantity iteration
+          for (let j = 1; j < 10; j++) {
+            const boxPokemon = generationDex.slice(30 * j - 30, 30 * j);
+
+            if (boxPokemon.length > 0) {
+              newPokeBox.push({
+                box: boxNumber,
+                pokemon: boxPokemon,
+              });
+              boxNumber++;
+            } else {
+              break;
+            }
+          }
+
+          if (g === 8) {
+            for (let j = 1; j < 10; j++) {
+              const boxPokemon = pokedex
+                .filter((pkmn) => {
+                  return pkmn.generation === 8.5;
+                })
+                .slice(30 * j - 30, 30 * j);
+
+              if (boxPokemon.length > 0) {
+                newPokeBox.push({
+                  box: boxNumber,
+                  pokemon: boxPokemon,
+                });
+                boxNumber++;
+              } else {
+                break;
+              }
+            }
+          }
+          // }
+        }
       }
     }
 
