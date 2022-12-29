@@ -41,7 +41,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.filterControl}>
         <FormControl>
           <InputLabel id="demo-simple-select-label">Sort by</InputLabel>
@@ -86,14 +86,11 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
             Break by Gen
           </ToggleButton>
         </ToggleButtonGroup>
+        {pokedex && <span>Showing: {pokedex.length} Pokemon</span>}
       </div>
-      <SearchBox />
-      {pokedex && (
-        <span>
-          <br />
-          Showing: {pokedex.length} Pokemon
-        </span>
-      )}
-    </>
+      <div className={styles.filterControl}>
+        <SearchBox />
+      </div>
+    </div>
   );
 }
