@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import { Pokemon } from "../../utils/Interfaces";
+import { handleName } from "../../utils/NameFormatting";
 
 interface Option {
   label: string;
@@ -19,45 +20,6 @@ export default function SearchBox() {
 
   const { setHighlightPokemon, pokedex } = usePokedex();
 
-  function handleNumber(pokemonNumber: number, charQuantity: 3 | 4) {
-    let stringNumber = String(pokemonNumber);
-
-    if (stringNumber.length < charQuantity) {
-      for (let i = stringNumber.length; i < charQuantity; i++) {
-        stringNumber = "0" + stringNumber;
-      }
-    }
-
-    return stringNumber;
-  }
-
-  function handleName(pokemon: Pokemon, number: boolean = false) {
-    let prefixName = "";
-    let prefixNumber = "";
-
-    if (pokemon.generalForm !== "") {
-      prefixName += pokemon.generalForm + " ";
-    }
-
-    if (pokemon.uniqueForm !== "") {
-      prefixName += pokemon.uniqueForm + " ";
-    }
-
-    if (pokemon.genderDifference) {
-      prefixName += "Female ";
-    }
-
-    if (number) {
-      if (router.pathname === "/") {
-        prefixNumber = "#" + handleNumber(pokemon.paldeaDex!, 3) + " - ";
-      } else {
-        prefixNumber = "#" + handleNumber(pokemon.nationalDex, 3) + " - ";
-      }
-    }
-
-    return `${prefixNumber}${prefixName}${pokemon.name}`;
-  }
-
   function handleSearch(
     event: React.FormEvent<HTMLButtonElement>,
     newValue: Option | null
@@ -72,6 +34,8 @@ export default function SearchBox() {
       }
       window.scrollTo({ top: offset, behavior: "smooth" });
       setHighlightPokemon(newValue.id);
+    } else {
+      setHighlightPokemon("");
     }
   }
 
@@ -93,7 +57,11 @@ export default function SearchBox() {
         })
         .map((pkmn) => {
           return {
-            label: handleName(pkmn, true),
+            label: handleName(
+              pkmn,
+              true,
+              router.pathname === "/" ? "Paldean" : "National"
+            ),
             id: pkmn.id,
           };
         })
