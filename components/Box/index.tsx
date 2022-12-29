@@ -134,8 +134,8 @@ export default function Box({ imageSource }: BoxProps) {
                     >
                       <Image
                         unoptimized
-                        width={80}
-                        height={80}
+                        width={10}
+                        height={10}
                         src={`/${imageSource}/${
                           imageSource === "svicons" ? pkmn.icon : pkmn.homePic
                         }`}
