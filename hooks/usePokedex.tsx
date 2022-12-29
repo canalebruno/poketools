@@ -25,6 +25,8 @@ interface PokedexContextData {
   updatePokedex: (pokedexToUpdate: Pokemon[]) => void;
   handleBreakByGen: () => void;
   breakByGen: boolean;
+  highlightPokemon: string;
+  setHighlightPokemon: (term: string) => void;
 }
 
 interface Pokemon {
@@ -56,6 +58,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const [viewOnlyOneForm, setViewOnlyOneForm] = useState(false);
   const [breakByGen, setBreakByGen] = useState(false);
   const [orderList, setOrderList] = useState<"p" | "n">("p");
+  const [highlightPokemon, setHighlightPokemon] = useState("");
 
   const router = useRouter();
 
@@ -249,6 +252,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         updatePokedex,
         breakByGen,
         handleBreakByGen,
+        highlightPokemon,
+        setHighlightPokemon,
       }}
     >
       {children}

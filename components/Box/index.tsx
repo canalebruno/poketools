@@ -36,7 +36,7 @@ export default function Box({ imageSource }: BoxProps) {
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
 
-  const { orderList, pokedex, breakByGen } = usePokedex();
+  const { orderList, pokedex, breakByGen, highlightPokemon } = usePokedex();
 
   const router = useRouter();
 
@@ -125,7 +125,13 @@ export default function Box({ imageSource }: BoxProps) {
               <div className={styles.boxGrid}>
                 {box.pokemon.map((pkmn) => {
                   return (
-                    <div key={pkmn.id} className={styles.card}>
+                    <div
+                      key={pkmn.id}
+                      id={pkmn.id}
+                      className={`${styles.card} ${
+                        highlightPokemon === pkmn.id && styles.cardActive
+                      }`}
+                    >
                       <Image
                         unoptimized
                         width={80}

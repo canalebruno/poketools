@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "../Box/styles.module.scss";
+import SearchBox from "../SearchBox";
 
 interface FilterControlProps {
   sortingDefault: "p" | "n";
@@ -69,6 +70,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
           Break by Gen
         </label>
       </div>
+      <SearchBox />
       {pokedex && (
         <span>
           <br />
