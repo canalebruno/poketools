@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
-import styles from "../Box/styles.module.scss";
+import styles from "./styles.module.scss";
 import SearchBox from "../SearchBox";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import VisibilityTwoToneIcon from "@mui/icons-material/VisibilityTwoTone";
+import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 
 interface FilterControlProps {
   sortingDefault: "p" | "n";
@@ -9,6 +17,7 @@ interface FilterControlProps {
 
 export default function FilterControl({ sortingDefault }: FilterControlProps) {
   const [pagePath, setPagePath] = useState("");
+  const [filterValues, setFilterValues] = useState(["gender"]);
 
   const {
     viewGenderDifference,
@@ -29,16 +38,63 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
     resetControls();
   }, []);
 
+  function handleSelectChange(event: SelectChangeEvent) {
+    handleSorting(event.target.value as string);
+  }
+
+  function handleFilterValues(
+    event: React.MouseEvent<HTMLElement>,
+    newValues: string[]
+  ) {
+    setFilterValues(newValues);
+  }
+
   return (
     <>
       <div className={styles.filterControl}>
-        <select
-          onChange={(e) => handleSorting(e.target.value)}
-          value={orderList}
+        <FormControl>
+          <InputLabel id="demo-simple-select-label">Sort by</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={orderList}
+            label="Sort by"
+            onChange={handleSelectChange}
+          >
+            <MenuItem value={"n"}>National Dex</MenuItem>
+            {pagePath === "/" && <MenuItem value={"p"}>Paldean Dex</MenuItem>}
+          </Select>
+        </FormControl>
+        <ToggleButtonGroup
+          value={filterValues}
+          onChange={handleFilterValues}
+          aria-label="text formatting"
         >
-          <option value="n">Sort by National Dex</option>
-          {pagePath === "/" && <option value="p">Sort by Paldean Dex</option>}
-        </select>
+          <ToggleButton value="gender" aria-label="gender">
+            {viewGenderDifference ? (
+              <VisibilityTwoToneIcon />
+            ) : (
+              <VisibilityOffTwoToneIcon />
+            )}
+            Gender Difference
+          </ToggleButton>
+          <ToggleButton value="oneForm" aria-label="oneForm">
+            {viewOnlyOneForm ? (
+              <VisibilityTwoToneIcon />
+            ) : (
+              <VisibilityOffTwoToneIcon />
+            )}
+            Only 1 Form
+          </ToggleButton>
+          <ToggleButton value="gen" aria-label="gen">
+            {breakByGen ? (
+              <VisibilityTwoToneIcon />
+            ) : (
+              <VisibilityOffTwoToneIcon />
+            )}
+            Break by Gen
+          </ToggleButton>
+        </ToggleButtonGroup>
         <label>
           <input
             type="checkbox"

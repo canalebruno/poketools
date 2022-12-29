@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
