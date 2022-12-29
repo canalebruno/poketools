@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { Tooltip } from "@mui/material";
+import { handleName } from "../../utils/NameFormatting";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
@@ -126,27 +128,37 @@ export default function Box({ imageSource }: BoxProps) {
               <div className={styles.boxGrid}>
                 {box.pokemon.map((pkmn) => {
                   return (
-                    <div
-                      key={pkmn.id}
-                      id={pkmn.id}
-                      className={`${styles.card} ${
-                        highlightPokemon === pkmn.id && styles.cardActive
-                      }`}
+                    <Tooltip
+                      title={handleName(
+                        pkmn,
+                        true,
+                        router.pathname === "/" ? "Paldean" : "National",
+                        true
+                      )}
+                      arrow
                     >
-                      <Image
-                        unoptimized
-                        width={10}
-                        height={10}
-                        src={`/${imageSource}/${
-                          imageSource === "svicons" ? pkmn.icon : pkmn.homePic
+                      <div
+                        key={pkmn.id}
+                        id={pkmn.id}
+                        className={`${styles.card} ${
+                          highlightPokemon === pkmn.id && styles.cardActive
                         }`}
-                        alt={`#${
-                          router.pathname === "/"
-                            ? pkmn.paldeaDex
-                            : pkmn.nationalDex
-                        } - ${pkmn.name}`}
-                      />
-                    </div>
+                      >
+                        <Image
+                          unoptimized
+                          width={10}
+                          height={10}
+                          src={`/${imageSource}/${
+                            imageSource === "svicons" ? pkmn.icon : pkmn.homePic
+                          }`}
+                          alt={`#${
+                            router.pathname === "/"
+                              ? pkmn.paldeaDex
+                              : pkmn.nationalDex
+                          } - ${pkmn.name}`}
+                        />
+                      </div>
+                    </Tooltip>
                   );
                 })}
                 {box.pokemon.length < 30 &&
