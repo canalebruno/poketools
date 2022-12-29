@@ -60,7 +60,8 @@ export default function SearchBox() {
             label: handleName(
               pkmn,
               true,
-              router.pathname === "/" ? "Paldean" : "National"
+              router.pathname === "/" ? "Paldean" : "National",
+              false
             ),
             id: pkmn.id,
           };

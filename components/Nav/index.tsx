@@ -1,17 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import styles from "./styles.module.scss";
 
 export default function Nav() {
   const router = useRouter();
-  const [windowWidth, setWindowWidth] = useState(0);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setWindowWidth(window.innerWidth);
-    }
-  }, []);
+  const { windowWidth } = useWindowSize();
 
   return (
     <div className={styles.container}>
