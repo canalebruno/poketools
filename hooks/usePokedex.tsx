@@ -100,6 +100,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     setFilterValues(["gender"]);
     setViewGenderDifference(true);
     setViewOnlyOneForm(false);
+    setBreakByGen(false);
   }
 
   function updatePokedex(pokedexToUpdate: Pokemon[]) {
