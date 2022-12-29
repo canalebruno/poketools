@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { createContext, ReactNode, useContext, useState } from "react";
 import pokelist from "../json/nationalDex.json";
+import { Pokemon } from "../utils/Interfaces";
 
 interface PokedexProviderProps {
   children: ReactNode;
@@ -27,25 +28,11 @@ interface PokedexContextData {
   breakByGen: boolean;
   highlightPokemon: string;
   setHighlightPokemon: (term: string) => void;
-}
-
-interface Pokemon {
-  id: string;
-  nationalDex: number;
-  name: string;
-  generalForm: string;
-  uniqueForm: string;
-  paldeaDex: null | number;
-  formOrder: string;
-  generation: number;
-  type1: string;
-  type2: string;
-  genderDifference: boolean;
-  homeAvailable: boolean;
-  shinyAvailable: boolean;
-  icon: string;
-  homePic: string;
-  homeShinyPic: string;
+  filterValues: string[];
+  handleFilterValues: (
+    event: React.MouseEvent<HTMLElement>,
+    newValues: string[]
+  ) => void;
 }
 
 const PokedexContext = createContext<PokedexContextData>(
@@ -59,6 +46,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const [breakByGen, setBreakByGen] = useState(false);
   const [orderList, setOrderList] = useState<"p" | "n">("p");
   const [highlightPokemon, setHighlightPokemon] = useState("");
+  const [filterValues, setFilterValues] = useState(["gender"]);
 
   const router = useRouter();
 
@@ -109,6 +97,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         handleSorting("n");
     }
 
+    setFilterValues(["gender"]);
     setViewGenderDifference(true);
     setViewOnlyOneForm(false);
   }
@@ -139,23 +128,45 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   function handleViewGenderDifference() {
     const newSetting = !viewGenderDifference;
+    let finalValues = [] as string[];
 
     setViewGenderDifference(newSetting);
 
     if (newSetting) {
+      finalValues = filterValues.filter((value) => {
+        return value !== "oneForm";
+      });
+
+      if (!finalValues.includes("gender")) {
+        finalValues = [...finalValues, "gender"];
+      }
+
       setViewOnlyOneForm(false);
       updatePokedex(pagePokedex());
     } else {
+      if (filterValues.includes("gender")) {
+        finalValues = filterValues.filter((value) => {
+          return value !== "gender";
+        });
+      }
       updatePokedex(filterByGender());
     }
+    setFilterValues(finalValues);
   }
 
   function handleViewOnlyOneForm() {
     const newSetting = !viewOnlyOneForm;
+    let finalValues = [] as string[];
 
     setViewOnlyOneForm(newSetting);
 
     if (!newSetting) {
+      if (filterValues.includes("oneForm")) {
+        finalValues = filterValues.filter((value) => {
+          return value !== "oneForm";
+        });
+      }
+
       if (viewGenderDifference) {
         handleViewGenderDifference();
       } else {
@@ -166,9 +177,16 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         );
       }
     } else {
+      finalValues = filterValues.filter((value) => {
+        return value !== "gender";
+      });
+      if (!finalValues.includes("oneForm")) {
+        finalValues = [...finalValues, "oneForm"];
+      }
       setViewGenderDifference(false);
       updatePokedex(filterByOnlyOneForm());
     }
+    setFilterValues(finalValues);
   }
 
   function filterByGender() {
@@ -228,7 +246,43 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   function handleBreakByGen() {
     const newSetting = !breakByGen;
 
+    if (newSetting && !filterValues.includes("gen")) {
+      setFilterValues([...filterValues, "gen"]);
+    } else if (!newSetting && filterValues.includes("gen")) {
+      setFilterValues(
+        filterValues.filter((value) => {
+          return value !== "gen";
+        })
+      );
+    }
+
     setBreakByGen(newSetting);
+  }
+
+  function handleFilterValues(
+    event: React.MouseEvent<HTMLElement>,
+    newValues: string[]
+  ) {
+    if (
+      (newValues.includes("gender") && !filterValues.includes("gender")) ||
+      (!newValues.includes("gender") && filterValues.includes("gender"))
+    ) {
+      handleViewGenderDifference();
+    }
+
+    if (
+      (newValues.includes("oneForm") && !filterValues.includes("oneForm")) ||
+      (!newValues.includes("oneForm") && filterValues.includes("oneForm"))
+    ) {
+      handleViewOnlyOneForm();
+    }
+
+    if (
+      (newValues.includes("gen") && !filterValues.includes("gen")) ||
+      (!newValues.includes("gen") && filterValues.includes("gen"))
+    ) {
+      handleBreakByGen();
+    }
   }
 
   return (
@@ -254,6 +308,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         handleBreakByGen,
         highlightPokemon,
         setHighlightPokemon,
+        filterValues,
+        handleFilterValues,
       }}
     >
       {children}

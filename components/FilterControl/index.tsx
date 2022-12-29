@@ -17,19 +17,17 @@ interface FilterControlProps {
 
 export default function FilterControl({ sortingDefault }: FilterControlProps) {
   const [pagePath, setPagePath] = useState("");
-  const [filterValues, setFilterValues] = useState(["gender"]);
 
   const {
     viewGenderDifference,
-    handleViewGenderDifference,
     viewOnlyOneForm,
-    handleViewOnlyOneForm,
     handleSorting,
     orderList,
     resetControls,
     pokedex,
     breakByGen,
-    handleBreakByGen,
+    filterValues,
+    handleFilterValues,
   } = usePokedex();
 
   useEffect(() => {
@@ -40,13 +38,6 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
 
   function handleSelectChange(event: SelectChangeEvent) {
     handleSorting(event.target.value as string);
-  }
-
-  function handleFilterValues(
-    event: React.MouseEvent<HTMLElement>,
-    newValues: string[]
-  ) {
-    setFilterValues(newValues);
   }
 
   return (
@@ -95,36 +86,6 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
             Break by Gen
           </ToggleButton>
         </ToggleButtonGroup>
-        <label>
-          <input
-            type="checkbox"
-            checked={viewGenderDifference}
-            onChange={handleViewGenderDifference}
-            name="Gender Difference"
-            id="genderDifference"
-          />
-          Gender Difference
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={viewOnlyOneForm}
-            onChange={handleViewOnlyOneForm}
-            name="Only One Form"
-            id="onlyOneForm"
-          />
-          Only 1 Form
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={breakByGen}
-            onChange={handleBreakByGen}
-            name="New Box by Gen"
-            id="newBoxByGen"
-          />
-          Break by Gen
-        </label>
       </div>
       <SearchBox />
       {pokedex && (

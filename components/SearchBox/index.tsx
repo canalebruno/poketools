@@ -76,7 +76,6 @@ export default function SearchBox() {
   }
 
   useEffect(() => {
-    console.log(pokedex);
     setOptions(
       pokedex
         .filter((pkmn) => {
