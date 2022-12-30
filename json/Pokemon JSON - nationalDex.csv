@@ -5,9 +5,9 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 003_01,003,Venusaur,Gigantamax,,,01,1,Grass,Poison,FALSE,FALSE,TRUE,003_01.png,003_01.png,003_01_S.png
 003_00_F,003,Venusaur,,,,00,1,Grass,Poison,TRUE,TRUE,TRUE,003_00.png,003_00_F.png,003_00_F_S.png
 003_02,003,Venusaur,Mega,,,02,1,Grass,Poison,FALSE,FALSE,TRUE,003_02.png,003_02.png,003_02_S.png
-004_00,004,Charmander,,,,00,1,Fire,,FALSE,TRUE,TRUE,004_00.png,004_00.png,004_00_S.png
-005_00,005,Charmeleon,,,,00,1,Fire,,FALSE,TRUE,TRUE,005_00.png,005_00.png,005_00_S.png
-006_00,006,Charizard,,,,00,1,Fire,Flying,FALSE,TRUE,TRUE,006_00.png,006_00.png,006_00_S.png
+004_00,004,Charmander,,,503,00,1,Fire,,FALSE,TRUE,TRUE,004_00.png,004_00.png,004_00_S.png
+005_00,005,Charmeleon,,,504,00,1,Fire,,FALSE,TRUE,TRUE,005_00.png,005_00.png,005_00_S.png
+006_00,006,Charizard,,,505,00,1,Fire,Flying,FALSE,TRUE,TRUE,006_00.png,006_00.png,006_00_S.png
 006_01,006,Charizard,Gigantamax,,,01,1,Fire,Flying,FALSE,FALSE,TRUE,006_01.png,006_01.png,006_01_S.png
 006_03,006,Charizard,Mega,Y,,03,1,Fire,Flying,FALSE,FALSE,TRUE,006_03.png,006_03.png,006_03_S.png
 006_02,006,Charizard,Mega,X,,02,1,Fire,Dragon,FALSE,FALSE,TRUE,006_02.png,006_02.png,006_02_S.png
@@ -91,7 +91,7 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 052_00,052,Meowth,,,141,00,1,Normal,,FALSE,TRUE,TRUE,052_00.png,052_00.png,052_00_S.png
 052_01,052,Meowth,Gigantamax,,,01,1,Normal,,FALSE,FALSE,TRUE,052_01.png,052_01.png,052_01_S.png
 052_02,052,Meowth,Alolan,,,02,1,Dark,,FALSE,TRUE,TRUE,052_02.png,052_02.png,052_02_S.png
-052_03,052,Meowth,Galarian,,,03,1,Steel,,FALSE,TRUE,TRUE,052_03.png,052_03.png,052_03_S.png
+052_03,052,Meowth,Galarian,,141,03,1,Steel,,FALSE,TRUE,TRUE,052_03.png,052_03.png,052_03_S.png
 053_00,053,Persian,,,142,00,1,Normal,,FALSE,TRUE,TRUE,053_00.png,053_00.png,053_00_S.png
 053_01,053,Persian,Alolan,,,01,1,Dark,,FALSE,TRUE,TRUE,053_01.png,053_01.png,053_01_S.png
 054_00,054,Psyduck,,,055,00,1,Water,,FALSE,TRUE,TRUE,054_00.png,054_00.png,054_00_S.png
@@ -295,11 +295,11 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 191_00,191,Sunkern,,,031,00,2,Grass,,FALSE,TRUE,TRUE,191_00.png,191_00.png,191_00_S.png
 192_00,192,Sunflora,,,032,00,2,Grass,,FALSE,TRUE,TRUE,192_00.png,192_00.png,192_00_S.png
 193_00,193,Yanma,,,,00,2,Bug,Flying,FALSE,TRUE,TRUE,193_00.png,193_00.png,193_00_S.png
-194_00,194,Wooper,,,,00,2,Water,Ground,FALSE,TRUE,TRUE,194_00.png,194_00.png,194_00_S.png
+194_00,194,Wooper,,,053,00,2,Water,Ground,FALSE,TRUE,TRUE,194_00.png,194_00.png,194_00_S.png
 194_01,194,Wooper,Paldean,,053,01,2,Poison,Ground,FALSE,FALSE,TRUE,194_01.png,194_01.png,194_01_S.png
-194_00_F,194,Wooper,,,,00,2,Water,Ground,TRUE,TRUE,TRUE,194_00.png,194_00_F.png,194_00_F_S.png
-195_00,195,Quagsire,,,,00,2,Water,Ground,FALSE,TRUE,TRUE,195_00.png,195_00.png,195_00_S.png
-195_00_F,195,Quagsire,,,,00,2,Water,Ground,TRUE,TRUE,TRUE,195_00.png,195_00_F.png,195_00_F_S.png
+194_00_F,194,Wooper,,,053,00,2,Water,Ground,TRUE,TRUE,TRUE,194_00.png,194_00_F.png,194_00_F_S.png
+195_00,195,Quagsire,,,501,00,2,Water,Ground,FALSE,TRUE,TRUE,195_00.png,195_00.png,195_00_S.png
+195_00_F,195,Quagsire,,,501,00,2,Water,Ground,TRUE,TRUE,TRUE,195_00.png,195_00_F.png,195_00_F_S.png
 196_00,196,Espeon,,,183,00,2,Psychic,,FALSE,TRUE,TRUE,196_00.png,196_00.png,196_00_S.png
 197_00,197,Umbreon,,,184,00,2,Dark,,FALSE,TRUE,TRUE,197_00.png,197_00.png,197_00_S.png
 198_00,198,Murkrow,,,232,00,2,Dark,Flying,FALSE,TRUE,TRUE,198_00.png,198_00.png,198_00_S.png
@@ -965,7 +965,7 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 656_00,656,Froakie,,,,00,6,Water,,FALSE,TRUE,TRUE,656_00.png,656_00.png,656_00_S.png
 657_00,657,Frogadier,,,,00,6,Water,,FALSE,TRUE,TRUE,657_00.png,657_00.png,657_00_S.png
 658_00,658,Greninja,,,,00,6,Water,Dark,FALSE,TRUE,TRUE,658_00.png,658_00.png,658_00_S.png
-658_01,658,Greninja,,Battle Bond,,01,6,Water,Dark,FALSE,TRUE,FALSE,658_01.png,658_01.png,658_01_S.png
+658_01,658,Greninja,,Battle Bond,,01,6,Water,Dark,FALSE,FALSE,FALSE,658_01.png,658_01.png,658_01_S.png
 659_00,659,Bunnelby,,,,00,6,Normal,,FALSE,TRUE,TRUE,659_00.png,659_00.png,659_00_S.png
 660_00,660,Diggersby,,,,00,6,Normal,Ground,FALSE,TRUE,TRUE,660_00.png,660_00.png,660_00_S.png
 661_00,661,Fletchling,,,019,00,6,Normal,Flying,FALSE,TRUE,TRUE,661_00.png,661_00.png,661_00_S.png
@@ -973,26 +973,26 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 663_00,663,Talonflame,,,021,00,6,Fire,Flying,FALSE,TRUE,TRUE,663_00.png,663_00.png,663_00_S.png
 664_00,664,Scatterbug,,,035,00,6,Bug,,FALSE,TRUE,TRUE,664_00.png,664_00.png,664_00_S.png
 665_00,665,Spewpa,,,036,00,6,Bug,,FALSE,TRUE,TRUE,665_00.png,665_00.png,665_00_S.png
-666_10,666,Vivillon,,Archipelago,,10,6,Bug,Flying,FALSE,TRUE,TRUE,666_10.png,666_10.png,666_10_S.png
-666_05,666,Vivillon,,Garden,,05,6,Bug,Flying,FALSE,TRUE,TRUE,666_05.png,666_05.png,666_05_S.png
-666_08,666,Vivillon,,Modern,,08,6,Bug,Flying,FALSE,TRUE,TRUE,666_08.png,666_08.png,666_08_S.png
-666_07,666,Vivillon,,Meadow,,07,6,Bug,Flying,FALSE,TRUE,TRUE,666_07.png,666_07.png,666_07_S.png
-666_04,666,Vivillon,,Continental,,04,6,Bug,Flying,FALSE,TRUE,TRUE,666_04.png,666_04.png,666_04_S.png
-666_06,666,Vivillon,,Elegant,,06,6,Bug,Flying,FALSE,TRUE,TRUE,666_06.png,666_06.png,666_06_S.png
-666_11,666,Vivillon,,High Plains,,11,6,Bug,Flying,FALSE,TRUE,TRUE,666_11.png,666_11.png,666_11_S.png
-666_09,666,Vivillon,,Marine,,09,6,Bug,Flying,FALSE,TRUE,TRUE,666_09.png,666_09.png,666_09_S.png
-666_01,666,Vivillon,,Icy Snow,,01,6,Bug,Flying,FALSE,TRUE,TRUE,666_01.png,666_01.png,666_01_S.png
-666_14,666,Vivillon,,Monsoon,,14,6,Bug,Flying,FALSE,TRUE,TRUE,666_14.png,666_14.png,666_14_S.png
-666_17,666,Vivillon,,Ocean,,17,6,Bug,Flying,FALSE,TRUE,TRUE,666_17.png,666_17.png,666_17_S.png
-666_15,666,Vivillon,,Savanna,,15,6,Bug,Flying,FALSE,TRUE,TRUE,666_15.png,666_15.png,666_15_S.png
-666_12,666,Vivillon,,Sandstorm,,12,6,Bug,Flying,FALSE,TRUE,TRUE,666_12.png,666_12.png,666_12_S.png
-666_13,666,Vivillon,,River,,13,6,Bug,Flying,FALSE,TRUE,TRUE,666_13.png,666_13.png,666_13_S.png
-666_00,666,Vivillon,,Fancy,037,00,6,Bug,Flying,FALSE,TRUE,TRUE,666_00.png,666_00.png,666_00_S.png
-666_03,666,Vivillon,,Tundra,,03,6,Bug,Flying,FALSE,TRUE,TRUE,666_03.png,666_03.png,666_03_S.png
-666_16,666,Vivillon,,Sun,,16,6,Bug,Flying,FALSE,TRUE,TRUE,666_16.png,666_16.png,666_16_S.png
-666_19,666,Vivillon,,Poké Ball,,19,6,Bug,Flying,FALSE,TRUE,FALSE,666_19.png,666_19.png,666_19_S.png
-666_18,666,Vivillon,,Jungle,,18,6,Bug,Flying,FALSE,TRUE,TRUE,666_18.png,666_18.png,666_18_S.png
-666_02,666,Vivillon,,Polar,,02,6,Bug,Flying,FALSE,TRUE,TRUE,666_02.png,666_02.png,666_02_S.png
+666_09,666,Vivillon,,Archipelago,,09,6,Bug,Flying,FALSE,TRUE,TRUE,666_09.png,666_09.png,666_09_S.png
+666_04,666,Vivillon,,Garden,,04,6,Bug,Flying,FALSE,TRUE,TRUE,666_04.png,666_04.png,666_04_S.png
+666_07,666,Vivillon,,Modern,,07,6,Bug,Flying,FALSE,TRUE,TRUE,666_07.png,666_07.png,666_07_S.png
+666_06,666,Vivillon,,Meadow,,06,6,Bug,Flying,FALSE,TRUE,TRUE,666_06.png,666_06.png,666_06_S.png
+666_03,666,Vivillon,,Continental,,03,6,Bug,Flying,FALSE,TRUE,TRUE,666_03.png,666_03.png,666_03_S.png
+666_05,666,Vivillon,,Elegant,,05,6,Bug,Flying,FALSE,TRUE,TRUE,666_05.png,666_05.png,666_05_S.png
+666_10,666,Vivillon,,High Plains,,10,6,Bug,Flying,FALSE,TRUE,TRUE,666_10.png,666_10.png,666_10_S.png
+666_08,666,Vivillon,,Marine,,08,6,Bug,Flying,FALSE,TRUE,TRUE,666_08.png,666_08.png,666_08_S.png
+666_00,666,Vivillon,,Icy Snow,,00,6,Bug,Flying,FALSE,TRUE,TRUE,666_00.png,666_00.png,666_00_S.png
+666_13,666,Vivillon,,Monsoon,,13,6,Bug,Flying,FALSE,TRUE,TRUE,666_13.png,666_13.png,666_13_S.png
+666_16,666,Vivillon,,Ocean,,16,6,Bug,Flying,FALSE,TRUE,TRUE,666_16.png,666_16.png,666_16_S.png
+666_14,666,Vivillon,,Savanna,,14,6,Bug,Flying,FALSE,TRUE,TRUE,666_14.png,666_14.png,666_14_S.png
+666_11,666,Vivillon,,Sandstorm,,11,6,Bug,Flying,FALSE,TRUE,TRUE,666_11.png,666_11.png,666_11_S.png
+666_12,666,Vivillon,,River,,12,6,Bug,Flying,FALSE,TRUE,TRUE,666_12.png,666_12.png,666_12_S.png
+666_19,666,Vivillon,,Fancy,037,19,6,Bug,Flying,FALSE,TRUE,TRUE,666_19.png,666_19.png,666_19_S.png
+666_02,666,Vivillon,,Tundra,,02,6,Bug,Flying,FALSE,TRUE,TRUE,666_02.png,666_02.png,666_02_S.png
+666_15,666,Vivillon,,Sun,,15,6,Bug,Flying,FALSE,TRUE,TRUE,666_15.png,666_15.png,666_15_S.png
+666_18,666,Vivillon,,Poké Ball,,18,6,Bug,Flying,FALSE,TRUE,FALSE,666_18.png,666_18.png,666_18_S.png
+666_17,666,Vivillon,,Jungle,,17,6,Bug,Flying,FALSE,TRUE,TRUE,666_17.png,666_17.png,666_17_S.png
+666_01,666,Vivillon,,Polar,,01,6,Bug,Flying,FALSE,TRUE,TRUE,666_01.png,666_01.png,666_01_S.png
 667_00,667,Litleo,,,224,00,6,Fire,Normal,FALSE,TRUE,TRUE,667_00.png,667_00.png,667_00_S.png
 668_00,668,Pyroar,,,225,00,6,Fire,Normal,FALSE,TRUE,TRUE,668_00.png,668_00.png,668_00_S.png
 668_00_F,668,Pyroar,,,225,00,6,Fire,Normal,TRUE,TRUE,TRUE,668_00_F.png,668_00_F.png,668_00_F_S.png
@@ -1082,8 +1082,8 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 718_00,718,Zygarde,,50% Forme,,00,6,Dragon,Ground,FALSE,TRUE,TRUE,718_00.png,718_00.png,718_00_S.png
 718_01,718,Zygarde,,10% Forme,,01,6,Dragon,Ground,FALSE,TRUE,TRUE,718_01.png,718_01.png,718_01_S.png
 718_02,718,Zygarde,,Complete Forme,,02,6,Dragon,Ground,FALSE,FALSE,TRUE,718_02.png,718_02.png,718_02_S.png
-718_03,718,Zygarde,,50% Forme Power Construct,,03,6,Dragon,Ground,FALSE,TRUE,TRUE,718_00.png,718_00.png,718_00_S.png
-718_04,718,Zygarde,,10% Forme Power Construct,,04,6,Dragon,Ground,FALSE,TRUE,TRUE,718_01.png,718_01.png,718_01_S.png
+718_03,718,Zygarde,,50% Forme Power Construct,,03,6,Dragon,Ground,FALSE,FALSE,TRUE,718_00.png,718_00.png,718_00_S.png
+718_04,718,Zygarde,,10% Forme Power Construct,,04,6,Dragon,Ground,FALSE,FALSE,TRUE,718_01.png,718_01.png,718_01_S.png
 719_00,719,Diancie,,,,00,6,Rock,Fairy,FALSE,TRUE,TRUE,719_00.png,719_00.png,719_00_S.png
 719_01,719,Diancie,Mega,,,01,6,Rock,Fairy,FALSE,FALSE,TRUE,719_01.png,719_01.png,719_01_S.png
 720_00,720,Hoopa,,Hoopa Confined,,00,6,Psychic,Ghost,FALSE,TRUE,FALSE,720_00.png,720_00.png,720_00_S.png
@@ -1218,9 +1218,9 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 811_00,811,Thwackey,,,,00,8,Grass,,FALSE,TRUE,TRUE,811_00.png,811_00.png,811_00_S.png
 812_00,812,Rillaboom,,,,00,8,Grass,,FALSE,TRUE,TRUE,812_00.png,812_00.png,812_00_S.png
 812_01,812,Rillaboom,Gigantamax,,,01,8,Grass,,FALSE,FALSE,TRUE,812_01.png,812_01.png,812_01_S.png
-813_00,813,Scorbunny,,,,00,8,Fire,,FALSE,TRUE,TRUE,813_00.png,813_00.png,813_00_S.png
-814_00,814,Raboot,,,,00,8,Fire,,FALSE,TRUE,TRUE,814_00.png,814_00.png,814_00_S.png
-815_00,815,Cinderace,,,,00,8,Fire,,FALSE,TRUE,TRUE,815_00.png,815_00.png,815_00_S.png
+813_00,813,Scorbunny,,,506,00,8,Fire,,FALSE,TRUE,TRUE,813_00.png,813_00.png,813_00_S.png
+814_00,814,Raboot,,,507,00,8,Fire,,FALSE,TRUE,TRUE,814_00.png,814_00.png,814_00_S.png
+815_00,815,Cinderace,,,508,00,8,Fire,,FALSE,TRUE,TRUE,815_00.png,815_00.png,815_00_S.png
 815_01,815,Cinderace,Gigantamax,,,01,8,Fire,,FALSE,FALSE,TRUE,815_01.png,815_01.png,815_01_S.png
 816_00,816,Sobble,,,,00,8,Water,,FALSE,TRUE,TRUE,816_00.png,816_00.png,816_00_S.png
 817_00,817,Drizzile,,,,00,8,Water,,FALSE,TRUE,TRUE,817_00.png,817_00.png,817_00_S.png
@@ -1287,7 +1287,7 @@ id,nationalDex,name,generalForm,uniqueForm,paldeaDex,formOrder,generation,type1,
 861_00,861,Grimmsnarl,,,287,00,8,Dark,Fairy,FALSE,TRUE,TRUE,861_00.png,861_00.png,861_00_S.png
 861_01,861,Grimmsnarl,Gigantamax,,,01,8,Dark,Fairy,FALSE,FALSE,TRUE,861_01.png,861_01.png,861_01_S.png
 862_00,862,Obstagoon,,,,00,8,Dark,Normal,FALSE,TRUE,TRUE,862_00.png,862_00.png,862_00_S.png
-863_00,863,Perrserker,,,,00,8,Steel,,FALSE,TRUE,TRUE,863_00.png,863_00.png,863_00_S.png
+863_00,863,Perrserker,,,502,00,8,Steel,,FALSE,TRUE,TRUE,863_00.png,863_00.png,863_00_S.png
 864_00,864,Cursola,,,,00,8,Ghost,,FALSE,TRUE,TRUE,864_00.png,864_00.png,864_00_S.png
 865_00,865,Sirfetch'd,,,,00,8,Fighting,,FALSE,TRUE,TRUE,865_00.png,865_00.png,865_00_S.png
 866_00,866,Mr. Rime,,,,00,8,Ice,Psychic,FALSE,TRUE,TRUE,866_00.png,866_00.png,866_00_S.png

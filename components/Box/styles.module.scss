@@ -14,8 +14,10 @@
 
 .boxHeader {
     border-radius: 1rem 1rem 0 0;
-    padding: 0.5rem;
-    text-align: center;
+    padding: 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #1ca3a6;
 }
 
@@ -60,7 +62,11 @@
 
     .boxHeader {
         border-radius: 1rem 1rem 0 0;
-        padding: 0.25rem;
+        padding: 0.25rem 1rem;
+
+        span:first-child, span:last-child {
+            font-size: small;
+        }
     }
 
     .boxContainer{

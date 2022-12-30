@@ -61,7 +61,8 @@ export default function SearchBox() {
           return {
             label: handleName(
               pkmn,
-              true,
+              router.pathname !== "/" ||
+                (router.pathname === "/" && pkmn.paldeaDex! < 500),
               router.pathname === "/" ? "Paldean" : "National",
               false
             ),

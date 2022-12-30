@@ -205,13 +205,13 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       switch (router.pathname) {
         case "/":
           return (
-            pkmn.formOrder === "0" ||
-            pkmn.formOrder === "00" ||
-            pkmn.id === "128_01" ||
-            pkmn.id === "194_01"
+            (pkmn.formOrder === "00" ||
+              pkmn.id === "128_01" ||
+              pkmn.id === "194_01") &&
+            pkmn.id !== "194_00"
           );
         default:
-          return pkmn.formOrder === "0" || pkmn.formOrder === "00";
+          return pkmn.formOrder === "00";
       }
     });
   }

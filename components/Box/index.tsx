@@ -5,7 +5,7 @@ import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Tooltip } from "@mui/material";
-import { handleName } from "../../utils/NameFormatting";
+import { handleName, handleNumber } from "../../utils/NameFormatting";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
@@ -110,7 +110,6 @@ export default function Box({ imageSource }: BoxProps) {
               }
             }
           }
-          // }
         }
       }
     }
@@ -124,14 +123,39 @@ export default function Box({ imageSource }: BoxProps) {
         {pokeBox.map((box) => {
           return (
             <div key={box.box} className={styles.boxContainer}>
-              <div className={styles.boxHeader}>Box {box.box}</div>
+              <div className={styles.boxHeader}>
+                {router.pathname === "/" ? (
+                  <span>{`#${handleNumber(
+                    box.pokemon[0]?.paldeaDex!,
+                    3
+                  )}`}</span>
+                ) : (
+                  <span>{`#${handleNumber(
+                    box.pokemon[0]?.nationalDex,
+                    3
+                  )}`}</span>
+                )}
+                <span>Box {box.box}</span>
+                {router.pathname === "/" ? (
+                  <span>{`#${handleNumber(
+                    box.pokemon[box.pokemon.length - 1]?.paldeaDex!,
+                    3
+                  )}`}</span>
+                ) : (
+                  <span>{`#${handleNumber(
+                    box.pokemon[box.pokemon.length - 1]?.nationalDex,
+                    3
+                  )}`}</span>
+                )}
+              </div>
               <div className={styles.boxGrid}>
                 {box.pokemon.map((pkmn) => {
                   return (
                     <Tooltip
                       title={handleName(
                         pkmn,
-                        true,
+                        router.pathname !== "/" ||
+                          (router.pathname === "/" && pkmn.paldeaDex! < 500),
                         router.pathname === "/" ? "Paldean" : "National",
                         true
                       )}
