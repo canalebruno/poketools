@@ -23,17 +23,19 @@ export default function Nav() {
     <div className={styles.container}>
       <nav className={styles.nav}>
         <Link href="/" className={router.pathname === "/" ? styles.active : ""}>
-          {windowWidth > 720 ? "Scarlet and Violet Boxes" : "SV Boxes"}
+          <span>
+            {windowWidth > 720 ? "Scarlet and Violet Boxes" : "SV Boxes"}
+          </span>
         </Link>
         <Link
           href="/homeboxes"
           className={router.pathname === "/homeboxes" ? styles.active : ""}
         >
-          Home Boxes
+          <span>Home Boxes</span>
         </Link>
         {windowWidth < 720 && (
           <>
-            <Fab onClick={(e) => toggleDrawer(true)}>
+            <Fab onClick={(e) => toggleDrawer(true)} sx={{ m: "1rem 0" }}>
               <FilterAltTwoToneIcon />
             </Fab>
             <Drawer
