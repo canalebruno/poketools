@@ -13,9 +13,13 @@ import VisibilityOffTwoToneIcon from "@mui/icons-material/VisibilityOffTwoTone";
 
 interface FilterControlProps {
   sortingDefault: "p" | "n";
+  vertical?: boolean;
 }
 
-export default function FilterControl({ sortingDefault }: FilterControlProps) {
+export default function FilterControl({
+  sortingDefault,
+  vertical = false,
+}: FilterControlProps) {
   const [pagePath, setPagePath] = useState("");
 
   const {
@@ -42,7 +46,11 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.filterControl}>
+      <div
+        className={`${styles.filterControl} ${
+          vertical && styles.verticalFilter
+        }`}
+      >
         <FormControl>
           <InputLabel id="demo-simple-select-label">Sort by</InputLabel>
           <Select
@@ -57,6 +65,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
           </Select>
         </FormControl>
         <ToggleButtonGroup
+          orientation={vertical ? "vertical" : "horizontal"}
           value={filterValues}
           onChange={handleFilterValues}
           aria-label="text formatting"
@@ -87,9 +96,6 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
           </ToggleButton>
         </ToggleButtonGroup>
         {pokedex && <span>Showing: {pokedex.length} Pokemon</span>}
-      </div>
-      <div className={styles.filterControl}>
-        <SearchBox />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { Pokemon } from "../../utils/Interfaces";
 import { handleName } from "../../utils/NameFormatting";
 
@@ -19,6 +20,7 @@ export default function SearchBox() {
   const router = useRouter();
 
   const { setHighlightPokemon, pokedex } = usePokedex();
+  const { windowWidth } = useWindowSize();
 
   function handleSearch(
     event: React.FormEvent<HTMLButtonElement>,
@@ -69,6 +71,8 @@ export default function SearchBox() {
     );
   }, [pokedex]);
 
+  const searchWidth = windowWidth > 720 ? 300 : "100%";
+
   return (
     <Autocomplete
       disablePortal
@@ -81,7 +85,7 @@ export default function SearchBox() {
         setTerm(newInputValue);
       }}
       options={options}
-      sx={{ width: 300 }}
+      sx={{ width: searchWidth }}
       renderInput={(params) => <TextField {...params} label="Pokémon" />}
     />
   );
