@@ -38,8 +38,9 @@ export default function Home() {
             </li>
             <li>Added Search Feature</li>
             <li>
-              Added available Pokémon in Scarlet and Violet that aren't in the
-              Pokédex. <i>Speacially Scorbunny family that's just debuted</i>
+              Added available Pokémon in Scarlet and Violet that {"aren't"} in
+              the Pokédex.{" "}
+              <i>Speacially Scorbunny family {"that's"} just debuted</i>
             </li>
             <li>Updated filters design</li>
             <li>Added name labels when mouse over images</li>
