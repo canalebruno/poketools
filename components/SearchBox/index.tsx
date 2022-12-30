@@ -46,7 +46,7 @@ export default function SearchBox() {
       pokedex
         .filter((pkmn) => {
           switch (router.pathname) {
-            case "/":
+            case "/svboxes":
               return (
                 (pkmn.formOrder === "00" ||
                   pkmn.id === "128_01" ||
@@ -61,9 +61,9 @@ export default function SearchBox() {
           return {
             label: handleName(
               pkmn,
-              router.pathname !== "/" ||
-                (router.pathname === "/" && pkmn.paldeaDex! < 500),
-              router.pathname === "/" ? "Paldean" : "National",
+              router.pathname !== "/svboxes" ||
+                (router.pathname === "/svboxes" && pkmn.paldeaDex! < 500),
+              router.pathname === "/svboxes" ? "Paldean" : "National",
               false
             ),
             id: pkmn.id,

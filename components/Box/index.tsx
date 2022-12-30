@@ -124,7 +124,7 @@ export default function Box({ imageSource }: BoxProps) {
           return (
             <div key={box.box} className={styles.boxContainer}>
               <div className={styles.boxHeader}>
-                {router.pathname === "/" ? (
+                {router.pathname === "/svboxes" ? (
                   <span>{`#${handleNumber(
                     box.pokemon[0]?.paldeaDex!,
                     3
@@ -136,11 +136,15 @@ export default function Box({ imageSource }: BoxProps) {
                   )}`}</span>
                 )}
                 <span>Box {box.box}</span>
-                {router.pathname === "/" ? (
-                  <span>{`#${handleNumber(
-                    box.pokemon[box.pokemon.length - 1]?.paldeaDex!,
-                    3
-                  )}`}</span>
+                {router.pathname === "/svboxes" ? (
+                  <span>{`#${
+                    box.pokemon[box.pokemon.length - 1]?.paldeaDex! <= 400
+                      ? handleNumber(
+                          box.pokemon[box.pokemon.length - 1]?.paldeaDex!,
+                          3
+                        )
+                      : 400
+                  }`}</span>
                 ) : (
                   <span>{`#${handleNumber(
                     box.pokemon[box.pokemon.length - 1]?.nationalDex,
@@ -152,17 +156,18 @@ export default function Box({ imageSource }: BoxProps) {
                 {box.pokemon.map((pkmn) => {
                   return (
                     <Tooltip
+                      key={pkmn.id}
                       title={handleName(
                         pkmn,
-                        router.pathname !== "/" ||
-                          (router.pathname === "/" && pkmn.paldeaDex! < 500),
-                        router.pathname === "/" ? "Paldean" : "National",
+                        router.pathname !== "/svboxes" ||
+                          (router.pathname === "/svboxes" &&
+                            pkmn.paldeaDex! < 500),
+                        router.pathname === "/svboxes" ? "Paldean" : "National",
                         true
                       )}
                       arrow
                     >
                       <div
-                        key={pkmn.id}
                         id={pkmn.id}
                         className={`${styles.card} ${
                           highlightPokemon === pkmn.id && styles.cardActive
@@ -170,13 +175,13 @@ export default function Box({ imageSource }: BoxProps) {
                       >
                         <Image
                           unoptimized
-                          width={10}
-                          height={10}
+                          width={25}
+                          height={25}
                           src={`/${imageSource}/${
                             imageSource === "svicons" ? pkmn.icon : pkmn.homePic
                           }`}
                           alt={`#${
-                            router.pathname === "/"
+                            router.pathname === "/svboxes"
                               ? pkmn.paldeaDex
                               : pkmn.nationalDex
                           } - ${pkmn.name}`}

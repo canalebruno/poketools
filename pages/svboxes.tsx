@@ -1,27 +1,27 @@
-import Box from "../components/Box";
 import styles from "../styles/Home.module.scss";
+
+import Box from "../components/Box";
 import { usePokedex } from "../hooks/usePokedex";
 import FilterControl from "../components/FilterControl";
 import { useEffect } from "react";
 import { useWindowSize } from "../hooks/useWindowSize";
 import SearchBox from "../components/SearchBox";
 
-export default function HomeBoxes() {
-  const { firstLoadPokedex, pagePokedex, sortByNationalDex, setFirstLoad } =
-    usePokedex();
+export default function Home() {
+  const { firstLoadPokedex, pagePokedex, sortByPaldeanDex } = usePokedex();
 
   const { windowWidth } = useWindowSize();
 
   useEffect(() => {
     firstLoadPokedex(pagePokedex());
-    sortByNationalDex();
+    sortByPaldeanDex();
   }, []);
 
   return (
     <div className={styles.container}>
-      {windowWidth > 720 && <FilterControl sortingDefault="n" />}
+      {windowWidth > 720 && <FilterControl sortingDefault="p" />}
       <SearchBox />
-      <Box imageSource="home" />
+      <Box imageSource="svicons" />
     </div>
   );
 }

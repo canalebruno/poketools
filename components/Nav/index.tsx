@@ -22,6 +22,12 @@ export default function Nav() {
     <div className={styles.container}>
       <nav className={styles.nav}>
         <Link href="/" className={router.pathname === "/" ? styles.active : ""}>
+          <span>Home</span>
+        </Link>
+        <Link
+          href="/svboxes"
+          className={router.pathname === "/svboxes" ? styles.active : ""}
+        >
           <span>
             {windowWidth > 720 ? "Scarlet and Violet Boxes" : "SV Boxes"}
           </span>
@@ -47,7 +53,7 @@ export default function Nav() {
             >
               <FilterControl
                 vertical
-                sortingDefault={router.pathname === "/" ? "p" : "n"}
+                sortingDefault={router.pathname === "/svboxes" ? "p" : "n"}
               />
             </Drawer>
           </>

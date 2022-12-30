@@ -65,7 +65,9 @@ export default function FilterControl({
             onChange={handleSelectChange}
           >
             <MenuItem value={"n"}>National Dex</MenuItem>
-            {pagePath === "/" && <MenuItem value={"p"}>Paldean Dex</MenuItem>}
+            {pagePath === "/svboxes" && (
+              <MenuItem value={"p"}>Paldean Dex</MenuItem>
+            )}
           </Select>
         </FormControl>
         <ToggleButtonGroup

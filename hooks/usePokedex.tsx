@@ -57,7 +57,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     setFirstLoad(true);
     let sortedPokedes = [] as Pokemon[];
 
-    if (router.pathname === "/") {
+    if (router.pathname === "/svboxes") {
       sortedPokedes = loadingPokedex.sort((a, b) => {
         if (a.paldeaDex !== b.paldeaDex) {
           return a.paldeaDex! - b.paldeaDex!;
@@ -79,7 +79,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   function pagePokedex() {
     switch (router.pathname) {
-      case "/":
+      case "/svboxes":
         return pokelist.filter((pkmn) => {
           return pkmn.paldeaDex !== null;
         });
@@ -94,7 +94,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   function resetControls() {
     switch (router.pathname) {
-      case "/":
+      case "/svboxes":
         handleSorting("p");
         break;
       default:
@@ -203,7 +203,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   function filterByOnlyOneForm() {
     return filterByGender().filter((pkmn) => {
       switch (router.pathname) {
-        case "/":
+        case "/svboxes":
           return (
             (pkmn.formOrder === "00" ||
               pkmn.id === "128_01" ||

@@ -24,7 +24,6 @@ export function WindowSizeProvider({ children }: WindowSizeProviderProps) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       setWindowWidth(window.screen.width);
-      console.log(window.screen.width);
     }
   }, []);
 
