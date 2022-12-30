@@ -8,8 +8,7 @@ import { useWindowSize } from "../hooks/useWindowSize";
 import SearchBox from "../components/SearchBox";
 
 export default function Home() {
-  const { firstLoadPokedex, pagePokedex, sortByPaldeanDex, updatePokedex } =
-    usePokedex();
+  const { firstLoadPokedex, pagePokedex, sortByPaldeanDex } = usePokedex();
 
   const { windowWidth } = useWindowSize();
 

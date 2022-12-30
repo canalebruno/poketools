@@ -33,6 +33,8 @@ interface PokedexContextData {
     event: React.MouseEvent<HTMLElement>,
     newValues: string[]
   ) => void;
+  firstLoad: boolean;
+  setFirstLoad: (b: boolean) => void;
 }
 
 const PokedexContext = createContext<PokedexContextData>(
@@ -47,10 +49,12 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const [orderList, setOrderList] = useState<"p" | "n">("p");
   const [highlightPokemon, setHighlightPokemon] = useState("");
   const [filterValues, setFilterValues] = useState(["gender"]);
+  const [firstLoad, setFirstLoad] = useState(true);
 
   const router = useRouter();
 
   function firstLoadPokedex(loadingPokedex: Pokemon[]) {
+    setFirstLoad(true);
     let sortedPokedes = [] as Pokemon[];
 
     if (router.pathname === "/") {
@@ -311,6 +315,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         setHighlightPokemon,
         filterValues,
         handleFilterValues,
+        firstLoad,
+        setFirstLoad,
       }}
     >
       {children}

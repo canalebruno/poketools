@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
-import SearchBox from "../SearchBox";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -32,13 +31,18 @@ export default function FilterControl({
     breakByGen,
     filterValues,
     handleFilterValues,
+    firstLoad,
+    setFirstLoad,
   } = usePokedex();
 
   useEffect(() => {
-    handleSorting(sortingDefault);
-    setPagePath(window.location.pathname);
-    resetControls();
-  }, []);
+    if (firstLoad) {
+      handleSorting(sortingDefault);
+      setPagePath(window.location.pathname);
+      resetControls();
+      setFirstLoad(false);
+    }
+  }, [firstLoad]);
 
   function handleSelectChange(event: SelectChangeEvent) {
     handleSorting(event.target.value as string);

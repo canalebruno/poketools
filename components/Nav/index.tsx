@@ -8,7 +8,6 @@ import Drawer from "@mui/material/Drawer";
 import FilterAltTwoToneIcon from "@mui/icons-material/FilterAltTwoTone";
 import Fab from "@mui/material/Fab";
 import FilterControl from "../FilterControl";
-import { makeStyles } from "@mui/material";
 
 export default function Nav() {
   const [isOpne, setIsOpen] = useState(false);
