@@ -38,7 +38,7 @@ export default function Nav() {
         >
           <span>Home Boxes</span>
         </Link>
-        {windowWidth < 720 && (
+        {windowWidth < 720 && router.pathname !== "/" && (
           <>
             <Fab onClick={(e) => toggleDrawer(true)} sx={{ m: "1rem 0" }}>
               <FilterAltTwoToneIcon />
