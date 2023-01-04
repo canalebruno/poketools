@@ -25,7 +25,7 @@ export default function UpdatesFeed() {
       {latestUpdates.length > 0 &&
         latestUpdates.map((update) => {
           return (
-            <div>
+            <div key={update.id}>
               <p>{update.date}</p>
               <ul>
                 {update.updates.flatMap((item) => {
