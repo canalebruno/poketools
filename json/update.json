@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "date": "30.12.2022",
+        "updates": [
+            "Added Break by Gen Feature to start a new box for each generation",
+            "Added Search Feature",
+            "Added available Pokémon in Scarlet and Violet that aren't in the Pokédex. <i>Speacially Scorbunny family that's just debuted</i>",
+            "Updated filters design",
+            "Added name labels when mouse over images",
+            "Added first and last numbers for each box",
+            "Created Homepage"
+        ]
+    },
+    {
+        "id": 2,
+        "date": "04.01.2023",
+        "updates": [
+            "Fixed Vivillon wasn't showing"
+        ]
+    }
+]

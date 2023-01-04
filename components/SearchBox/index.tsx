@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { Pokemon } from "../../utils/Interfaces";
 import { handleName } from "../../utils/NameFormatting";
 
 interface Option {

@@ -1,6 +1,7 @@
 import styles from "../styles/Home.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import UpdatesFeed from "../components/UpdatesFeed";
 
 export default function Home() {
   return (
@@ -30,24 +31,7 @@ export default function Home() {
       </section>
       <section>
         <h2>Last Updates</h2>
-        <div>
-          <p>30.12.2022</p>
-          <ul>
-            <li>
-              Added Break by Gen Feature to start a new box for each generation
-            </li>
-            <li>Added Search Feature</li>
-            <li>
-              Added available Pokémon in Scarlet and Violet that {"aren't"} in
-              the Pokédex.{" "}
-              <i>Speacially Scorbunny family {"that's"} just debuted</i>
-            </li>
-            <li>Updated filters design</li>
-            <li>Added name labels when mouse over images</li>
-            <li>Added first and last numbers for each box</li>
-            <li>Created Homepage</li>
-          </ul>
-        </div>
+        <UpdatesFeed />
       </section>
     </div>
   );

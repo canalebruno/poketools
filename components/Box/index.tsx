@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Tooltip } from "@mui/material";
 import { handleName, handleNumber } from "../../utils/NameFormatting";
 
@@ -125,10 +124,14 @@ export default function Box({ imageSource }: BoxProps) {
             <div key={box.box} className={styles.boxContainer}>
               <div className={styles.boxHeader}>
                 {router.pathname === "/svboxes" ? (
-                  <span>{`#${handleNumber(
-                    box.pokemon[0]?.paldeaDex!,
-                    3
-                  )}`}</span>
+                  orderList === "p" && !breakByGen ? (
+                    <span>{`#${handleNumber(
+                      box.pokemon[0]?.paldeaDex!,
+                      3
+                    )}`}</span>
+                  ) : (
+                    <span />
+                  )
                 ) : (
                   <span>{`#${handleNumber(
                     box.pokemon[0]?.nationalDex,
@@ -137,14 +140,18 @@ export default function Box({ imageSource }: BoxProps) {
                 )}
                 <span>Box {box.box}</span>
                 {router.pathname === "/svboxes" ? (
-                  <span>{`#${
-                    box.pokemon[box.pokemon.length - 1]?.paldeaDex! <= 400
-                      ? handleNumber(
-                          box.pokemon[box.pokemon.length - 1]?.paldeaDex!,
-                          3
-                        )
-                      : 400
-                  }`}</span>
+                  orderList === "p" && !breakByGen ? (
+                    <span>{`#${
+                      box.pokemon[box.pokemon.length - 1]?.paldeaDex! <= 400
+                        ? handleNumber(
+                            box.pokemon[box.pokemon.length - 1]?.paldeaDex!,
+                            3
+                          )
+                        : 400
+                    }`}</span>
+                  ) : (
+                    <span />
+                  )
                 ) : (
                   <span>{`#${handleNumber(
                     box.pokemon[box.pokemon.length - 1]?.nationalDex,
