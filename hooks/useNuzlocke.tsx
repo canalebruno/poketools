@@ -40,14 +40,26 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
         return a.id - b.id;
       })
       .map((loc) => {
-        return {
-          id: loc.id,
-          name: loc.name,
-          pokemon: randomPokemon([
+        let pokemon;
+
+        if (gameExclusive.includes("tradable")) {
+          pokemon = randomPokemon([
             ...loc.general,
             ...loc.violet,
             ...loc.scarlet,
-          ]),
+          ]);
+        } else if (gameExclusive.includes("scarlet")) {
+          pokemon = randomPokemon([...loc.general, ...loc.scarlet]);
+        } else if (gameExclusive.includes("violet")) {
+          pokemon = randomPokemon([...loc.general, ...loc.violet]);
+        } else {
+          pokemon = undefined;
+        }
+
+        return {
+          id: loc.id,
+          name: loc.name,
+          pokemon,
         };
       });
 
