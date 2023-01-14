@@ -6,6 +6,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { useNuzlocke } from "../../hooks/useNuzlocke";
 
 interface FilterControlProps {
   vertical?: boolean;
@@ -14,9 +15,14 @@ interface FilterControlProps {
 export default function NuzlockeFilterControl({
   vertical = false,
 }: FilterControlProps) {
-  const [gameExclusive, setGameExclusive] = useState(["tradable"]);
-  const [customOptions, setCustomOptions] = useState(["repeat"]);
-  const [typeSelected, setTypeSelected] = useState("all");
+  const {
+    gameExclusive,
+    setGameExclusive,
+    customOptions,
+    setCustomOptions,
+    typeSelected,
+    setTypeSelected,
+  } = useNuzlocke();
 
   function handleExclusivityValues(
     event: React.MouseEvent<HTMLElement>,
