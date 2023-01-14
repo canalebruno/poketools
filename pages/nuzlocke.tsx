@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Pokemon } from "../utils/Interfaces";
 import LocationCard from "../components/LocationCard";
 import NuzlockeFilterControl from "../components/NuzlockeFilterControl";
+import Button from "@mui/material/Button";
 
 interface Hunt {
   id: number;
@@ -52,9 +53,13 @@ export default function HomeBoxes() {
   return (
     <div className={styles.container}>
       <NuzlockeFilterControl />
-      <button type="button" onClick={handleGenerateNuzlockHunt}>
+      <Button
+        sx={{ marginTop: "2rem", fontSize: "1.25rem" }}
+        variant="contained"
+        onClick={handleGenerateNuzlockHunt}
+      >
         Generate
-      </button>
+      </Button>
       <div className={styles.cardsGrid}>
         {hunt &&
           hunt.map((item) => {
