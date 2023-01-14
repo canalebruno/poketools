@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { Pokemon } from "../utils/Interfaces";
-import nuzlockeJson from "../json/nuzlocke.json";
+import nuzlockeJsonPoor from "../json/nuzlocke.json";
 import pokedex from "../json/nationalDex.json";
 
 interface NuzlockeProviderProps {
@@ -34,6 +34,28 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
   const [typeSelected, setTypeSelected] = useState("all");
   const [hunt, setHunt] = useState([] as Hunt[]);
 
+  const nuzlockeJson = nuzlockeJsonPoor.map((loc) => {
+    return {
+      id: loc.id,
+      name: loc.name,
+      general: loc.general.map((pkmnId) => {
+        return pokedex.find((pkmn) => {
+          return pkmn.id === pkmnId;
+        });
+      }),
+      scarlet: loc.scarlet.map((pkmnId) => {
+        return pokedex.find((pkmn) => {
+          return pkmn.id === pkmnId;
+        });
+      }),
+      violet: loc.violet.map((pkmnId) => {
+        return pokedex.find((pkmn) => {
+          return pkmn.id === pkmnId;
+        });
+      }),
+    };
+  });
+
   function handleGenerateNuzlockeHunt() {
     const huntGenerator = nuzlockeJson
       .sort((a, b) => {
@@ -43,15 +65,21 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
         let pokemon;
 
         if (gameExclusive.includes("tradable")) {
-          pokemon = randomPokemon([
-            ...loc.general,
-            ...loc.violet,
-            ...loc.scarlet,
-          ]);
+          pokemon = randomPokemon(
+            filterAvailablePokemon([
+              ...loc.general,
+              ...loc.violet,
+              ...loc.scarlet,
+            ])
+          );
         } else if (gameExclusive.includes("scarlet")) {
-          pokemon = randomPokemon([...loc.general, ...loc.scarlet]);
+          pokemon = randomPokemon(
+            filterAvailablePokemon([...loc.general, ...loc.scarlet])
+          );
         } else if (gameExclusive.includes("violet")) {
-          pokemon = randomPokemon([...loc.general, ...loc.violet]);
+          pokemon = randomPokemon(
+            filterAvailablePokemon([...loc.general, ...loc.violet])
+          );
         } else {
           pokemon = undefined;
         }
@@ -66,18 +94,47 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     setHunt(huntGenerator);
   }
 
-  function randomPokemon(options: string[]) {
+  function randomPokemon(options: Pokemon[]) {
     const quantity = options.length;
 
     const randomIndex = Math.floor(Math.random() * quantity);
 
-    const randomPokemon = options[randomIndex];
+    return options[randomIndex];
+  }
 
-    const pokemon = pokedex.find((pkmn) => {
-      return pkmn.id === randomPokemon;
+  function filterAvailablePokemon(pokemon: Pokemon[] | any) {
+    let availablePokemon = pokemon;
+
+    if (customOptions.includes("basic")) {
+    }
+
+    if (!customOptions.includes("repeat")) {
+    }
+
+    if (customOptions.includes("newGen")) {
+      availablePokemon = filterNewGen(availablePokemon);
+    }
+
+    return availablePokemon;
+  }
+
+  function filterNewGen(pokemon: Pokemon[]) {
+    return pokemon.filter((pkmn) => {
+      const interGenPokemon = [
+        "194_01",
+        "128_01",
+        "128_02",
+        "128_03",
+        "056_00",
+        "057_00",
+        "203_00",
+        "206_00",
+        "624_00",
+        "625_00",
+      ];
+
+      return pkmn.nationalDex > 905 || interGenPokemon.includes(pkmn.id);
     });
-
-    return pokemon;
   }
 
   return (
