@@ -106,6 +106,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     let availablePokemon = pokemon;
 
     if (customOptions.includes("basic")) {
+      availablePokemon = filterFirstStage(availablePokemon);
     }
 
     if (!customOptions.includes("repeat")) {
@@ -120,7 +121,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
 
   function filterNewGen(pokemon: Pokemon[]) {
     return pokemon.filter((pkmn) => {
-      const interGenPokemon = [
+      const crossGenPokemon = [
         "194_01",
         "128_01",
         "128_02",
@@ -133,7 +134,13 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
         "625_00",
       ];
 
-      return pkmn.nationalDex > 905 || interGenPokemon.includes(pkmn.id);
+      return pkmn.nationalDex > 905 || crossGenPokemon.includes(pkmn.id);
+    });
+  }
+
+  function filterFirstStage(pokemon: Pokemon[]) {
+    return pokemon.filter((pkmn) => {
+      return pkmn.stage < 0 || (pkmn.stage === 0 && !pkmn.hasBaby);
     });
   }
 

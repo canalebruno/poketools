@@ -15,4 +15,6 @@ export interface Pokemon {
   icon: string;
   homePic: string;
   homeShinyPic: string;
+  stage: number;
+  hasBaby: boolean;
 }
