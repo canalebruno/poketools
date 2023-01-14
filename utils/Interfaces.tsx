@@ -17,4 +17,5 @@ export interface Pokemon {
   homeShinyPic: string;
   stage: number;
   hasBaby: boolean;
+  family: number[] | "";
 }

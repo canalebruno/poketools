@@ -56,6 +56,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     };
   });
 
+  console.log(nuzlockeJson);
+
   function handleGenerateNuzlockeHunt() {
     const huntGenerator = nuzlockeJson
       .sort((a, b) => {
@@ -90,6 +92,9 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
           pokemon,
         };
       });
+
+    console.log(nuzlockeJson);
+    console.log(huntGenerator);
 
     setHunt(huntGenerator);
   }
