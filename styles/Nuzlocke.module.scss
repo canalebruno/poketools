@@ -1,0 +1,46 @@
+.container {
+    padding: 2rem;
+    width: 100%;
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: 0 auto;
+
+    .cardsGrid {
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 300px) {
+    .container {
+        .cardsGrid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+}
+  }
+
+@media (min-width: 580px) {
+    .container {
+        .cardsGrid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+}
+  }
+
+@media (min-width: 1024px) {
+    .container {
+        .cardsGrid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+}
+  }
+
+@media (min-width: 1440px) {
+    .container {
+        .cardsGrid {
+        grid-template-columns: repeat(8, 1fr);
+      }
+}
+  }

@@ -1,0 +1,32 @@
+.container {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid #5c5c5c;
+    border-radius: 0.5rem;
+    // min-height: 150px;
+    
+    .title {
+        background-color: #5c5c5c;
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem;
+        font-weight: bold;
+        color: white;
+    }
+    
+    .pokemon {
+        background: #5c5c5c30;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        margin: 0.5rem;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+        width: calc(100% - 1rem);
+    }
+
+}
