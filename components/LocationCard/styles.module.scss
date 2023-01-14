@@ -39,6 +39,12 @@
         span {
             margin: auto 0;
         }
+
+        svg {
+            font-size: 2.7rem;
+            margin-top: calc(80px - 2.7rem);
+            color: #3c3c3c;
+        }
     }
 
 }
