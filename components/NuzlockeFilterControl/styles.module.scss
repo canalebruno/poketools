@@ -28,3 +28,9 @@
         margin-top: 1rem;
     }
 }
+
+@media (max-width: 720px) {
+    .container {
+        flex-direction: column;
+    }
+}

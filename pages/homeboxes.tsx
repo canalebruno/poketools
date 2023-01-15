@@ -19,7 +19,7 @@ export default function HomeBoxes() {
 
   return (
     <div className={styles.container}>
-      {windowWidth > 720 && <FilterControl sortingDefault="n" />}
+      <FilterControl sortingDefault="n" />
       <SearchBox />
       <Box imageSource="home" />
     </div>

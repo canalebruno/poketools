@@ -7,6 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useNuzlocke } from "../../hooks/useNuzlocke";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 interface FilterControlProps {
   vertical?: boolean;
@@ -23,6 +24,8 @@ export default function NuzlockeFilterControl({
     typeSelected,
     setTypeSelected,
   } = useNuzlocke();
+
+  const { windowWidth } = useWindowSize();
 
   function handleExclusivityValues(
     event: React.MouseEvent<HTMLElement>,
@@ -45,7 +48,6 @@ export default function NuzlockeFilterControl({
   return (
     <div className={styles.container}>
       <ToggleButtonGroup
-        orientation={vertical ? "vertical" : "horizontal"}
         exclusive
         value={gameExclusive}
         onChange={handleExclusivityValues}
@@ -62,7 +64,6 @@ export default function NuzlockeFilterControl({
         </ToggleButton>
       </ToggleButtonGroup>
       <ToggleButtonGroup
-        orientation={vertical ? "vertical" : "horizontal"}
         value={customOptions}
         onChange={handleCustomValues}
         aria-label="game exclusive"

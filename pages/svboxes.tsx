@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {windowWidth > 720 && <FilterControl sortingDefault="p" />}
+      <FilterControl sortingDefault="p" />
       <SearchBox />
       <Box imageSource="svicons" />
     </div>
