@@ -21,23 +21,37 @@ export default function Nav() {
   return (
     <div className={styles.container}>
       <nav className={styles.nav}>
-        <Link href="/" className={router.pathname === "/" ? styles.active : ""}>
-          <span>Home</span>
-        </Link>
-        <Link
-          href="/svboxes"
-          className={router.pathname === "/svboxes" ? styles.active : ""}
-        >
-          <span>
-            {windowWidth > 720 ? "Scarlet and Violet Boxes" : "SV Boxes"}
-          </span>
-        </Link>
-        <Link
-          href="/homeboxes"
-          className={router.pathname === "/homeboxes" ? styles.active : ""}
-        >
-          <span>Home Boxes</span>
-        </Link>
+        <h2>Pokémon Tools</h2>
+        {windowWidth >= 720 && (
+          <>
+            <Link
+              href="/"
+              className={router.pathname === "/" ? styles.active : ""}
+            >
+              <span>Home</span>
+            </Link>
+            <Link
+              href="/svboxes"
+              className={router.pathname === "/svboxes" ? styles.active : ""}
+            >
+              <span>
+                {windowWidth > 720 ? "Scarlet and Violet Boxes" : "SV Boxes"}
+              </span>
+            </Link>
+            <Link
+              href="/nuzlocke"
+              className={router.pathname === "/nuzlocke" ? styles.active : ""}
+            >
+              <span>SV Nuzlocke Generator</span>
+            </Link>
+            <Link
+              href="/homeboxes"
+              className={router.pathname === "/homeboxes" ? styles.active : ""}
+            >
+              <span>Home Boxes</span>
+            </Link>
+          </>
+        )}
         {windowWidth < 720 && router.pathname !== "/" && (
           <>
             <Fab onClick={(e) => toggleDrawer(true)} sx={{ m: "1rem 0" }}>

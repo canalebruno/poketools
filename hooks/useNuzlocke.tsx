@@ -310,6 +310,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
           pkmn.type2.toLowerCase() === type ||
           pkmn.id === "056_00" ||
           pkmn.id === "361_00" ||
+          pkmn.id === "935_00" ||
           pkmn.id === "057_00"
         );
       });
@@ -343,6 +344,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
         return (
           pkmn.type1.toLowerCase() === type ||
           pkmn.type2.toLowerCase() === type ||
+          pkmn.id === "953_00" ||
+          pkmn.id === "935_00" ||
           pkmn.id === "133_00"
         );
       });

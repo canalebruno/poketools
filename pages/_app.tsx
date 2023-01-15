@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <WindowSizeProvider>
         <PokedexProvider>
           <Head>
-            <title>Pokémon Boxes Organizer</title>
+            <title>Pokémon Tools</title>
           </Head>
           <main>
             <Nav />

@@ -2,11 +2,12 @@ import styles from "../styles/Home.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import UpdatesFeed from "../components/UpdatesFeed";
+import GrassIcon from "@mui/icons-material/Grass";
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <h1>Pokémon Boxes Organizer</h1>
+      <h1>Pokémon Tools</h1>
       <section className={styles.buttonsSection}>
         <Link href="/svboxes">
           <span>Scarlet and Violet Boxes</span>
@@ -17,6 +18,10 @@ export default function Home() {
             height={10}
             alt="Pokémon Scarlet and Violet"
           />
+        </Link>
+        <Link href="/nuzlocke">
+          <span>SV Nuzlocke Random Hunt Generator</span>
+          <GrassIcon />
         </Link>
         <Link href="/homeboxes">
           <span>Home Boxes</span>

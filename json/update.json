@@ -18,5 +18,13 @@
         "updates": [
             "Fixed Vivillon wasn't showing"
         ]
+    },
+    {
+        "id": 3,
+        "date": "15.01.2023",
+        "updates": [
+            "Fixed SV Pokémon National Dex numbers",
+            "Added new Feature: <i>Scarlet and Violet Nuzlocke Random Hunt Generator</i>. Now you can generate a random hunting plan to be used alongside the Nuzlocke Challenge"
+        ]
     }
 ]

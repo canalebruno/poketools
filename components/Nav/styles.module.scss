@@ -3,9 +3,16 @@
     border-bottom: 3px solid #4bcdcf ;
     
     .nav {
-        padding: 2rem;
+        padding: 0 2rem;
         max-width: 1440px;
         margin: 0 auto;
+        display: flex;
+        align-items: center;
+
+        h2 {
+            margin: 0;
+            padding-right: 2rem;
+        }
         
         a {
             padding: 2rem;
@@ -30,7 +37,7 @@
         .nav {
             padding: 0rem 2rem;
             display: flex;
-            align-items: stretch;
+            align-items: center;
 
             a {
                 padding: 0.5rem;
