@@ -5,7 +5,7 @@ import NuzlockeFilterControl from "../components/NuzlockeFilterControl";
 import Button from "@mui/material/Button";
 import { useNuzlocke } from "../hooks/useNuzlocke";
 
-export default function HomeBoxes() {
+export default function Nuzlocke() {
   const { handleGenerateNuzlockeHunt, hunt } = useNuzlocke();
 
   return (
@@ -23,6 +23,7 @@ export default function HomeBoxes() {
           hunt.map((item) => {
             return (
               <LocationCard
+                key={item.id}
                 name={item.name}
                 pokemon={item.pokemon && item.pokemon}
               />

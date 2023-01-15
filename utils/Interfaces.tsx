@@ -2,6 +2,7 @@ export interface Pokemon {
   id: string;
   nationalDex: number;
   name: string;
+  stage: number;
   generalForm: string;
   uniqueForm: string;
   paldeaDex: null | number;
@@ -15,7 +16,6 @@ export interface Pokemon {
   icon: string;
   homePic: string;
   homeShinyPic: string;
-  stage: number;
   hasBaby: boolean;
-  family: number[] | "";
+  family: number[];
 }

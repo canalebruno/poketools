@@ -33,6 +33,11 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
   const [customOptions, setCustomOptions] = useState(["repeat"]);
   const [typeSelected, setTypeSelected] = useState("all");
   const [hunt, setHunt] = useState([] as Hunt[]);
+  // const [notRepeatablePokemon, setNotRepeatablePokemon] = useState(
+  //   [] as Pokemon[]
+  // );
+
+  let notRepeatablePokemon = [] as number[];
 
   const nuzlockeJson = nuzlockeJsonPoor.map((loc) => {
     return {
@@ -56,9 +61,9 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     };
   });
 
-  console.log(nuzlockeJson);
-
   function handleGenerateNuzlockeHunt() {
+    notRepeatablePokemon = [] as number[];
+
     const huntGenerator = nuzlockeJson
       .sort((a, b) => {
         return a.id - b.id;
@@ -93,9 +98,6 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
         };
       });
 
-    console.log(nuzlockeJson);
-    console.log(huntGenerator);
-
     setHunt(huntGenerator);
   }
 
@@ -104,17 +106,29 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
 
     const randomIndex = Math.floor(Math.random() * quantity);
 
+    if (options[randomIndex] === undefined) {
+      return undefined;
+    }
+
+    if (!customOptions.includes("repeat")) {
+      notRepeatablePokemon = [
+        ...notRepeatablePokemon,
+        ...options[randomIndex].family,
+      ];
+    }
+
     return options[randomIndex];
   }
 
   function filterAvailablePokemon(pokemon: Pokemon[] | any) {
     let availablePokemon = pokemon;
 
-    if (customOptions.includes("basic")) {
-      availablePokemon = filterFirstStage(availablePokemon);
+    if (!customOptions.includes("repeat")) {
+      availablePokemon = filterDontRepeat(availablePokemon);
     }
 
-    if (!customOptions.includes("repeat")) {
+    if (customOptions.includes("basic")) {
+      availablePokemon = filterFirstStage(availablePokemon);
     }
 
     if (customOptions.includes("newGen")) {
@@ -124,7 +138,11 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     return availablePokemon;
   }
 
-  function filterNewGen(pokemon: Pokemon[]) {
+  function filterNewGen(pokemon: Pokemon[] | undefined) {
+    if (pokemon === undefined) {
+      return undefined;
+    }
+
     return pokemon.filter((pkmn) => {
       const crossGenPokemon = [
         "194_01",
@@ -143,10 +161,36 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     });
   }
 
-  function filterFirstStage(pokemon: Pokemon[]) {
+  function filterFirstStage(pokemon: Pokemon[] | undefined) {
+    if (pokemon === undefined) {
+      return undefined;
+    }
+
     return pokemon.filter((pkmn) => {
       return pkmn.stage < 0 || (pkmn.stage === 0 && !pkmn.hasBaby);
     });
+  }
+
+  function filterDontRepeat(pokemon: Pokemon[] | undefined) {
+    if (pokemon === undefined) {
+      return undefined;
+    }
+
+    let locationPokemon = pokemon;
+
+    // notRepeatablePokemon.map((pkmn) => {
+    //   pkmn.family.map((species) => {
+    //     locationPokemon.filter((pokemon) => {
+    //       return pokemon.nationalDex !== species;
+    //     });
+    //   });
+    // });
+
+    return locationPokemon.filter((pkmn) => {
+      return !notRepeatablePokemon.includes(pkmn.nationalDex);
+    });
+
+    // return locationPokemon;
   }
 
   return (
