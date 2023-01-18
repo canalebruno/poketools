@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { Pokemon } from "../utils/Interfaces";
+import { Pokemon } from "../utils/types";
 import nuzlockeJsonPoor from "../json/nuzlocke.json";
 import pokedex from "../json/nationalDex.json";
 

@@ -5,7 +5,7 @@ import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
 import { Tooltip } from "@mui/material";
 import { handleName, handleNumber } from "../../utils/NameFormatting";
-import { Pokemon } from "../../utils/Interfaces";
+import { Pokemon } from "../../utils/types";
 
 interface BoxProps {
   imageSource: "svicons" | "home";

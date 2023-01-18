@@ -1,4 +1,4 @@
-import { Pokemon } from "./Interfaces";
+import { Pokemon } from "./types";
 
 export function handleNumber(pokemonNumber: number, charQuantity: 3 | 4) {
   let stringNumber = String(pokemonNumber);

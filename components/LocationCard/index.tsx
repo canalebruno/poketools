@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Pokemon } from "../../utils/Interfaces";
+import { Pokemon } from "../../utils/types";
 import { handleName } from "../../utils/NameFormatting";
 import styles from "./styles.module.scss";
 import GrassIcon from "@mui/icons-material/Grass";

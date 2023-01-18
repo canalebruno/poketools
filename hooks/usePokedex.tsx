@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { createContext, ReactNode, useContext, useState } from "react";
 import pokelist from "../json/nationalDex.json";
-import { Pokemon } from "../utils/Interfaces";
+import { Pokemon } from "../utils/types";
 
 interface PokedexProviderProps {
   children: ReactNode;
