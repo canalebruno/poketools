@@ -26,5 +26,12 @@
             "Fixed SV Pokémon National Dex numbers",
             "Added new Feature: <i>Scarlet and Violet Nuzlocke Random Hunt Generator</i>. Now you can generate a random hunting plan to be used alongside the Nuzlocke Challenge"
         ]
+    },
+    {
+        "id": 4,
+        "date": "04.02.2023",
+        "updates": [
+            "Added Froakie family to the SV Boxes"
+        ]
     }
 ]
