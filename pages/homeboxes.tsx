@@ -5,16 +5,19 @@ import FilterControl from "../components/FilterControl";
 import { useEffect } from "react";
 import { useWindowSize } from "../hooks/useWindowSize";
 import SearchBox from "../components/SearchBox";
+import { GetServerSideProps } from "next";
+import { Pokemon } from "../utils/types";
 
-export default function HomeBoxes() {
-  const { firstLoadPokedex, pagePokedex, sortByNationalDex, setFirstLoad } =
-    usePokedex();
+interface HomeBoxesProps {
+  homedex: Pokemon[];
+}
 
-  const { windowWidth } = useWindowSize();
+export default function HomeBoxes({ homedex }: HomeBoxesProps) {
+  const { firstLoadPokedex, sortByPaldeanDex } = usePokedex();
 
   useEffect(() => {
-    firstLoadPokedex(pagePokedex());
-    sortByNationalDex();
+    firstLoadPokedex(homedex);
+    sortByPaldeanDex();
   }, []);
 
   return (
@@ -25,3 +28,13 @@ export default function HomeBoxes() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  let response = await fetch(`${process.env.API_URL}homedex`);
+  // let response = await fetch("http://localhost:3000/api/homedex");
+  let homedex = await response.json();
+
+  return {
+    props: { homedex },
+  };
+};

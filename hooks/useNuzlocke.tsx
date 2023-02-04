@@ -1,10 +1,17 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { Pokemon } from "../utils/types";
-import nuzlockeJsonPoor from "../json/nuzlocke.json";
-import pokedex from "../json/nationalDex.json";
+import { Pokemon, SVLocation } from "../utils/types";
+import { GetServerSideProps } from "next";
 
 interface NuzlockeProviderProps {
   children: ReactNode;
+}
+
+interface SVLocationUpdated {
+  id: number;
+  name: string;
+  general: (Pokemon | undefined)[];
+  scarlet: (Pokemon | undefined)[];
+  violet: (Pokemon | undefined)[];
 }
 
 interface NuzlockeContextData {
@@ -16,6 +23,8 @@ interface NuzlockeContextData {
   setTypeSelected: (value: string) => void;
   handleGenerateNuzlockeHunt: () => void;
   hunt: Hunt[];
+  nuzlockeJson: SVLocationUpdated[];
+  setNuzlockeJson: (json: SVLocationUpdated[]) => void;
 }
 
 interface Hunt {
@@ -33,6 +42,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
   const [customOptions, setCustomOptions] = useState(["repeat"]);
   const [typeSelected, setTypeSelected] = useState("all");
   const [hunt, setHunt] = useState([] as Hunt[]);
+  const [nuzlockeJson, setNuzlockeJson] = useState([] as SVLocationUpdated[]);
 
   let notRepeatablePokemon = [] as number[];
 
@@ -56,28 +66,6 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     "steel",
     "water",
   ];
-
-  const nuzlockeJson = nuzlockeJsonPoor.map((loc) => {
-    return {
-      id: loc.id,
-      name: loc.name,
-      general: loc.general.map((pkmnId) => {
-        return pokedex.find((pkmn) => {
-          return pkmn.id === pkmnId;
-        });
-      }),
-      scarlet: loc.scarlet.map((pkmnId) => {
-        return pokedex.find((pkmn) => {
-          return pkmn.id === pkmnId;
-        });
-      }),
-      violet: loc.violet.map((pkmnId) => {
-        return pokedex.find((pkmn) => {
-          return pkmn.id === pkmnId;
-        });
-      }),
-    };
-  });
 
   function handleGenerateNuzlockeHunt() {
     notRepeatablePokemon = [] as number[];
@@ -406,6 +394,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
         setTypeSelected,
         handleGenerateNuzlockeHunt,
         hunt,
+        nuzlockeJson,
+        setNuzlockeJson,
       }}
     >
       {children}
@@ -418,3 +408,41 @@ export function useNuzlocke(): NuzlockeContextData {
 
   return context;
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  let nuzlockeResponse = await fetch(`${process.env.API_URL}nuzlocke`);
+  // let nuzlockeResponse = await fetch("http://localhost:3000/api/nuzlocke");
+  let nuzlockeJsonPoor: SVLocation[] = await nuzlockeResponse.json();
+
+  let paldeaDexResponse = await fetch(`${process.env.API_URL}paldeadex`);
+  // let paldeaDexResponse = await fetch("http://localhost:3000/api/paldeadex");
+  let pokedex: Pokemon[] = await paldeaDexResponse.json();
+
+  const nuzlockeJson = await nuzlockeJsonPoor.map((loc) => {
+    return {
+      id: loc.id,
+      name: loc.name,
+      general: loc.general.map((pkmnId) => {
+        return pokedex.find((pkmn) => {
+          return pkmn.id === pkmnId;
+        });
+      }),
+      scarlet: loc.scarlet.map((pkmnId) => {
+        return pokedex.find((pkmn) => {
+          return pkmn.id === pkmnId;
+        });
+      }),
+      violet: loc.violet.map((pkmnId) => {
+        return pokedex.find((pkmn) => {
+          return pkmn.id === pkmnId;
+        });
+      }),
+    };
+  });
+
+  return {
+    props: {
+      nuzlockeJson,
+    },
+  };
+};

@@ -6,8 +6,27 @@ import Nav from "../components/Nav";
 import Head from "next/head";
 import { WindowSizeProvider } from "../hooks/useWindowSize";
 import { NuzlockeProvider } from "../hooks/useNuzlocke";
+import Router from "next/router";
+import { useState, useEffect } from "react";
+import Loader from "../components/Loader";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    Router.events.on("routeChangeStart", (url) => {
+      setIsLoading(true);
+    });
+
+    Router.events.on("routeChangeComplete", (url) => {
+      setIsLoading(false);
+    });
+
+    Router.events.on("routeChangeError", (url) => {
+      setIsLoading(false);
+    });
+  }, [Router]);
+
   return (
     <NuzlockeProvider>
       <WindowSizeProvider>
@@ -17,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </Head>
           <main>
             <Nav />
+            {isLoading && <Loader />}
             <Component {...pageProps} />
           </main>
           <Analytics />

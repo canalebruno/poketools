@@ -23,10 +23,20 @@ export interface Pokemon {
   family: number[];
 }
 
-// Interface to defining our object of response functions
-export interface ResponseFuncs {
-  GET?: Function
-  POST?: Function
-  PUT?: Function
-  DELETE?: Function
+// Interface to define Pokemon on the frontend
+export interface SVLocation {
+  _id?: string;
+  id: number;
+  name: string;
+  general: string[];
+  scarlet: string[];
+  violet: string[];
 }
+
+// // Interface to defining our object of response functions
+// export interface ResponseFuncs {
+//   GET?: Function
+//   POST?: Function
+//   PUT?: Function
+//   DELETE?: Function
+// }

@@ -1,15 +1,25 @@
 import { useRouter } from "next/router";
-import { createContext, ReactNode, useContext, useState } from "react";
-import pokelist from "../json/nationalDex.json";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+// import pokelist from "../json/nationalDex.json";
 import { Pokemon } from "../utils/types";
 
 interface PokedexProviderProps {
   children: ReactNode;
+  // pokelist: any;
 }
 
 interface PokedexContextData {
-  pagePokedex: () => Pokemon[];
+  // pagePokedex: () => Pokemon[];
   pokedex: Pokemon[];
+  setPokedex: (pokedex: Pokemon[]) => void;
+  pageDex: Pokemon[];
+  setPageDex: (pokedex: Pokemon[]) => void;
   viewGenderDifference: boolean;
   viewOnlyOneForm: boolean;
   orderList: "p" | "n";
@@ -20,7 +30,7 @@ interface PokedexContextData {
   sortByNationalDex: () => Pokemon[];
   sortByPaldeanDex: () => Pokemon[];
   handleSorting: (value: string) => void;
-  resetPokedex: () => void;
+  // resetPokedex: () => void;
   firstLoadPokedex: (loadingPokedex: Pokemon[]) => void;
   resetControls: () => void;
   updatePokedex: (pokedexToUpdate: Pokemon[]) => void;
@@ -42,7 +52,8 @@ const PokedexContext = createContext<PokedexContextData>(
 );
 
 export function PokedexProvider({ children }: PokedexProviderProps) {
-  const [pokedex, setPokedex] = useState<Pokemon[]>(pokelist);
+  const [pokedex, setPokedex] = useState<Pokemon[]>([] as Pokemon[]);
+  const [pageDex, setPageDex] = useState<Pokemon[]>([] as Pokemon[]);
   const [viewGenderDifference, setViewGenderDifference] = useState(true);
   const [viewOnlyOneForm, setViewOnlyOneForm] = useState(false);
   const [breakByGen, setBreakByGen] = useState(false);
@@ -53,8 +64,13 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   const router = useRouter();
 
+  // useEffect(() => {
+  //   setPokedex(pokelist);
+  // }, [pokelist]);
+
   function firstLoadPokedex(loadingPokedex: Pokemon[]) {
     setFirstLoad(true);
+    setPageDex(loadingPokedex);
     let sortedPokedes = [] as Pokemon[];
 
     if (router.pathname === "/svboxes") {
@@ -73,24 +89,24 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     setPokedex(sortedPokedes);
   }
 
-  function resetPokedex() {
-    setPokedex(pokelist);
-  }
+  // function resetPokedex() {
+  //   setPokedex(pokelist);
+  // }
 
-  function pagePokedex() {
-    switch (router.pathname) {
-      case "/svboxes":
-        return pokelist.filter((pkmn) => {
-          return pkmn.paldeaDex !== null;
-        });
-      case "/homeboxes":
-        return pokelist.filter((pkmn) => {
-          return pkmn.homeAvailable;
-        });
-      default:
-        return pokelist;
-    }
-  }
+  // function pagePokedex() {
+  //   switch (router.pathname) {
+  //     case "/svboxes":
+  //       return pokelist.filter((pkmn) => {
+  //         return pkmn.paldeaDex !== null;
+  //       });
+  //     case "/homeboxes":
+  //       return pokelist.filter((pkmn) => {
+  //         return pkmn.homeAvailable;
+  //       });
+  //     default:
+  //       return pokelist;
+  //   }
+  // }
 
   function resetControls() {
     switch (router.pathname) {
@@ -147,7 +163,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       }
 
       setViewOnlyOneForm(false);
-      updatePokedex(pagePokedex());
+      // updatePokedex(pagePokedex());
+      // updatePokedex(pokedex);
+      updatePokedex(pageDex);
     } else {
       if (filterValues.includes("gender")) {
         finalValues = filterValues.filter((value) => {
@@ -176,7 +194,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         handleViewGenderDifference();
       } else {
         updatePokedex(
-          pagePokedex().filter((pkmn) => {
+          // pagePokedex().filter((pkmn) => {
+          // pokedex.filter((pkmn) => {
+          pageDex.filter((pkmn) => {
             return !pkmn.genderDifference;
           })
         );
@@ -293,9 +313,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   return (
     <PokedexContext.Provider
       value={{
-        pagePokedex,
+        // pagePokedex,
         pokedex,
-        resetPokedex,
+        // resetPokedex,
         viewGenderDifference,
         viewOnlyOneForm,
         orderList,
@@ -317,6 +337,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         handleFilterValues,
         firstLoad,
         setFirstLoad,
+        setPokedex,
+        pageDex,
+        setPageDex,
       }}
     >
       {children}

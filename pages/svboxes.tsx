@@ -1,27 +1,41 @@
 import styles from "../styles/Home.module.scss";
+import { GetServerSideProps } from "next";
 
 import Box from "../components/Box";
 import { usePokedex } from "../hooks/usePokedex";
 import FilterControl from "../components/FilterControl";
 import { useEffect } from "react";
-import { useWindowSize } from "../hooks/useWindowSize";
 import SearchBox from "../components/SearchBox";
+import { Pokemon } from "../utils/types";
 
-export default function Home() {
-  const { firstLoadPokedex, pagePokedex, sortByPaldeanDex } = usePokedex();
+interface SVBoxesProps {
+  paldeaDex: Pokemon[];
+}
 
-  const { windowWidth } = useWindowSize();
+export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
+  const { firstLoadPokedex, sortByPaldeanDex } = usePokedex();
 
   useEffect(() => {
-    firstLoadPokedex(pagePokedex());
+    firstLoadPokedex(paldeaDex);
     sortByPaldeanDex();
   }, []);
 
   return (
     <div className={styles.container}>
+      <h1>Scarlet and Violet Boxes</h1>
       <FilterControl sortingDefault="p" />
       <SearchBox />
-      <Box imageSource="svicons" />
+      {paldeaDex && <Box imageSource="svicons" />}
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  // let response = await fetch("http://localhost:3000/api/paldeadex");
+  let response = await fetch(`${process.env.API_URL}paldeadex`);
+  let paldeaDex = await response.json();
+
+  return {
+    props: { paldeaDex },
+  };
+};
