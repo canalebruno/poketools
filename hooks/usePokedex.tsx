@@ -227,8 +227,10 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           return (
             (pkmn.formOrder === "00" ||
               pkmn.id === "128_01" ||
-              pkmn.id === "194_01") &&
-            pkmn.id !== "194_00"
+              pkmn.id === "194_01" ||
+              pkmn.id === "666_19") &&
+            pkmn.id !== "194_00" &&
+            pkmn.id !== "666_00"
           );
         default:
           return pkmn.formOrder === "00";
