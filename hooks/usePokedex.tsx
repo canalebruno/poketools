@@ -6,16 +6,13 @@ import {
   useEffect,
   useState,
 } from "react";
-// import pokelist from "../json/nationalDex.json";
 import { Pokemon } from "../utils/types";
 
 interface PokedexProviderProps {
   children: ReactNode;
-  // pokelist: any;
 }
 
 interface PokedexContextData {
-  // pagePokedex: () => Pokemon[];
   pokedex: Pokemon[];
   setPokedex: (pokedex: Pokemon[]) => void;
   pageDex: Pokemon[];
@@ -30,7 +27,6 @@ interface PokedexContextData {
   sortByNationalDex: () => Pokemon[];
   sortByPaldeanDex: () => Pokemon[];
   handleSorting: (value: string) => void;
-  // resetPokedex: () => void;
   firstLoadPokedex: (loadingPokedex: Pokemon[]) => void;
   resetControls: () => void;
   updatePokedex: (pokedexToUpdate: Pokemon[]) => void;
@@ -64,49 +60,11 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   setPokedex(pokelist);
-  // }, [pokelist]);
-
   function firstLoadPokedex(loadingPokedex: Pokemon[]) {
     setFirstLoad(true);
     setPageDex(loadingPokedex);
-    let sortedPokedes = [] as Pokemon[];
-
-    if (router.pathname === "/svboxes") {
-      sortedPokedes = loadingPokedex.sort((a, b) => {
-        if (a.paldeaDex !== b.paldeaDex) {
-          return a.paldeaDex! - b.paldeaDex!;
-        } else {
-          return a.id > b.id ? 1 : -1;
-        }
-      });
-    } else {
-      sortedPokedes = loadingPokedex.sort((a, b) => {
-        return a.id > b.id ? 1 : -1;
-      });
-    }
-    setPokedex(sortedPokedes);
+    setPokedex(loadingPokedex);
   }
-
-  // function resetPokedex() {
-  //   setPokedex(pokelist);
-  // }
-
-  // function pagePokedex() {
-  //   switch (router.pathname) {
-  //     case "/svboxes":
-  //       return pokelist.filter((pkmn) => {
-  //         return pkmn.paldeaDex !== null;
-  //       });
-  //     case "/homeboxes":
-  //       return pokelist.filter((pkmn) => {
-  //         return pkmn.homeAvailable;
-  //       });
-  //     default:
-  //       return pokelist;
-  //   }
-  // }
 
   function resetControls() {
     switch (router.pathname) {
@@ -163,8 +121,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       }
 
       setViewOnlyOneForm(false);
-      // updatePokedex(pagePokedex());
-      // updatePokedex(pokedex);
       updatePokedex(pageDex);
     } else {
       if (filterValues.includes("gender")) {
@@ -194,8 +150,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         handleViewGenderDifference();
       } else {
         updatePokedex(
-          // pagePokedex().filter((pkmn) => {
-          // pokedex.filter((pkmn) => {
           pageDex.filter((pkmn) => {
             return !pkmn.genderDifference;
           })
@@ -315,9 +269,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   return (
     <PokedexContext.Provider
       value={{
-        // pagePokedex,
         pokedex,
-        // resetPokedex,
         viewGenderDifference,
         viewOnlyOneForm,
         orderList,

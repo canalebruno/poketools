@@ -3,9 +3,8 @@ import styles from "../styles/Home.module.scss";
 import { usePokedex } from "../hooks/usePokedex";
 import FilterControl from "../components/FilterControl";
 import { useEffect } from "react";
-import { useWindowSize } from "../hooks/useWindowSize";
 import SearchBox from "../components/SearchBox";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { Pokemon } from "../utils/types";
 
 interface HomeBoxesProps {
@@ -29,7 +28,7 @@ export default function HomeBoxes({ shinydex }: HomeBoxesProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   let response = await fetch(`${process.env.API_URL}shinydex`);
   let shinydex = await response.json();
 
