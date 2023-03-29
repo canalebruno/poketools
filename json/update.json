@@ -41,5 +41,12 @@
             "Added Walking Wake, Iron Leaves, Vivillon patterns available in Pokémon GO and Hisuian Zorua family to the SV Boxes",
             "Fixed Vivillon order in Home Boxes"
         ]
+    },
+    {
+        "id": 6,
+        "date": "29.03.2023",
+        "updates": [
+            "Added Rowlet family to the SV Boxes"
+        ]
     }
 ]
