@@ -9,14 +9,14 @@ import { GetServerSideProps } from "next";
 import { Pokemon } from "../utils/types";
 
 interface HomeBoxesProps {
-  homedex: Pokemon[];
+  shinydex: Pokemon[];
 }
 
-export default function HomeBoxes({ homedex }: HomeBoxesProps) {
+export default function HomeBoxes({ shinydex }: HomeBoxesProps) {
   const { firstLoadPokedex, sortByPaldeanDex } = usePokedex();
 
   useEffect(() => {
-    firstLoadPokedex(homedex);
+    firstLoadPokedex(shinydex);
     sortByPaldeanDex();
   }, []);
 
@@ -24,16 +24,16 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
     <div className={styles.container}>
       <FilterControl sortingDefault="n" />
       <SearchBox />
-      <Box imageSource="home" />
+      <Box imageSource="home" shiny />
     </div>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let response = await fetch(`${process.env.API_URL}homedex`);
-  let homedex = await response.json();
+  let response = await fetch(`${process.env.API_URL}shinydex`);
+  let shinydex = await response.json();
 
   return {
-    props: { homedex },
+    props: { shinydex },
   };
 };
