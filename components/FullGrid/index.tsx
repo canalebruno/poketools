@@ -17,179 +17,70 @@ interface Box {
   pokemon: Pokemon[];
 }
 
-export default function Box({ imageSource, shiny = false }: BoxProps) {
-  const [boxQuantity, setBoxQuantity] = useState(0);
-  const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
-
+export default function FullGrid({ imageSource, shiny = false }: BoxProps) {
   const { orderList, pokedex, breakByGen, highlightPokemon } = usePokedex();
 
   const router = useRouter();
 
-  useEffect(() => {
-    setBoxQuantity(Math.ceil(pokedex.length / 30));
-
-    if (boxQuantity > 0) {
-      setPokeBox(handleBoxQuantity());
-    }
-  }, [pokedex, boxQuantity, orderList, breakByGen]);
-
-  function handleBoxQuantity() {
-    const newPokeBox = [];
-
-    if (boxQuantity > 0) {
-      if (!breakByGen) {
-        for (let i = 1; i <= boxQuantity; i++) {
-          newPokeBox.push({
-            box: i,
-            pokemon: pokedex.slice(30 * i - 30, 30 * i),
-          });
-        }
-      } else {
-        const latestGen = pokedex.reduce(
-          (a, b) => Math.max(a, b.generation),
-          -Infinity
-        );
-
-        let boxNumber = 1;
-
-        // Generation Iteration
-        for (let g = 1; g <= latestGen; g++) {
-          const generationDex = pokedex.filter((pkmn) => {
-            return pkmn.generation === g;
-          });
-
-          // Quantity iteration
-          for (let j = 1; j < 10; j++) {
-            const boxPokemon = generationDex.slice(30 * j - 30, 30 * j);
-
-            if (boxPokemon.length > 0) {
-              newPokeBox.push({
-                box: boxNumber,
-                pokemon: boxPokemon,
-              });
-              boxNumber++;
-            } else {
-              break;
-            }
-          }
-
-          if (g === 8) {
-            for (let j = 1; j < 10; j++) {
-              const boxPokemon = pokedex
-                .filter((pkmn) => {
-                  return pkmn.generation === 8.5;
-                })
-                .slice(30 * j - 30, 30 * j);
-
-              if (boxPokemon.length > 0) {
-                newPokeBox.push({
-                  box: boxNumber,
-                  pokemon: boxPokemon,
-                });
-                boxNumber++;
-              } else {
-                break;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    return newPokeBox;
-  }
+  const firstOfGen = [
+    "152_00",
+    "252_00",
+    "387_00",
+    "494_00",
+    "650_00",
+    "722_00",
+    "810_00",
+    "899_00",
+    "906_00",
+  ];
 
   return (
     <div>
       <div className={styles.container}>
-        {pokeBox.map((box) => {
+        {pokedex.map((pkmn) => {
           return (
-            <div key={box.box} className={styles.boxContainer}>
-              <div className={styles.boxHeader}>
-                {router.pathname === "/svboxes" ? (
-                  orderList === "p" && !breakByGen ? (
-                    <span>{`#${handleNumber(
-                      box.pokemon[0]?.paldeaDex!,
-                      3
-                    )}`}</span>
-                  ) : (
-                    <span />
-                  )
-                ) : (
-                  <span>{`#${handleNumber(
-                    box.pokemon[0]?.nationalDex,
-                    3
-                  )}`}</span>
+            <>
+              {breakByGen && firstOfGen.includes(pkmn.id) && (
+                <div className={styles.firstOfGen} />
+              )}
+              <Tooltip
+                key={pkmn.id}
+                title={handleName(
+                  pkmn,
+                  router.pathname !== "/svboxes" ||
+                    (router.pathname === "/svboxes" && pkmn.paldeaDex! < 500),
+                  router.pathname === "/svboxes" ? "Paldean" : "National",
+                  true
                 )}
-                <span>Box {box.box}</span>
-                {router.pathname === "/svboxes" ? (
-                  orderList === "p" && !breakByGen ? (
-                    <span>{`#${
-                      box.pokemon[box.pokemon.length - 1]?.paldeaDex! <= 400
-                        ? handleNumber(
-                            box.pokemon[box.pokemon.length - 1]?.paldeaDex!,
-                            3
-                          )
-                        : 400
-                    }`}</span>
-                  ) : (
-                    <span />
-                  )
-                ) : (
-                  <span>{`#${handleNumber(
-                    box.pokemon[box.pokemon.length - 1]?.nationalDex,
-                    3
-                  )}`}</span>
-                )}
-              </div>
-              <div className={styles.boxGrid}>
-                {box.pokemon.map((pkmn) => {
-                  return (
-                    <Tooltip
-                      key={pkmn.id}
-                      title={handleName(
-                        pkmn,
-                        router.pathname !== "/svboxes" ||
-                          (router.pathname === "/svboxes" &&
-                            pkmn.paldeaDex! < 500),
-                        router.pathname === "/svboxes" ? "Paldean" : "National",
-                        true
-                      )}
-                      arrow
-                    >
-                      <div
-                        id={pkmn.id}
-                        className={`${styles.card} ${
-                          highlightPokemon === pkmn.id && styles.cardActive
-                        }`}
-                      >
-                        <Image
-                          unoptimized
-                          width={25}
-                          height={25}
-                          src={`/${imageSource}/${
-                            imageSource === "svicons"
-                              ? pkmn.icon
-                              : shiny
-                              ? pkmn.homeShinyPic
-                              : pkmn.homePic
-                          }`}
-                          alt={`#${
-                            router.pathname === "/svboxes"
-                              ? pkmn.paldeaDex
-                              : pkmn.nationalDex
-                          } - ${pkmn.name}`}
-                        />
-                      </div>
-                    </Tooltip>
-                  );
-                })}
-                {box.pokemon.length < 30 &&
-                  [...Array(30 - box.pokemon.length)].map((x, i) => (
-                    <div className={styles.card} key={i} />
-                  ))}
-              </div>
-            </div>
+                arrow
+              >
+                <div
+                  id={pkmn.id}
+                  className={`${styles.card} ${
+                    highlightPokemon === pkmn.id && styles.cardActive
+                  }
+                `}
+                >
+                  <Image
+                    unoptimized
+                    width={25}
+                    height={25}
+                    src={`/${imageSource}/${
+                      imageSource === "svicons"
+                        ? pkmn.icon
+                        : shiny
+                        ? pkmn.homeShinyPic
+                        : pkmn.homePic
+                    }`}
+                    alt={`#${
+                      router.pathname === "/svboxes"
+                        ? pkmn.paldeaDex
+                        : pkmn.nationalDex
+                    } - ${pkmn.name}`}
+                  />
+                </div>
+              </Tooltip>
+            </>
           );
         })}
       </div>

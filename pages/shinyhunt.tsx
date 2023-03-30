@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import SearchBox from "../components/SearchBox";
 import { GetStaticProps } from "next";
 import { Pokemon } from "../utils/types";
+import FullGrid from "../components/FullGrid";
 
 interface HomeBoxesProps {
   shinydex: Pokemon[];
@@ -23,7 +24,7 @@ export default function HomeBoxes({ shinydex }: HomeBoxesProps) {
     <div className={styles.container}>
       <FilterControl sortingDefault="n" />
       <SearchBox />
-      <Box imageSource="home" shiny />
+      <FullGrid imageSource="home" shiny />
     </div>
   );
 }
