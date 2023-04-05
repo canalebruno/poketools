@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 import { Tooltip } from "@mui/material";
 import { handleName, handleNumber } from "../../utils/NameFormatting";
 import { Pokemon } from "../../utils/types";
+import { useShinyHunting } from "../../hooks/useShinyHunting";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
@@ -18,7 +19,8 @@ interface Box {
 }
 
 export default function FullGrid({ imageSource, shiny = false }: BoxProps) {
-  const { orderList, pokedex, breakByGen, highlightPokemon } = usePokedex();
+  const { breakByGen, highlightPokemon } = usePokedex();
+  const { activeList } = useShinyHunting();
 
   const router = useRouter();
 
@@ -37,52 +39,53 @@ export default function FullGrid({ imageSource, shiny = false }: BoxProps) {
   return (
     <div>
       <div className={styles.container}>
-        {pokedex.map((pkmn) => {
-          return (
-            <>
-              {breakByGen && firstOfGen.includes(pkmn.id) && (
-                <div className={styles.firstOfGen} />
-              )}
-              <Tooltip
-                key={pkmn.id}
-                title={handleName(
-                  pkmn,
-                  router.pathname !== "/svboxes" ||
-                    (router.pathname === "/svboxes" && pkmn.paldeaDex! < 500),
-                  router.pathname === "/svboxes" ? "Paldean" : "National",
-                  true
+        {activeList.pokemon &&
+          activeList.pokemon.map((pkmn) => {
+            return (
+              <>
+                {breakByGen && firstOfGen.includes(pkmn.id) && (
+                  <div className={styles.firstOfGen} />
                 )}
-                arrow
-              >
-                <div
-                  id={pkmn.id}
-                  className={`${styles.card} ${
-                    highlightPokemon === pkmn.id && styles.cardActive
-                  }
-                `}
+                <Tooltip
+                  key={pkmn.id}
+                  title={handleName(
+                    pkmn,
+                    router.pathname !== "/svboxes" ||
+                      (router.pathname === "/svboxes" && pkmn.paldeaDex! < 500),
+                    router.pathname === "/svboxes" ? "Paldean" : "National",
+                    true
+                  )}
+                  arrow
                 >
-                  <Image
-                    unoptimized
-                    width={25}
-                    height={25}
-                    src={`/${imageSource}/${
-                      imageSource === "svicons"
-                        ? pkmn.icon
-                        : shiny
-                        ? pkmn.homeShinyPic
-                        : pkmn.homePic
-                    }`}
-                    alt={`#${
-                      router.pathname === "/svboxes"
-                        ? pkmn.paldeaDex
-                        : pkmn.nationalDex
-                    } - ${pkmn.name}`}
-                  />
-                </div>
-              </Tooltip>
-            </>
-          );
-        })}
+                  <div
+                    id={pkmn.id}
+                    className={`${styles.card} ${
+                      highlightPokemon === pkmn.id && styles.cardActive
+                    }
+                `}
+                  >
+                    <Image
+                      unoptimized
+                      width={25}
+                      height={25}
+                      src={`/${imageSource}/${
+                        imageSource === "svicons"
+                          ? pkmn.icon
+                          : shiny
+                          ? pkmn.homeShinyPic
+                          : pkmn.homePic
+                      }`}
+                      alt={`#${
+                        router.pathname === "/svboxes"
+                          ? pkmn.paldeaDex
+                          : pkmn.nationalDex
+                      } - ${pkmn.name}`}
+                    />
+                  </div>
+                </Tooltip>
+              </>
+            );
+          })}
       </div>
     </div>
   );

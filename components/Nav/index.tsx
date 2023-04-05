@@ -54,6 +54,12 @@ export default function Nav() {
             >
               <span>Home Boxes</span>
             </Link>
+            <Link
+              href="/shinyhunt"
+              className={router.pathname === "/shinyhunt" ? styles.active : ""}
+            >
+              <span>Shiny Hunt</span>
+            </Link>
           </>
         )}
         {windowWidth < 720 && (
@@ -114,6 +120,16 @@ export default function Nav() {
                     }
                   >
                     <span>Home Boxes</span>
+                  </Link>
+                </ListItem>
+                <ListItem>
+                  <Link
+                    href="/shinyhunt"
+                    className={
+                      router.pathname === "/shinyhunt" ? styles.active : ""
+                    }
+                  >
+                    <span>Shiny Hunt</span>
                   </Link>
                 </ListItem>
               </List>
