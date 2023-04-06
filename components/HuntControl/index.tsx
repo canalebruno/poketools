@@ -10,13 +10,14 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useShinyHunting } from "../../hooks/useShinyHunting";
-import SelectAddPokemon from "../SelectAddPokemon";
+import SelectAddPokemon from "../SelectAddRemovePokemon";
 import styles from "./styles.module.scss";
 
 export default function HuntControl() {
   const [newListName, setNewListName] = useState("");
   const [newListModalOpen, setNewListModalOpen] = useState(false);
   const [addPokemonModalOpen, setAddPokemonModalOpen] = useState(false);
+  const [removePokemonModalOpen, setRemovePokemonModalOpen] = useState(false);
   const [countIdList, setCountIdList] = useState(1);
 
   const {
@@ -65,10 +66,6 @@ export default function HuntControl() {
     setNewListName("");
   }
 
-  function handleAddPokemon() {
-    setAddPokemonModalOpen(true);
-  }
-
   const handleNewListModalOpen = () => setNewListModalOpen(true);
 
   return (
@@ -103,6 +100,19 @@ export default function HuntControl() {
           <SelectAddPokemon />
         </div>
       </Modal>
+      <Modal
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        open={removePokemonModalOpen}
+        onClose={() => setRemovePokemonModalOpen(false)}
+      >
+        <div className={styles.modalContainer}>
+          <SelectAddPokemon remove />
+        </div>
+      </Modal>
       <FormControl>
         <InputLabel id="list-select-label">List</InputLabel>
         <Select
@@ -126,14 +136,14 @@ export default function HuntControl() {
       </FormControl>
       <Button
         disabled={activeList.id === "default"}
-        onClick={handleAddPokemon}
+        onClick={() => setAddPokemonModalOpen(true)}
         variant="contained"
       >
         Add Pokémon
       </Button>
       <Button
         disabled={activeList.id === "default"}
-        onClick={handleAddPokemon}
+        onClick={() => setRemovePokemonModalOpen(true)}
         variant="contained"
       >
         Remove Pokémon

@@ -88,7 +88,36 @@ export function ShinyHuntingProvider({ children }: ShinyHuntingProviderProps) {
     handleUpdateActiveList(updatedActiveList);
   }
 
-  function handleRemovePokemon(id: string) {}
+  function handleRemovePokemon(id: string) {
+    const indexToRemove = activeList.pokemon.findIndex((pokemon) => {
+      return pokemon.id === id;
+    });
+
+    console.log(indexToRemove);
+
+    if (!indexToRemove) {
+      return;
+    }
+
+    let list = activeList.pokemon;
+
+    list.splice(indexToRemove, 1);
+
+    const updatedActiveList = {
+      ...activeList,
+      pokemon: list.sort((a, b) => {
+        if (a.id < b.id) {
+          return -1;
+        } else if (a.id > b.id) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }),
+    };
+
+    handleUpdateActiveList(updatedActiveList);
+  }
 
   function handleDeleteList() {
     const updatedLists = allLists.filter((list) => list.id !== activeList.id);

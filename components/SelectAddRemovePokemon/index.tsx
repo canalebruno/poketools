@@ -5,18 +5,27 @@ import { handleName } from "../../utils/NameFormatting";
 import styles from "./styles.module.scss";
 import { useShinyHunting } from "../../hooks/useShinyHunting";
 
-export default function SelectAddPokemon() {
+interface SelectAddRemovePokemonProps {
+  remove?: boolean;
+}
+
+export default function SelectAddRemovePokemon({
+  remove = false,
+}: SelectAddRemovePokemonProps) {
   const { pokedex } = usePokedex();
-  const { handleAddPokemon } = useShinyHunting();
+  const { handleAddPokemon, handleRemovePokemon, activeList } =
+    useShinyHunting();
 
   const [term, setTerm] = useState("");
   const [filteredDex, setFilteredDex] = useState(pokedex);
 
+  const pokemonList = remove ? activeList.pokemon : pokedex;
+
   useEffect(() => {
     if (term === "") {
-      setFilteredDex(pokedex);
+      setFilteredDex(pokemonList);
     } else {
-      const newFilter = pokedex.filter((pokemon) => {
+      const newFilter = pokemonList.filter((pokemon) => {
         return handleName(pokemon, true, "National", true)
           .toLowerCase()
           .includes(term);
@@ -44,7 +53,9 @@ export default function SelectAddPokemon() {
               <button
                 className={styles.listCard}
                 onClick={() => {
-                  handleAddPokemon(pokemon.id);
+                  remove
+                    ? handleRemovePokemon(pokemon.id)
+                    : handleAddPokemon(pokemon.id);
                 }}
                 id={pokemon.id}
               >
