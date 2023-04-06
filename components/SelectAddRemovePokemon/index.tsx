@@ -3,23 +3,30 @@ import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import { handleName } from "../../utils/NameFormatting";
 import styles from "./styles.module.scss";
-import { useShinyHunting } from "../../hooks/useShinyHunting";
+import { useShinyTracker } from "../../hooks/useShinyTracker";
+import { Pokemon } from "../../utils/types";
 
 interface SelectAddRemovePokemonProps {
-  remove?: boolean;
+  kind: "add" | "remove";
 }
 
 export default function SelectAddRemovePokemon({
-  remove = false,
+  kind,
 }: SelectAddRemovePokemonProps) {
   const { pokedex } = usePokedex();
   const { handleAddPokemon, handleRemovePokemon, activeList } =
-    useShinyHunting();
+    useShinyTracker();
 
   const [term, setTerm] = useState("");
   const [filteredDex, setFilteredDex] = useState(pokedex);
 
-  const pokemonList = remove ? activeList.pokemon : pokedex;
+  let pokemonList = [] as Pokemon[];
+
+  if (kind === "remove") {
+    pokemonList = activeList.pokemon;
+  } else {
+    pokemonList = pokedex;
+  }
 
   useEffect(() => {
     if (term === "") {
@@ -36,8 +43,9 @@ export default function SelectAddRemovePokemon({
   }, [term]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <TextField
+        fullWidth
         id="searchBox"
         value={term}
         onChange={(e) => {
@@ -53,9 +61,11 @@ export default function SelectAddRemovePokemon({
               <button
                 className={styles.listCard}
                 onClick={() => {
-                  remove
-                    ? handleRemovePokemon(pokemon.id)
-                    : handleAddPokemon(pokemon.id);
+                  if (kind === "remove") {
+                    handleRemovePokemon(pokemon.id);
+                  } else {
+                    handleAddPokemon(pokemon.id);
+                  }
                 }}
                 id={pokemon.id}
               >

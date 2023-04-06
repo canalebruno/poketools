@@ -8,7 +8,7 @@ import {
 import { usePokedex } from "./usePokedex";
 import { Pokemon } from "../utils/types";
 
-interface ShinyHuntingProviderProps {
+interface ShinyTrackerProviderProps {
   children: ReactNode;
 }
 
@@ -18,7 +18,7 @@ interface List {
   pokemon: Pokemon[];
 }
 
-interface ShinyHuntingContextData {
+interface ShinyTrackerContextData {
   shinyDex: Pokemon[];
   setShinyDex: (p: Pokemon[]) => void;
   allLists: List[];
@@ -32,11 +32,11 @@ interface ShinyHuntingContextData {
   setCountIdList: (n: number) => void;
 }
 
-const ShinyHuntingContext = createContext<ShinyHuntingContextData>(
-  {} as ShinyHuntingContextData
+const ShinyTrackerContext = createContext<ShinyTrackerContextData>(
+  {} as ShinyTrackerContextData
 );
 
-export function ShinyHuntingProvider({ children }: ShinyHuntingProviderProps) {
+export function ShinyTrackerProvider({ children }: ShinyTrackerProviderProps) {
   const { pokedex } = usePokedex();
   const [shinyDex, setShinyDex] = useState<Pokemon[]>([] as Pokemon[]);
   const [activeList, setActiveList] = useState<List>({} as List);
@@ -52,14 +52,14 @@ export function ShinyHuntingProvider({ children }: ShinyHuntingProviderProps) {
     setActiveList(updatedList);
     setAllLists(newAllLists);
 
-    const localShinyHuntingLists = {
+    const localShinyTrackerLists = {
       countId: countIdList,
       list: newAllLists,
     };
 
     localStorage.setItem(
-      "localShinyHuntingLists",
-      JSON.stringify(localShinyHuntingLists)
+      "localShinyTrackerLists",
+      JSON.stringify(localShinyTrackerLists)
     );
   }
 
@@ -93,9 +93,7 @@ export function ShinyHuntingProvider({ children }: ShinyHuntingProviderProps) {
       return pokemon.id === id;
     });
 
-    console.log(indexToRemove);
-
-    if (!indexToRemove) {
+    if (!indexToRemove && indexToRemove !== 0) {
       return;
     }
 
@@ -105,15 +103,7 @@ export function ShinyHuntingProvider({ children }: ShinyHuntingProviderProps) {
 
     const updatedActiveList = {
       ...activeList,
-      pokemon: list.sort((a, b) => {
-        if (a.id < b.id) {
-          return -1;
-        } else if (a.id > b.id) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }),
+      pokemon: list,
     };
 
     handleUpdateActiveList(updatedActiveList);
@@ -128,7 +118,7 @@ export function ShinyHuntingProvider({ children }: ShinyHuntingProviderProps) {
       return;
     }
 
-    const localShinyHuntingLists = {
+    const localShinyTrackerLists = {
       countId: countIdList,
       list: updatedLists,
     };
@@ -136,13 +126,13 @@ export function ShinyHuntingProvider({ children }: ShinyHuntingProviderProps) {
     setActiveList(defaultList);
     setAllLists(updatedLists);
     localStorage.setItem(
-      "localShinyHuntingLists",
-      JSON.stringify(localShinyHuntingLists)
+      "localShinyTrackerLists",
+      JSON.stringify(localShinyTrackerLists)
     );
   }
 
   return (
-    <ShinyHuntingContext.Provider
+    <ShinyTrackerContext.Provider
       value={{
         shinyDex,
         setShinyDex,
@@ -158,12 +148,12 @@ export function ShinyHuntingProvider({ children }: ShinyHuntingProviderProps) {
       }}
     >
       {children}
-    </ShinyHuntingContext.Provider>
+    </ShinyTrackerContext.Provider>
   );
 }
 
-export function useShinyHunting(): ShinyHuntingContextData {
-  const context = useContext(ShinyHuntingContext);
+export function useShinyTracker(): ShinyTrackerContextData {
+  const context = useContext(ShinyTrackerContext);
 
   return context;
 }

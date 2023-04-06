@@ -1,22 +1,20 @@
 import styles from "../styles/Home.module.scss";
 import { usePokedex } from "../hooks/usePokedex";
-import FilterControl from "../components/FilterControl";
 import { useEffect } from "react";
-import SearchBox from "../components/SearchBox";
 import { GetStaticProps } from "next";
 import { Pokemon } from "../utils/types";
 import FullGrid from "../components/FullGrid";
-import HuntControl from "../components/HuntControl";
-import { useShinyHunting } from "../hooks/useShinyHunting";
+import HuntControl from "../components/ShinyTrackerControl";
+import { useShinyTracker } from "../hooks/useShinyTracker";
+import ImportExportButtons from "../components/ImportExportButtons";
 
-interface HomeBoxesProps {
+interface ShinyTrackerProps {
   shinydex: Pokemon[];
 }
 
-export default function HomeBoxes({ shinydex }: HomeBoxesProps) {
+export default function ShinyTracker({ shinydex }: ShinyTrackerProps) {
   const { firstLoadPokedex, sortByNationalDex } = usePokedex();
-  const { setActiveList, setAllLists, countIdList, setCountIdList } =
-    useShinyHunting();
+  const { setActiveList, setAllLists, setCountIdList } = useShinyTracker();
 
   useEffect(() => {
     firstLoadPokedex(shinydex);
@@ -27,12 +25,12 @@ export default function HomeBoxes({ shinydex }: HomeBoxesProps) {
     });
     sortByNationalDex();
 
-    const localShinyHuntingLists = localStorage.getItem(
-      "localShinyHuntingLists"
+    const localShinyTrackerLists = localStorage.getItem(
+      "localShinyTrackerLists"
     );
 
-    if (localShinyHuntingLists) {
-      const { countId, list } = JSON.parse(localShinyHuntingLists);
+    if (localShinyTrackerLists) {
+      const { countId, list } = JSON.parse(localShinyTrackerLists);
       setCountIdList(countId);
       setAllLists(list);
     } else {
@@ -48,9 +46,7 @@ export default function HomeBoxes({ shinydex }: HomeBoxesProps) {
 
   return (
     <div className={styles.container}>
-      <FilterControl sortingDefault="n" />
       <HuntControl />
-      <SearchBox />
       <FullGrid imageSource="home" shiny />
     </div>
   );

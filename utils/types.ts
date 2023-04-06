@@ -33,6 +33,13 @@ export interface SVLocation {
   violet: string[];
 }
 
+// Interface to define Pokemon on the frontend
+export interface List {
+  id: string;
+  name: string;
+  pokemon: Pokemon[];
+}
+
 // // Interface to defining our object of response functions
 // export interface ResponseFuncs {
 //   GET?: Function

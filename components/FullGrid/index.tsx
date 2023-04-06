@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 import { Tooltip } from "@mui/material";
 import { handleName, handleNumber } from "../../utils/NameFormatting";
 import { Pokemon } from "../../utils/types";
-import { useShinyHunting } from "../../hooks/useShinyHunting";
+import { useShinyTracker } from "../../hooks/useShinyTracker";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
@@ -20,7 +20,7 @@ interface Box {
 
 export default function FullGrid({ imageSource, shiny = false }: BoxProps) {
   const { breakByGen, highlightPokemon } = usePokedex();
-  const { activeList } = useShinyHunting();
+  const { activeList } = useShinyTracker();
 
   const router = useRouter();
 
