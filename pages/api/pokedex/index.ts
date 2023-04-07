@@ -6,9 +6,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const client = await clientPromise;
     const db = client.db("pokedex");
 
-    const posts = await db.collection("pokedex").find({}).toArray();
+    const pokemon = await db.collection("pokedex").find({}).toArray();
 
-    res.json(posts);
+    res.json(pokemon);
   } catch (e: any) {
     console.error(e);
     throw new Error(e).message;
