@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <a href="https://ko-fi.com/P5P7K5F3E" target="_blank">
+        <a href="https://ko-fi.com/P5P7K5F3E" rel="noreferrer" target="_blank">
           <img
             height="36px"
             style={{ border: 0, height: "36px" }}

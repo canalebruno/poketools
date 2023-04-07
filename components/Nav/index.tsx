@@ -62,7 +62,11 @@ export default function Nav() {
             >
               <span>Shiny Tracker (Beta)</span>
             </Link>
-            <a href="https://ko-fi.com/P5P7K5F3E" target="_blank">
+            <a
+              href="https://ko-fi.com/P5P7K5F3E"
+              rel="noreferrer"
+              target="_blank"
+            >
               <img
                 height="36px"
                 style={{ border: 0, height: "36px" }}
@@ -143,7 +147,11 @@ export default function Nav() {
                   </Link>
                 </ListItem>
                 <ListItem>
-                  <a href="https://ko-fi.com/P5P7K5F3E" target="_blank">
+                  <a
+                    href="https://ko-fi.com/P5P7K5F3E"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
                     <img
                       height="36px"
                       style={{ border: 0, height: "36px" }}
