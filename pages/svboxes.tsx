@@ -1,5 +1,5 @@
 import styles from "../styles/Home.module.scss";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 
 import Box from "../components/Box";
 import { usePokedex } from "../hooks/usePokedex";
@@ -44,13 +44,3 @@ export const getStaticProps: GetStaticProps = async () => {
     props: { paldeaDex: JSON.parse(JSON.stringify(paldeaDex)) },
   };
 };
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   // let response = await fetch("http://localhost:3000/api/paldeadex");
-//   let response = await fetch(`${process.env.API_URL}paldeadex`);
-//   let paldeaDex = await response.json();
-
-//   return {
-//     props: { paldeaDex },
-//   };
-// };

@@ -9,6 +9,8 @@ import { NuzlockeProvider } from "../hooks/useNuzlocke";
 import Router from "next/router";
 import { useState, useEffect } from "react";
 import Loader from "../components/Loader";
+import { ShinyTrackerProvider } from "../hooks/useShinyTracker";
+import Footer from "../components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,15 +33,18 @@ export default function App({ Component, pageProps }: AppProps) {
     <NuzlockeProvider>
       <WindowSizeProvider>
         <PokedexProvider>
-          <Head>
-            <title>Pokémon Tools</title>
-          </Head>
-          <main>
-            <Nav />
-            {isLoading && <Loader />}
-            <Component {...pageProps} />
-          </main>
-          <Analytics />
+          <ShinyTrackerProvider>
+            <Head>
+              <title>Pokémon Tools</title>
+            </Head>
+            <main>
+              <Nav />
+              {isLoading && <Loader />}
+              <Component {...pageProps} />
+              {/* <Footer /> */}
+            </main>
+            <Analytics />
+          </ShinyTrackerProvider>
         </PokedexProvider>
       </WindowSizeProvider>
     </NuzlockeProvider>

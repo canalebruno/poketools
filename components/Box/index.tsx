@@ -9,6 +9,7 @@ import { Pokemon } from "../../utils/types";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
+  shiny?: boolean;
 }
 
 interface Box {
@@ -16,7 +17,7 @@ interface Box {
   pokemon: Pokemon[];
 }
 
-export default function Box({ imageSource }: BoxProps) {
+export default function Box({ imageSource, shiny = false }: BoxProps) {
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
 
@@ -167,7 +168,11 @@ export default function Box({ imageSource }: BoxProps) {
                           width={25}
                           height={25}
                           src={`/${imageSource}/${
-                            imageSource === "svicons" ? pkmn.icon : pkmn.homePic
+                            imageSource === "svicons"
+                              ? pkmn.icon
+                              : shiny
+                              ? pkmn.homeShinyPic
+                              : pkmn.homePic
                           }`}
                           alt={`#${
                             router.pathname === "/svboxes"

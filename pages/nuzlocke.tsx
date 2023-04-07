@@ -1,18 +1,13 @@
 import styles from "../styles/Nuzlocke.module.scss";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 
 import LocationCard from "../components/LocationCard";
 import NuzlockeFilterControl from "../components/NuzlockeFilterControl";
 import Button from "@mui/material/Button";
 import { useNuzlocke } from "../hooks/useNuzlocke";
 import { Pokemon, SVLocation } from "../utils/types";
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
+import { useState, useEffect } from "react";
+import clientPromise from "../utils/mongodb";
 
 interface NuzlockeProps {
   nuzlockeJson: {
@@ -59,14 +54,31 @@ export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  let nuzlockeResponse = await fetch(`${process.env.API_URL}nuzlocke`);
-  // let nuzlockeResponse = await fetch("http://localhost:3000/api/nuzlocke");
-  let nuzlockeJsonPoor: SVLocation[] = await nuzlockeResponse.json();
+export const getStaticProps: GetStaticProps = async () => {
+  // let nuzlockeResponse = await fetch(`${process.env.API_URL}nuzlocke`);
+  // let nuzlockeJsonPoor: SVLocation[] = await nuzlockeResponse.json();
 
-  let paldeaDexResponse = await fetch(`${process.env.API_URL}paldeadex`);
-  // let paldeaDexResponse = await fetch("http://localhost:3000/api/paldeadex");
-  let pokedex: Pokemon[] = await paldeaDexResponse.json();
+  const client = await clientPromise;
+  const db = client.db("pokedex");
+
+  const nuzlockeJsonPoorRes = await db
+    .collection("svlocations")
+    .find({})
+    .toArray();
+
+  const pokedexRes = await db
+    .collection("pokedex")
+    .find({ paldeaDex: { $gte: 1 } })
+    .sort({ paldeaDex: 1, formOrder: 1 })
+    .toArray();
+
+  // let paldeaDexResponse = await fetch(`${process.env.API_URL}paldeadex`);
+  // let pokedex: Pokemon[] = await paldeaDexResponse.json();
+
+  const nuzlockeJsonPoor: SVLocation[] = JSON.parse(
+    JSON.stringify(nuzlockeJsonPoorRes)
+  );
+  const pokedex: Pokemon[] = JSON.parse(JSON.stringify(pokedexRes));
 
   const nuzlockeJson = nuzlockeJsonPoor.map((loc) => {
     return {

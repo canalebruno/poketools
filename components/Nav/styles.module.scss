@@ -14,7 +14,7 @@
             padding-right: 2rem;
         }
         
-        a {
+        a:not([target="_blank"]) {
             padding: 2rem;
             font-weight: bold;
             
@@ -32,7 +32,7 @@
     
 }
 
-@media(max-width: 720px) {
+@media(max-width: 1024px) {
     .container {
         .nav {
             padding: 0 2rem;

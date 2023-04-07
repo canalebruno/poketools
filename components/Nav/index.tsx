@@ -26,7 +26,7 @@ export default function Nav() {
     <div className={styles.container}>
       <nav className={styles.nav}>
         <h2>Pokémon Tools</h2>
-        {windowWidth >= 720 && (
+        {windowWidth >= 1024 && (
           <>
             <Link
               href="/"
@@ -54,9 +54,25 @@ export default function Nav() {
             >
               <span>Home Boxes</span>
             </Link>
+            <Link
+              href="/shinytracker"
+              className={
+                router.pathname === "/shinytracker" ? styles.active : ""
+              }
+            >
+              <span>Shiny Tracker (Beta)</span>
+            </Link>
+            <a href="https://ko-fi.com/P5P7K5F3E" target="_blank">
+              <img
+                height="36px"
+                style={{ border: 0, height: "36px" }}
+                src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
+                alt="Buy Me a Coffee at ko-fi.com"
+              />
+            </a>
           </>
         )}
-        {windowWidth < 720 && (
+        {windowWidth < 1024 && (
           <>
             <IconButton
               aria-label="menu"
@@ -90,7 +106,7 @@ export default function Nav() {
                     }
                   >
                     <span>
-                      {windowWidth > 720
+                      {windowWidth > 1024
                         ? "Scarlet and Violet Boxes"
                         : "SV Boxes"}
                     </span>
@@ -115,6 +131,26 @@ export default function Nav() {
                   >
                     <span>Home Boxes</span>
                   </Link>
+                </ListItem>
+                <ListItem>
+                  <Link
+                    href="/shinytracker"
+                    className={
+                      router.pathname === "/shinytracker" ? styles.active : ""
+                    }
+                  >
+                    <span>Shiny Tracker (Beta)</span>
+                  </Link>
+                </ListItem>
+                <ListItem>
+                  <a href="https://ko-fi.com/P5P7K5F3E" target="_blank">
+                    <img
+                      height="36px"
+                      style={{ border: 0, height: "36px" }}
+                      src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
+                      alt="Buy Me a Coffee at ko-fi.com"
+                    />
+                  </a>
                 </ListItem>
               </List>
             </Drawer>
