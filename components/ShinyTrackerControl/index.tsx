@@ -21,7 +21,7 @@ export default function ShinyTrackerControl() {
   const [addPokemonModalOpen, setAddPokemonModalOpen] = useState(false);
   const [removePokemonModalOpen, setRemovePokemonModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [countIdList, setCountIdList] = useState(1);
+  // const [countIdList, setCountIdList] = useState(1);
 
   const { allLists, setAllLists, handleDeleteList, activeList, setActiveList } =
     useShinyTracker();
@@ -44,13 +44,13 @@ export default function ShinyTrackerControl() {
 
   function handleCreateList() {
     const newList = {
-      id: `custom-list-${countIdList}`,
+      id: `CL${Date.now()}`,
       name: newListName,
       pokemon: [],
     };
 
     const updatedLists = [...allLists, newList];
-    setCountIdList(countIdList + 1);
+    // setCountIdList(countIdList + 1);
     setAllLists(updatedLists);
     setActiveList(newList);
     setNewListModalOpen(false);

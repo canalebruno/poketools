@@ -28,8 +28,8 @@ interface ShinyTrackerContextData {
   setActiveList: (l: List) => void;
   handleRemovePokemon: (id: string) => void;
   handleDeleteList: () => void;
-  countIdList: number;
-  setCountIdList: (n: number) => void;
+  // countIdList: number;
+  // setCountIdList: (n: number) => void;
 }
 
 const ShinyTrackerContext = createContext<ShinyTrackerContextData>(
@@ -41,7 +41,7 @@ export function ShinyTrackerProvider({ children }: ShinyTrackerProviderProps) {
   const [shinyDex, setShinyDex] = useState<Pokemon[]>([] as Pokemon[]);
   const [activeList, setActiveList] = useState<List>({} as List);
   const [allLists, setAllLists] = useState<List[]>([] as List[]);
-  const [countIdList, setCountIdList] = useState(1);
+  // const [countIdList, setCountIdList] = useState(1);
 
   function handleUpdateActiveList(updatedList: List) {
     const newAllLists = [
@@ -52,15 +52,7 @@ export function ShinyTrackerProvider({ children }: ShinyTrackerProviderProps) {
     setActiveList(updatedList);
     setAllLists(newAllLists);
 
-    const localShinyTrackerLists = {
-      countId: countIdList,
-      list: newAllLists,
-    };
-
-    localStorage.setItem(
-      "localShinyTrackerLists",
-      JSON.stringify(localShinyTrackerLists)
-    );
+    localStorage.setItem("localShinyTrackerLists", JSON.stringify(newAllLists));
   }
 
   function handleAddPokemon(id: string) {
@@ -118,16 +110,11 @@ export function ShinyTrackerProvider({ children }: ShinyTrackerProviderProps) {
       return;
     }
 
-    const localShinyTrackerLists = {
-      countId: countIdList,
-      list: updatedLists,
-    };
-
     setActiveList(defaultList);
     setAllLists(updatedLists);
     localStorage.setItem(
       "localShinyTrackerLists",
-      JSON.stringify(localShinyTrackerLists)
+      JSON.stringify(updatedLists)
     );
   }
 
@@ -143,8 +130,8 @@ export function ShinyTrackerProvider({ children }: ShinyTrackerProviderProps) {
         setActiveList,
         handleRemovePokemon,
         handleDeleteList,
-        countIdList,
-        setCountIdList,
+        // countIdList,
+        // setCountIdList,
       }}
     >
       {children}
