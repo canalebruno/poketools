@@ -30,8 +30,6 @@ export default function ShinyTracker({ shinydex }: ShinyTrackerProps) {
     );
 
     if (localShinyTrackerLists) {
-      console.log("entrou");
-      console.log(localShinyTrackerLists);
       setAllLists(JSON.parse(localShinyTrackerLists));
     } else {
       setAllLists([

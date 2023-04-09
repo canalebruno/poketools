@@ -28,8 +28,6 @@ interface ShinyTrackerContextData {
   setActiveList: (l: List) => void;
   handleRemovePokemon: (id: string) => void;
   handleDeleteList: () => void;
-  // countIdList: number;
-  // setCountIdList: (n: number) => void;
 }
 
 const ShinyTrackerContext = createContext<ShinyTrackerContextData>(
@@ -41,7 +39,6 @@ export function ShinyTrackerProvider({ children }: ShinyTrackerProviderProps) {
   const [shinyDex, setShinyDex] = useState<Pokemon[]>([] as Pokemon[]);
   const [activeList, setActiveList] = useState<List>({} as List);
   const [allLists, setAllLists] = useState<List[]>([] as List[]);
-  // const [countIdList, setCountIdList] = useState(1);
 
   function handleUpdateActiveList(updatedList: List) {
     const newAllLists = [
@@ -130,8 +127,6 @@ export function ShinyTrackerProvider({ children }: ShinyTrackerProviderProps) {
         setActiveList,
         handleRemovePokemon,
         handleDeleteList,
-        // countIdList,
-        // setCountIdList,
       }}
     >
       {children}

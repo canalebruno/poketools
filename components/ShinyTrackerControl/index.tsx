@@ -10,10 +10,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useShinyTracker } from "../../hooks/useShinyTracker";
-import SelectAddPokemon from "../SelectAddRemovePokemon";
 import styles from "./styles.module.scss";
 import SelectAddRemovePokemon from "../SelectAddRemovePokemon";
-import { useWindowSize } from "../../hooks/useWindowSize";
 
 export default function ShinyTrackerControl() {
   const [newListName, setNewListName] = useState("");
@@ -21,7 +19,6 @@ export default function ShinyTrackerControl() {
   const [addPokemonModalOpen, setAddPokemonModalOpen] = useState(false);
   const [removePokemonModalOpen, setRemovePokemonModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  // const [countIdList, setCountIdList] = useState(1);
 
   const { allLists, setAllLists, handleDeleteList, activeList, setActiveList } =
     useShinyTracker();
@@ -50,7 +47,6 @@ export default function ShinyTrackerControl() {
     };
 
     const updatedLists = [...allLists, newList];
-    // setCountIdList(countIdList + 1);
     setAllLists(updatedLists);
     setActiveList(newList);
     setNewListModalOpen(false);
