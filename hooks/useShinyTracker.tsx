@@ -40,6 +40,12 @@ export function ShinyTrackerProvider({ children }: ShinyTrackerProviderProps) {
   const [activeList, setActiveList] = useState<List>({} as List);
   const [allLists, setAllLists] = useState<List[]>([] as List[]);
 
+  const defaultList = {
+    name: "Show All Shinies",
+    id: "default",
+    pokemon: shinyDex,
+  };
+
   function handleUpdateActiveList(updatedList: List) {
     const newAllLists = [
       ...allLists.filter((list) => updatedList.id !== list.id),

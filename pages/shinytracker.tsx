@@ -17,13 +17,13 @@ export default function ShinyTracker({ shinydex }: ShinyTrackerProps) {
   const { setActiveList, setAllLists } = useShinyTracker();
 
   useEffect(() => {
-    firstLoadPokedex(shinydex);
+    // firstLoadPokedex(shinydex);
     setActiveList({
       name: "Show All Shinies",
       id: "default",
       pokemon: shinydex,
     });
-    sortByNationalDex();
+    // sortByNationalDex();
 
     const localShinyTrackerLists = localStorage.getItem(
       "localShinyTrackerLists"

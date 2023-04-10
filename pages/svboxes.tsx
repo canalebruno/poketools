@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import SearchBox from "../components/SearchBox";
 import { Pokemon } from "../utils/types";
 import clientPromise from "../utils/mongodb";
+import paldeadex from "./api/paldeadex";
 
 interface SVBoxesProps {
   paldeaDex: Pokemon[];
@@ -38,6 +39,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const paldeaDex = await db
     .collection("pokedex")
     .find({ paldeaDex: { $gte: 1 } })
+    .sort({ paldeaDex: 1, id: 1 })
     .toArray();
 
   return {
