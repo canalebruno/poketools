@@ -7,6 +7,7 @@ import { Tooltip } from "@mui/material";
 import { handleName, handleNumber } from "../../utils/NameFormatting";
 import { Pokemon } from "../../utils/types";
 import { useShinyTracker } from "../../hooks/useShinyTracker";
+import Square from "../Square";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
@@ -46,43 +47,12 @@ export default function FullGrid({ imageSource, shiny = false }: BoxProps) {
                 {breakByGen && firstOfGen.includes(pkmn.id) && (
                   <div className={styles.firstOfGen} />
                 )}
-                <Tooltip
+                <Square
+                  imageSource={imageSource}
+                  shiny={shiny}
+                  pokemon={pkmn}
                   key={pkmn.id}
-                  title={handleName(
-                    pkmn,
-                    router.pathname !== "/svboxes" ||
-                      (router.pathname === "/svboxes" && pkmn.paldeaDex! < 500),
-                    router.pathname === "/svboxes" ? "Paldean" : "National",
-                    true
-                  )}
-                  arrow
-                >
-                  <div
-                    id={pkmn.id}
-                    className={`${styles.card} ${
-                      highlightPokemon === pkmn.id && styles.cardActive
-                    }
-                `}
-                  >
-                    <Image
-                      unoptimized
-                      width={25}
-                      height={25}
-                      src={`/${imageSource}/${
-                        imageSource === "svicons"
-                          ? pkmn.icon
-                          : shiny
-                          ? pkmn.homeShinyPic
-                          : pkmn.homePic
-                      }`}
-                      alt={`#${
-                        router.pathname === "/svboxes"
-                          ? pkmn.paldeaDex
-                          : pkmn.nationalDex
-                      } - ${pkmn.name}`}
-                    />
-                  </div>
-                </Tooltip>
+                />
               </>
             );
           })}

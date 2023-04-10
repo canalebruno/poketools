@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 import { Tooltip } from "@mui/material";
 import { handleName, handleNumber } from "../../utils/NameFormatting";
 import { Pokemon } from "../../utils/types";
+import Square from "../Square";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
@@ -20,6 +21,7 @@ interface Box {
 export default function Box({ imageSource, shiny = false }: BoxProps) {
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
+  const [openTooltip, setOpenTooltip] = useState(false);
 
   const { orderList, pokedex, breakByGen, highlightPokemon } = usePokedex();
 
@@ -145,43 +147,12 @@ export default function Box({ imageSource, shiny = false }: BoxProps) {
               <div className={styles.boxGrid}>
                 {box.pokemon.map((pkmn) => {
                   return (
-                    <Tooltip
+                    <Square
+                      imageSource={imageSource}
+                      shiny={shiny}
+                      pokemon={pkmn}
                       key={pkmn.id}
-                      title={handleName(
-                        pkmn,
-                        router.pathname !== "/svboxes" ||
-                          (router.pathname === "/svboxes" &&
-                            pkmn.paldeaDex! < 500),
-                        router.pathname === "/svboxes" ? "Paldean" : "National",
-                        true
-                      )}
-                      arrow
-                    >
-                      <div
-                        id={pkmn.id}
-                        className={`${styles.card} ${
-                          highlightPokemon === pkmn.id && styles.cardActive
-                        }`}
-                      >
-                        <Image
-                          unoptimized
-                          width={25}
-                          height={25}
-                          src={`/${imageSource}/${
-                            imageSource === "svicons"
-                              ? pkmn.icon
-                              : shiny
-                              ? pkmn.homeShinyPic
-                              : pkmn.homePic
-                          }`}
-                          alt={`#${
-                            router.pathname === "/svboxes"
-                              ? pkmn.paldeaDex
-                              : pkmn.nationalDex
-                          } - ${pkmn.name}`}
-                        />
-                      </div>
-                    </Tooltip>
+                    />
                   );
                 })}
                 {box.pokemon.length < 30 &&
