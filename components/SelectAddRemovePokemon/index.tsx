@@ -35,7 +35,7 @@ export default function SelectAddRemovePokemon({
       const newFilter = pokemonList.filter((pokemon) => {
         return handleName(pokemon, true, "National", true)
           .toLowerCase()
-          .includes(term);
+          .includes(term.toLowerCase());
       });
 
       setFilteredDex(newFilter);
