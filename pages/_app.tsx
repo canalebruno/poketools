@@ -34,6 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <WindowSizeProvider>
         <PokedexProvider>
           <ShinyTrackerProvider>
+            <Head>
             <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
 
             <Script strategy="lazyOnload">
@@ -46,7 +47,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     });
                 `}
             </Script>
-            <Head>
+            
               <title>Pokémon Tools</title>
             </Head>
             <main>
