@@ -76,5 +76,12 @@
         "updates": [
             "Added Chespin family to the SV Boxes"
         ]
+    },
+    {
+        "id": 11,
+        "date": "31.05.2023",
+        "updates": [
+            "Added Gen 9 Pokémon to the Home Boxes"
+        ]
     }
 ]
