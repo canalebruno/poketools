@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <Nav />
               {isLoading && <Loader />}
               <Component {...pageProps} />
-              {/* <Footer /> */}
+              <Footer />
             </main>
             <Analytics />
           </ShinyTrackerProvider>
