@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useWindowSize } from "../../hooks/useWindowSize";
 import styles from "./styles.module.scss";
 import * as React from "react";
 import Drawer from "@mui/material/Drawer";
@@ -16,7 +15,6 @@ export default function Nav() {
   const [isOpne, setIsOpen] = useState(false);
   const [isSuspendedMenuOpne, setIsSuspendedMenuOpen] = useState(false);
   const router = useRouter();
-  const { windowWidth } = useWindowSize();
   const isDesktop = useMediaQuery("(min-width: 720px)");
 
   function toggleDrawer(open: boolean) {
@@ -73,52 +71,6 @@ export default function Nav() {
               </Link>
             </div>
           </nav>
-          /* <Link
-              href="/"
-              className={router.pathname === "/" ? styles.active : ""}
-            >
-              <span>Home</span>
-            </Link>
-            <Link
-              href="/svboxes"
-              className={router.pathname === "/svboxes" ? styles.active : ""}
-            >
-              <span>
-                {windowWidth > 720 ? "Scarlet and Violet Boxes" : "SV Boxes"}
-              </span>
-            </Link>
-            <Link
-              href="/nuzlocke"
-              className={router.pathname === "/nuzlocke" ? styles.active : ""}
-            >
-              <span>SV Nuzlocke Generator</span>
-            </Link>
-            <Link
-              href="/homeboxes"
-              className={router.pathname === "/homeboxes" ? styles.active : ""}
-            >
-              <span>Home Boxes</span>
-            </Link>
-            <Link
-              href="/shinytracker"
-              className={
-                router.pathname === "/shinytracker" ? styles.active : ""
-              }
-            >
-              <span>Shiny Tracker (Beta)</span>
-            </Link>
-            <a
-              href="https://ko-fi.com/P5P7K5F3E"
-              rel="noreferrer"
-              target="_blank"
-            >
-              <img
-                height="36px"
-                style={{ border: 0, height: "36px" }}
-                src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
-                alt="Buy Me a Coffee at ko-fi.com"
-              />
-            </a> */
         )}
         {!isDesktop && (
           <>
@@ -137,73 +89,40 @@ export default function Nav() {
                 "& .MuiPaper-root": { padding: "2rem 1rem" },
               }}
             >
-              <List>
-                <ListItem>
-                  <Link
-                    href="/"
-                    className={router.pathname === "/" ? styles.active : ""}
-                  >
-                    <span>Home</span>
-                  </Link>
-                </ListItem>
-                <ListItem>
-                  <Link
-                    href="/svboxes"
-                    className={
-                      router.pathname === "/svboxes" ? styles.active : ""
-                    }
-                  >
-                    <span>
-                      {windowWidth > 1024
-                        ? "Scarlet and Violet Boxes"
-                        : "SV Boxes"}
-                    </span>
-                  </Link>
-                </ListItem>
-                <ListItem>
-                  <Link
-                    href="/nuzlocke"
-                    className={
-                      router.pathname === "/nuzlocke" ? styles.active : ""
-                    }
-                  >
-                    <span>SV Nuzlocke Generator</span>
-                  </Link>
-                </ListItem>
-                <ListItem>
-                  <Link
-                    href="/homeboxes"
-                    className={
-                      router.pathname === "/homeboxes" ? styles.active : ""
-                    }
-                  >
-                    <span>Home Boxes</span>
-                  </Link>
-                </ListItem>
-                <ListItem>
-                  <Link
-                    href="/shinytracker"
-                    className={
-                      router.pathname === "/shinytracker" ? styles.active : ""
-                    }
-                  >
-                    <span>Shiny Tracker (Beta)</span>
-                  </Link>
-                </ListItem>
-                <ListItem>
-                  <a
-                    href="https://ko-fi.com/P5P7K5F3E"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    <img
-                      height="36px"
-                      style={{ border: 0, height: "36px" }}
-                      src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
-                      alt="Buy Me a Coffee at ko-fi.com"
-                    />
-                  </a>
-                </ListItem>
+              <List className={styles.list}>
+                <div className={styles.listGroup}>
+                  <ListItem className={styles.listItem}>
+                    <strong>Box Organizer</strong>
+                    {/* <ArrowDropDownIcon /> */}
+                  </ListItem>
+                  <ListItem className={styles.listItem}>
+                    <Link href="/svboxes">
+                      <span>Scarlet and Violet</span>
+                    </Link>
+                  </ListItem>
+                  <ListItem className={styles.listItem}>
+                    <Link href="/homeboxes">
+                      <span>Home</span>
+                    </Link>
+                  </ListItem>
+                  <ListItem className={styles.listItem}>
+                    <Link
+                      href="/shinytracker"
+                      className={
+                        router.pathname === "/shinytracker" ? styles.active : ""
+                      }
+                    >
+                      <span>Builder (Beta)</span>
+                    </Link>
+                  </ListItem>
+                </div>
+                <div className={styles.listGroup}>
+                  <ListItem className={styles.listItem}>
+                    <Link href="/nuzlocke">
+                      <span>SV Nuzlocke Generator</span>
+                    </Link>
+                  </ListItem>
+                </div>
               </List>
             </Drawer>
           </>
