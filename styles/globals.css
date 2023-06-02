@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    
+
   background: linear-gradient(#cef2ac, #99e1c9);
 }
 
@@ -18,7 +18,7 @@ a {
 }
 
 main {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }

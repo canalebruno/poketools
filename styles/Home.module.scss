@@ -2,7 +2,6 @@
   padding: 2rem;
   width: 100%;
   max-width: 1440px;
-  min-height: 100vh;
   margin: 0 auto;
 }
 
@@ -24,10 +23,9 @@
     text-align: center;
 
     transition: 0.1s;
-    
+
     &:hover {
       background-color: #1ca3a6;
-
     }
 
     img {
@@ -41,11 +39,11 @@
       font-size: 4rem;
       margin: 1.5rem;
       color: #3c3c3c;
-  }
+    }
   }
 }
 
-@media(max-width: 720px) {
+@media (max-width: 720px) {
   .container {
     h1 {
       text-align: center;

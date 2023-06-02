@@ -1,57 +1,90 @@
+// Mobile Style
 .container {
-    background-color: #1ca3a6;
-    border-bottom: 3px solid #4bcdcf ;
-    
-    .nav {
-        padding: 0 2rem;
-        max-width: 1440px;
-        margin: 0 auto;
+  background-color: #1ca3a6;
+  border-bottom: 3px solid #4bcdcf;
+
+  .content {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0;
+      padding-right: 2rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .menuItem {
         display: flex;
         align-items: center;
+        padding: 1rem;
+        cursor: pointer;
 
-        h2 {
-            margin: 0;
-            padding-right: 2rem;
+        &:hover {
+          color: white;
+          background-color: #1ca3a6;
         }
-        
-        a:not([target="_blank"]) {
-            padding: 2rem;
-            font-weight: bold;
-            
-            transition: 0.2s;
-            
-            &.active {
-                background-color: #4bcdcf;
-            }
-            
-            &:hover {
-                background-color: #4bcdcf;
-            }
+      }
+
+      .suspendedMenu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 5rem;
+        background-color: #4bcdcf;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+          rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        border-radius: 0 0 0.5rem 0.5rem;
+
+        .menuItem:last-child {
+          border-radius: 0 0 0.5rem 0.5rem;
         }
+
+        .menuItem:first-child {
+          border-top: 3px solid #4bcdcf;
+        }
+      }
+
+      //   a:not([target="_blank"]) {
+      //     padding: 2rem;
+      //     font-weight: bold;
+
+      //     transition: 0.2s;
+
+      //     &.active {
+      //       background-color: #4bcdcf;
+      //     }
+
+      //     &:hover {
+      //       background-color: #4bcdcf;
+      //     }
+      //   }
     }
-    
+  }
 }
 
-@media(max-width: 1024px) {
-    .container {
-        .nav {
-            padding: 0 2rem;
-            display: flex;
-            align-items: center;
+// Desktop Style
+@media (min-width: 720px) {
+  .container {
+    nav {
+      //   a {
+      //     padding: 0.5rem;
+      //     display: flex;
+      //     align-items: center;
+      //     justify-content: center;
+      //     font-size: small;
+      //   }
 
-            a {
-                padding: 0.5rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: small;
-            }
-
-            Button{
-                margin-left: auto;
-            }
-        }
+      Button {
+        margin-left: auto;
+      }
     }
-
-    
+  }
 }

@@ -5,30 +5,75 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 import styles from "./styles.module.scss";
 import * as React from "react";
 import Drawer from "@mui/material/Drawer";
-import FilterAltTwoToneIcon from "@mui/icons-material/FilterAltTwoTone";
-import Fab from "@mui/material/Fab";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import FilterControl from "../FilterControl";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 export default function Nav() {
   const [isOpne, setIsOpen] = useState(false);
+  const [isSuspendedMenuOpne, setIsSuspendedMenuOpen] = useState(false);
   const router = useRouter();
   const { windowWidth } = useWindowSize();
+  const isDesktop = useMediaQuery("(min-width: 720px)");
 
   function toggleDrawer(open: boolean) {
     setIsOpen(open);
   }
 
+  function getTopAxis() {
+    const menuPosition =
+      document.getElementById("boxOrganizerMenu")?.offsetHeight;
+
+    return menuPosition ? menuPosition : 0;
+  }
+
   return (
     <div className={styles.container}>
-      <nav className={styles.nav}>
+      <div className={styles.content}>
         <h2>Pokémon Tools</h2>
-        {windowWidth >= 1024 && (
-          <>
-            <Link
+        {isDesktop && (
+          <nav>
+            <div
+              className={styles.menuItem}
+              id="boxOrganizerMenu"
+              onMouseEnter={() => setIsSuspendedMenuOpen(true)}
+              onMouseLeave={() => setIsSuspendedMenuOpen(false)}
+              style={isSuspendedMenuOpne ? { color: "white" } : undefined}
+            >
+              <span>Box Organizer</span>
+              <ArrowDropDownIcon />
+            </div>
+            {isSuspendedMenuOpne && (
+              <div
+                className={styles.suspendedMenu}
+                style={{ top: getTopAxis() }}
+                onMouseEnter={() => setIsSuspendedMenuOpen(true)}
+                onMouseLeave={() => setIsSuspendedMenuOpen(false)}
+              >
+                <Link className={styles.menuItem} href="/svboxes">
+                  <span>Scarlet and Violet</span>
+                </Link>
+                <Link className={styles.menuItem} href="/homeboxes">
+                  <span>Home</span>
+                </Link>
+                <Link className={styles.menuItem} href="/shinytracker">
+                  <span>Builder (Beta)</span>
+                </Link>
+              </div>
+            )}
+            <div className={styles.menuItem}>
+              <Link
+                href="/nuzlocke"
+                className={router.pathname === "/nuzlocke" ? styles.active : ""}
+              >
+                <span>SV Nuzlocke Generator</span>
+              </Link>
+            </div>
+          </nav>
+          /* <Link
               href="/"
               className={router.pathname === "/" ? styles.active : ""}
             >
@@ -73,10 +118,9 @@ export default function Nav() {
                 src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
                 alt="Buy Me a Coffee at ko-fi.com"
               />
-            </a>
-          </>
+            </a> */
         )}
-        {windowWidth < 1024 && (
+        {!isDesktop && (
           <>
             <IconButton
               aria-label="menu"
@@ -164,7 +208,7 @@ export default function Nav() {
             </Drawer>
           </>
         )}
-      </nav>
+      </div>
     </div>
   );
 }
