@@ -13,9 +13,11 @@ export default function UpdatesFeed() {
   useEffect(() => {
     if (updates) {
       setLatestUpdates(
-        updates.sort((a, b) => {
-          return b.id - a.id;
-        })
+        updates
+          .sort((a, b) => {
+            return b.id - a.id;
+          })
+          .slice(0, 3)
       );
     }
   }, []);

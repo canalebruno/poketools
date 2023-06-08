@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import SearchBox from "../components/SearchBox";
 import { GetStaticProps } from "next";
 import { Pokemon } from "../utils/types";
-import test from "./api/homedex";
 import clientPromise from "../utils/mongodb";
 
 interface HomeBoxesProps {

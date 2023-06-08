@@ -31,7 +31,9 @@ export default function Nav() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h2>Pokémon Tools</h2>
+        <Link href="/">
+          <h2>Pokémon Tools</h2>
+        </Link>
         {isDesktop && (
           <nav>
             <div
