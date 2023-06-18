@@ -11,6 +11,7 @@ import Square from "../Square";
 interface BoxProps {
   imageSource: "svicons" | "home";
   shiny?: boolean;
+  pokemonListShown: Pokemon[];
 }
 
 interface Box {
