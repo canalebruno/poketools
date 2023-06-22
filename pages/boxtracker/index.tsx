@@ -1,52 +1,113 @@
 import styles from "../../styles/Home.module.scss";
 import { usePokedex } from "../../hooks/usePokedex";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GetStaticProps } from "next";
 import { Pokemon } from "../../utils/types";
-import FullGrid from "../../components/FullGrid";
-import HuntControl from "../../components/ShinyTrackerControl";
-import { useShinyTracker } from "../../hooks/useShinyTracker";
 import clientPromise from "../../utils/mongodb";
+import Link from "next/link";
+import { Button, Modal, SelectChangeEvent, TextField } from "@mui/material";
 
 interface BoxTrackerMainProps {
   shinydex: Pokemon[];
 }
 
 export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
-  const { firstLoadPokedex, sortByNationalDex } = usePokedex();
-  const { setActiveList, setAllLists } = useShinyTracker();
+  const { setCustomBoxes, customBoxes } = usePokedex();
+
+  const [newBoxName, setNewBoxName] = useState("");
+  const [newBoxModalOpen, setNewBoxModalOpen] = useState(false);
 
   useEffect(() => {
-    firstLoadPokedex(shinydex);
-    setActiveList({
-      name: "Show All Shinies",
-      id: "default",
-      pokemon: shinydex,
-    });
-    sortByNationalDex();
+    const localBoxes = localStorage.getItem("localBoxes");
 
-    const localShinyTrackerLists = localStorage.getItem(
-      "localShinyTrackerLists"
-    );
-
-    if (localShinyTrackerLists) {
-      setAllLists(JSON.parse(localShinyTrackerLists));
-    } else {
-      setAllLists([
-        {
-          name: "Show All Shinies",
-          id: "default",
-          pokemon: shinydex,
-        },
-      ]);
+    if (localBoxes) {
+      setCustomBoxes(JSON.parse(localBoxes));
     }
   }, []);
 
+  function convertNameToSlug(name: string) {
+    const slug = name
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(" ", "-")
+      .toLowerCase();
+
+    return slug;
+  }
+
+  function handleCreateCustomBox() {
+    const newSlug = convertNameToSlug(newBoxName);
+
+    const usedSlug = customBoxes.find((box) => box.id === newSlug);
+
+    if (usedSlug) {
+      return;
+    }
+
+    const newCustomBox = {
+      id: newSlug,
+      name: newBoxName,
+      pokemon: [],
+    };
+
+    const updatedLists = [...customBoxes, newCustomBox];
+    setCustomBoxes(updatedLists);
+    handleNewBoxModalClose();
+  }
+
+  function handleNewBoxModalClose() {
+    setNewBoxModalOpen(false);
+    setNewBoxName("");
+  }
+
+  const modalStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "1rem",
+  };
+
   return (
-    <div className={styles.container}>
-      <HuntControl />
-      <FullGrid imageSource="home" shiny />
-    </div>
+    <>
+      <Modal
+        style={modalStyle}
+        open={newBoxModalOpen}
+        onClose={handleNewBoxModalClose}
+      >
+        <div className={`${styles.modalContainer} ${styles.small}`}>
+          <h3>Create Box</h3>
+          <TextField
+            value={newBoxName}
+            onChange={(event) => setNewBoxName(event.target.value)}
+            id="new-list-name"
+            label="Box Name"
+            variant="standard"
+          />
+          <div className={styles.buttonGroup} style={{ margin: "0 auto" }}>
+            <Button onClick={handleNewBoxModalClose} variant="outlined">
+              Cancel
+            </Button>
+            <Button onClick={handleCreateCustomBox} variant="contained">
+              Create
+            </Button>
+          </div>
+        </div>
+      </Modal>
+      <div className={styles.container}>
+        <Button variant="contained" onClick={(e) => setNewBoxModalOpen(true)}>
+          Create new Box
+        </Button>
+        {customBoxes &&
+          customBoxes.length > 0 &&
+          customBoxes.map((list) => {
+            return (
+              <Link key={list.id} href={`/boxtracker/${list.id}`}>
+                {list.name}
+              </Link>
+            );
+          })}
+      </div>
+    </>
   );
 }
 

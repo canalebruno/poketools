@@ -28,6 +28,24 @@ export default function Nav() {
     return menuPosition ? menuPosition : 0;
   }
 
+  const menuNavItems = [
+    {
+      id: 1,
+      title: "Scarlet and Violet",
+      slug: "/svboxes",
+    },
+    {
+      id: 2,
+      title: "Home",
+      slug: "/homeboxes",
+    },
+    {
+      id: 3,
+      title: "Builder (Beta)",
+      slug: "/boxtracker",
+    },
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -53,15 +71,17 @@ export default function Nav() {
                 onMouseEnter={() => setIsSuspendedMenuOpen(true)}
                 onMouseLeave={() => setIsSuspendedMenuOpen(false)}
               >
-                <Link className={styles.menuItem} href="/svboxes">
-                  <span>Scarlet and Violet</span>
-                </Link>
-                <Link className={styles.menuItem} href="/homeboxes">
-                  <span>Home</span>
-                </Link>
-                <Link className={styles.menuItem} href="/shinytracker">
-                  <span>Builder (Beta)</span>
-                </Link>
+                {menuNavItems.map((item) => {
+                  return (
+                    <Link
+                      key={item.id}
+                      className={styles.menuItem}
+                      href={item.slug}
+                    >
+                      <span>{item.title}</span>
+                    </Link>
+                  );
+                })}
               </div>
             )}
             <div className={styles.menuItem}>
@@ -97,26 +117,15 @@ export default function Nav() {
                     <strong>Box Organizer</strong>
                     {/* <ArrowDropDownIcon /> */}
                   </ListItem>
-                  <ListItem className={styles.listItem}>
-                    <Link href="/svboxes">
-                      <span>Scarlet and Violet</span>
-                    </Link>
-                  </ListItem>
-                  <ListItem className={styles.listItem}>
-                    <Link href="/homeboxes">
-                      <span>Home</span>
-                    </Link>
-                  </ListItem>
-                  <ListItem className={styles.listItem}>
-                    <Link
-                      href="/shinytracker"
-                      className={
-                        router.pathname === "/shinytracker" ? styles.active : ""
-                      }
-                    >
-                      <span>Builder (Beta)</span>
-                    </Link>
-                  </ListItem>
+                  {menuNavItems.map((item) => {
+                    return (
+                      <ListItem key={item.id} className={styles.listItem}>
+                        <Link href={item.slug}>
+                          <span>{item.title}</span>
+                        </Link>
+                      </ListItem>
+                    );
+                  })}
                 </div>
                 <div className={styles.listGroup}>
                   <ListItem className={styles.listItem}>

@@ -9,56 +9,46 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { useShinyTracker } from "../../hooks/useShinyTracker";
+// import { useShinyTracker } from "../../hooks/useShinyTracker";
 import styles from "./styles.module.scss";
 import SelectAddRemovePokemon from "../SelectAddRemovePokemon";
+import { usePokedex } from "../../hooks/usePokedex";
+import { useEffect } from "react";
+import { Pokemon } from "../../utils/types";
+import { useRouter } from "next/router";
+import AddPokemonButton from "../SelectAddRemovePokemon/AddButton";
 
 export default function ShinyTrackerControl() {
-  const [newListName, setNewListName] = useState("");
-  const [newListModalOpen, setNewListModalOpen] = useState(false);
   const [addPokemonModalOpen, setAddPokemonModalOpen] = useState(false);
   const [removePokemonModalOpen, setRemovePokemonModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [addPokemonList, setAddPokemonList] = useState<Pokemon[]>();
 
-  const { allLists, setAllLists, handleDeleteList, activeList, setActiveList } =
-    useShinyTracker();
+  const router = useRouter();
+
+  const pageSlug = router.asPath.replace("/boxtracker/", "");
+
+  const fetchUserData = () => {
+    fetch("/api/shinydex")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setAddPokemonList(data);
+      });
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const { customBoxes, handleDeleteList, pageBox } = usePokedex();
 
   function handleSelectList(event: SelectChangeEvent) {
     const selection = event.target.value;
 
-    if (selection === "create") {
-      handleNewListModalOpen();
-    } else {
-      const newShownList = allLists.find((list) => list.id === selection);
-      if (newShownList) {
-        setActiveList(newShownList);
-      } else {
-        const defaultList = allLists.find((list) => list.id === "default");
-        setActiveList(defaultList!);
-      }
-    }
+    router.push(`/boxtracker/${selection}`);
   }
-
-  function handleCreateList() {
-    const newList = {
-      id: `CL${Date.now()}`,
-      name: newListName,
-      pokemon: [],
-    };
-
-    const updatedLists = [...allLists, newList];
-    setAllLists(updatedLists);
-    setActiveList(newList);
-    setNewListModalOpen(false);
-    setNewListName("");
-  }
-
-  function handleNewListModalClose() {
-    setNewListModalOpen(false);
-    setNewListName("");
-  }
-
-  const handleNewListModalOpen = () => setNewListModalOpen(true);
 
   const modalStyle = {
     display: "flex",
@@ -85,36 +75,13 @@ export default function ShinyTrackerControl() {
             </Button>
             <Button
               onClick={() => {
-                handleDeleteList();
+                handleDeleteList(pageSlug);
                 setDeleteModalOpen(false);
+                router.push("/boxtracker");
               }}
               variant="contained"
             >
               Yes, Delete List
-            </Button>
-          </div>
-        </div>
-      </Modal>
-      <Modal
-        style={modalStyle}
-        open={newListModalOpen}
-        onClose={handleNewListModalClose}
-      >
-        <div className={`${styles.modalContainer} ${styles.small}`}>
-          <h3>Create List</h3>
-          <TextField
-            value={newListName}
-            onChange={(event) => setNewListName(event.target.value)}
-            id="new-list-name"
-            label="List Name"
-            variant="standard"
-          />
-          <div className={styles.buttonGroup} style={{ margin: "0 auto" }}>
-            <Button onClick={handleNewListModalClose} variant="outlined">
-              Cancel
-            </Button>
-            <Button onClick={handleCreateList} variant="contained">
-              Create
             </Button>
           </div>
         </div>
@@ -134,7 +101,7 @@ export default function ShinyTrackerControl() {
               Close
             </Button>
           </div>
-          <SelectAddRemovePokemon kind="add" />
+          <AddPokemonButton />
         </div>
       </Modal>
       <Modal
@@ -152,59 +119,48 @@ export default function ShinyTrackerControl() {
               Close
             </Button>
           </div>
-          <SelectAddRemovePokemon kind="remove" />
+          <SelectAddRemovePokemon kind="remove" pokemonList={pageBox.pokemon} />
         </div>
       </Modal>
       <div className={styles.container}>
         <div className={styles.buttonGroup}>
-          <FormControl>
+          {/* <FormControl>
             <InputLabel id="list-select-label">List</InputLabel>
             <Select
               labelId="list-select-label"
               id="list-select"
-              value={activeList.id ? activeList.id : "default"}
+              value={pageSlug ? pageSlug : ""}
               label="List"
               onChange={(event) => handleSelectList(event)}
               style={{ width: "250px" }}
             >
-              <MenuItem value={"default"}>Show All Shinies</MenuItem>
-              {allLists.length &&
-                allLists.length > 0 &&
-                allLists.map((list) => {
-                  if (list.id === "default") {
-                    return;
-                  }
+              {customBoxes.length &&
+                customBoxes.length > 0 &&
+                customBoxes.map((list) => {
                   return (
                     <MenuItem key={list.id} value={list.id}>
                       {list.name}
                     </MenuItem>
                   );
                 })}
-              <MenuItem value={"create"}>+ Create new List</MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
           <span>*Attention, the lists are saved locally on your browser</span>
         </div>
         <div className={styles.buttonGroup}>
           <Button
-            disabled={activeList.id === "default"}
             onClick={() => setAddPokemonModalOpen(true)}
             variant="contained"
           >
             Add Pokémon
           </Button>
           <Button
-            disabled={activeList.id === "default"}
             onClick={() => setRemovePokemonModalOpen(true)}
             variant="contained"
           >
             Remove Pokémon
           </Button>
-          <Button
-            disabled={activeList.id === "default"}
-            onClick={() => setDeleteModalOpen(true)}
-            variant="contained"
-          >
+          <Button onClick={() => setDeleteModalOpen(true)} variant="contained">
             Delete List
           </Button>
         </div>

@@ -19,22 +19,40 @@ interface Box {
   pokemon: Pokemon[];
 }
 
-export default function Box({ imageSource, shiny = false }: BoxProps) {
+export default function Box({
+  imageSource,
+  shiny = false,
+  pokemonListShown,
+}: BoxProps) {
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
   const [openTooltip, setOpenTooltip] = useState(false);
 
-  const { orderList, pokedex, breakByGen, highlightPokemon } = usePokedex();
+  const {
+    orderList,
+    pokedexShown,
+    breakByGen,
+    highlightPokemon,
+    loadPokedex,
+    pageBox,
+    customBoxes,
+  } = usePokedex();
 
   const router = useRouter();
 
   useEffect(() => {
-    setBoxQuantity(Math.ceil(pokedex.length / 30));
+    loadPokedex(pokemonListShown);
+  }, []);
+
+  useEffect(() => {
+    if (pokedexShown && pokedexShown.length > 0) {
+      setBoxQuantity(Math.ceil(pokedexShown.length / 30));
+    }
 
     if (boxQuantity > 0) {
       setPokeBox(handleBoxQuantity());
     }
-  }, [pokedex, boxQuantity, orderList, breakByGen]);
+  }, [pokedexShown, boxQuantity, orderList, breakByGen, customBoxes]);
 
   function handleBoxQuantity() {
     const newPokeBox = [];
@@ -44,11 +62,11 @@ export default function Box({ imageSource, shiny = false }: BoxProps) {
         for (let i = 1; i <= boxQuantity; i++) {
           newPokeBox.push({
             box: i,
-            pokemon: pokedex.slice(30 * i - 30, 30 * i),
+            pokemon: pokedexShown.slice(30 * i - 30, 30 * i),
           });
         }
       } else {
-        const latestGen = pokedex.reduce(
+        const latestGen = pokedexShown.reduce(
           (a, b) => Math.max(a, b.generation),
           -Infinity
         );
@@ -57,7 +75,7 @@ export default function Box({ imageSource, shiny = false }: BoxProps) {
 
         // Generation Iteration
         for (let g = 1; g <= latestGen; g++) {
-          const generationDex = pokedex.filter((pkmn) => {
+          const generationDex = pokedexShown.filter((pkmn) => {
             return pkmn.generation === g;
           });
 
@@ -78,7 +96,7 @@ export default function Box({ imageSource, shiny = false }: BoxProps) {
 
           if (g === 8) {
             for (let j = 1; j < 10; j++) {
-              const boxPokemon = pokedex
+              const boxPokemon = pokedexShown
                 .filter((pkmn) => {
                   return pkmn.generation === 8.5;
                 })

@@ -15,10 +15,9 @@ interface SVBoxesProps {
 }
 
 export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
-  const { firstLoadPokedex, sortByPaldeanDex } = usePokedex();
+  const { sortByPaldeanDex } = usePokedex();
 
   useEffect(() => {
-    firstLoadPokedex(paldeaDex);
     sortByPaldeanDex();
   }, []);
 
@@ -27,7 +26,7 @@ export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
       <h1>Scarlet and Violet Boxes</h1>
       <FilterControl sortingDefault="p" />
       <SearchBox />
-      {paldeaDex && <Box imageSource="svicons" />}
+      {paldeaDex && <Box imageSource="svicons" pokemonListShown={paldeaDex} />}
     </div>
   );
 }

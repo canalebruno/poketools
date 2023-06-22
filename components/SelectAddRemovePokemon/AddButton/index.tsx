@@ -1,33 +1,40 @@
-import TextField from "@mui/material/TextField";
-import { useEffect, useState } from "react";
-import { usePokedex } from "../../hooks/usePokedex";
-import { handleName } from "../../utils/NameFormatting";
-import styles from "./styles.module.scss";
-import { Pokemon } from "../../utils/types";
+import { usePokedex } from "../../../hooks/usePokedex";
+import { useState, useEffect } from "react";
+import { Pokemon } from "../../../utils/types";
 import { useRouter } from "next/router";
+import { handleName } from "../../../utils/NameFormatting";
+import styles from "../styles.module.scss";
+import TextField from "@mui/material/TextField";
 
-interface SelectAddRemovePokemonProps {
-  kind: "add" | "remove";
-  pokemonList: Pokemon[];
-}
-
-export default function SelectAddRemovePokemon({
-  kind,
-  pokemonList,
-}: SelectAddRemovePokemonProps) {
+export default function AddPokemonButton() {
   const { handleAddPokemon, handleRemovePokemon, pokedexShown, fullShinyDex } =
     usePokedex();
 
   const [term, setTerm] = useState("");
+  const [loadedList, setLoadedList] = useState<Pokemon[]>([] as Pokemon[]);
   const [filteredDex, setFilteredDex] = useState(pokedexShown);
   const [fullList, setFullList] = useState();
   const { route } = useRouter();
 
+  const fetchUserData = () => {
+    fetch("/api/shinydex")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setLoadedList(data);
+      });
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   useEffect(() => {
     if (term === "") {
-      setFilteredDex(pokemonList);
+      setFilteredDex(loadedList);
     } else {
-      const newFilter = pokemonList.filter((pokemon) => {
+      const newFilter = loadedList.filter((pokemon) => {
         return handleName(pokemon, true, "National", true)
           .toLowerCase()
           .includes(term.toLowerCase());
@@ -35,7 +42,7 @@ export default function SelectAddRemovePokemon({
 
       setFilteredDex(newFilter);
     }
-  }, [term, pokemonList]);
+  }, [term, loadedList]);
 
   return (
     <div className={styles.container}>
@@ -57,11 +64,7 @@ export default function SelectAddRemovePokemon({
                 key={pokemon.id}
                 className={styles.listCard}
                 onClick={() => {
-                  if (kind === "remove") {
-                    handleRemovePokemon(pokemon.id);
-                  } else {
-                    handleAddPokemon(pokemon.id);
-                  }
+                  handleAddPokemon(pokemon.id);
                 }}
                 id={pokemon.id}
               >

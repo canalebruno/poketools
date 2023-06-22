@@ -1,14 +1,15 @@
 import { Button } from "@mui/material";
 import { List } from "../../utils/types";
-import { useShinyTracker } from "../../hooks/useShinyTracker";
+// import { useShinyTracker } from "../../hooks/useShinyTracker";
 import styles from "./styles.module.scss";
 import { ChangeEvent } from "react";
+import { usePokedex } from "../../hooks/usePokedex";
 
 export default function ImportExportButtons() {
-  const { allLists } = useShinyTracker();
+  const { customBoxes } = usePokedex();
 
   function handleExport() {
-    const maskedItem = allLists
+    const maskedItem = customBoxes
       .filter((list) => list.id !== "default")
       .map((list) => {
         return {
@@ -38,7 +39,6 @@ export default function ImportExportButtons() {
 
   function handleImport(event: ChangeEvent<HTMLInputElement>) {
     const fileList = event.target.files;
-    console.log(fileList);
   }
 
   return (

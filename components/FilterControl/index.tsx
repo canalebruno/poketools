@@ -37,7 +37,7 @@ FilterControlProps) {
     handleSorting,
     orderList,
     resetControls,
-    pokedex,
+    pokedexShown,
     breakByGen,
     filterValues,
     handleFilterValues,
@@ -107,7 +107,7 @@ FilterControlProps) {
               Break by Gen
             </ToggleButton>
           </ToggleButtonGroup>
-          {pokedex && <span>Showing: {pokedex.length} Pokemon</span>}
+          {pokedexShown && <span>Showing: {pokedexShown.length} Pokemon</span>}
         </div>
       </div>
     );
@@ -180,7 +180,9 @@ FilterControlProps) {
                   Break by Gen
                 </ToggleButton>
               </ToggleButtonGroup>
-              {pokedex && <span>Showing: {pokedex.length} Pokemon</span>}
+              {pokedexShown && (
+                <span>Showing: {pokedexShown.length} Pokemon</span>
+              )}
             </div>
           </div>
         </Drawer>

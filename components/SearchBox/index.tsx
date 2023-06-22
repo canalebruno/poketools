@@ -18,7 +18,7 @@ export default function SearchBox() {
 
   const router = useRouter();
 
-  const { setHighlightPokemon, pokedex } = usePokedex();
+  const { setHighlightPokemon, pokedexShown } = usePokedex();
   const { windowWidth } = useWindowSize();
 
   function handleSearch(
@@ -42,7 +42,7 @@ export default function SearchBox() {
 
   useEffect(() => {
     setOptions(
-      pokedex
+      pokedexShown
         .filter((pkmn) => {
           switch (router.pathname) {
             case "/svboxes":
@@ -69,7 +69,7 @@ export default function SearchBox() {
           };
         })
     );
-  }, [pokedex]);
+  }, [pokedexShown]);
 
   const searchWidth = windowWidth > 720 ? 300 : "100%";
 
