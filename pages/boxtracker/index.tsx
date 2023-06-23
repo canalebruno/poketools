@@ -6,6 +6,7 @@ import { Pokemon } from "../../utils/types";
 import clientPromise from "../../utils/mongodb";
 import Link from "next/link";
 import { Button, Modal, SelectChangeEvent, TextField } from "@mui/material";
+import ImportOldBoxes from "../../components/ImportOldBoxes";
 
 interface BoxTrackerMainProps {
   shinydex: Pokemon[];
@@ -97,6 +98,7 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
         <Button variant="contained" onClick={(e) => setNewBoxModalOpen(true)}>
           Create new Box
         </Button>
+        <ImportOldBoxes />
         {customBoxes &&
           customBoxes.length > 0 &&
           customBoxes.map((list) => {
