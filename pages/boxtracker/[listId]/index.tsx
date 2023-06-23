@@ -7,6 +7,7 @@ import { usePokedex } from "../../../hooks/usePokedex";
 import clientPromise from "../../../utils/mongodb";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Pokemon } from "../../../utils/types";
+import FilterControl from "../../../components/FilterControl";
 
 interface ShinyTrackerProps {
   shinydex: Pokemon[];
@@ -44,6 +45,7 @@ export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
   return (
     <div className={styles.container}>
       <HuntControl />
+      <FilterControl sortingDefault="n" />
       {pageBox !== undefined && (
         <>
           <p>Nome da llist: {pageBox.name}</p>

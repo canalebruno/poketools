@@ -16,13 +16,9 @@ import Fab from "@mui/material/Fab";
 
 interface FilterControlProps {
   sortingDefault: "p" | "n";
-  // vertical?: boolean;
 }
 
-export default function FilterControl({
-  sortingDefault,
-}: // vertical = false,
-FilterControlProps) {
+export default function FilterControl({ sortingDefault }: FilterControlProps) {
   const [pagePath, setPagePath] = useState("");
   const { windowWidth } = useWindowSize();
   const [isOpne, setIsOpen] = useState(false);
