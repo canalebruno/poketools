@@ -17,6 +17,8 @@ import { useEffect } from "react";
 import { Pokemon } from "../../utils/types";
 import { useRouter } from "next/router";
 import AddPokemonButton from "../SelectAddRemovePokemon/AddButton";
+import Link from "next/link";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 export default function ShinyTrackerControl() {
   const [addPokemonModalOpen, setAddPokemonModalOpen] = useState(false);
@@ -123,6 +125,9 @@ export default function ShinyTrackerControl() {
         </div>
       </Modal>
       <div className={styles.container}>
+        <Link href="/boxtracker">
+          <KeyboardArrowLeftIcon />
+        </Link>
         <div className={styles.buttonGroup}>
           {/* <FormControl>
             <InputLabel id="list-select-label">List</InputLabel>

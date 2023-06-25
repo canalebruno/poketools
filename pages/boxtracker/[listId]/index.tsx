@@ -48,7 +48,7 @@ export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
       <FilterControl sortingDefault="n" />
       {pageBox !== undefined && (
         <>
-          <p>Nome da llist: {pageBox.name}</p>
+          <h2>{pageBox.name}</h2>
           {pageBox.pokemon !== undefined && pageBox.pokemon.length > 0 && (
             <Box imageSource="home" shiny pokemonListShown={pageBox.pokemon} />
           )}
