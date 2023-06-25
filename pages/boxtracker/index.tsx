@@ -1,4 +1,5 @@
-import styles from "../../styles/Home.module.scss";
+import masterStyles from "../../styles/Home.module.scss";
+import styles from "./styles.module.scss";
 import { usePokedex } from "../../hooks/usePokedex";
 import { useEffect, useState } from "react";
 import { GetStaticProps } from "next";
@@ -7,6 +8,7 @@ import clientPromise from "../../utils/mongodb";
 import Link from "next/link";
 import { Button, Modal, SelectChangeEvent, TextField } from "@mui/material";
 import ImportOldBoxes from "../../components/ImportOldBoxes";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 interface BoxTrackerMainProps {
   shinydex: Pokemon[];
@@ -94,20 +96,39 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
           </div>
         </div>
       </Modal>
-      <div className={styles.container}>
-        <Button variant="contained" onClick={(e) => setNewBoxModalOpen(true)}>
-          Create new Box
-        </Button>
-        <ImportOldBoxes />
-        {customBoxes &&
-          customBoxes.length > 0 &&
-          customBoxes.map((list) => {
-            return (
-              <Link key={list.id} href={`/boxtracker/${list.id}`}>
-                {list.name}
-              </Link>
-            );
-          })}
+      <div className={masterStyles.container}>
+        <div className={styles.topSection}>
+          <Button variant="contained" onClick={(e) => setNewBoxModalOpen(true)}>
+            Create new Box
+          </Button>
+          <ImportOldBoxes />
+        </div>
+        <div className={styles.main}>
+          {customBoxes &&
+            customBoxes.length > 0 &&
+            customBoxes
+              .sort((a, b) => {
+                if (a.id < b.id) {
+                  return -1;
+                } else if (a.id > b.id) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              })
+              .map((list) => {
+                return (
+                  <Link
+                    key={list.id}
+                    className={styles.boxCard}
+                    href={`/boxtracker/${list.id}`}
+                  >
+                    <span>{list.name}</span>
+                    <ArrowRightAltIcon />
+                  </Link>
+                );
+              })}
+        </div>
       </div>
     </>
   );
