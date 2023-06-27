@@ -333,12 +333,16 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       pokemon:
         pageBox.pokemon && pageBox.pokemon.length > 0
           ? [...pageBox.pokemon, pokemonToAdd].sort((a, b) => {
-              if (a.id < b.id) {
-                return -1;
-              } else if (a.id > b.id) {
-                return 1;
+              if (a.nationalDex === b.nationalDex) {
+                if (a.id < b.id) {
+                  return -1;
+                } else if (a.id > b.id) {
+                  return 1;
+                } else {
+                  return 0;
+                }
               } else {
-                return 0;
+                return a.nationalDex - b.nationalDex;
               }
             })
           : [pokemonToAdd],
