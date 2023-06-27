@@ -15,12 +15,14 @@ interface BoxTrackerMainProps {
 }
 
 export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
-  const { setCustomBoxes, customBoxes } = usePokedex();
+  const { setCustomBoxes, customBoxes, setPokedexShown } = usePokedex();
 
   const [newBoxName, setNewBoxName] = useState("");
   const [newBoxModalOpen, setNewBoxModalOpen] = useState(false);
 
   useEffect(() => {
+    setPokedexShown([] as Pokemon[]);
+
     const localBoxes = localStorage.getItem("localBoxes");
 
     if (localBoxes) {

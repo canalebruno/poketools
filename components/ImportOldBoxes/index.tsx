@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { usePokedex } from "../../hooks/usePokedex";
+import { List } from "../../utils/types";
 
 export default function ImportOldBoxes() {
   const { customBoxes, setCustomBoxes } = usePokedex();
@@ -10,7 +11,7 @@ export default function ImportOldBoxes() {
     if (oldLists) {
       const json = JSON.parse(oldLists);
 
-      const removeDefault = json.filter((item) => {
+      const removeDefault = json.filter((item: List) => {
         return item.id !== "default";
       });
 

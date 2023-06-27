@@ -302,6 +302,10 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       });
   }, []);
 
+  useEffect(() => {
+    setPokedexShown(pageBox.pokemon);
+  }, [pageBox]);
+
   function handleUpdateActiveList(updatedList: List) {
     const newCustomBoxes = [
       ...customBoxes.filter((list) => updatedList.id !== list.id),
@@ -326,15 +330,18 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     const updatedBox = {
       ...pageBox,
-      pokemon: [...pageBox.pokemon, pokemonToAdd].sort((a, b) => {
-        if (a.id < b.id) {
-          return -1;
-        } else if (a.id > b.id) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }),
+      pokemon:
+        pageBox.pokemon && pageBox.pokemon.length > 0
+          ? [...pageBox.pokemon, pokemonToAdd].sort((a, b) => {
+              if (a.id < b.id) {
+                return -1;
+              } else if (a.id > b.id) {
+                return 1;
+              } else {
+                return 0;
+              }
+            })
+          : [pokemonToAdd],
     };
 
     handleUpdateActiveList(updatedBox);
