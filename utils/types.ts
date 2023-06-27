@@ -2,6 +2,7 @@
 export interface Pokemon {
   _id?: string;
   id: string;
+  customBoxId?: string;
   nationalDex: number;
   name: string;
   stage: number;

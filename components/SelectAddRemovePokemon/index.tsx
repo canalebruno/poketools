@@ -58,7 +58,7 @@ export default function SelectAddRemovePokemon({
                 className={styles.listCard}
                 onClick={() => {
                   if (kind === "remove") {
-                    handleRemovePokemon(pokemon.id);
+                    handleRemovePokemon(pokemon.customBoxId, pokemon.id);
                   } else {
                     handleAddPokemon(pokemon.id);
                   }

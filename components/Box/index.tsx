@@ -170,7 +170,11 @@ export default function Box({
                       imageSource={imageSource}
                       shiny={shiny}
                       pokemon={pkmn}
-                      key={pkmn.id}
+                      key={
+                        pkmn.customBoxId !== undefined
+                          ? pkmn.customBoxId
+                          : pkmn.id
+                      }
                     />
                   );
                 })}

@@ -55,7 +55,7 @@ interface PokedexContextData {
   handleAddPokemon: (id: string) => void;
   pageBox: List;
   setPageBox: (l: List) => void;
-  handleRemovePokemon: (id: string) => void;
+  handleRemovePokemon: (customBoxId: string | undefined, id: string) => void;
   handleDeleteList: (slug: string) => void;
   fullShinyDex: Pokemon[];
 }
@@ -318,14 +318,21 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     localStorage.setItem("localBoxes", JSON.stringify(newCustomBoxes));
   }
-  // ESTOU AQUI
+
   function handleAddPokemon(id: string) {
-    const pokemonToAdd = fullShinyDex.find((pokemon) => {
+    const findPokemonToAdd = fullShinyDex.find((pokemon) => {
       return pokemon.id === id;
     });
 
-    if (!pokemonToAdd) {
+    let pokemonToAdd;
+
+    if (!findPokemonToAdd) {
       return;
+    } else {
+      pokemonToAdd = {
+        ...findPokemonToAdd,
+        customBoxId: `${findPokemonToAdd.id}-${Date.now()}`,
+      };
     }
 
     const updatedBox = {
@@ -351,9 +358,11 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     handleUpdateActiveList(updatedBox);
   }
 
-  function handleRemovePokemon(id: string) {
+  function handleRemovePokemon(customBoxId: string | undefined, id: string) {
     const indexToRemove = pageBox.pokemon.findIndex((pokemon) => {
-      return pokemon.id === id;
+      return customBoxId !== undefined
+        ? pokemon.customBoxId === customBoxId
+        : pokemon.id === id;
     });
 
     if (!indexToRemove && indexToRemove !== 0) {
