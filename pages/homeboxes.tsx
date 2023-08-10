@@ -13,17 +13,23 @@ interface HomeBoxesProps {
 }
 
 export default function HomeBoxes({ homedex }: HomeBoxesProps) {
-  const { sortByNationalDex } = usePokedex();
+  const { pokedexShown, loadPokedex } = usePokedex();
 
   useEffect(() => {
-    sortByNationalDex();
+    loadPokedex(homedex);
   }, []);
 
   return (
     <div className={styles.container}>
-      <FilterControl sortingDefault="n" />
-      <SearchBox />
-      <Box imageSource="home" pokemonListShown={homedex} />
+      {pokedexShown ? (
+        <>
+          <FilterControl sortingDefault="n" />
+          <SearchBox />
+          <Box imageSource="home" pokemonListShown={homedex} />
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 }
