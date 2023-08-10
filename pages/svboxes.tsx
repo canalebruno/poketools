@@ -8,25 +8,32 @@ import { useEffect } from "react";
 import SearchBox from "../components/SearchBox";
 import { Pokemon } from "../utils/types";
 import clientPromise from "../utils/mongodb";
-import paldeadex from "./api/paldeadex";
 
 interface SVBoxesProps {
   paldeaDex: Pokemon[];
 }
 
 export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
-  const { sortByPaldeanDex } = usePokedex();
+  const { pokedexShown, loadPokedex } = usePokedex();
 
   useEffect(() => {
-    sortByPaldeanDex();
+    loadPokedex(paldeaDex);
   }, []);
 
   return (
     <div className={styles.container}>
       <h1>Scarlet and Violet Boxes</h1>
-      <FilterControl sortingDefault="p" />
-      <SearchBox />
-      {paldeaDex && <Box imageSource="svicons" pokemonListShown={paldeaDex} />}
+      {pokedexShown ? (
+        <>
+          <FilterControl sortingDefault="p" />
+          <SearchBox />
+          {paldeaDex && (
+            <Box imageSource="svicons" pokemonListShown={paldeaDex} />
+          )}
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 }
