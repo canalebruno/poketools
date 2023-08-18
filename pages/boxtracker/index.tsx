@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import ImportOldBoxes from "../../components/ImportOldBoxes";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import Head from "next/head";
 
 interface BoxTrackerMainProps {
   shinydex: Pokemon[];
@@ -236,6 +237,14 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
 
   return (
     <>
+      <Head>
+        <title>Pokémon Tools | Box Builder (Beta)</title>
+        <meta
+          property="og:title"
+          content="Pokémon Tools | Box Builder (Beta)"
+          key="title"
+        />
+      </Head>
       <Modal
         style={modalStyle}
         open={newBoxModalOpen}

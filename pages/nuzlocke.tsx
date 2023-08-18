@@ -8,6 +8,7 @@ import { useNuzlocke } from "../hooks/useNuzlocke";
 import { Pokemon, SVLocation } from "../utils/types";
 import { useState, useEffect } from "react";
 import clientPromise from "../utils/mongodb";
+import Head from "next/head";
 
 interface NuzlockeProps {
   nuzlockeJson: {
@@ -30,6 +31,14 @@ export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Pokémon Tools | Nuzlocke Generator</title>
+        <meta
+          property="og:title"
+          content="Pokémon Tools | Nuzlocke Generator"
+          key="title"
+        />
+      </Head>
       <NuzlockeFilterControl />
       <Button
         sx={{ marginTop: "2rem", fontSize: "1.25rem" }}

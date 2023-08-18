@@ -7,6 +7,7 @@ import SearchBox from "../components/SearchBox";
 import { GetStaticProps } from "next";
 import { Pokemon } from "../utils/types";
 import clientPromise from "../utils/mongodb";
+import Head from "next/head";
 
 interface HomeBoxesProps {
   homedex: Pokemon[];
@@ -21,6 +22,14 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Pokémon Tools | Home Boxes</title>
+        <meta
+          property="og:title"
+          content="Pokémon Tools | Home Boxes"
+          key="title"
+        />
+      </Head>
       {pokedexShown ? (
         <>
           <FilterControl sortingDefault="n" />

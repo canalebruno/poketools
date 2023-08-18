@@ -8,6 +8,7 @@ import clientPromise from "../../../utils/mongodb";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Pokemon } from "../../../utils/types";
 import FilterControl from "../../../components/FilterControl";
+import Head from "next/head";
 
 interface ShinyTrackerProps {
   shinydex: Pokemon[];
@@ -44,6 +45,14 @@ export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Pokémon Tools | My Box: {pageBox && pageBox.name}</title>
+        <meta
+          property="og:title"
+          content={`Pokémon Tools | My Box: ${pageBox && pageBox.name}`}
+          key="title"
+        />
+      </Head>
       <HuntControl />
       <FilterControl sortingDefault="n" />
       {pageBox !== undefined && (

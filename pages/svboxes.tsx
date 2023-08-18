@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import SearchBox from "../components/SearchBox";
 import { Pokemon } from "../utils/types";
 import clientPromise from "../utils/mongodb";
+import Head from "next/head";
 
 interface SVBoxesProps {
   paldeaDex: Pokemon[];
@@ -22,6 +23,14 @@ export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Pokémon Tools | Scarlet and Violet Boxes</title>
+        <meta
+          property="og:title"
+          content="Pokémon Tools | Scarlet and Violet Boxes"
+          key="title"
+        />
+      </Head>
       <h1>Scarlet and Violet Boxes</h1>
       {pokedexShown ? (
         <>
