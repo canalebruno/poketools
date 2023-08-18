@@ -224,6 +224,26 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
           (item, index) => compiled.indexOf(item) === index
         );
         break;
+      case "galar":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.galarDex;
+        });
+        break;
+      case "ioa":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.galarIoaDex;
+        });
+        break;
+      case "ct":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.galarCtDex;
+        });
+        break;
+      case "swsh":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.galarDex || pkmn.galarIoaDex || pkmn.galarCtDex;
+        });
+        break;
     }
 
     if (templateDone) {
@@ -309,10 +329,10 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
               <MenuItem value={"none"}>Start from scratch</MenuItem>
               <ListSubheader>Dexes</ListSubheader>
               <MenuItem value={"national"}>National Dex</MenuItem>
-              {/* <MenuItem value={"swsh"}>SwSh Dex (Galar + IoA + CT)</MenuItem>
+              <MenuItem value={"swsh"}>SwSh Dex (Galar + IoA + CT)</MenuItem>
               <MenuItem value={"galar"}>Galar Dex</MenuItem>
               <MenuItem value={"ioa"}>Isle of Armor Dex</MenuItem>
-              <MenuItem value={"ct"}>Crown Tundra Dex</MenuItem> */}
+              <MenuItem value={"ct"}>Crown Tundra Dex</MenuItem>
               <MenuItem value={"hisui"}>Hisui Dex</MenuItem>
               <MenuItem value={"paldea"}>Paldea Dex</MenuItem>
               <ListSubheader>Forms</ListSubheader>
