@@ -6,7 +6,17 @@ import { GetStaticProps } from "next";
 import { Pokemon } from "../../utils/types";
 import clientPromise from "../../utils/mongodb";
 import Link from "next/link";
-import { Button, Modal, SelectChangeEvent, TextField } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  ListSubheader,
+  MenuItem,
+  Modal,
+  Select,
+  SelectChangeEvent,
+  TextField,
+} from "@mui/material";
 import ImportOldBoxes from "../../components/ImportOldBoxes";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
@@ -19,6 +29,7 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
 
   const [newBoxName, setNewBoxName] = useState("");
   const [newBoxModalOpen, setNewBoxModalOpen] = useState(false);
+  const [templateListSelection, setTemplateListSelection] = useState("none");
 
   useEffect(() => {
     setPokedexShown([] as Pokemon[]);
@@ -65,6 +76,9 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
     setNewBoxName("");
   }
 
+  function handleSelectChange(event: SelectChangeEvent) {
+    setTemplateListSelection(event.target.value as string);
+  }
   const modalStyle = {
     display: "flex",
     alignItems: "center",
@@ -88,6 +102,43 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
             label="Box Name"
             variant="standard"
           />
+          <FormControl>
+            <InputLabel id="template-list-select-label">
+              Start with a template
+            </InputLabel>
+            <Select
+              labelId="template-list-select-label"
+              id="template-list-select"
+              value={templateListSelection}
+              label="Start with a template"
+              onChange={handleSelectChange}
+            >
+              <MenuItem value={"none"}>Start from scratch</MenuItem>
+              <ListSubheader>Dexes</ListSubheader>
+              <MenuItem value={"national"}>National Dex</MenuItem>
+              <MenuItem value={"swsh"}>SwSh Dex (Galar + IoA + CT)</MenuItem>
+              <MenuItem value={"galar"}>Galar Dex</MenuItem>
+              <MenuItem value={"ioa"}>Isle of Armor Dex</MenuItem>
+              <MenuItem value={"ct"}>Crown Tundra Dex</MenuItem>
+              <MenuItem value={"hisui"}>Hisui Dex</MenuItem>
+              <MenuItem value={"paldea"}>Paldea Dex</MenuItem>
+              <ListSubheader>Forms</ListSubheader>
+              <MenuItem value={"gender"}>Gender Differences</MenuItem>
+              <MenuItem value={"regionals"}>Regionals</MenuItem>
+              <MenuItem value={"mega"}>Mega</MenuItem>
+              <MenuItem value={"gigantamax"}>Gigantamax</MenuItem>
+              <ListSubheader>Generations</ListSubheader>
+              <MenuItem value={"gen1"}>Gen 1 Pokémon</MenuItem>
+              <MenuItem value={"gen2"}>Gen 2 Pokémon</MenuItem>
+              <MenuItem value={"gen3"}>Gen 3 Pokémon</MenuItem>
+              <MenuItem value={"gen4"}>Gen 4 Pokémon</MenuItem>
+              <MenuItem value={"gen5"}>Gen 5 Pokémon</MenuItem>
+              <MenuItem value={"gen6"}>Gen 6 Pokémon</MenuItem>
+              <MenuItem value={"gen7"}>Gen 7 Pokémon</MenuItem>
+              <MenuItem value={"gen8"}>Gen 8 Pokémon</MenuItem>
+              <MenuItem value={"gen9"}>Gen 9 Pokémon</MenuItem>
+            </Select>
+          </FormControl>
           <div className={styles.buttonGroup} style={{ margin: "0 auto" }}>
             <Button onClick={handleNewBoxModalClose} variant="outlined">
               Cancel
