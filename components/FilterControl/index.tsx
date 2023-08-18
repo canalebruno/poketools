@@ -52,7 +52,30 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
   }, [firstLoad]);
 
   function handleSelectChange(event: SelectChangeEvent) {
-    handleSorting(event.target.value as string);
+    const orderListValues = [
+      "p",
+      "n",
+      "hisuian",
+      "galarian",
+      "galarian-ioa",
+      "galarian-ct",
+    ];
+
+    const selectionOrder = event.target.value;
+
+    if (!orderListValues.includes(selectionOrder)) {
+      return;
+    } else {
+      handleSorting(
+        selectionOrder as
+          | "p"
+          | "n"
+          | "hisuian"
+          | "galarian"
+          | "galarian-ioa"
+          | "galarian-ct"
+      );
+    }
   }
 
   if (windowWidth >= 720) {
@@ -60,10 +83,10 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
       <div className={styles.container}>
         <div className={`${styles.filterControl}`}>
           <FormControl>
-            <InputLabel id="demo-simple-select-label">Sort by</InputLabel>
+            <InputLabel id="sort-by-select-label">Sort by</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              labelId="sort-by-select-label"
+              id="sort-by-select"
               value={orderList}
               label="Sort by"
               onChange={handleSelectChange}
@@ -72,6 +95,10 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
               {pagePath === "/svboxes" && (
                 <MenuItem value={"p"}>Paldean Dex</MenuItem>
               )}
+              <MenuItem value={"hisuian"}>Hisuian Dex</MenuItem>
+              <MenuItem value={"galarian"}>Galarian Dex</MenuItem>
+              <MenuItem value={"ioa"}>Isle of Armour Dex</MenuItem>
+              <MenuItem value={"ct"}>Crown Tundra Dex</MenuItem>
             </Select>
           </FormControl>
           <ToggleButtonGroup
