@@ -63,12 +63,24 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
     const newCustomBox = {
       id: newSlug,
       name: newBoxName,
-      pokemon: [],
+      pokemon: useTemplate(),
     };
 
     const updatedLists = [...customBoxes, newCustomBox];
     setCustomBoxes(updatedLists);
+    localStorage.setItem("localBoxes", JSON.stringify(updatedLists));
     handleNewBoxModalClose();
+  }
+
+  function useTemplate() {
+    switch (templateListSelection) {
+      case "gender":
+        return shinydex.filter((pkmn) => {
+          return pkmn.genderDifference;
+        });
+      default:
+        return [];
+    }
   }
 
   function handleNewBoxModalClose() {
@@ -79,6 +91,7 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
   function handleSelectChange(event: SelectChangeEvent) {
     setTemplateListSelection(event.target.value as string);
   }
+
   const modalStyle = {
     display: "flex",
     alignItems: "center",
