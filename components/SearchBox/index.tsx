@@ -69,6 +69,7 @@ export default function SearchBox() {
           };
         })
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokedexShown]);
 
   const searchWidth = windowWidth > 720 ? 300 : "100%";

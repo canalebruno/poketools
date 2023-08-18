@@ -27,6 +27,7 @@ export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
 
   useEffect(() => {
     setNuzlockeJson(nuzlockeJson);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

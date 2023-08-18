@@ -32,6 +32,7 @@ export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
     if (localBoxes) {
       setCustomBoxes(JSON.parse(localBoxes));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -41,6 +42,7 @@ export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
       setPageBox(getPageBox);
     } else {
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageBox, customBoxes]);
 
   return (

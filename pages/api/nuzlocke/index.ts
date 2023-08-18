@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import clientPromise from "../../../utils/mongodb";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+async function nuzlockAPI (req: NextApiRequest, res: NextApiResponse)  {
   try {
     const client = await clientPromise;
     const db = client.db("pokedex");
@@ -14,3 +14,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     throw new Error(e).message;
   }
 };
+
+export default nuzlockAPI

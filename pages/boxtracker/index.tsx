@@ -40,6 +40,7 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
     if (localBoxes) {
       setCustomBoxes(JSON.parse(localBoxes));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function convertNameToSlug(name: string) {

@@ -48,6 +48,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
       resetControls();
       setFirstLoad(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firstLoad]);
 
   function handleSelectChange(event: SelectChangeEvent) {

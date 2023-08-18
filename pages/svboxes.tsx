@@ -19,6 +19,7 @@ export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
 
   useEffect(() => {
     loadPokedex(paldeaDex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

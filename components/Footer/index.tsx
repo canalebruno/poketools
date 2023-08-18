@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -16,8 +17,11 @@ export default function Footer() {
             rel="noreferrer"
             target="_blank"
           >
-            <img
-              height="36px"
+            <Image
+              unoptimized
+              width={141}
+              height={36}
+              // fill
               style={{ border: 0, height: "36px" }}
               src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
               alt="Buy Me a Coffee at ko-fi.com"

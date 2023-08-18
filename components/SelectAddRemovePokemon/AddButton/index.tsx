@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { handleName } from "../../../utils/NameFormatting";
 import styles from "../styles.module.scss";
 import TextField from "@mui/material/TextField";
+import Image from "next/image";
 
 export default function AddPokemonButton() {
   const { handleAddPokemon, handleRemovePokemon, pokedexShown, fullShinyDex } =
@@ -68,7 +69,10 @@ export default function AddPokemonButton() {
                 }}
                 id={pokemon.id}
               >
-                <img
+                <Image
+                  unoptimized
+                  width={100}
+                  height={100}
                   src={`/home/${pokemon.homeShinyPic}`}
                   alt={handleName(pokemon, false, "National", true)}
                 />

@@ -18,6 +18,7 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
 
   useEffect(() => {
     loadPokedex(homedex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

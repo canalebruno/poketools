@@ -42,6 +42,7 @@ export default function Box({
 
   useEffect(() => {
     loadPokedex(pokemonListShown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -52,6 +53,7 @@ export default function Box({
     if (boxQuantity > 0) {
       setPokeBox(handleBoxQuantity());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokedexShown, boxQuantity, orderList, breakByGen, customBoxes]);
 
   function handleBoxQuantity() {

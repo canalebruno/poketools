@@ -5,6 +5,7 @@ import { handleName } from "../../utils/NameFormatting";
 import styles from "./styles.module.scss";
 import { Pokemon } from "../../utils/types";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 interface SelectAddRemovePokemonProps {
   kind: "add" | "remove";
@@ -65,7 +66,10 @@ export default function SelectAddRemovePokemon({
                 }}
                 id={pokemon.id}
               >
-                <img
+                <Image
+                  unoptimized
+                  width={100}
+                  height={100}
                   src={`/home/${pokemon.homeShinyPic}`}
                   alt={handleName(pokemon, false, "National", true)}
                 />
