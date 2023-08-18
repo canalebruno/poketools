@@ -73,6 +73,8 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
   }
 
   function useTemplate() {
+    let templateDone;
+
     switch (templateListSelection) {
       case "gender":
         // Filter by females with genderDifference
@@ -95,12 +97,105 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
         });
 
         // Compiling males and females, and filtering duplicate females
-        return [
+        const malesFemales = [
           ...males.filter((male) => {
             return !male.genderDifference;
           }),
           ...females,
-        ].sort((a, b) => {
+        ];
+
+        templateDone = malesFemales;
+        break;
+      case "national":
+        templateDone = shinydex;
+        break;
+      case "hisui":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.hisuiDex;
+        });
+        break;
+        break;
+      case "paldea":
+        templateDone = shinydex.filter((pkmn) => {
+          return (
+            (pkmn.paldeaDex && pkmn.paldeaDex <= 400) || pkmn.nationalDex > 1000
+          );
+        });
+        break;
+      case "regionals":
+        templateDone = shinydex.filter((pkmn) => {
+          return (
+            pkmn.generalForm === "Hisuian" ||
+            pkmn.generalForm === "Alolan" ||
+            pkmn.generalForm === "Galarian" ||
+            pkmn.generalForm === "Paldean"
+          );
+        });
+        break;
+      case "mega":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generalForm === "Mega";
+        });
+        break;
+      case "gigantamax":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generalForm === "Gigantamax";
+        });
+        break;
+      case "gen1":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generation === 1;
+        });
+        break;
+      case "gen2":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generation === 2;
+        });
+        break;
+      case "gen3":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generation === 3;
+        });
+        break;
+      case "gen4":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generation === 4;
+        });
+        break;
+      case "gen5":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generation === 5;
+        });
+        break;
+      case "gen6":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generation === 6;
+        });
+        break;
+      case "gen7":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generation === 7;
+        });
+        break;
+      case "gen8":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generation === 8 || pkmn.generation === 8.5;
+        });
+        break;
+      case "gen9":
+        templateDone = shinydex.filter((pkmn) => {
+          return pkmn.generation === 9;
+        });
+        break;
+    }
+
+    if (templateDone) {
+      // Add individual customBoxId and sort
+      return templateDone
+        .map((pkmn) => {
+          return { ...pkmn, customBoxId: `${pkmn.id}-${Date.now()}` };
+        })
+        .sort((a, b) => {
           if (a === undefined || b === undefined) {
             return 0;
           }
@@ -117,14 +212,15 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
             return a.nationalDex - b.nationalDex;
           }
         });
-      default:
-        return [] as Pokemon[];
+    } else {
+      return [] as Pokemon[];
     }
   }
 
   function handleNewBoxModalClose() {
     setNewBoxModalOpen(false);
     setNewBoxName("");
+    setTemplateListSelection("none");
   }
 
   function handleSelectChange(event: SelectChangeEvent) {
@@ -168,10 +264,10 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
               <MenuItem value={"none"}>Start from scratch</MenuItem>
               <ListSubheader>Dexes</ListSubheader>
               <MenuItem value={"national"}>National Dex</MenuItem>
-              <MenuItem value={"swsh"}>SwSh Dex (Galar + IoA + CT)</MenuItem>
+              {/* <MenuItem value={"swsh"}>SwSh Dex (Galar + IoA + CT)</MenuItem>
               <MenuItem value={"galar"}>Galar Dex</MenuItem>
               <MenuItem value={"ioa"}>Isle of Armor Dex</MenuItem>
-              <MenuItem value={"ct"}>Crown Tundra Dex</MenuItem>
+              <MenuItem value={"ct"}>Crown Tundra Dex</MenuItem> */}
               <MenuItem value={"hisui"}>Hisui Dex</MenuItem>
               <MenuItem value={"paldea"}>Paldea Dex</MenuItem>
               <ListSubheader>Forms</ListSubheader>
@@ -195,7 +291,11 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
             <Button onClick={handleNewBoxModalClose} variant="outlined">
               Cancel
             </Button>
-            <Button onClick={handleCreateCustomBox} variant="contained">
+            <Button
+              disabled={!newBoxName}
+              onClick={handleCreateCustomBox}
+              variant="contained"
+            >
               Create
             </Button>
           </div>
@@ -308,8 +408,6 @@ export const getStaticProps: GetStaticProps = async () => {
     "869_60",
     "869_61",
     "869_62",
-    "1009_00",
-    "1010_00",
   ];
 
   const shinydex = await db
