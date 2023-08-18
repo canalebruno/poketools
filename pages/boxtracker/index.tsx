@@ -135,7 +135,7 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
         break;
       case "mega":
         templateDone = shinydex.filter((pkmn) => {
-          return pkmn.generalForm === "Mega";
+          return pkmn.generalForm === "Mega" || pkmn.uniqueForm === "Primal";
         });
         break;
       case "gigantamax":
@@ -187,6 +187,41 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
         templateDone = shinydex.filter((pkmn) => {
           return pkmn.generation === 9;
         });
+        break;
+      case "multiple":
+        const multipleForm = shinydex.filter((pkmn) => {
+          return (
+            (pkmn.uniqueForm &&
+              pkmn.generalForm !== "Mega" &&
+              pkmn.generalForm !== "Gigantamax" &&
+              pkmn.uniqueForm !== "Primal") ||
+            pkmn.id === "555_02"
+          );
+        });
+
+        const originalForm = multipleForm.map((multi) => {
+          const original = shinydex.find((pkmn) => {
+            return (
+              pkmn.nationalDex === multi.nationalDex &&
+              pkmn.formOrder === "00" &&
+              pkmn.id !== "128_00"
+            );
+          });
+
+          if (original) {
+            return original;
+          } else {
+            // To prevent having an undefined result
+            return multi;
+          }
+        });
+
+        const compiled = [...multipleForm, ...originalForm];
+
+        // Remove duplicates
+        templateDone = compiled.filter(
+          (item, index) => compiled.indexOf(item) === index
+        );
         break;
     }
 
@@ -281,6 +316,7 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
               <MenuItem value={"paldea"}>Paldea Dex</MenuItem>
               <ListSubheader>Forms</ListSubheader>
               <MenuItem value={"gender"}>Gender Differences</MenuItem>
+              <MenuItem value={"multiple"}>Multiple Forms</MenuItem>
               <MenuItem value={"regionals"}>Regionals</MenuItem>
               <MenuItem value={"mega"}>Mega</MenuItem>
               <MenuItem value={"gigantamax"}>Gigantamax</MenuItem>
