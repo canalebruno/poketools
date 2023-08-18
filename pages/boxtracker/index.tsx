@@ -64,7 +64,7 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
     const newCustomBox = {
       id: newSlug,
       name: newBoxName,
-      pokemon: useTemplate(),
+      pokemon: findTemplate(),
     };
 
     const updatedLists = [...customBoxes, newCustomBox];
@@ -73,7 +73,7 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
     handleNewBoxModalClose();
   }
 
-  function useTemplate() {
+  function findTemplate() {
     let templateDone;
 
     switch (templateListSelection) {
