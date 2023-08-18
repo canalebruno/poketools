@@ -230,6 +230,10 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   function handleSorting(value: string) {
     const newOrder = value;
 
+    if (!pokedexShown) {
+      return;
+    }
+
     if (newOrder !== "p" && newOrder !== "n") {
       return;
     }

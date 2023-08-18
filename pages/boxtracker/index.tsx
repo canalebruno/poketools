@@ -75,11 +75,50 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
   function useTemplate() {
     switch (templateListSelection) {
       case "gender":
-        return shinydex.filter((pkmn) => {
+        // Filter by females with genderDifference
+        const females = shinydex.filter((pkmn) => {
           return pkmn.genderDifference;
         });
+
+        // New array with the males from the females array
+        const males = females.map((female) => {
+          const male = shinydex.find((pkmn) => {
+            return pkmn.id === female.id.slice(0, -2);
+          });
+
+          if (male) {
+            return male;
+          } else {
+            // To prevent having an undefined result
+            return female;
+          }
+        });
+
+        // Compiling males and females, and filtering duplicate females
+        return [
+          ...males.filter((male) => {
+            return !male.genderDifference;
+          }),
+          ...females,
+        ].sort((a, b) => {
+          if (a === undefined || b === undefined) {
+            return 0;
+          }
+
+          if (a.nationalDex === b.nationalDex) {
+            if (a.id < b.id) {
+              return -1;
+            } else if (a.id > b.id) {
+              return 1;
+            } else {
+              return 0;
+            }
+          } else {
+            return a.nationalDex - b.nationalDex;
+          }
+        });
       default:
-        return [];
+        return [] as Pokemon[];
     }
   }
 
