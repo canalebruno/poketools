@@ -26,6 +26,7 @@ export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
   const { handleGenerateNuzlockeHunt, hunt, setNuzlockeJson } = useNuzlocke();
 
   useEffect(() => {
+    // console.log(nuzlockeJson);
     setNuzlockeJson(nuzlockeJson);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,9 +66,6 @@ export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // let nuzlockeResponse = await fetch(`${process.env.API_URL}nuzlocke`);
-  // let nuzlockeJsonPoor: SVLocation[] = await nuzlockeResponse.json();
-
   const client = await clientPromise;
   const db = client.db("pokedex");
 
@@ -82,13 +80,12 @@ export const getStaticProps: GetStaticProps = async () => {
     .sort({ paldeaDex: 1, formOrder: 1 })
     .toArray();
 
-  // let paldeaDexResponse = await fetch(`${process.env.API_URL}paldeadex`);
-  // let pokedex: Pokemon[] = await paldeaDexResponse.json();
-
   const nuzlockeJsonPoor: SVLocation[] = JSON.parse(
     JSON.stringify(nuzlockeJsonPoorRes)
   );
   const pokedex: Pokemon[] = JSON.parse(JSON.stringify(pokedexRes));
+
+  // console.log(nuzlockeJsonPoor);
 
   const nuzlockeJson = nuzlockeJsonPoor.map((loc) => {
     return {
@@ -111,6 +108,8 @@ export const getStaticProps: GetStaticProps = async () => {
       }),
     };
   });
+
+  // console.log(nuzlockeJson);
 
   return {
     props: {

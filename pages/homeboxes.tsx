@@ -33,7 +33,7 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
       </Head>
       {pokedexShown ? (
         <>
-          <FilterControl sortingDefault="n" />
+          <FilterControl sortingDefault="national" />
           <SearchBox />
           <Box imageSource="home" pokemonListShown={homedex} />
         </>

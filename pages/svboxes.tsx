@@ -35,7 +35,7 @@ export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
       <h1>Scarlet and Violet Boxes</h1>
       {pokedexShown ? (
         <>
-          <FilterControl sortingDefault="p" />
+          <FilterControl sortingDefault="paldean" />
           <SearchBox />
           {paldeaDex && (
             <Box imageSource="svicons" pokemonListShown={paldeaDex} />

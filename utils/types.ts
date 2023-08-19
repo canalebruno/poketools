@@ -23,8 +23,8 @@ export interface Pokemon {
   hasBaby: boolean;
   family: number[];
   galarCtDex: number | null,
-    galarDex: number | null,
-    galarIoaDex: number | null
+  galarDex: number | null,
+  galarIoaDex: number | null
 }
 
 // Interface to define Pokemon on the frontend

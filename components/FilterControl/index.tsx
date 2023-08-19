@@ -165,17 +165,17 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
           <div className={styles.container}>
             <div className={`${styles.filterControl} ${styles.verticalFilter}`}>
               <FormControl>
-                <InputLabel id="demo-simple-select-label">Sort by</InputLabel>
+                <InputLabel id="sort-by-select-label">Sort by</InputLabel>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
+                  labelId="sort-by-select-label"
+                  id="sort-by-select"
                   value={orderList}
                   label="Sort by"
                   onChange={handleSelectChange}
                 >
-                  <MenuItem value={"n"}>National Dex</MenuItem>
+                  <MenuItem value={"national"}>National Dex</MenuItem>
                   {pagePath === "/svboxes" && (
-                    <MenuItem value={"p"}>Paldean Dex</MenuItem>
+                    <MenuItem value={"paldean"}>Paldean Dex</MenuItem>
                   )}
                 </Select>
               </FormControl>

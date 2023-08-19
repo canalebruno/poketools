@@ -56,7 +56,7 @@ export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
         />
       </Head>
       <HuntControl />
-      <FilterControl sortingDefault="n" />
+      <FilterControl sortingDefault="national" />
       {pageBox !== undefined && (
         <>
           <h2>{pageBox.name}</h2>

@@ -130,7 +130,7 @@ export default function Box({
             <div key={box.box} className={styles.boxContainer}>
               <div className={styles.boxHeader}>
                 {router.pathname === "/svboxes" ? (
-                  orderList === "p" && !breakByGen ? (
+                  orderList === "paldean" && !breakByGen ? (
                     <span>{`#${handleNumber(
                       box.pokemon[0]?.paldeaDex!,
                       3
@@ -146,7 +146,7 @@ export default function Box({
                 )}
                 <span>Box {box.box}</span>
                 {router.pathname === "/svboxes" ? (
-                  orderList === "p" && !breakByGen ? (
+                  orderList === "paldean" && !breakByGen ? (
                     <span>{`#${
                       box.pokemon[box.pokemon.length - 1]?.paldeaDex! <= 400
                         ? handleNumber(
