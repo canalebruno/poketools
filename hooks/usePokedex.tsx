@@ -26,8 +26,8 @@ interface PokedexContextData {
   viewGenderDifference: boolean;
   viewOnlyOneForm: boolean;
   orderList:
-    | "p"
-    | "n"
+    | "paldean"
+    | "national"
     | "hisuian"
     | "galarian"
     | "galarian-ioa"
@@ -36,10 +36,14 @@ interface PokedexContextData {
   handleViewOnlyOneForm: () => void;
   filterByGender: () => Pokemon[];
   filterByOnlyOneForm: () => Pokemon[];
-  // sortByNationalDex: () => Pokemon[];
-  // sortByPaldeanDex: () => Pokemon[];
   handleSorting: (
-    value: "p" | "n" | "hisuian" | "galarian" | "galarian-ioa" | "galarian-ct"
+    value:
+      | "paldean"
+      | "national"
+      | "hisuian"
+      | "galarian"
+      | "galarian-ioa"
+      | "galarian-ct"
   ) => void;
   loadPokedex: (loadingPokedex: Pokemon[]) => void;
   resetControls: () => void;
@@ -81,8 +85,13 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const [viewOnlyOneForm, setViewOnlyOneForm] = useState(false);
   const [breakByGen, setBreakByGen] = useState(false);
   const [orderList, setOrderList] = useState<
-    "p" | "n" | "hisuian" | "galarian" | "galarian-ioa" | "galarian-ct"
-  >("p");
+    | "paldean"
+    | "national"
+    | "hisuian"
+    | "galarian"
+    | "galarian-ioa"
+    | "galarian-ct"
+  >("national");
   const [highlightPokemon, setHighlightPokemon] = useState("");
   const [filterValues, setFilterValues] = useState(["gender"]);
   const [firstLoad, setFirstLoad] = useState(true);
@@ -98,10 +107,10 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   function resetControls() {
     switch (router.pathname) {
       case "/svboxes":
-        handleSorting("p");
+        handleSorting("paldean");
         break;
       default:
-        handleSorting("n");
+        handleSorting("national");
     }
 
     setFilterValues(["gender"]);
@@ -111,13 +120,13 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   }
 
   function updatePokedex(pokedexToUpdate: Pokemon[]) {
-    if (orderList !== "p" && orderList !== "n") {
+    if (orderList !== "paldean" && orderList !== "national") {
       return;
     }
 
     let pokedexToUpdateOrederd = [] as Pokemon[];
 
-    if (orderList === "p") {
+    if (orderList === "paldean") {
       pokedexToUpdateOrederd = pokedexToUpdate.sort((a, b) => {
         if (a.paldeaDex !== b.paldeaDex) {
           return a.paldeaDex! - b.paldeaDex!;
@@ -221,77 +230,137 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     });
   }
 
-  function sortByNationalDex() {
-    return pokedexShown.sort((a, b) => {
-      return a.nationalDex - b.nationalDex;
-    });
-  }
-
-  function sortByPaldeanDex() {
-    return pokedexShown.sort((a, b) => {
-      if (a.paldeaDex !== b.paldeaDex) {
-        return a.paldeaDex! - b.paldeaDex!;
-      } else {
-        return a.id > b.id ? 1 : -1;
-      }
-    });
-  }
-
   function handleSorting(
-    value: "p" | "n" | "hisuian" | "galarian" | "galarian-ioa" | "galarian-ct"
+    value:
+      | "paldean"
+      | "national"
+      | "hisuian"
+      | "galarian"
+      | "galarian-ioa"
+      | "galarian-ct"
   ) {
     if (!pokedexShown) {
       return;
     }
 
-    // if (newOrder !== "p" && newOrder !== "n") {
-    //   return;
-    // }
-
     setOrderList(value);
 
+    if (value === "national") {
+      pokedexShown.sort((a, b) => {
+        return a.id > b.id ? 1 : -1;
+      });
+      return;
+    }
+
+    let notInDex = [] as Pokemon[];
+
+    let inDex = [] as Pokemon[];
+
     switch (value) {
-      case "p":
-        pokedexShown.sort((a, b) => {
-          if (a.paldeaDex !== b.paldeaDex) {
-            return a.paldeaDex! - b.paldeaDex!;
-          } else {
-            return a.id > b.id ? 1 : -1;
-          }
+      case "paldean":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.paldeaDex;
         });
-        break;
-      case "n":
-        pokedexShown.sort((a, b) => {
-          return a.nationalDex - b.nationalDex;
-        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.paldeaDex;
+          })
+          .sort((a, b) => {
+            if (a.paldeaDex === b.paldeaDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.paldeaDex || !b.paldeaDex) {
+              return 0;
+            } else {
+              return a.paldeaDex - b.paldeaDex;
+            }
+          });
         break;
       case "hisuian":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.hisuiDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.hisuiDex;
+          })
+          .sort((a, b) => {
+            if (a.hisuiDex === b.hisuiDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.hisuiDex || !b.hisuiDex) {
+              return 0;
+            } else {
+              return a.hisuiDex - b.hisuiDex;
+            }
+          });
         break;
       case "galarian":
-        pokedexShown.sort((a, b) => {
-          if (!a.galarDex || !b.galarDex) {
-            handleSorting("n");
-          } else if (a.galarDex !== b.galarDex) {
-            return a.galarDex - b.galarDex;
-          } else {
-            return a.id > b.id ? 1 : -1;
-          }
-          return 0;
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.galarDex;
         });
-        console.log(pokedexShown);
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.galarDex;
+          })
+          .sort((a, b) => {
+            if (a.galarDex === b.galarDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.galarDex || !b.galarDex) {
+              return 0;
+            } else {
+              return a.galarDex - b.galarDex;
+            }
+          });
         break;
       case "galarian-ioa":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.galarIoaDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.galarIoaDex;
+          })
+          .sort((a, b) => {
+            if (a.galarIoaDex === b.galarIoaDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.galarIoaDex || !b.galarIoaDex) {
+              return 0;
+            } else {
+              return a.galarIoaDex - b.galarIoaDex;
+            }
+          });
+
         break;
       case "galarian-ct":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.galarCtDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.galarCtDex;
+          })
+          .sort((a, b) => {
+            if (a.galarCtDex === b.galarCtDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.galarCtDex || !b.galarCtDex) {
+              return 0;
+            } else {
+              return a.galarCtDex - b.galarCtDex;
+            }
+          });
         break;
     }
 
-    // if (newOrder === "p") {
-    //   // setPokedexShown(sortByPaldeanDex());
-
-    // } else {
-    //   setPokedexShown(sortByNationalDex());
-    // }
+    setPokedexShown([
+      ...inDex,
+      ...notInDex.sort((a, b) => {
+        return a.id > b.id ? 1 : -1;
+      }),
+    ]);
   }
 
   function handleBreakByGen() {
@@ -450,8 +519,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         handleViewOnlyOneForm,
         filterByGender,
         filterByOnlyOneForm,
-        // sortByNationalDex,
-        // sortByPaldeanDex,
         handleSorting,
         loadPokedex,
         resetControls,

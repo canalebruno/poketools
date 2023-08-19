@@ -15,7 +15,13 @@ import FilterAltTwoToneIcon from "@mui/icons-material/FilterAltTwoTone";
 import Fab from "@mui/material/Fab";
 
 interface FilterControlProps {
-  sortingDefault: "p" | "n";
+  sortingDefault:
+    | "paldean"
+    | "national"
+    | "hisuian"
+    | "galarian"
+    | "galarian-ioa"
+    | "galarian-ct";
 }
 
 export default function FilterControl({ sortingDefault }: FilterControlProps) {
@@ -53,8 +59,8 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
 
   function handleSelectChange(event: SelectChangeEvent) {
     const orderListValues = [
-      "p",
-      "n",
+      "paldean",
+      "national",
       "hisuian",
       "galarian",
       "galarian-ioa",
@@ -68,8 +74,8 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
     } else {
       handleSorting(
         selectionOrder as
-          | "p"
-          | "n"
+          | "paldean"
+          | "national"
           | "hisuian"
           | "galarian"
           | "galarian-ioa"
@@ -91,14 +97,14 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
               label="Sort by"
               onChange={handleSelectChange}
             >
-              <MenuItem value={"n"}>National Dex</MenuItem>
+              <MenuItem value={"national"}>National Dex</MenuItem>
               {pagePath === "/svboxes" && (
-                <MenuItem value={"p"}>Paldean Dex</MenuItem>
+                <MenuItem value={"paldean"}>Paldean Dex</MenuItem>
               )}
               <MenuItem value={"hisuian"}>Hisuian Dex</MenuItem>
               <MenuItem value={"galarian"}>Galarian Dex</MenuItem>
-              <MenuItem value={"ioa"}>Isle of Armour Dex</MenuItem>
-              <MenuItem value={"ct"}>Crown Tundra Dex</MenuItem>
+              <MenuItem value={"galarian-ioa"}>Isle of Armour Dex</MenuItem>
+              <MenuItem value={"galarian-ct"}>Crown Tundra Dex</MenuItem>
             </Select>
           </FormControl>
           <ToggleButtonGroup
