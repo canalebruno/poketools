@@ -8,6 +8,8 @@ import { GetStaticProps } from "next";
 import { Pokemon } from "../utils/types";
 import clientPromise from "../utils/mongodb";
 import Head from "next/head";
+import BoxGridLayout from "../components/BoxGridLayout";
+import BoxLoading from "../components/BoxLoading";
 
 interface HomeBoxesProps {
   homedex: Pokemon[];
@@ -43,11 +45,15 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
         <>
           <FilterControl sortingDefault="national" />
           <SearchBox />
-          <Box imageSource="home" pokemonListShown={homedex} />
-          {loading && <p>Loading...</p>}
+          <BoxGridLayout>
+            <Box imageSource="home" pokemonListShown={homedex} />
+            {loading && <BoxLoading />}
+          </BoxGridLayout>
         </>
       ) : (
-        <p>Loading...</p>
+        <BoxGridLayout>
+          <BoxLoading />
+        </BoxGridLayout>
       )}
     </div>
   );
@@ -61,7 +67,7 @@ export const getStaticProps: GetStaticProps = async () => {
     .collection("pokedex")
     .find({ homeAvailable: true })
     .sort({ nationalDex: 1, id: 1 })
-    .limit(120)
+    .limit(240)
     .toArray();
 
   return {

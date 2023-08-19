@@ -1,5 +1,5 @@
 import { Tooltip } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pokemon } from "../../utils/types";
 import { handleName } from "../../utils/NameFormatting";
 import { useRouter } from "next/router";

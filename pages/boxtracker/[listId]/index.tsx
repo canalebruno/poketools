@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../../styles/Home.module.scss";
 import Box from "../../../components/Box";
 import HuntControl from "../../../components/ShinyTrackerControl";
@@ -7,28 +7,21 @@ import { usePokedex } from "../../../hooks/usePokedex";
 import { Pokemon } from "../../../utils/types";
 import FilterControl from "../../../components/FilterControl";
 import Head from "next/head";
+import BoxGridLayout from "../../../components/BoxGridLayout";
+import BoxLoading from "../../../components/BoxLoading";
 
-interface ShinyTrackerProps {
-  shinydex: Pokemon[];
-}
-
-interface List {
-  id: string;
-  name: string;
-  pokemon: Pokemon[];
-}
-
-export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
+export default function CustomBoxTracker() {
   const router = useRouter();
-  const { listId } = router.query;
   const pageSlug = router.asPath.replace("/boxtracker/", "");
   const { setPageBox, customBoxes, pageBox, setCustomBoxes } = usePokedex();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const localBoxes = localStorage.getItem("localBoxes");
 
     if (localBoxes) {
       setCustomBoxes(JSON.parse(localBoxes));
+      setIsLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -38,7 +31,6 @@ export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
 
     if (getPageBox) {
       setPageBox(getPageBox);
-    } else {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageBox, customBoxes]);
@@ -58,9 +50,18 @@ export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
       {pageBox !== undefined && (
         <>
           <h2>{pageBox.name}</h2>
-          {pageBox.pokemon !== undefined && pageBox.pokemon.length > 0 && (
-            <Box imageSource="home" shiny pokemonListShown={pageBox.pokemon} />
-          )}
+          {
+            <BoxGridLayout>
+              {pageBox.pokemon !== undefined && pageBox.pokemon.length > 0 && (
+                <Box
+                  imageSource="home"
+                  shiny
+                  pokemonListShown={pageBox.pokemon}
+                />
+              )}
+              {isLoading && <BoxLoading />}
+            </BoxGridLayout>
+          }
         </>
       )}
     </div>

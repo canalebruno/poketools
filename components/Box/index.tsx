@@ -123,72 +123,72 @@ export default function Box({
   }
 
   return (
-    <div>
-      <div className={styles.container}>
-        {pokeBox.map((box) => {
-          return (
-            <div key={box.box} className={styles.boxContainer}>
-              <div className={styles.boxHeader}>
-                {router.pathname === "/svboxes" ? (
-                  orderList === "paldean" && !breakByGen ? (
-                    <span>{`#${handleNumber(
-                      box.pokemon[0]?.paldeaDex!,
-                      3
-                    )}`}</span>
-                  ) : (
-                    <span />
-                  )
-                ) : (
+    <>
+      {/* <div className={styles.container}> */}
+      {pokeBox.map((box) => {
+        return (
+          <div key={box.box} className={styles.boxContainer}>
+            <div className={styles.boxHeader}>
+              {router.pathname === "/svboxes" ? (
+                orderList === "paldean" && !breakByGen ? (
                   <span>{`#${handleNumber(
-                    box.pokemon[0]?.nationalDex,
+                    box.pokemon[0]?.paldeaDex!,
                     3
                   )}`}</span>
-                )}
-                <span>Box {box.box}</span>
-                {router.pathname === "/svboxes" ? (
-                  orderList === "paldean" && !breakByGen ? (
-                    <span>{`#${
-                      box.pokemon[box.pokemon.length - 1]?.paldeaDex! <= 400
-                        ? handleNumber(
-                            box.pokemon[box.pokemon.length - 1]?.paldeaDex!,
-                            3
-                          )
-                        : 400
-                    }`}</span>
-                  ) : (
-                    <span />
-                  )
                 ) : (
-                  <span>{`#${handleNumber(
-                    box.pokemon[box.pokemon.length - 1]?.nationalDex,
-                    3
-                  )}`}</span>
-                )}
-              </div>
-              <div className={styles.boxGrid}>
-                {box.pokemon.map((pkmn) => {
-                  return (
-                    <Square
-                      imageSource={imageSource}
-                      shiny={shiny}
-                      pokemon={pkmn}
-                      key={
-                        pkmn.customBoxId !== undefined
-                          ? pkmn.customBoxId
-                          : pkmn.id
-                      }
-                    />
-                  );
-                })}
-                {box.pokemon.length < 30 &&
-                  [...Array(30 - box.pokemon.length)].map((x, i) => (
-                    <div className={styles.card} key={i} />
-                  ))}
-              </div>
+                  <span />
+                )
+              ) : (
+                <span>{`#${handleNumber(
+                  box.pokemon[0]?.nationalDex,
+                  3
+                )}`}</span>
+              )}
+              <span>Box {box.box}</span>
+              {router.pathname === "/svboxes" ? (
+                orderList === "paldean" && !breakByGen ? (
+                  <span>{`#${
+                    box.pokemon[box.pokemon.length - 1]?.paldeaDex! <= 400
+                      ? handleNumber(
+                          box.pokemon[box.pokemon.length - 1]?.paldeaDex!,
+                          3
+                        )
+                      : 400
+                  }`}</span>
+                ) : (
+                  <span />
+                )
+              ) : (
+                <span>{`#${handleNumber(
+                  box.pokemon[box.pokemon.length - 1]?.nationalDex,
+                  3
+                )}`}</span>
+              )}
             </div>
-          );
-        })}
-      </div>
-    </div>
+            <div className={styles.boxGrid}>
+              {box.pokemon.map((pkmn) => {
+                return (
+                  <Square
+                    imageSource={imageSource}
+                    shiny={shiny}
+                    pokemon={pkmn}
+                    key={
+                      pkmn.customBoxId !== undefined
+                        ? pkmn.customBoxId
+                        : pkmn.id
+                    }
+                  />
+                );
+              })}
+              {box.pokemon.length < 30 &&
+                [...Array(30 - box.pokemon.length)].map((x, i) => (
+                  <div className={styles.card} key={i} />
+                ))}
+            </div>
+          </div>
+        );
+      })}
+      {/* //   </div> */}
+    </>
   );
 }

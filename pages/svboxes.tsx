@@ -9,6 +9,8 @@ import SearchBox from "../components/SearchBox";
 import { Pokemon } from "../utils/types";
 import clientPromise from "../utils/mongodb";
 import Head from "next/head";
+import BoxLoading from "../components/BoxLoading";
+import BoxGridLayout from "../components/BoxGridLayout";
 
 interface SVBoxesProps {
   paldeaDex: Pokemon[];
@@ -45,13 +47,17 @@ export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
         <>
           <FilterControl sortingDefault="paldean" />
           <SearchBox />
-          {paldeaDex && (
-            <Box imageSource="svicons" pokemonListShown={paldeaDex} />
-          )}
-          {loading && <p>Loading...</p>}
+          <BoxGridLayout>
+            {paldeaDex && (
+              <Box imageSource="svicons" pokemonListShown={paldeaDex} />
+            )}
+            {loading && <BoxLoading />}
+          </BoxGridLayout>
         </>
       ) : (
-        <p>Loading...</p>
+        <BoxGridLayout>
+          <BoxLoading />
+        </BoxGridLayout>
       )}
     </div>
   );
@@ -65,7 +71,7 @@ export const getStaticProps: GetStaticProps = async () => {
     .collection("pokedex")
     .find({ paldeaDex: { $gte: 1 } })
     .sort({ paldeaDex: 1, id: 1 })
-    .limit(120)
+    .limit(240)
     .toArray();
 
   return {
