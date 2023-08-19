@@ -404,7 +404,7 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
     </>
   );
 }
-
+/*
 export const getStaticProps: GetStaticProps = async () => {
   const client = await clientPromise;
   const db = client.db("pokedex");
@@ -491,3 +491,4 @@ export const getStaticProps: GetStaticProps = async () => {
     props: { shinydex: JSON.parse(JSON.stringify(shinydex)) },
   };
 };
+*/

@@ -52,6 +52,7 @@ export const getStaticProps: GetStaticProps = async () => {
     .collection("pokedex")
     .find({ homeAvailable: true })
     .sort({ nationalDex: 1, id: 1 })
+    .limit(120)
     .toArray();
 
   return {

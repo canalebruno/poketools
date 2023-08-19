@@ -64,7 +64,7 @@ export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
     </div>
   );
 }
-
+/*
 export const getStaticProps: GetStaticProps = async () => {
   const client = await clientPromise;
   const db = client.db("pokedex");
@@ -84,8 +84,6 @@ export const getStaticProps: GetStaticProps = async () => {
     JSON.stringify(nuzlockeJsonPoorRes)
   );
   const pokedex: Pokemon[] = JSON.parse(JSON.stringify(pokedexRes));
-
-  // console.log(nuzlockeJsonPoor);
 
   const nuzlockeJson = nuzlockeJsonPoor.map((loc) => {
     return {
@@ -109,11 +107,10 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   });
 
-  // console.log(nuzlockeJson);
-
   return {
     props: {
       nuzlockeJson,
     },
   };
 };
+*/

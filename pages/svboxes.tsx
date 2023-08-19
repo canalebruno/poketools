@@ -56,6 +56,7 @@ export const getStaticProps: GetStaticProps = async () => {
     .collection("pokedex")
     .find({ paldeaDex: { $gte: 1 } })
     .sort({ paldeaDex: 1, id: 1 })
+    .limit(120)
     .toArray();
 
   return {

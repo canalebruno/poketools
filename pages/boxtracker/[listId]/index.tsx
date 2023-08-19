@@ -68,7 +68,7 @@ export default function CustomBoxTracker({ shinydex }: ShinyTrackerProps) {
     </div>
   );
 }
-
+/*
 export const getStaticPaths: GetStaticPaths = async () => {
   const arr: string[] = ["slug1", "slug2"];
   const paths = arr.map((listId) => {
@@ -78,6 +78,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return { paths, fallback: true };
 };
+
 
 export const getStaticProps: GetStaticProps = async () => {
   const client = await clientPromise;
@@ -167,3 +168,4 @@ export const getStaticProps: GetStaticProps = async () => {
     props: { shinydex: JSON.parse(JSON.stringify(shinydex)) },
   };
 };
+*/
