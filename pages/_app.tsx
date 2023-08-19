@@ -13,21 +13,21 @@ import Loader from "../components/Loader";
 import Footer from "../components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    Router.events.on("routeChangeStart", (url) => {
-      setIsLoading(true);
-    });
+  // useEffect(() => {
+  //   Router.events.on("routeChangeStart", (url) => {
+  //     setIsLoading(true);
+  //   });
 
-    Router.events.on("routeChangeComplete", (url) => {
-      setIsLoading(false);
-    });
+  //   Router.events.on("routeChangeComplete", (url) => {
+  //     setIsLoading(false);
+  //   });
 
-    Router.events.on("routeChangeError", (url) => {
-      setIsLoading(false);
-    });
-  }, [Router]);
+  //   Router.events.on("routeChangeError", (url) => {
+  //     setIsLoading(false);
+  //   });
+  // }, [Router]);
 
   return (
     <NuzlockeProvider>
@@ -52,7 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </Head>
           <main>
             <Nav />
-            {isLoading && <Loader />}
+            {/* {isLoading && <Loader />} */}
             <Component {...pageProps} />
             <Footer />
           </main>
