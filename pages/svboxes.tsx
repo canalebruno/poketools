@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import Box from "../components/Box";
 import { usePokedex } from "../hooks/usePokedex";
 import FilterControl from "../components/FilterControl";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SearchBox from "../components/SearchBox";
 import { Pokemon } from "../utils/types";
 import clientPromise from "../utils/mongodb";
@@ -16,9 +16,17 @@ interface SVBoxesProps {
 
 export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
   const { pokedexShown, loadPokedex } = usePokedex();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadPokedex(paldeaDex);
+
+    fetch("/api/paldeadex")
+      .then((res) => res.json())
+      .then((data) => {
+        loadPokedex(data);
+        setLoading(false);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -40,6 +48,7 @@ export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
           {paldeaDex && (
             <Box imageSource="svicons" pokemonListShown={paldeaDex} />
           )}
+          {loading && <p>Loading...</p>}
         </>
       ) : (
         <p>Loading...</p>

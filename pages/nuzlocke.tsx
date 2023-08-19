@@ -1,5 +1,4 @@
 import styles from "../styles/Nuzlocke.module.scss";
-import { GetStaticProps } from "next";
 
 import LocationCard from "../components/LocationCard";
 import NuzlockeFilterControl from "../components/NuzlockeFilterControl";
@@ -7,7 +6,6 @@ import Button from "@mui/material/Button";
 import { useNuzlocke } from "../hooks/useNuzlocke";
 import { Pokemon, SVLocation } from "../utils/types";
 import { useState, useEffect } from "react";
-import clientPromise from "../utils/mongodb";
 import Head from "next/head";
 
 interface NuzlockeProps {
@@ -21,13 +19,47 @@ interface NuzlockeProps {
 }
 
 export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
-  const [] = useState();
-
   const { handleGenerateNuzlockeHunt, hunt, setNuzlockeJson } = useNuzlocke();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // console.log(nuzlockeJson);
-    setNuzlockeJson(nuzlockeJson);
+    fetch("/api/nuzlocke")
+      .then((res) => res.json())
+      .then((data: SVLocation[]) => {
+        let pokedex: Pokemon[];
+
+        fetch("/api/paldeadex")
+          .then((res) => res.json())
+          .then((pokedexData: Pokemon[]) => {
+            pokedex = pokedexData;
+
+            const dataWorked = data.map((loc) => {
+              return {
+                id: loc.id,
+                name: loc.name,
+                general: loc.general.map((pkmnId) => {
+                  return pokedex.find((pkmn) => {
+                    return pkmn.id === pkmnId;
+                  });
+                }),
+                scarlet: loc.scarlet.map((pkmnId) => {
+                  return pokedex.find((pkmn) => {
+                    return pkmn.id === pkmnId;
+                  });
+                }),
+                violet: loc.violet.map((pkmnId) => {
+                  return pokedex.find((pkmn) => {
+                    return pkmn.id === pkmnId;
+                  });
+                }),
+              };
+            });
+
+            setNuzlockeJson(dataWorked);
+            setLoading(false);
+          });
+      });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -46,6 +78,7 @@ export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
         sx={{ marginTop: "2rem", fontSize: "1.25rem" }}
         variant="contained"
         onClick={handleGenerateNuzlockeHunt}
+        disabled={loading}
       >
         Generate
       </Button>
@@ -64,53 +97,3 @@ export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
     </div>
   );
 }
-/*
-export const getStaticProps: GetStaticProps = async () => {
-  const client = await clientPromise;
-  const db = client.db("pokedex");
-
-  const nuzlockeJsonPoorRes = await db
-    .collection("svlocations")
-    .find({})
-    .toArray();
-
-  const pokedexRes = await db
-    .collection("pokedex")
-    .find({ paldeaDex: { $gte: 1 } })
-    .sort({ paldeaDex: 1, formOrder: 1 })
-    .toArray();
-
-  const nuzlockeJsonPoor: SVLocation[] = JSON.parse(
-    JSON.stringify(nuzlockeJsonPoorRes)
-  );
-  const pokedex: Pokemon[] = JSON.parse(JSON.stringify(pokedexRes));
-
-  const nuzlockeJson = nuzlockeJsonPoor.map((loc) => {
-    return {
-      id: loc.id,
-      name: loc.name,
-      general: loc.general.map((pkmnId) => {
-        return pokedex.find((pkmn) => {
-          return pkmn.id === pkmnId;
-        });
-      }),
-      scarlet: loc.scarlet.map((pkmnId) => {
-        return pokedex.find((pkmn) => {
-          return pkmn.id === pkmnId;
-        });
-      }),
-      violet: loc.violet.map((pkmnId) => {
-        return pokedex.find((pkmn) => {
-          return pkmn.id === pkmnId;
-        });
-      }),
-    };
-  });
-
-  return {
-    props: {
-      nuzlockeJson,
-    },
-  };
-};
-*/

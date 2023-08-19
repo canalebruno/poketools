@@ -2,7 +2,7 @@ import Box from "../components/Box";
 import styles from "../styles/Home.module.scss";
 import { usePokedex } from "../hooks/usePokedex";
 import FilterControl from "../components/FilterControl";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SearchBox from "../components/SearchBox";
 import { GetStaticProps } from "next";
 import { Pokemon } from "../utils/types";
@@ -15,9 +15,17 @@ interface HomeBoxesProps {
 
 export default function HomeBoxes({ homedex }: HomeBoxesProps) {
   const { pokedexShown, loadPokedex } = usePokedex();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadPokedex(homedex);
+
+    fetch("/api/homedex")
+      .then((res) => res.json())
+      .then((data) => {
+        loadPokedex(data);
+        setLoading(false);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -36,6 +44,7 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
           <FilterControl sortingDefault="national" />
           <SearchBox />
           <Box imageSource="home" pokemonListShown={homedex} />
+          {loading && <p>Loading...</p>}
         </>
       ) : (
         <p>Loading...</p>

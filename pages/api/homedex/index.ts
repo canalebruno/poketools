@@ -8,8 +8,7 @@ async function homedexAPI (req: NextApiRequest, res: NextApiResponse) {
 
     const posts = await db.collection("pokedex").find({"homeAvailable":true}).sort({"nationalDex":1,"id":1}).toArray();
 
-    // res.json(posts);
-    return posts
+    res.json(posts);
   } catch (e: any) {
     console.error(e);
     throw new Error(e).message;
