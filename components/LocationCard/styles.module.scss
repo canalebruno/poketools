@@ -1,39 +1,55 @@
+
 .container {
-    background: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 3px solid #5c5c5c;
-    border-radius: 0.5rem;
     
-    .title {
-        background-color: #5c5c5c;
-        width: 100%;
+    display: flex;
+    border-radius: 0.5rem;
+    height: 5rem;
+
+    .text {
+        width: calc(100% - 5rem);
+        
+        
+        .subtitle {
+            background-color: #ffffff;
+            width: fit-content;
+            padding: 0.3rem;
+            border-radius: 0 0 0.5rem 0;
+        }
+
+        .title {
+            border-radius: 0 0.5rem 0.5rem 0;
+            background-color: #5c5c5c;
+            padding: 0.3rem;
+            width: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 0.5rem;
         font-weight: bold;
         color: white;
-        min-height: 80px;
     }
-    
-    .pokemon {
-        background: #5c5c5c30;
-        border-radius: 0.5rem;
-        padding: 0.5rem;
-        margin: 0.5rem;
+}
+
+.pokemon {
+    --pokemonSize: 5rem;
+
+
+        border: 3px solid #5c5c5c;
+        background: #e2e2e2;
+        border-radius: 0.5rem 0 0.5rem 0.5rem;
         display: flex;
         align-items: center;
         flex-direction: column;
         text-align: center;
-        gap: 0.5rem;
-        width: calc(100% - 1rem);
+        width: var(--pokemonSize);
+        position: relative;
         height: 100%;
-
+        
         img {
             filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+            position: absolute;
+            width: var(--pokemonSize);
+            height: auto;
+            bottom: 0.5rem;
+            left: -3px;
         }
 
         span {
@@ -42,7 +58,7 @@
 
         svg {
             font-size: 2.7rem;
-            margin-top: calc(80px - 2.7rem);
+            margin: auto 0;
             color: #3c3c3c;
         }
     }

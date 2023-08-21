@@ -12,7 +12,6 @@ interface LocationCardProps {
 export default function LocationCard({ name, pokemon }: LocationCardProps) {
   return (
     <div className={styles.container}>
-      <div className={styles.title}>{name}</div>
       <div className={styles.pokemon}>
         {pokemon ? (
           <>
@@ -23,14 +22,22 @@ export default function LocationCard({ name, pokemon }: LocationCardProps) {
               width={80}
               height={80}
             />
-            <span>{handleName(pokemon, false, "Paldean", true)}</span>
           </>
         ) : (
           <>
             <GrassIcon />
-            <span>Nothing to catch in this area</span>
           </>
         )}
+      </div>
+      <div className={styles.text}>
+        <div className={styles.title}>{name}</div>
+        <div className={styles.subtitle}>
+          {pokemon ? (
+            <span>{handleName(pokemon, false, "Paldean", true)}</span>
+          ) : (
+            <span>Nothing to catch in this area</span>
+          )}
+        </div>
       </div>
     </div>
   );
