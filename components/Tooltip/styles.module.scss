@@ -1,0 +1,41 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        bottom: -1rem;
+        
+        svg {
+            fill: rgba(97, 97, 97, 0.92);
+        }
+        
+        .titleWrapper {
+            background-color: #c6c6c6;
+            text-align: center;
+            font-size: 0.6875rem;
+            background-color: rgba(97, 97, 97, 0.92);
+            border-radius: 4px;
+            color: #fff;
+            padding: 4px 8px;
+            z-index: 100;
+            width: max-content;
+
+        }
+    }
+}
+
+
+/*
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 0.6875rem;
+    margin: 0;
+    font-weight: 500;
+    position: relative;
+    */

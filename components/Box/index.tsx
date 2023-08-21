@@ -1,10 +1,8 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
-import { Tooltip } from "@mui/material";
-import { handleName, handleNumber } from "../../utils/NameFormatting";
+import { handleNumber } from "../../utils/NameFormatting";
 import { Pokemon } from "../../utils/types";
 import Square from "../Square";
 
@@ -26,17 +24,9 @@ export default function Box({
 }: BoxProps) {
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
-  const [openTooltip, setOpenTooltip] = useState(false);
 
-  const {
-    orderList,
-    pokedexShown,
-    breakByGen,
-    highlightPokemon,
-    loadPokedex,
-    pageBox,
-    customBoxes,
-  } = usePokedex();
+  const { orderList, pokedexShown, breakByGen, loadPokedex, customBoxes } =
+    usePokedex();
 
   const router = useRouter();
 
@@ -124,7 +114,6 @@ export default function Box({
 
   return (
     <>
-      {/* <div className={styles.container}> */}
       {pokeBox.map((box) => {
         return (
           <div key={box.box} className={styles.boxContainer}>
@@ -188,7 +177,6 @@ export default function Box({
           </div>
         );
       })}
-      {/* //   </div> */}
     </>
   );
 }

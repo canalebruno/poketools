@@ -1,4 +1,3 @@
-import { Tooltip } from "@mui/material";
 import { useState } from "react";
 import { Pokemon } from "../../utils/types";
 import { handleName } from "../../utils/NameFormatting";
@@ -7,6 +6,7 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 import { usePokedex } from "../../hooks/usePokedex";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import Tooltip from "../Tooltip";
 
 interface SquareProps {
   pokemon: Pokemon;
@@ -28,8 +28,6 @@ export default function Square({
 
   return (
     <Tooltip
-      open={mobile ? openTooltip : undefined}
-      onClose={mobile ? () => setOpenTooltip(false) : undefined}
       title={handleName(
         pokemon,
         router.pathname !== "/svboxes" ||
@@ -37,7 +35,6 @@ export default function Square({
         router.pathname === "/svboxes" ? "Paldean" : "National",
         true
       )}
-      arrow
     >
       <div
         onClick={mobile ? () => setOpenTooltip(true) : undefined}
