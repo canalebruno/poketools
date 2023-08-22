@@ -1,6 +1,6 @@
 import Box from "../components/Box";
 // import FilterControl from "../components/FilterControl";
-// import SearchBox from "../components/SearchBox";
+import SearchBox from "../components/SearchBox";
 import styles from "../styles/Home.module.scss";
 import { usePokedex } from "../hooks/usePokedex";
 import { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
   const [loading, setLoading] = useState(true);
 
   const FilterControl = dynamic(() => import("../components/FilterControl"));
-  const SearchBox = dynamic(() => import("../components/SearchBox"));
+  // const SearchBox = dynamic(() => import("../components/SearchBox"));
   // const Box = dynamic(() => import("../components/Box"));
 
   useEffect(() => {
@@ -46,20 +46,12 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
           key="title"
         />
       </Head>
-      {pokedexShown ? (
-        <>
-          <FilterControl sortingDefault="national" />
-          <SearchBox />
-          <BoxGridLayout>
-            <Box imageSource="home" pokemonListShown={homedex} />
-            {loading && <BoxLoading />}
-          </BoxGridLayout>
-        </>
-      ) : (
-        <BoxGridLayout>
-          <BoxLoading />
-        </BoxGridLayout>
-      )}
+      <FilterControl sortingDefault="national" />
+      <SearchBox />
+      <BoxGridLayout>
+        <Box imageSource="home" pokemonListShown={homedex} />
+        {loading && <BoxLoading />}
+      </BoxGridLayout>
     </div>
   );
 }

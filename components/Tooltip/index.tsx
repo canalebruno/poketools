@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 interface TooltipProps {
   children: ReactNode;
@@ -9,11 +10,16 @@ interface TooltipProps {
 export default function Tooltip({ children, title }: TooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { windowWidth } = useWindowSize();
+
+  const mobile = windowWidth <= 1024;
+
   return (
     <div
       className={styles.wrapper}
-      onMouseEnter={() => setIsOpen(true)}
+      onMouseEnter={mobile ? undefined : () => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
+      onClick={mobile ? () => setIsOpen(true) : undefined}
     >
       {children}
       {isOpen && (

@@ -43,22 +43,14 @@ export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
         />
       </Head>
       <h1>Scarlet and Violet Boxes</h1>
-      {pokedexShown ? (
-        <>
-          <FilterControl sortingDefault="paldean" />
-          <SearchBox />
-          <BoxGridLayout>
-            {paldeaDex && (
-              <Box imageSource="svicons" pokemonListShown={paldeaDex} />
-            )}
-            {loading && <BoxLoading />}
-          </BoxGridLayout>
-        </>
-      ) : (
-        <BoxGridLayout>
-          <BoxLoading />
-        </BoxGridLayout>
-      )}
+      <FilterControl sortingDefault="paldean" />
+      <SearchBox />
+      <BoxGridLayout>
+        {paldeaDex && (
+          <Box imageSource="svicons" pokemonListShown={paldeaDex} />
+        )}
+        {loading && <BoxLoading />}
+      </BoxGridLayout>
     </div>
   );
 }
