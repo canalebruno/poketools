@@ -1,11 +1,10 @@
 import styles from "../styles/Home.module.scss";
 import { GetStaticProps } from "next";
-
 import Box from "../components/Box";
 import { usePokedex } from "../hooks/usePokedex";
 import FilterControl from "../components/FilterControl";
 import { useEffect, useState } from "react";
-import SearchBox from "../components/SearchBox";
+import SearchBox from "../components/Inputs/SearchBox";
 import { Pokemon } from "../utils/types";
 import clientPromise from "../utils/mongodb";
 import Head from "next/head";
@@ -17,7 +16,7 @@ interface SVBoxesProps {
 }
 
 export default function SVBoxes({ paldeaDex }: SVBoxesProps) {
-  const { pokedexShown, loadPokedex } = usePokedex();
+  const { loadPokedex } = usePokedex();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

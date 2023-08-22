@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { usePokedex } from "../../hooks/usePokedex";
-import { handleName } from "../../utils/NameFormatting";
-import styles from "./styles.module.scss";
+import { usePokedex } from "../../../hooks/usePokedex";
+import { handleName } from "../../../utils/NameFormatting";
+import styles from "../styles.module.scss";
+import InputContainer from "../InputContainer";
 
 interface Option {
   label: string;
@@ -73,7 +74,7 @@ export default function SearchBox() {
   }, [pokedexShown]);
 
   return (
-    <div className={styles.container}>
+    <InputContainer label="Pokémon" valueOn={term}>
       <input
         type="text"
         list="pokemon"
@@ -88,6 +89,6 @@ export default function SearchBox() {
           return <option key={option.id} value={option.label} />;
         })}
       </datalist>
-    </div>
+    </InputContainer>
   );
 }

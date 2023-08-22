@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { usePokedex } from "../../hooks/usePokedex";
-import styles from "./styles.module.scss";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -13,6 +10,10 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 import Drawer from "@mui/material/Drawer";
 import FilterAltTwoToneIcon from "@mui/icons-material/FilterAltTwoTone";
 import Fab from "@mui/material/Fab";
+import { useEffect, useState } from "react";
+import { usePokedex } from "../../hooks/usePokedex";
+import styles from "./styles.module.scss";
+import SortingSelect from "../Inputs/SortingSelect";
 
 interface FilterControlProps {
   sortingDefault:
@@ -88,25 +89,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
     return (
       <div className={styles.container}>
         <div className={`${styles.filterControl}`}>
-          <FormControl>
-            <InputLabel id="sort-by-select-label">Sort by</InputLabel>
-            <Select
-              labelId="sort-by-select-label"
-              id="sort-by-select"
-              value={orderList}
-              label="Sort by"
-              onChange={handleSelectChange}
-            >
-              <MenuItem value={"national"}>National Dex</MenuItem>
-              {pagePath === "/svboxes" && (
-                <MenuItem value={"paldean"}>Paldean Dex</MenuItem>
-              )}
-              <MenuItem value={"hisuian"}>Hisuian Dex</MenuItem>
-              <MenuItem value={"galarian"}>Galarian Dex</MenuItem>
-              <MenuItem value={"galarian-ioa"}>Isle of Armour Dex</MenuItem>
-              <MenuItem value={"galarian-ct"}>Crown Tundra Dex</MenuItem>
-            </Select>
-          </FormControl>
+          <SortingSelect />
           <ToggleButtonGroup
             value={filterValues}
             onChange={handleFilterValues}
@@ -164,21 +147,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
         >
           <div className={styles.container}>
             <div className={`${styles.filterControl} ${styles.verticalFilter}`}>
-              <FormControl>
-                <InputLabel id="sort-by-select-label">Sort by</InputLabel>
-                <Select
-                  labelId="sort-by-select-label"
-                  id="sort-by-select"
-                  value={orderList}
-                  label="Sort by"
-                  onChange={handleSelectChange}
-                >
-                  <MenuItem value={"national"}>National Dex</MenuItem>
-                  {pagePath === "/svboxes" && (
-                    <MenuItem value={"paldean"}>Paldean Dex</MenuItem>
-                  )}
-                </Select>
-              </FormControl>
+              <SortingSelect />
               <ToggleButtonGroup
                 orientation={"vertical"}
                 value={filterValues}
