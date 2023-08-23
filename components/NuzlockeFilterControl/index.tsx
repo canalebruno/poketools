@@ -1,13 +1,8 @@
-import { useState } from "react";
 import styles from "./styles.module.scss";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useNuzlocke } from "../../hooks/useNuzlocke";
-import { useWindowSize } from "../../hooks/useWindowSize";
+import ButtonsGroup from "../ButtonsGroup";
+import ToggleButton from "../ButtonsGroup/ToggleButton";
+import InputContainer from "../Inputs/InputContainer";
 
 interface FilterControlProps {
   vertical?: boolean;
@@ -25,90 +20,109 @@ export default function NuzlockeFilterControl({
     setTypeSelected,
   } = useNuzlocke();
 
-  const { windowWidth } = useWindowSize();
-
-  function handleExclusivityValues(
-    event: React.MouseEvent<HTMLElement>,
-    newValues: string[]
-  ) {
-    setGameExclusive(newValues);
-  }
-
-  function handleCustomValues(
-    event: React.MouseEvent<HTMLElement>,
-    newValues: string[]
-  ) {
-    setCustomOptions(newValues);
-  }
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setTypeSelected(event.target.value as string);
+  const handleChange = (newValue: string) => {
+    setTypeSelected(newValue);
   };
 
   return (
     <div className={styles.container}>
-      <ToggleButtonGroup
-        exclusive
-        value={gameExclusive}
-        onChange={handleExclusivityValues}
-        aria-label="game exclusive"
-      >
-        <ToggleButton value="scarlet" aria-label="scarlet">
-          Scarlet Exclusives
-        </ToggleButton>
-        <ToggleButton value="violet" aria-label="violet">
-          Violet Exclusives
-        </ToggleButton>
-        <ToggleButton value="tradable" aria-label="tradable">
-          Trade Exclusives
-        </ToggleButton>
-      </ToggleButtonGroup>
-      <ToggleButtonGroup
-        value={customOptions}
-        onChange={handleCustomValues}
-        aria-label="game exclusive"
-      >
-        <ToggleButton value="basic" aria-label="only first stage pokémon">
-          Only First Stage
-        </ToggleButton>
-        <ToggleButton value="repeat" aria-label="repeat pokémon species">
-          Repeat Species
-        </ToggleButton>
-        <ToggleButton value="newGen" aria-label="only new generation pokémon">
-          Only New Gen
-        </ToggleButton>
-      </ToggleButtonGroup>
-      <FormControl sx={{ minWidth: 120 }}>
-        <InputLabel id="type-select-label">Type</InputLabel>
-        <Select
-          labelId="type-select-label"
-          id="type-select"
+      <ButtonsGroup>
+        <ToggleButton
+          label="Scarlet Exclusives"
+          hideEyeIcon={true}
+          controller={gameExclusive === "scarlet"}
+          onClick={() => setGameExclusive("scarlet")}
+        />
+        <ToggleButton
+          label="Violet Exclusives"
+          hideEyeIcon={true}
+          controller={gameExclusive === "violet"}
+          onClick={() => setGameExclusive("violet")}
+        />
+        <ToggleButton
+          label="Trade Exclusives"
+          hideEyeIcon={true}
+          controller={gameExclusive === "tradable"}
+          onClick={() => setGameExclusive("tradable")}
+        />
+      </ButtonsGroup>
+      <ButtonsGroup>
+        <ToggleButton
+          label="Only First Stage"
+          hideEyeIcon={true}
+          controller={customOptions.includes("basic")}
+          onClick={() => {
+            if (customOptions.includes("basic")) {
+              const newOptions = customOptions.filter((option) => {
+                return option !== "basic";
+              });
+
+              setCustomOptions(newOptions);
+            } else {
+              setCustomOptions([...customOptions, "basic"]);
+            }
+          }}
+        />
+        <ToggleButton
+          label="Repeat Species"
+          hideEyeIcon={true}
+          controller={customOptions.includes("repeat")}
+          onClick={() => {
+            if (customOptions.includes("repeat")) {
+              const newOptions = customOptions.filter((option) => {
+                return option !== "repeat";
+              });
+
+              setCustomOptions(newOptions);
+            } else {
+              setCustomOptions([...customOptions, "repeat"]);
+            }
+          }}
+        />
+        <ToggleButton
+          label="Only New Gen"
+          hideEyeIcon={true}
+          controller={customOptions.includes("newGen")}
+          onClick={() => {
+            if (customOptions.includes("newGen")) {
+              const newOptions = customOptions.filter((option) => {
+                return option !== "newGen";
+              });
+
+              setCustomOptions(newOptions);
+            } else {
+              setCustomOptions([...customOptions, "newGen"]);
+            }
+          }}
+        />
+      </ButtonsGroup>
+      <InputContainer label="Type" valueOn={typeSelected}>
+        <select
           value={typeSelected}
-          label="Type"
-          onChange={handleChange}
+          onChange={(event) => handleChange(event.target.value)}
         >
-          <MenuItem value={"all"}>All</MenuItem>
-          <MenuItem value={"random"}>Random</MenuItem>
-          <MenuItem value={"bug"}>Bug</MenuItem>
-          <MenuItem value={"dark"}>Dark</MenuItem>
-          <MenuItem value={"dragon"}>Dragon</MenuItem>
-          <MenuItem value={"electric"}>Electric</MenuItem>
-          <MenuItem value={"fairy"}>Fairy</MenuItem>
-          <MenuItem value={"fighting"}>Fighting</MenuItem>
-          <MenuItem value={"fire"}>Fire</MenuItem>
-          <MenuItem value={"flying"}>Flying</MenuItem>
-          <MenuItem value={"ghost"}>Ghost</MenuItem>
-          <MenuItem value={"grass"}>Grass</MenuItem>
-          <MenuItem value={"ground"}>Ground</MenuItem>
-          <MenuItem value={"ice"}>Ice</MenuItem>
-          <MenuItem value={"normal"}>Normal</MenuItem>
-          <MenuItem value={"poison"}>Poison</MenuItem>
-          <MenuItem value={"psychic"}>Psychic</MenuItem>
-          <MenuItem value={"rock"}>Rock</MenuItem>
-          <MenuItem value={"steel"}>Steel</MenuItem>
-          <MenuItem value={"water"}>Water</MenuItem>
-        </Select>
-      </FormControl>
+          <option value={"all"}>All</option>
+          <option value={"random"}>Random</option>
+          <option value={"bug"}>Bug</option>
+          <option value={"dark"}>Dark</option>
+          <option value={"dragon"}>Dragon</option>
+          <option value={"electric"}>Electric</option>
+          <option value={"fairy"}>Fairy</option>
+          <option value={"fighting"}>Fighting</option>
+          <option value={"fire"}>Fire</option>
+          <option value={"flying"}>Flying</option>
+          <option value={"ghost"}>Ghost</option>
+          <option value={"grass"}>Grass</option>
+          <option value={"ground"}>Ground</option>
+          <option value={"ice"}>Ice</option>
+          <option value={"normal"}>Normal</option>
+          <option value={"poison"}>Poison</option>
+          <option value={"psychic"}>Psychic</option>
+          <option value={"rock"}>Rock</option>
+          <option value={"steel"}>Steel</option>
+          <option value={"water"}>Water</option>
+        </select>
+      </InputContainer>
     </div>
   );
 }

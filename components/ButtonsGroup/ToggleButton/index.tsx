@@ -4,6 +4,7 @@ import styles from "../styles.module.scss";
 
 interface ToggleButtonProps {
   label: string;
+  hideEyeIcon?: boolean;
   controller: boolean;
   onClick: () => void;
 }
@@ -12,13 +13,20 @@ export default function ToggleButton({
   label,
   controller,
   onClick,
+  hideEyeIcon = false,
 }: ToggleButtonProps) {
   return (
     <button
       className={`${styles.container} ${controller && styles.active}`}
       onClick={onClick}
     >
-      {controller ? <VisibilityTwoToneIcon /> : <VisibilityOffTwoToneIcon />}
+      {hideEyeIcon ? (
+        ""
+      ) : controller ? (
+        <VisibilityTwoToneIcon />
+      ) : (
+        <VisibilityOffTwoToneIcon />
+      )}
       {label.toUpperCase()}
     </button>
   );

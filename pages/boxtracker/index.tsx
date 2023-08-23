@@ -19,6 +19,8 @@ import ImportOldBoxes from "../../components/ImportOldBoxes";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Head from "next/head";
 
+// REFATORAR AQUI MUITOS
+
 interface BoxTrackerMainProps {
   shinydex: Pokemon[];
 }

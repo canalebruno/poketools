@@ -2,6 +2,8 @@ import { Button } from "@mui/material";
 import { usePokedex } from "../../hooks/usePokedex";
 import { List } from "../../utils/types";
 
+// REFATORAR AQUI BOTAO
+
 export default function ImportOldBoxes() {
   const { customBoxes, setCustomBoxes } = usePokedex();
 

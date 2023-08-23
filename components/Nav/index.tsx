@@ -1,15 +1,17 @@
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import MenuIcon from "@mui/icons-material/Menu";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import * as React from "react";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+// import * as React from "react";
+
+// REFATORAR AQUI MENU
 
 export default function Nav() {
   const [isOpne, setIsOpen] = useState(false);

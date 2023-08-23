@@ -12,6 +12,8 @@ interface SelectAddRemovePokemonProps {
   pokemonList: Pokemon[];
 }
 
+// REFATORAR AQUI INPUT TEXT
+
 export default function SelectAddRemovePokemon({
   kind,
   pokemonList,

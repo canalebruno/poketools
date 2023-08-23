@@ -1,11 +1,13 @@
+import TextField from "@mui/material/TextField";
 import { usePokedex } from "../../../hooks/usePokedex";
 import { useState, useEffect } from "react";
 import { Pokemon } from "../../../utils/types";
 import { useRouter } from "next/router";
 import { handleName } from "../../../utils/NameFormatting";
 import styles from "../styles.module.scss";
-import TextField from "@mui/material/TextField";
 import Image from "next/image";
+
+// REFATORAR AQUI INPUT TEXT
 
 export default function AddPokemonButton() {
   const { handleAddPokemon, handleRemovePokemon, pokedexShown, fullShinyDex } =

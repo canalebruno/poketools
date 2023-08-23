@@ -1,15 +1,6 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Modal,
-  Select,
-  SelectChangeEvent,
-  TextField,
-} from "@mui/material";
+import { Button, Modal, SelectChangeEvent } from "@mui/material";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { useState } from "react";
-// import { useShinyTracker } from "../../hooks/useShinyTracker";
 import styles from "./styles.module.scss";
 import SelectAddRemovePokemon from "../SelectAddRemovePokemon";
 import { usePokedex } from "../../hooks/usePokedex";
@@ -18,7 +9,8 @@ import { Pokemon } from "../../utils/types";
 import { useRouter } from "next/router";
 import AddPokemonButton from "../SelectAddRemovePokemon/AddButton";
 import Link from "next/link";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+
+// REFATORAR AQUI MODAL E BOTAO
 
 export default function ShinyTrackerControl() {
   const [addPokemonModalOpen, setAddPokemonModalOpen] = useState(false);

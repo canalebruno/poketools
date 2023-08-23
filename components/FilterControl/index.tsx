@@ -1,12 +1,15 @@
 import Drawer from "@mui/material/Drawer";
-import FilterAltTwoToneIcon from "@mui/icons-material/FilterAltTwoTone";
 import Fab from "@mui/material/Fab";
+import FilterAltTwoToneIcon from "@mui/icons-material/FilterAltTwoTone";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
 import SortingSelect from "../Inputs/SortingSelect";
 import ButtonsGroup from "../ButtonsGroup";
+import FilterViewToggleButtons from "../FilterViewToggleButtons";
+
+// REFATORAR AQUI DRAWER
 
 interface FilterControlProps {
   sortingDefault:
@@ -48,7 +51,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
       <div className={styles.container}>
         <div className={`${styles.filterControl}`}>
           <SortingSelect />
-          <ButtonsGroup />
+          <FilterViewToggleButtons />
           {pokedexShown && <span>Showing: {pokedexShown.length} Pokemon</span>}
         </div>
       </div>
@@ -77,7 +80,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
           <div className={styles.container}>
             <div className={`${styles.filterControl} ${styles.verticalFilter}`}>
               <SortingSelect />
-              <ButtonsGroup vertical />
+              <FilterViewToggleButtons vertical />
               {pokedexShown && (
                 <span>Showing: {pokedexShown.length} Pokemon</span>
               )}
