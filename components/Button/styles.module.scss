@@ -1,0 +1,34 @@
+.outlined:not(:disabled) {
+    background-color: transparent;
+    color: #1ca3a6;
+    border: 1px solid #1ca3a6;
+    
+    &:hover:not(:disabled) {
+        background-color: #1ca3a610;
+    }
+}
+
+.contained:not(:disabled) {
+    background-color:  #1ca3a6;
+    border: none;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    
+    &:hover:not(:disabled) {
+        background-color:  #1b999b;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 8px;
+    }
+}
+
+.container{
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    
+    &:disabled {
+        color: #00000050;
+        cursor: default;
+        background-color: #00000020;
+        border: none;
+    }
+}

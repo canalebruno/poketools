@@ -57,7 +57,7 @@
 
 
 @media(min-width: 720px) {
-    .container {
+    .container:not(.fullWidth) {
         max-width: 300px;
     }
 } 

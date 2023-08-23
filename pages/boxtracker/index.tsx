@@ -1,39 +1,32 @@
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import masterStyles from "../../styles/Home.module.scss";
 import styles from "./styles.module.scss";
 import { usePokedex } from "../../hooks/usePokedex";
 import { useEffect, useState } from "react";
 import { Pokemon } from "../../utils/types";
 import Link from "next/link";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  ListSubheader,
-  MenuItem,
-  Modal,
-  Select,
-  SelectChangeEvent,
-  TextField,
-} from "@mui/material";
 import ImportOldBoxes from "../../components/ImportOldBoxes";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Head from "next/head";
+import Modal from "../../components/Modal";
+import InputContainer from "../../components/Inputs/InputContainer";
+import Button from "../../components/Button";
 
-// REFATORAR AQUI MUITOS
-
-interface BoxTrackerMainProps {
-  shinydex: Pokemon[];
-}
-
-export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
+export default function BoxTrackerMain() {
   const { setCustomBoxes, customBoxes, setPokedexShown } = usePokedex();
 
   const [newBoxName, setNewBoxName] = useState("");
+  const [shinydex, setShinydex] = useState([] as Pokemon[]);
   const [newBoxModalOpen, setNewBoxModalOpen] = useState(false);
   const [templateListSelection, setTemplateListSelection] = useState("none");
 
   useEffect(() => {
     setPokedexShown([] as Pokemon[]);
+
+    fetch("/api/shinydex")
+      .then((res) => res.json())
+      .then((data) => {
+        setShinydex(data);
+      });
 
     const localBoxes = localStorage.getItem("localBoxes");
 
@@ -280,16 +273,9 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
     setTemplateListSelection("none");
   }
 
-  function handleSelectChange(event: SelectChangeEvent) {
-    setTemplateListSelection(event.target.value as string);
+  function handleSelectChange(value: string) {
+    setTemplateListSelection(value);
   }
-
-  const modalStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "1rem",
-  };
 
   return (
     <>
@@ -301,77 +287,76 @@ export default function BoxTrackerMain({ shinydex }: BoxTrackerMainProps) {
           key="title"
         />
       </Head>
-      <Modal
-        style={modalStyle}
-        open={newBoxModalOpen}
-        onClose={handleNewBoxModalClose}
-      >
-        <div className={`${styles.modalContainer} ${styles.small}`}>
-          <h3>Create Box</h3>
-          <TextField
+      <Modal open={newBoxModalOpen} onClose={handleNewBoxModalClose}>
+        <h3>Create Box</h3>
+        <InputContainer fullWidth label="Box Name" valueOn={newBoxName}>
+          <input
+            placeholder="Box Name"
+            type="text"
             value={newBoxName}
             onChange={(event) => setNewBoxName(event.target.value)}
-            id="new-list-name"
-            label="Box Name"
-            variant="standard"
           />
-          <FormControl>
-            <InputLabel id="template-list-select-label">
-              Start with a template
-            </InputLabel>
-            <Select
-              labelId="template-list-select-label"
-              id="template-list-select"
-              value={templateListSelection}
-              label="Start with a template"
-              onChange={handleSelectChange}
-            >
-              <MenuItem value={"none"}>Start from scratch</MenuItem>
-              <ListSubheader>Dexes</ListSubheader>
-              <MenuItem value={"national"}>National Dex</MenuItem>
-              <MenuItem value={"swsh"}>SwSh Dex (Galar + IoA + CT)</MenuItem>
-              <MenuItem value={"galar"}>Galar Dex</MenuItem>
-              <MenuItem value={"ioa"}>Isle of Armor Dex</MenuItem>
-              <MenuItem value={"ct"}>Crown Tundra Dex</MenuItem>
-              <MenuItem value={"hisui"}>Hisui Dex</MenuItem>
-              <MenuItem value={"paldea"}>Paldea Dex</MenuItem>
-              <ListSubheader>Forms</ListSubheader>
-              <MenuItem value={"gender"}>Gender Differences</MenuItem>
-              <MenuItem value={"multiple"}>Multiple Forms</MenuItem>
-              <MenuItem value={"regionals"}>Regionals</MenuItem>
-              <MenuItem value={"mega"}>Mega</MenuItem>
-              <MenuItem value={"gigantamax"}>Gigantamax</MenuItem>
-              <ListSubheader>Generations</ListSubheader>
-              <MenuItem value={"gen1"}>Gen 1 Pokémon</MenuItem>
-              <MenuItem value={"gen2"}>Gen 2 Pokémon</MenuItem>
-              <MenuItem value={"gen3"}>Gen 3 Pokémon</MenuItem>
-              <MenuItem value={"gen4"}>Gen 4 Pokémon</MenuItem>
-              <MenuItem value={"gen5"}>Gen 5 Pokémon</MenuItem>
-              <MenuItem value={"gen6"}>Gen 6 Pokémon</MenuItem>
-              <MenuItem value={"gen7"}>Gen 7 Pokémon</MenuItem>
-              <MenuItem value={"gen8"}>Gen 8 Pokémon</MenuItem>
-              <MenuItem value={"gen9"}>Gen 9 Pokémon</MenuItem>
-            </Select>
-          </FormControl>
-          <div className={styles.buttonGroup} style={{ margin: "0 auto" }}>
-            <Button onClick={handleNewBoxModalClose} variant="outlined">
-              Cancel
-            </Button>
-            <Button
-              disabled={!newBoxName}
-              onClick={handleCreateCustomBox}
-              variant="contained"
-            >
-              Create
-            </Button>
-          </div>
+        </InputContainer>
+        <InputContainer
+          fullWidth
+          label="Start with a template"
+          valueOn={templateListSelection}
+        >
+          <select
+            value={templateListSelection}
+            onChange={(event) => {
+              handleSelectChange(event.target.value);
+            }}
+          >
+            <option value={"none"}>Start from scratch</option>
+            <optgroup label="Dexes">
+              <option value={"national"}>National Dex</option>
+              <option value={"swsh"}>SwSh Dex (Galar + IoA + CT)</option>
+              <option value={"galar"}>Galar Dex</option>
+              <option value={"ioa"}>Isle of Armor Dex</option>
+              <option value={"ct"}>Crown Tundra Dex</option>
+              <option value={"hisui"}>Hisui Dex</option>
+              <option value={"paldea"}>Paldea Dex</option>
+            </optgroup>
+            <optgroup label="Forms">
+              <option value={"gender"}>Gender Differences</option>
+              <option value={"multiple"}>Multiple Forms</option>
+              <option value={"regionals"}>Regionals</option>
+              <option value={"mega"}>Mega</option>
+              <option value={"gigantamax"}>Gigantamax</option>
+            </optgroup>
+            <optgroup label="Generations">
+              <option value={"gen1"}>Gen 1 Pokémon</option>
+              <option value={"gen2"}>Gen 2 Pokémon</option>
+              <option value={"gen3"}>Gen 3 Pokémon</option>
+              <option value={"gen4"}>Gen 4 Pokémon</option>
+              <option value={"gen5"}>Gen 5 Pokémon</option>
+              <option value={"gen6"}>Gen 6 Pokémon</option>
+              <option value={"gen7"}>Gen 7 Pokémon</option>
+              <option value={"gen8"}>Gen 8 Pokémon</option>
+              <option value={"gen9"}>Gen 9 Pokémon</option>
+            </optgroup>
+          </select>
+        </InputContainer>
+        <div className={styles.buttonGroup} style={{ margin: "0 auto" }}>
+          <Button
+            label="Cancel"
+            variant="outlined"
+            onClick={handleNewBoxModalClose}
+          />
+          <Button
+            label="Create"
+            disabled={!newBoxName || !shinydex}
+            onClick={handleCreateCustomBox}
+          />
         </div>
       </Modal>
       <div className={masterStyles.container}>
         <div className={styles.topSection}>
-          <Button variant="contained" onClick={(e) => setNewBoxModalOpen(true)}>
-            Create new Box
-          </Button>
+          <Button
+            onClick={() => setNewBoxModalOpen(true)}
+            label="Create new Box"
+          />
           <ImportOldBoxes />
         </div>
         <div className={styles.main}>

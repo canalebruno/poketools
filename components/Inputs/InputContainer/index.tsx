@@ -1,22 +1,24 @@
 import styles from "../styles.module.scss";
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState } from "react";
 
 interface InputContainerProps {
   label: string;
   children: ReactNode;
   valueOn: string;
+  fullWidth?: boolean;
 }
 
 export default function InputContainer({
   label,
   children,
   valueOn,
+  fullWidth,
 }: InputContainerProps) {
   const [onFocus, setOnFocus] = useState(valueOn !== "");
 
   return (
     <div
-      className={styles.container}
+      className={`${styles.container} ${fullWidth && styles.fullWidth}`}
       onFocus={() => setOnFocus(true)}
       onBlur={() => {
         if (valueOn === "") {

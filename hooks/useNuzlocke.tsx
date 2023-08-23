@@ -142,22 +142,18 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     let availablePokemon = pokemon;
 
     if (typeSelected !== "all") {
-      console.log("entrou no type");
       availablePokemon = filterByType(availablePokemon, type);
     }
 
     if (!customOptions.includes("repeat")) {
-      console.log("entrou no repeat");
       availablePokemon = filterDontRepeat(availablePokemon);
     }
 
     if (customOptions.includes("basic")) {
-      console.log("entrou no basic");
       availablePokemon = filterFirstStage(availablePokemon);
     }
 
     if (customOptions.includes("newGen")) {
-      console.log("entrou no newgen");
       availablePokemon = filterNewGen(availablePokemon);
     }
 

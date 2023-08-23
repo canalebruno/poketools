@@ -1,8 +1,6 @@
-import { Button } from "@mui/material";
 import { usePokedex } from "../../hooks/usePokedex";
 import { List } from "../../utils/types";
-
-// REFATORAR AQUI BOTAO
+import Button from "../Button";
 
 export default function ImportOldBoxes() {
   const { customBoxes, setCustomBoxes } = usePokedex();
@@ -25,13 +23,9 @@ export default function ImportOldBoxes() {
 
       alert("Your boxes are updated.");
     } else {
-      alert("There is no old lists.");
+      alert("There are no old lists.");
     }
   }
 
-  return (
-    <Button variant="contained" onClick={handleSync}>
-      Sync your old lists
-    </Button>
-  );
+  return <Button label="Sync your old lists" onClick={handleSync} />;
 }
