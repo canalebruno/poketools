@@ -1,4 +1,3 @@
-import Drawer from "@mui/material/Drawer";
 import Fab from "@mui/material/Fab";
 import FilterAltTwoToneIcon from "@mui/icons-material/FilterAltTwoTone";
 import { useWindowSize } from "../../hooks/useWindowSize";
@@ -6,10 +5,10 @@ import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
 import SortingSelect from "../Inputs/SortingSelect";
-import ButtonsGroup from "../ButtonsGroup";
 import FilterViewToggleButtons from "../FilterViewToggleButtons";
+import Drawer from "../Drawer";
 
-// REFATORAR AQUI DRAWER
+// REFATORAR AQUI FAB
 
 interface FilterControlProps {
   sortingDefault:
@@ -69,14 +68,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
         >
           <FilterAltTwoToneIcon />
         </Fab>
-        <Drawer
-          anchor="right"
-          open={isOpne}
-          onClose={() => toggleDrawer(false)}
-          sx={{
-            "& .MuiPaper-root": { padding: "2rem 1rem" },
-          }}
-        >
+        <Drawer open={isOpne} onClose={() => toggleDrawer(false)}>
           <div className={styles.container}>
             <div className={`${styles.filterControl} ${styles.verticalFilter}`}>
               <SortingSelect />

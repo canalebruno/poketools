@@ -1,7 +1,6 @@
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -9,9 +8,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "./styles.module.scss";
-// import * as React from "react";
+import Drawer from "../Drawer";
 
-// REFATORAR AQUI MENU
+// REFATORAR AQUI LIST, LIST ITEM, ICON BUTTON
 
 export default function Nav() {
   const [isOpne, setIsOpen] = useState(false);
@@ -105,14 +104,7 @@ export default function Nav() {
             >
               <MenuIcon />
             </IconButton>
-            <Drawer
-              anchor="right"
-              open={isOpne}
-              onClose={(e) => toggleDrawer(false)}
-              sx={{
-                "& .MuiPaper-root": { padding: "2rem 1rem" },
-              }}
-            >
+            <Drawer open={isOpne} onClose={() => toggleDrawer(false)}>
               <List className={styles.list}>
                 <div className={styles.listGroup}>
                   <ListItem className={styles.listItem}>

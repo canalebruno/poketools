@@ -1,4 +1,3 @@
-import TextField from "@mui/material/TextField";
 import { usePokedex } from "../../../hooks/usePokedex";
 import { useState, useEffect } from "react";
 import { Pokemon } from "../../../utils/types";
@@ -6,8 +5,7 @@ import { useRouter } from "next/router";
 import { handleName } from "../../../utils/NameFormatting";
 import styles from "../styles.module.scss";
 import Image from "next/image";
-
-// REFATORAR AQUI INPUT TEXT
+import InputContainer from "../../Inputs/InputContainer";
 
 export default function AddPokemonButton() {
   const { handleAddPokemon, handleRemovePokemon, pokedexShown, fullShinyDex } =
@@ -49,7 +47,7 @@ export default function AddPokemonButton() {
 
   return (
     <div className={styles.container}>
-      <TextField
+      {/* <TextField
         fullWidth
         id="searchBox"
         value={term}
@@ -58,7 +56,17 @@ export default function AddPokemonButton() {
         }}
         label="Pokémon"
         variant="outlined"
-      />
+      /> */}
+      <InputContainer fullWidth label="Pokémon" valueOn={term}>
+        <input
+          type="text"
+          placeholder="Pokémon"
+          value={term}
+          onChange={(e) => {
+            setTerm(e.target.value);
+          }}
+        />
+      </InputContainer>
       <div className={styles.listContainer}>
         {filteredDex &&
           filteredDex.map((pokemon) => {
