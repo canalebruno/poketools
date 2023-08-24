@@ -43,6 +43,9 @@ export default function Square({
           highlightPokemon === pokemon.id && styles.cardActive
         }`}
       >
+        {/* <p>
+          gal: {pokemon.galarDex} <br /> id: {pokemon.id}
+        </p> */}
         <Image
           unoptimized
           width={25}
