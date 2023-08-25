@@ -3,7 +3,7 @@ import masterStyles from "../../styles/Home.module.scss";
 import styles from "./styles.module.scss";
 import { usePokedex } from "../../hooks/usePokedex";
 import { useEffect, useState } from "react";
-import { Pokemon } from "../../utils/types";
+import { List, Pokemon, PokemonCustomBox } from "../../utils/types";
 import Link from "next/link";
 import ImportOldBoxes from "../../components/ImportOldBoxes";
 import Head from "next/head";
@@ -18,6 +18,7 @@ export default function BoxTrackerMain() {
   const [shinydex, setShinydex] = useState([] as Pokemon[]);
   const [newBoxModalOpen, setNewBoxModalOpen] = useState(false);
   const [templateListSelection, setTemplateListSelection] = useState("none");
+  const [isAllShiny, setIsAllShiny] = useState(false);
 
   useEffect(() => {
     setPokedexShown([] as Pokemon[]);
@@ -55,13 +56,13 @@ export default function BoxTrackerMain() {
       return;
     }
 
-    const newCustomBox = {
+    const newCustomBox: List = {
       id: newSlug,
       name: newBoxName,
       pokemon: findTemplate(),
     };
 
-    const updatedLists = [...customBoxes, newCustomBox];
+    const updatedLists: List[] = [...customBoxes, newCustomBox];
     setCustomBoxes(updatedLists);
     localStorage.setItem("localBoxes", JSON.stringify(updatedLists));
     handleNewBoxModalClose();
@@ -240,10 +241,15 @@ export default function BoxTrackerMain() {
     }
 
     if (templateDone) {
-      // Add individual customBoxId and sort
+      // Add individual customBoxId, shiny, checked and sort
       return templateDone
         .map((pkmn) => {
-          return { ...pkmn, customBoxId: `${pkmn.id}-${Date.now()}` };
+          return {
+            ...pkmn,
+            customBoxId: `${pkmn.id}-${Date.now()}`,
+            isChecked: false,
+            isShiny: isAllShiny,
+          };
         })
         .sort((a, b) => {
           if (a === undefined || b === undefined) {
@@ -263,7 +269,7 @@ export default function BoxTrackerMain() {
           }
         });
     } else {
-      return [] as Pokemon[];
+      return [] as PokemonCustomBox[];
     }
   }
 
@@ -337,6 +343,13 @@ export default function BoxTrackerMain() {
               <option value={"gen9"}>Gen 9 Pokémon</option>
             </optgroup>
           </select>
+        </InputContainer>
+        <InputContainer label="Add All Shiny" valueOn={"s"}>
+          <input
+            type="checkbox"
+            checked={isAllShiny}
+            onChange={() => setIsAllShiny(!isAllShiny)}
+          />
         </InputContainer>
         <div className={styles.buttonGroup} style={{ margin: "0 auto" }}>
           <Button

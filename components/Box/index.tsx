@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
 import { handleNumber } from "../../utils/NameFormatting";
-import { Pokemon } from "../../utils/types";
+import { Pokemon, PokemonCustomBox } from "../../utils/types";
 import Square from "../Square";
 import BoxLoading from "../BoxLoading";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
   shiny?: boolean;
-  pokemonListShown: Pokemon[];
+  pokemonListShown: Pokemon[] | PokemonCustomBox[];
 }
 
 interface Box {
   box: number;
-  pokemon: Pokemon[];
+  pokemon: Pokemon[] | PokemonCustomBox[];
 }
 
 export default function Box({
@@ -163,11 +163,7 @@ export default function Box({
                       imageSource={imageSource}
                       shiny={shiny}
                       pokemon={pkmn}
-                      key={
-                        pkmn.customBoxId !== undefined
-                          ? pkmn.customBoxId
-                          : pkmn.id
-                      }
+                      key={"customBoxId" in pkmn ? pkmn.customBoxId : pkmn.id}
                     />
                   );
                 })}

@@ -6,16 +6,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Pokemon } from "../utils/types";
+import { List, Pokemon, PokemonCustomBox } from "../utils/types";
 
 interface PokedexProviderProps {
   children: ReactNode;
-}
-
-interface List {
-  id: string;
-  name: string;
-  pokemon: Pokemon[];
 }
 
 interface PokedexContextData {
@@ -64,7 +58,7 @@ interface PokedexContextData {
   setShinyDex: (p: Pokemon[]) => void;
   customBoxes: List[];
   setCustomBoxes: (l: List[]) => void;
-  handleAddPokemon: (id: string) => void;
+  handleAddPokemon: (id: string, shouldAddShiny: boolean) => void;
   pageBox: List;
   setPageBox: (l: List) => void;
   handleRemovePokemon: (customBoxId: string | undefined, id: string) => void;
@@ -439,12 +433,12 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     localStorage.setItem("localBoxes", JSON.stringify(newCustomBoxes));
   }
 
-  function handleAddPokemon(id: string) {
+  function handleAddPokemon(id: string, shouldAddShiny: boolean) {
     const findPokemonToAdd = fullShinyDex.find((pokemon) => {
       return pokemon.id === id;
     });
 
-    let pokemonToAdd;
+    let pokemonToAdd: PokemonCustomBox;
 
     if (!findPokemonToAdd) {
       return;
@@ -452,6 +446,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       pokemonToAdd = {
         ...findPokemonToAdd,
         customBoxId: `${findPokemonToAdd.id}-${Date.now()}`,
+        isChecked: false,
+        isShiny: shouldAddShiny,
       };
     }
 

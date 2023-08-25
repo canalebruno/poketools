@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pokemon } from "../../utils/types";
+import { Pokemon, PokemonCustomBox } from "../../utils/types";
 import { handleName } from "../../utils/NameFormatting";
 import { useRouter } from "next/router";
 import styles from "./styles.module.scss";
@@ -9,7 +9,7 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 import Tooltip from "../Tooltip";
 
 interface SquareProps {
-  pokemon: Pokemon;
+  pokemon: Pokemon | PokemonCustomBox;
   imageSource: "svicons" | "home";
   shiny?: boolean;
 }
@@ -17,8 +17,8 @@ interface SquareProps {
 export default function Square({
   pokemon,
   imageSource,
-  shiny = false,
-}: SquareProps) {
+}: // shiny = false,
+SquareProps) {
   const [openTooltip, setOpenTooltip] = useState(false);
   const { highlightPokemon } = usePokedex();
   const router = useRouter();
@@ -53,9 +53,10 @@ export default function Square({
           src={`/${imageSource}/${
             imageSource === "svicons"
               ? pokemon.icon
-              : shiny
-              ? pokemon.homeShinyPic
-              : pokemon.homePic
+              : !("customBoxId" in pokemon) ||
+                ("isShiny" in pokemon && !pokemon.isShiny)
+              ? pokemon.homePic
+              : pokemon.homeShinyPic
           }`}
           alt={`#${
             router.pathname === "/svboxes"

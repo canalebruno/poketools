@@ -8,14 +8,12 @@ import Image from "next/image";
 import InputContainer from "../../Inputs/InputContainer";
 
 export default function AddPokemonButton() {
-  const { handleAddPokemon, handleRemovePokemon, pokedexShown, fullShinyDex } =
-    usePokedex();
+  const { handleAddPokemon, pokedexShown } = usePokedex();
 
   const [term, setTerm] = useState("");
   const [loadedList, setLoadedList] = useState<Pokemon[]>([] as Pokemon[]);
   const [filteredDex, setFilteredDex] = useState(pokedexShown);
-  const [fullList, setFullList] = useState();
-  const { route } = useRouter();
+  const [isShiny, setIsShiny] = useState(false);
 
   const fetchUserData = () => {
     fetch("/api/shinydex")
@@ -47,16 +45,6 @@ export default function AddPokemonButton() {
 
   return (
     <div className={styles.container}>
-      {/* <TextField
-        fullWidth
-        id="searchBox"
-        value={term}
-        onChange={(e) => {
-          setTerm(e.target.value);
-        }}
-        label="Pokémon"
-        variant="outlined"
-      /> */}
       <InputContainer fullWidth label="Pokémon" valueOn={term}>
         <input
           type="text"
@@ -67,6 +55,13 @@ export default function AddPokemonButton() {
           }}
         />
       </InputContainer>
+      <InputContainer label="Add Shiny" valueOn={"s"}>
+        <input
+          type="checkbox"
+          checked={isShiny}
+          onChange={() => setIsShiny(!isShiny)}
+        />
+      </InputContainer>
       <div className={styles.listContainer}>
         {filteredDex &&
           filteredDex.map((pokemon) => {
@@ -75,7 +70,7 @@ export default function AddPokemonButton() {
                 key={pokemon.id}
                 className={styles.listCard}
                 onClick={() => {
-                  handleAddPokemon(pokemon.id);
+                  handleAddPokemon(pokemon.id, isShiny);
                 }}
                 id={pokemon.id}
               >
@@ -83,7 +78,9 @@ export default function AddPokemonButton() {
                   unoptimized
                   width={100}
                   height={100}
-                  src={`/home/${pokemon.homeShinyPic}`}
+                  src={`/home/${
+                    isShiny ? pokemon.homeShinyPic : pokemon.homePic
+                  }`}
                   alt={handleName(pokemon, false, "National", true)}
                 />
                 <span>{handleName(pokemon, true, "National", true)}</span>

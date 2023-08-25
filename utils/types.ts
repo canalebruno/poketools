@@ -2,7 +2,6 @@
 export interface Pokemon {
   _id?: string;
   id: string;
-  customBoxId?: string;
   nationalDex: number;
   name: string;
   stage: number;
@@ -27,6 +26,12 @@ export interface Pokemon {
   galarIoaDex: number | null
 }
 
+export interface PokemonCustomBox extends Pokemon {
+  customBoxId: string;
+  isShiny: boolean;
+  isChecked: boolean
+}
+
 // Interface to define Pokemon on the frontend
 export interface SVLocation {
   _id?: string;
@@ -41,7 +46,7 @@ export interface SVLocation {
 export interface List {
   id: string;
   name: string;
-  pokemon: Pokemon[];
+  pokemon: PokemonCustomBox[];
 }
 
 // // Interface to defining our object of response functions
