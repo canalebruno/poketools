@@ -612,7 +612,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   // SHINY TRACKER
 
-  // WORK ON HANDLE CHECK THAT KEEPS REORDERING AND REMOVE
+  // WORK ON HANDLE CHECK THAT KEEPS REORDERING; REMOVE POKEMON MODAL; REUPLOAD POKDEXE SHOWN WHEN CHANGING PAGE
 
   const [shinyDex, setShinyDex] = useState<Pokemon[]>([] as Pokemon[]);
   const [pageBox, setPageBox] = useState<List>({} as List);

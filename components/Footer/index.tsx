@@ -2,6 +2,8 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 
+// WORK ON CONTACT PAGE
+
 export default function Footer() {
   return (
     <div className={styles.container}>
@@ -11,7 +13,7 @@ export default function Footer() {
           <Link href="https://github.com/canalebruno/poketools" target="_blank">
             Github
           </Link>
-          <Link href="/contact">Contact</Link>
+          {/* <Link href="/contact">Contact</Link> */}
           <a
             href="https://ko-fi.com/P5P7K5F3E"
             rel="noreferrer"
