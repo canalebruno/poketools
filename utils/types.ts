@@ -49,6 +49,8 @@ export interface List {
   pokemon: PokemonCustomBox[];
 }
 
+export type Games = "s" | "v" | "pla" | "sw" | "sh" | "ioa" | "ct" 
+
 // // Interface to defining our object of response functions
 // export interface ResponseFuncs {
 //   GET?: Function

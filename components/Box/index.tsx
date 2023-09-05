@@ -9,8 +9,8 @@ import BoxLoading from "../BoxLoading";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
-  shiny?: boolean;
   pokemonListShown: Pokemon[] | PokemonCustomBox[];
+  isCheckable?: boolean;
 }
 
 interface Box {
@@ -20,8 +20,8 @@ interface Box {
 
 export default function Box({
   imageSource,
-  shiny = false,
   pokemonListShown,
+  isCheckable = false,
 }: BoxProps) {
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
@@ -160,8 +160,8 @@ export default function Box({
                 {box.pokemon.map((pkmn) => {
                   return (
                     <Square
+                      isCheckable={isCheckable}
                       imageSource={imageSource}
-                      shiny={shiny}
                       pokemon={pkmn}
                       key={"customBoxId" in pkmn ? pkmn.customBoxId : pkmn.id}
                     />

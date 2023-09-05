@@ -109,7 +109,6 @@ export default function Nav() {
                 <div className={styles.listGroup}>
                   <ListItem className={styles.listItem}>
                     <strong>Box Organizer</strong>
-                    {/* <ArrowDropDownIcon /> */}
                   </ListItem>
                   {menuNavItems.map((item) => {
                     return (

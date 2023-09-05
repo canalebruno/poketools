@@ -19,6 +19,8 @@ export default function BoxTrackerMain() {
   const [newBoxModalOpen, setNewBoxModalOpen] = useState(false);
   const [templateListSelection, setTemplateListSelection] = useState("none");
   const [isAllShiny, setIsAllShiny] = useState(false);
+  const [isAllChecked, setIsAllChecked] = useState(false);
+  const [importValue, setImportValue] = useState("");
 
   useEffect(() => {
     setPokedexShown([] as Pokemon[]);
@@ -109,7 +111,6 @@ export default function BoxTrackerMain() {
         templateDone = shinydex.filter((pkmn) => {
           return pkmn.hisuiDex;
         });
-        break;
         break;
       case "paldea":
         templateDone = shinydex.filter((pkmn) => {
@@ -247,7 +248,7 @@ export default function BoxTrackerMain() {
           return {
             ...pkmn,
             customBoxId: `${pkmn.id}-${Date.now()}`,
-            isChecked: false,
+            isChecked: isAllChecked,
             isShiny: isAllShiny,
           };
         })
@@ -351,6 +352,13 @@ export default function BoxTrackerMain() {
             onChange={() => setIsAllShiny(!isAllShiny)}
           />
         </InputContainer>
+        <InputContainer label="Start All Checked" valueOn={"s"}>
+          <input
+            type="checkbox"
+            checked={isAllChecked}
+            onChange={() => setIsAllChecked(!isAllChecked)}
+          />
+        </InputContainer>
         <div className={styles.buttonGroup} style={{ margin: "0 auto" }}>
           <Button
             label="Cancel"
@@ -370,7 +378,6 @@ export default function BoxTrackerMain() {
             onClick={() => setNewBoxModalOpen(true)}
             label="Create new Box"
           />
-          <ImportOldBoxes />
         </div>
         <div className={styles.main}>
           {customBoxes &&

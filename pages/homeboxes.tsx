@@ -16,7 +16,12 @@ interface HomeBoxesProps {
 }
 
 export default function HomeBoxes({ homedex }: HomeBoxesProps) {
-  const { loadPokedex } = usePokedex();
+  const {
+    loadPokedex,
+    passThroughFilters,
+    viewGenderDifference,
+    viewOnlyOneForm,
+  } = usePokedex();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,6 +35,10 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    passThroughFilters();
+  }, [viewGenderDifference, viewOnlyOneForm]);
 
   return (
     <div className={styles.container}>

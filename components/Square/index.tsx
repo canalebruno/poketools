@@ -11,20 +11,16 @@ import Tooltip from "../Tooltip";
 interface SquareProps {
   pokemon: Pokemon | PokemonCustomBox;
   imageSource: "svicons" | "home";
-  shiny?: boolean;
+  isCheckable?: boolean;
 }
 
 export default function Square({
   pokemon,
   imageSource,
-}: // shiny = false,
-SquareProps) {
-  const [openTooltip, setOpenTooltip] = useState(false);
-  const { highlightPokemon } = usePokedex();
+  isCheckable = false,
+}: SquareProps) {
+  const { highlightPokemon, handleCheck } = usePokedex();
   const router = useRouter();
-  const { windowWidth } = useWindowSize();
-
-  const mobile = windowWidth <= 1024;
 
   return (
     <Tooltip
@@ -37,15 +33,16 @@ SquareProps) {
       )}
     >
       <div
-        onClick={mobile ? () => setOpenTooltip(true) : undefined}
+        onClick={
+          isCheckable && "isChecked" in pokemon
+            ? () => handleCheck(pokemon.customBoxId)
+            : undefined
+        }
         id={pokemon.id}
         className={`${styles.card} ${
           highlightPokemon === pokemon.id && styles.cardActive
-        }`}
+        } ${"isChecked" in pokemon && pokemon.isChecked && styles.checked} `}
       >
-        {/* <p>
-          gal: {pokemon.galarDex} <br /> id: {pokemon.id}
-        </p> */}
         <Image
           unoptimized
           width={25}

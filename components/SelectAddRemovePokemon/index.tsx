@@ -21,6 +21,7 @@ export default function SelectAddRemovePokemon({
 
   const [term, setTerm] = useState("");
   const [filteredDex, setFilteredDex] = useState(pokedexShown);
+  const [addShiny, setAddShiny] = useState(false);
   const [fullList, setFullList] = useState();
   const { route } = useRouter();
 
@@ -40,16 +41,6 @@ export default function SelectAddRemovePokemon({
 
   return (
     <div className={styles.container}>
-      {/* <TextField
-        fullWidth
-        id="searchBox"
-        value={term}
-        onChange={(e) => {
-          setTerm(e.target.value);
-        }}
-        label="Pokémon"
-        variant="outlined"
-      /> */}
       <InputContainer fullWidth label="Pokémon" valueOn={term}>
         <input
           type="text"
@@ -58,6 +49,13 @@ export default function SelectAddRemovePokemon({
           onChange={(e) => {
             setTerm(e.target.value);
           }}
+        />
+      </InputContainer>
+      <InputContainer label="Add Shiny" valueOn={"s"}>
+        <input
+          type="checkbox"
+          checked={addShiny}
+          onChange={() => setAddShiny(!addShiny)}
         />
       </InputContainer>
       <div className={styles.listContainer}>
@@ -69,9 +67,9 @@ export default function SelectAddRemovePokemon({
                 className={styles.listCard}
                 onClick={() => {
                   if (kind === "remove") {
-                    handleRemovePokemon(pokemon.customBoxId, pokemon.id);
+                    handleRemovePokemon(pokemon.customBoxId);
                   } else {
-                    handleAddPokemon(pokemon.id);
+                    handleAddPokemon(pokemon.id, addShiny);
                   }
                 }}
                 id={pokemon.id}

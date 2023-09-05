@@ -413,11 +413,9 @@ export function useNuzlocke(): NuzlockeContextData {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   let nuzlockeResponse = await fetch(`${process.env.API_URL}nuzlocke`);
-  // let nuzlockeResponse = await fetch("http://localhost:3000/api/nuzlocke");
   let nuzlockeJsonPoor: SVLocation[] = await nuzlockeResponse.json();
 
   let paldeaDexResponse = await fetch(`${process.env.API_URL}paldeadex`);
-  // let paldeaDexResponse = await fetch("http://localhost:3000/api/paldeadex");
   let pokedex: Pokemon[] = await paldeaDexResponse.json();
 
   const nuzlockeJson = await nuzlockeJsonPoor.map((loc) => {

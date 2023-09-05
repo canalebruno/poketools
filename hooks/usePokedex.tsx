@@ -6,14 +6,22 @@ import {
   useEffect,
   useState,
 } from "react";
-import { List, Pokemon, PokemonCustomBox } from "../utils/types";
+import { Games, List, Pokemon, PokemonCustomBox } from "../utils/types";
 
 interface PokedexProviderProps {
   children: ReactNode;
 }
 
+type SortingLists =
+  | "paldean"
+  | "national"
+  | "hisuian"
+  | "galarian"
+  | "galarian-ioa"
+  | "galarian-ct";
+
 interface PokedexContextData {
-  pokedexShown: Pokemon[];
+  pokedexShown: PokemonShown[];
   setPokedexShown: (pokedex: Pokemon[]) => void;
   fullListPokedex: Pokemon[];
   setFullListPokedex: (pokedex: Pokemon[]) => void;
@@ -30,15 +38,7 @@ interface PokedexContextData {
   handleViewOnlyOneForm: () => void;
   filterByGender: () => Pokemon[];
   filterByOnlyOneForm: () => Pokemon[];
-  handleSorting: (
-    value:
-      | "paldean"
-      | "national"
-      | "hisuian"
-      | "galarian"
-      | "galarian-ioa"
-      | "galarian-ct"
-  ) => void;
+  handleSorting: (value: SortingLists) => void;
   loadPokedex: (loadingPokedex: Pokemon[]) => void;
   resetControls: () => void;
   updatePokedex: (pokedexToUpdate: Pokemon[]) => void;
@@ -61,17 +61,39 @@ interface PokedexContextData {
   handleAddPokemon: (id: string, shouldAddShiny: boolean) => void;
   pageBox: List;
   setPageBox: (l: List) => void;
-  handleRemovePokemon: (customBoxId: string | undefined, id: string) => void;
+  handleRemovePokemon: (customBoxId: string | undefined) => void;
   handleDeleteList: (slug: string) => void;
   fullShinyDex: Pokemon[];
+  handleCheck: (id: string) => void;
+  showChecked: boolean;
+  showUnchecked: boolean;
+  setShowChecked: (b: boolean) => void;
+  setShowUnchecked: (b: boolean) => void;
+  showAllCheckedAndUnchecked: boolean;
+  passListThroughFilters: () => void;
+  passThroughFilters: () => void;
+  handleToggleCheck: (
+    kind: "check" | "uncheck" | "all",
+    value: boolean
+  ) => void;
+  handleSelectGame: (value: string) => void;
+  huntGameSelection: string;
 }
 
 const PokedexContext = createContext<PokedexContextData>(
   {} as PokedexContextData
 );
 
+interface PokemonShown extends Pokemon {
+  customBoxId?: string;
+  isShiny?: boolean;
+  isChecked?: boolean;
+}
+
 export function PokedexProvider({ children }: PokedexProviderProps) {
-  const [pokedexShown, setPokedexShown] = useState<Pokemon[]>([] as Pokemon[]);
+  const [pokedexShown, setPokedexShown] = useState<PokemonShown[]>(
+    [] as PokemonShown[]
+  );
   const [fullListPokedex, setFullListPokedex] = useState<Pokemon[]>(
     [] as Pokemon[]
   );
@@ -111,6 +133,10 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     setViewGenderDifference(true);
     setViewOnlyOneForm(false);
     setBreakByGen(false);
+    setShowUnchecked(false);
+    setShowChecked(false);
+    setShowAllCheckedAndUnchecked(true);
+    setHuntGameSelection("");
   }
 
   function updatePokedex(pokedexToUpdate: Pokemon[]) {
@@ -136,7 +162,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     setPokedexShown(pokedexToUpdateOrederd);
   }
-
+  /*
   function handleViewGenderDifference() {
     const newSetting = !viewGenderDifference;
     let finalValues = [] as string[];
@@ -164,7 +190,37 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
     setFilterValues(finalValues);
   }
+*/
+  // function NEWhandleViewGenderDifference() {
+  function handleViewGenderDifference() {
+    const newSetting = !viewGenderDifference;
 
+    setViewGenderDifference(newSetting);
+
+    if (newSetting) {
+      if (viewOnlyOneForm) {
+        setViewOnlyOneForm(false);
+      }
+
+      // updatePokedex(fullListPokedex);
+    } else {
+      // updatePokedex(filterByGender());
+    }
+  }
+
+  // function NEWhandleViewOnlyOneForm() {
+  function handleViewOnlyOneForm() {
+    const newSetting = !viewOnlyOneForm;
+
+    setViewOnlyOneForm(newSetting);
+
+    if (newSetting) {
+      if (viewGenderDifference) {
+        setViewGenderDifference(false);
+      }
+    }
+  }
+  /*
   function handleViewOnlyOneForm() {
     const newSetting = !viewOnlyOneForm;
     let finalValues = [] as string[];
@@ -199,9 +255,15 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
     setFilterValues(finalValues);
   }
-
+*/
   function filterByGender() {
     return pokedexShown.filter((pkmn) => {
+      return !pkmn.genderDifference;
+    });
+  }
+
+  function filterListByGender(list: PokemonCustomBox[]) {
+    return list.filter((pkmn) => {
       return !pkmn.genderDifference;
     });
   }
@@ -212,11 +274,11 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         case "/svboxes":
           return (
             (pkmn.formOrder === "00" ||
-              pkmn.id === "128_01" ||
-              pkmn.id === "194_01" ||
-              pkmn.id === "666_19") &&
-            pkmn.id !== "194_00" &&
-            pkmn.id !== "666_00"
+              pkmn.id === "0128_01" ||
+              pkmn.id === "0194_01" ||
+              pkmn.id === "0666_19") &&
+            pkmn.id !== "0194_00" &&
+            pkmn.id !== "0666_00"
           );
         default:
           return pkmn.formOrder === "00";
@@ -224,15 +286,13 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     });
   }
 
-  function handleSorting(
-    value:
-      | "paldean"
-      | "national"
-      | "hisuian"
-      | "galarian"
-      | "galarian-ioa"
-      | "galarian-ct"
-  ) {
+  function filterListByOnlyOneForm(list: PokemonCustomBox[]) {
+    return filterListByGender(list).filter((pkmn) => {
+      return pkmn.formOrder === "00";
+    });
+  }
+
+  function handleSorting(value: SortingLists) {
     if (!pokedexShown) {
       return;
     }
@@ -399,12 +459,170 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
   }
 
+  function passThroughFilters() {
+    let finalList = fullListPokedex;
+
+    if (viewOnlyOneForm) {
+      finalList = [...filterByOnlyOneForm()];
+    } else if (!viewGenderDifference) {
+      finalList = [...filterByGender()];
+    }
+
+    setPokedexShown(finalList);
+  }
+
+  function sortList(list: PokemonCustomBox[], order: SortingLists) {
+    if (order === "national") {
+      return list.sort((a, b) => {
+        return a.id > b.id ? 1 : -1;
+      });
+    }
+
+    let notInDex;
+
+    let inDex;
+
+    switch (order) {
+      case "paldean":
+        notInDex = list.filter((pkmn) => {
+          return !pkmn.paldeaDex;
+        });
+
+        inDex = list
+          .filter((pkmn) => {
+            return pkmn.paldeaDex;
+          })
+          .sort((a, b) => {
+            if (a.paldeaDex === b.paldeaDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.paldeaDex || !b.paldeaDex) {
+              return 0;
+            } else {
+              return a.paldeaDex - b.paldeaDex;
+            }
+          });
+        break;
+      case "hisuian":
+        notInDex = list.filter((pkmn) => {
+          return !pkmn.hisuiDex;
+        });
+
+        inDex = list
+          .filter((pkmn) => {
+            return pkmn.hisuiDex;
+          })
+          .sort((a, b) => {
+            if (a.hisuiDex === b.hisuiDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.hisuiDex || !b.hisuiDex) {
+              return 0;
+            } else {
+              return a.hisuiDex - b.hisuiDex;
+            }
+          });
+        break;
+      case "galarian":
+        notInDex = list.filter((pkmn) => {
+          return !pkmn.galarDex;
+        });
+
+        inDex = list
+          .filter((pkmn) => {
+            return pkmn.galarDex;
+          })
+          .sort((a, b) => {
+            if (a.galarDex === b.galarDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.galarDex || !b.galarDex) {
+              return 0;
+            } else {
+              return a.galarDex - b.galarDex;
+            }
+          });
+        break;
+      case "galarian-ioa":
+        notInDex = list.filter((pkmn) => {
+          return !pkmn.galarIoaDex;
+        });
+
+        inDex = list
+          .filter((pkmn) => {
+            return pkmn.galarIoaDex;
+          })
+          .sort((a, b) => {
+            if (a.galarIoaDex === b.galarIoaDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.galarIoaDex || !b.galarIoaDex) {
+              return 0;
+            } else {
+              return a.galarIoaDex - b.galarIoaDex;
+            }
+          });
+
+        break;
+      case "galarian-ct":
+        notInDex = list.filter((pkmn) => {
+          return !pkmn.galarCtDex;
+        });
+
+        inDex = list
+          .filter((pkmn) => {
+            return pkmn.galarCtDex;
+          })
+          .sort((a, b) => {
+            if (a.galarCtDex === b.galarCtDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.galarCtDex || !b.galarCtDex) {
+              return 0;
+            } else {
+              return a.galarCtDex - b.galarCtDex;
+            }
+          });
+        break;
+    }
+
+    return [
+      ...inDex,
+      ...notInDex.sort((a, b) => {
+        return a.id > b.id ? 1 : -1;
+      }),
+    ];
+  }
+
+  // AQUI
+  function passListThroughFilters() {
+    let finalList = pageBox.pokemon;
+
+    if (viewOnlyOneForm) {
+      finalList = [...filterListByOnlyOneForm(finalList)];
+    } else if (!viewGenderDifference) {
+      finalList = [...filterListByGender(finalList)];
+    }
+
+    if (router.pathname.includes("boxtracker")) {
+      finalList = [...filterListByGame(finalList)];
+    }
+
+    if (router.pathname.includes("boxtracker")) {
+      finalList = [...filterListByChecked(finalList)];
+    }
+
+    setPokedexShown(sortList(finalList, orderList));
+  }
+
   // SHINY TRACKER
+
+  // WORK ON HANDLE CHECK THAT KEEPS REORDERING AND REMOVE
 
   const [shinyDex, setShinyDex] = useState<Pokemon[]>([] as Pokemon[]);
   const [pageBox, setPageBox] = useState<List>({} as List);
   const [customBoxes, setCustomBoxes] = useState<List[]>([] as List[]);
   const [fullShinyDex, setFullShinyDex] = useState<Pokemon[]>([] as Pokemon[]);
+  const [showChecked, setShowChecked] = useState(false);
+  const [showUnchecked, setShowUnchecked] = useState(false);
+  const [showAllCheckedAndUnchecked, setShowAllCheckedAndUnchecked] =
+    useState(true);
+  const [huntGameSelection, setHuntGameSelection] = useState("");
 
   useEffect(() => {
     fetch("/api/shinydex")
@@ -420,15 +638,149 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     setPokedexShown(pageBox.pokemon);
   }, [pageBox]);
 
-  function handleUpdateActiveList(updatedList: List) {
+  // useEffect(() => {
+  //   if (pageBox.pokemon && pageBox.pokemon.length > 0) {
+  //     passThroughFilters();
+  //   }
+  // }, [showChecked]);
+
+  function filterListByChecked(list: PokemonCustomBox[]) {
+    if (showChecked && !showUnchecked) {
+      return list.filter((pkmn) => {
+        return pkmn.isChecked;
+      });
+    } else if (!showChecked && showUnchecked) {
+      return list.filter((pkmn) => {
+        return !pkmn.isChecked;
+      });
+    } else {
+      return list;
+    }
+  }
+
+  function handleSelectGame(selection: string) {
+    setHuntGameSelection(selection);
+  }
+
+  function filterListByGame(list: PokemonCustomBox[]) {
+    switch (huntGameSelection) {
+      case "s":
+        return list.filter((pkmn) => {
+          return (
+            pkmn.paldeaDex &&
+            pkmn.id !== "0128_03" &&
+            pkmn.nationalDex !== 766 &&
+            pkmn.nationalDex !== 875 &&
+            pkmn.nationalDex !== 990 &&
+            pkmn.nationalDex !== 991 &&
+            pkmn.nationalDex !== 992 &&
+            pkmn.nationalDex !== 993 &&
+            pkmn.nationalDex !== 994 &&
+            pkmn.nationalDex !== 995 &&
+            pkmn.nationalDex !== 1006 &&
+            pkmn.nationalDex !== 1008 &&
+            pkmn.nationalDex !== 1010 &&
+            !pkmn.family.includes(200) &&
+            !pkmn.family.includes(316) &&
+            !pkmn.family.includes(371) &&
+            !pkmn.family.includes(692) &&
+            !pkmn.family.includes(885)
+          );
+        });
+      case "v":
+        return list.filter((pkmn) => {
+          return (
+            pkmn.paldeaDex &&
+            pkmn.id !== "0128_02" &&
+            pkmn.nationalDex !== 765 &&
+            pkmn.nationalDex !== 874 &&
+            pkmn.nationalDex !== 984 &&
+            pkmn.nationalDex !== 985 &&
+            pkmn.nationalDex !== 986 &&
+            pkmn.nationalDex !== 987 &&
+            pkmn.nationalDex !== 988 &&
+            pkmn.nationalDex !== 989 &&
+            pkmn.nationalDex !== 1005 &&
+            pkmn.nationalDex !== 1007 &&
+            pkmn.nationalDex !== 1009 &&
+            !pkmn.family.includes(246) &&
+            !pkmn.family.includes(425) &&
+            !pkmn.family.includes(434) &&
+            !pkmn.family.includes(633) &&
+            !pkmn.family.includes(690)
+          );
+        });
+      case "pla":
+        return list.filter((pkmn) => {
+          return pkmn.hisuiDex;
+        });
+      case "sw":
+        return list.filter((pkmn) => {
+          return pkmn.galarDex;
+        });
+      case "sh":
+        return list.filter((pkmn) => {
+          return pkmn.galarDex;
+        });
+      case "ioa":
+        return list.filter((pkmn) => {
+          return pkmn.galarIoaDex;
+        });
+      case "ct":
+        return list.filter((pkmn) => {
+          return pkmn.galarCtDex;
+        });
+      default:
+        return list;
+    }
+  }
+
+  // ORGANIZAR OS OUTROS FILTROS
+
+  function OLDhandleUpdateActiveList(
+    updatedList: List,
+    preventPokedexShown?: boolean
+  ) {
+    const sortedList: List = {
+      ...updatedList,
+      pokemon: sortList(updatedList.pokemon, orderList),
+    };
+
     const newCustomBoxes = [
       ...customBoxes.filter((list) => updatedList.id !== list.id),
-      updatedList,
+      sortedList,
     ];
 
     setCustomBoxes(newCustomBoxes);
-    setPokedexShown(updatedList.pokemon);
-    setPageBox(updatedList);
+    setPageBox(sortedList);
+    setPokedexShown(sortedList.pokemon);
+
+    localStorage.setItem("localBoxes", JSON.stringify(newCustomBoxes));
+  }
+
+  function handleUpdateActiveList(
+    updatedList: List,
+    preventPokedexShown?: boolean
+  ) {
+    let sortedList;
+
+    if (preventPokedexShown) {
+      sortedList = {
+        ...updatedList,
+        pokemon: sortList(updatedList.pokemon, orderList),
+      };
+    } else {
+      sortedList = updatedList;
+    }
+
+    const newCustomBoxes = [
+      ...customBoxes.filter((list) => updatedList.id !== list.id),
+      sortedList,
+    ];
+
+    setCustomBoxes(newCustomBoxes);
+    setPageBox(sortedList);
+    setPokedexShown(sortedList.pokemon);
 
     localStorage.setItem("localBoxes", JSON.stringify(newCustomBoxes));
   }
@@ -455,30 +807,29 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       ...pageBox,
       pokemon:
         pageBox.pokemon && pageBox.pokemon.length > 0
-          ? [...pageBox.pokemon, pokemonToAdd].sort((a, b) => {
-              if (a.nationalDex === b.nationalDex) {
-                if (a.id < b.id) {
-                  return -1;
-                } else if (a.id > b.id) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              } else {
-                return a.nationalDex - b.nationalDex;
-              }
-            })
-          : [pokemonToAdd],
+          ? [...pageBox.pokemon, pokemonToAdd]
+          : // .sort((a, b) => {
+            //     if (a.nationalDex === b.nationalDex) {
+            //       if (a.id < b.id) {
+            //         return -1;
+            //       } else if (a.id > b.id) {
+            //         return 1;
+            //       } else {
+            //         return 0;
+            //       }
+            //     } else {
+            //       return a.nationalDex - b.nationalDex;
+            //     }
+            //   })
+            [pokemonToAdd],
     };
 
     handleUpdateActiveList(updatedBox);
   }
 
-  function handleRemovePokemon(customBoxId: string | undefined, id: string) {
+  function handleRemovePokemon(customBoxId: string | undefined) {
     const indexToRemove = pageBox.pokemon.findIndex((pokemon) => {
-      return customBoxId !== undefined
-        ? pokemon.customBoxId === customBoxId
-        : pokemon.id === id;
+      return pokemon.customBoxId === customBoxId;
     });
 
     if (!indexToRemove && indexToRemove !== 0) {
@@ -502,6 +853,89 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     setCustomBoxes(updatedLists);
     localStorage.setItem("localBoxes", JSON.stringify(updatedLists));
+  }
+
+  function handleToggleCheck(
+    kind: "check" | "uncheck" | "all",
+    value: boolean
+  ) {
+    if (kind === "check") {
+      if (value) {
+        setShowAllCheckedAndUnchecked(false);
+        setShowChecked(true);
+        setShowUnchecked(false);
+      } else if (!value && !showUnchecked) {
+        setShowAllCheckedAndUnchecked(true);
+      }
+      setShowChecked(value);
+    } else if (kind === "uncheck") {
+      if (value) {
+        setShowAllCheckedAndUnchecked(false);
+        setShowChecked(false);
+        setShowUnchecked(true);
+      } else if (!value && !showChecked) {
+        setShowAllCheckedAndUnchecked(true);
+      }
+      setShowUnchecked(value);
+    } else if (kind === "all") {
+      if (value) {
+        setShowAllCheckedAndUnchecked(true);
+        setShowChecked(false);
+        setShowUnchecked(false);
+      }
+    } else {
+      return;
+    }
+  }
+
+  // function handleCheck(id: string) {
+  //   const findPokemon = pageBox.pokemon.find((pkmn) => {
+  //     return pkmn.customBoxId === id;
+  //   });
+
+  //   if (!findPokemon) {
+  //     return;
+  //   }
+
+  //   const updatePokemon: PokemonCustomBox = {
+  //     ...findPokemon,
+  //     isChecked: !findPokemon.isChecked,
+  //   };
+
+  //   const updatedActiveList: List = {
+  //     ...pageBox,
+  //     pokemon: [
+  //       ...pageBox.pokemon.filter((pkmn) => {
+  //         return pkmn.customBoxId !== id;
+  //       }),
+  //       updatePokemon,
+  //     ],
+  //   };
+
+  //   handleUpdateActiveList(updatedActiveList);
+  // }
+  function handleCheck(id: string) {
+    const findPokemonIndex = pageBox.pokemon.findIndex((pkmn) => {
+      return pkmn.customBoxId === id;
+    });
+
+    if (!findPokemonIndex) {
+      return;
+    }
+
+    pageBox.pokemon[findPokemonIndex].isChecked =
+      !pageBox.pokemon[findPokemonIndex].isChecked;
+
+    // const updatedActiveList: List = {
+    //   ...pageBox,
+    //   pokemon: [
+    //     ...pageBox.pokemon,
+    //     pageBox.pokemon[findPokemonIndex].isChecked =
+    //   !pageBox.pokemon[findPokemonIndex].isChecked;
+    //   ],
+    // };
+
+    handleUpdateActiveList(pageBox, true);
   }
 
   return (
@@ -540,6 +974,17 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         handleRemovePokemon,
         handleDeleteList,
         fullShinyDex,
+        handleCheck,
+        showChecked,
+        showUnchecked,
+        setShowChecked,
+        setShowUnchecked,
+        passListThroughFilters,
+        handleToggleCheck,
+        showAllCheckedAndUnchecked,
+        passThroughFilters,
+        handleSelectGame,
+        huntGameSelection,
       }}
     >
       {children}

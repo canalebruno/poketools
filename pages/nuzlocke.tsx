@@ -80,7 +80,7 @@ export default function Nuzlocke({ nuzlockeJson }: NuzlockeProps) {
         onClick={handleGenerateNuzlockeHunt}
         disabled={loading}
       >
-        Generate
+        {loading ? "Loading data..." : "Generate"}
       </Button>
       <div className={styles.cardsGrid}>
         {hunt &&
