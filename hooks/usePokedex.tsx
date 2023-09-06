@@ -18,7 +18,8 @@ type SortingLists =
   | "hisuian"
   | "galarian"
   | "galarian-ioa"
-  | "galarian-ct";
+  | "galarian-ct"
+  | "paldean-tm";
 
 interface PokedexContextData {
   pokedexShown: PokemonShown[];
@@ -29,6 +30,7 @@ interface PokedexContextData {
   viewOnlyOneForm: boolean;
   orderList:
     | "paldean"
+    | "paldean-tm"
     | "national"
     | "hisuian"
     | "galarian"
@@ -102,6 +104,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const [breakByGen, setBreakByGen] = useState(false);
   const [orderList, setOrderList] = useState<
     | "paldean"
+    | "paldean-tm"
     | "national"
     | "hisuian"
     | "galarian"
@@ -271,6 +274,16 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   function filterByOnlyOneForm() {
     return filterByGender().filter((pkmn) => {
       switch (router.pathname) {
+        case "/teal-mask-boxes":
+          return (
+            (pkmn.formOrder === "00" ||
+              pkmn.id === "0741_04" ||
+              pkmn.id === "0550_02" ||
+              pkmn.id === "0901_01") &&
+            pkmn.id !== "0741_00" &&
+            pkmn.id !== "0901_00" &&
+            pkmn.id !== "0550_00"
+          );
         case "/svboxes":
           return (
             (pkmn.formOrder === "00" ||
@@ -499,6 +512,25 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
               return 0;
             } else {
               return a.paldeaDex - b.paldeaDex;
+            }
+          });
+        break;
+      case "paldean-tm":
+        notInDex = list.filter((pkmn) => {
+          return !pkmn.paldeaTMDex;
+        });
+
+        inDex = list
+          .filter((pkmn) => {
+            return pkmn.paldeaTMDex;
+          })
+          .sort((a, b) => {
+            if (a.paldeaTMDex === b.paldeaTMDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.paldeaTMDex || !b.paldeaTMDex) {
+              return 0;
+            } else {
+              return a.paldeaTMDex - b.paldeaTMDex;
             }
           });
         break;

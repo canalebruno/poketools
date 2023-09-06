@@ -23,7 +23,8 @@ export interface Pokemon {
   family: number[];
   galarCtDex: number | null,
   galarDex: number | null,
-  galarIoaDex: number | null
+  galarIoaDex: number | null,
+  paldeaTMDex: number | null
 }
 
 export interface PokemonCustomBox extends Pokemon {

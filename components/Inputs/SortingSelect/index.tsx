@@ -1,9 +1,10 @@
+import { useRouter } from "next/router";
 import { usePokedex } from "../../../hooks/usePokedex";
 import InputContainer from "../InputContainer";
-import TopLabel from "../InputContainer";
-import styles from "../styles.module.scss";
 
 export default function SortingSelect() {
+  const router = useRouter();
+
   const options = [
     {
       value: "national",
@@ -12,6 +13,10 @@ export default function SortingSelect() {
     {
       value: "paldean",
       label: "Paldea Dex",
+    },
+    {
+      value: "paldean-tm",
+      label: "Teal Mask Dex",
     },
     {
       value: "hisuian",
@@ -29,7 +34,15 @@ export default function SortingSelect() {
       value: "galarian-ct",
       label: "Crown Tundra Dex",
     },
-  ];
+  ].filter((option) => {
+    if (router.pathname === "/svboxes") {
+      return option.value === "national" || option.value === "paldean";
+    } else if (router.pathname === "/teal-mask-boxes") {
+      return option.value === "national" || option.value === "paldean-tm";
+    } else {
+      return option;
+    }
+  });
 
   const { handleSorting, orderList } = usePokedex();
 
@@ -44,6 +57,7 @@ export default function SortingSelect() {
       handleSorting(
         selection as
           | "paldean"
+          | "paldean-tm"
           | "national"
           | "hisuian"
           | "galarian"
