@@ -10,7 +10,6 @@ export default function Home() {
       <h1>Pokémon Tools</h1>
       <section className={styles.buttonsSection}>
         <Link href="/svboxes">
-          <span>Scarlet and Violet Boxes</span>
           <Image
             unoptimized
             src="appicons/pokemon-sv.jpg"
@@ -18,13 +17,28 @@ export default function Home() {
             height={10}
             alt="Pokémon Scarlet and Violet"
           />
+          <div>
+            <span className={styles.title}>Scarlet & Violet</span>
+            <br />
+            <span className={styles.subtitle}>Boxes</span>
+          </div>
         </Link>
-        <Link href="/nuzlocke">
-          <span>SV Nuzlocke Random Hunt Generator</span>
-          <GrassIcon />
+        <Link href="/teal-mask-boxes">
+          {/* <div></div> */}
+          {/* <Image
+            unoptimized
+            src="appicons/pokemon-home.png"
+            width={10}
+            height={10}
+            alt="Pokémon Scarlet and Violet"
+          /> */}
+          <div>
+            <span className={styles.title}>Teal Mask</span>
+            <br />
+            <span className={styles.subtitle}>Boxes</span>
+          </div>
         </Link>
         <Link href="/homeboxes">
-          <span>Home Boxes</span>
           <Image
             unoptimized
             src="appicons/pokemon-home.png"
@@ -32,6 +46,34 @@ export default function Home() {
             height={10}
             alt="Pokémon Scarlet and Violet"
           />
+          <div>
+            <span className={styles.title}>Home</span>
+            <br />
+            <span className={styles.subtitle}>Boxes</span>
+          </div>
+        </Link>
+        <Link href="/nuzlocke">
+          <GrassIcon />
+          <div>
+            <span className={styles.title}>Nuzlocke</span>
+            <br />
+            <span className={styles.subtitle}>SV Random Hunt Generator</span>
+          </div>
+        </Link>
+        <Link href="/boxtracker">
+          {/* <div></div> */}
+          {/* <Image
+            unoptimized
+            src="appicons/pokemon-home.png"
+            width={10}
+            height={10}
+            alt="Box Builder (Beta)"
+          /> */}
+          <div>
+            <span className={styles.title}>Builder</span>
+            <br />
+            <span className={styles.subtitle}>Boxes (Beta)</span>
+          </div>
         </Link>
       </section>
       <section>

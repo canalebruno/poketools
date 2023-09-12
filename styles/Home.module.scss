@@ -6,38 +6,46 @@
 }
 
 .buttonsSection {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 1fr;
   gap: 1rem;
-
+  
   a {
-    width: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    border: 5px solid #4bcdcf;
+    display: grid;
+    padding: 0.5rem;
+    border: 2px solid #4bcdcf;
     background-color: #1ca3a680;
-    border-radius: 1rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-
+    border-radius: 0.5rem;
+    position: relative;
+    
     transition: 0.1s;
-
+    
+    .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    
     &:hover {
       background-color: #1ca3a6;
     }
 
     img {
-      height: 7rem;
+      height: 2.25rem;
       width: auto;
-      border-radius: 0.75rem;
-      margin-left: 1rem;
+      border-radius: 0.25rem;
+      opacity: 0.8;
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
     }
-
+    
     svg {
-      font-size: 4rem;
-      margin: 1.5rem;
+      font-size: 2.5rem;
+      opacity: 0.8;
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
       color: #3c3c3c;
     }
   }
@@ -52,17 +60,6 @@
   }
 
   .buttonsSection {
-    flex-direction: column;
-    a {
-      width: 100%;
-      height: 150px;
-
-      img {
-        width: auto;
-        max-width: 50%;
-        height: auto;
-        max-height: 100%;
-      }
-    }
+    grid-template-columns: repeat(2, 1fr);
   }
 }
