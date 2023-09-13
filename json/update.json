@@ -83,5 +83,12 @@
         "updates": [
             "Added Gen 9 Pokémon to the Home Boxes"
         ]
+    },
+    {
+        "id": 12,
+        "date": "13.09.2023",
+        "updates": [
+            "Added Teal Mask Boxes page"
+        ]
     }
 ]
