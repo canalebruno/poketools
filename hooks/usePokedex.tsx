@@ -277,7 +277,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         case "/teal-mask-boxes":
           return (
             (pkmn.formOrder === "00" ||
-              pkmn.id === "0741_04" ||
+              pkmn.id === "0741_03" ||
               pkmn.id === "0550_02" ||
               pkmn.id === "0901_01") &&
             pkmn.id !== "0741_00" &&
