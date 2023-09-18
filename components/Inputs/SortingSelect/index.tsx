@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { usePokedex } from "../../../hooks/usePokedex";
 import InputContainer from "../InputContainer";
+import { useEffect } from "react";
 
 export default function SortingSelect() {
   const router = useRouter();
@@ -45,6 +46,10 @@ export default function SortingSelect() {
   });
 
   const { handleSorting, orderList } = usePokedex();
+
+  useEffect(() => {
+    console.log(orderList);
+  }, []);
 
   function handleSelectChange(selection: string) {
     const orderListValues = options.map((option) => {

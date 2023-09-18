@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { Pokemon } from "./types";
 
 export function handleNumber(pokemonNumber: number, charQuantity: 3 | 4) {
@@ -15,7 +16,7 @@ export function handleNumber(pokemonNumber: number, charQuantity: 3 | 4) {
 export function handleName(
   pokemon: Pokemon,
   number: boolean = false,
-  dex: "Paldean" | "National" = "National",
+  dex: string,
   form: boolean = true
 ) {
   let prefixName = "";
@@ -36,10 +37,15 @@ export function handleName(
   }
 
   if (number) {
-    if (dex === "Paldean") {
-      prefixNumber = "#" + handleNumber(pokemon.paldeaDex!, 3) + " - ";
-    } else {
-      prefixNumber = "#" + handleNumber(pokemon.nationalDex, 3) + " - ";
+    switch (dex) {
+      case "/svboxes":
+        prefixNumber = "#" + handleNumber(pokemon.paldeaDex!, 3) + " - ";
+        break;
+      case "/teal-mask-boxes":
+        prefixNumber = "#" + handleNumber(pokemon.paldeaTMDex!, 3) + " - ";
+        break;
+      default:
+        prefixNumber = "#" + handleNumber(pokemon.nationalDex, 4) + " - ";
     }
   }
 

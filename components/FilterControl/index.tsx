@@ -39,7 +39,7 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
 
   useEffect(() => {
     if (firstLoad) {
-      handleSorting(sortingDefault);
+      // handleSorting(sortingDefault);
       resetControls();
       setFirstLoad(false);
     }

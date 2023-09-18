@@ -6,6 +6,7 @@ import { handleNumber } from "../../utils/NameFormatting";
 import { Pokemon, PokemonCustomBox } from "../../utils/types";
 import Square from "../Square";
 import BoxLoading from "../BoxLoading";
+import TopNumber from "./TopNumber";
 
 interface BoxProps {
   imageSource: "svicons" | "home";
@@ -120,7 +121,7 @@ export default function Box({
           return (
             <div key={box.box} className={styles.boxContainer}>
               <div className={styles.boxHeader}>
-                {router.pathname === "/svboxes" ? (
+                {/* {router.pathname === "/svboxes" ? (
                   orderList === "paldean" && !breakByGen ? (
                     <span>{`#${handleNumber(
                       box.pokemon[0]?.paldeaDex!,
@@ -134,9 +135,11 @@ export default function Box({
                     box.pokemon[0]?.nationalDex,
                     3
                   )}`}</span>
-                )}
+                )} */}
+                <TopNumber pokemon={box.pokemon[0]} />
                 <span>Box {box.box}</span>
-                {router.pathname === "/svboxes" ? (
+                <TopNumber pokemon={box.pokemon[box.pokemon.length - 1]} />
+                {/* {router.pathname === "/svboxes" ? (
                   orderList === "paldean" && !breakByGen ? (
                     <span>{`#${
                       box.pokemon[box.pokemon.length - 1]?.paldeaDex! <= 400
@@ -154,7 +157,7 @@ export default function Box({
                     box.pokemon[box.pokemon.length - 1]?.nationalDex,
                     3
                   )}`}</span>
-                )}
+                )} */}
               </div>
               <div className={styles.boxGrid}>
                 {box.pokemon.map((pkmn) => {

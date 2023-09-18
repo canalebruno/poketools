@@ -28,7 +28,7 @@ export default function Square({
         pokemon,
         router.pathname !== "/svboxes" ||
           (router.pathname === "/svboxes" && pokemon.paldeaDex! < 500),
-        router.pathname === "/svboxes" ? "Paldean" : "National",
+        router.pathname,
         true
       )}
     >

@@ -128,6 +128,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       case "/svboxes":
         handleSorting("paldean");
         break;
+      case "/teal-mask-boxes":
+        handleSorting("paldean-tm");
+        break;
       default:
         handleSorting("national");
     }
@@ -340,6 +343,25 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
               return 0;
             } else {
               return a.paldeaDex - b.paldeaDex;
+            }
+          });
+        break;
+      case "paldean-tm":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.paldeaTMDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.paldeaTMDex;
+          })
+          .sort((a, b) => {
+            if (a.paldeaTMDex === b.paldeaTMDex) {
+              return a.id > b.id ? 1 : -1;
+            } else if (!a.paldeaTMDex || !b.paldeaTMDex) {
+              return 0;
+            } else {
+              return a.paldeaTMDex - b.paldeaTMDex;
             }
           });
         break;
