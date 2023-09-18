@@ -3,31 +3,35 @@ import { handleNumber } from "../../../utils/NameFormatting";
 import { Pokemon, PokemonCustomBox } from "../../../utils/types";
 
 interface TopNumberProps {
-  pokemon: Pokemon | PokemonCustomBox;
+  pokemon?: Pokemon | PokemonCustomBox | null;
 }
 
-export default function TopNumber({ pokemon }: TopNumberProps) {
+export default function TopNumber({ pokemon = null }: TopNumberProps) {
   const router = useRouter();
 
-  let decimals: 3 | 4;
-  let number: number | null;
+  let decimals: 3 | 4 = 4;
+  let number: number | null = null;
 
-  switch (router.pathname) {
-    case "/svboxes":
-      number =
-        pokemon.paldeaDex && pokemon.paldeaDex <= 400 ? pokemon.paldeaDex : 400;
-      decimals = 3;
-      break;
-    case "/teal-mask-boxes":
-      number = pokemon.paldeaTMDex;
-      decimals = 3;
-      break;
-    default:
-      number = pokemon.nationalDex;
-      decimals = 4;
+  if (pokemon) {
+    switch (router.pathname) {
+      case "/svboxes":
+        number =
+          pokemon.paldeaDex && pokemon.paldeaDex <= 400
+            ? pokemon.paldeaDex
+            : 400;
+        decimals = 3;
+        break;
+      case "/teal-mask-boxes":
+        number = pokemon.paldeaTMDex;
+        decimals = 3;
+        break;
+      default:
+        number = pokemon.nationalDex;
+        decimals = 4;
+    }
   }
 
-  return number ? (
+  return pokemon && number ? (
     <span>{`#${handleNumber(number, decimals)}`}</span>
   ) : (
     <span />
