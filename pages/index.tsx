@@ -24,14 +24,13 @@ export default function Home() {
           </div>
         </Link>
         <Link href="/teal-mask-boxes">
-          {/* <div></div> */}
-          {/* <Image
+          <Image
             unoptimized
-            src="appicons/pokemon-home.png"
+            src="appicons/pokemon-teal-mask.png"
             width={10}
             height={10}
             alt="Pokémon Scarlet and Violet"
-          /> */}
+          />
           <div>
             <span className={styles.title}>Teal Mask</span>
             <br />
@@ -61,14 +60,13 @@ export default function Home() {
           </div>
         </Link>
         <Link href="/boxtracker">
-          {/* <div></div> */}
-          {/* <Image
+          <Image
             unoptimized
-            src="appicons/pokemon-home.png"
+            src="appicons/pokebox.png"
             width={10}
             height={10}
             alt="Box Builder (Beta)"
-          /> */}
+          />
           <div>
             <span className={styles.title}>Builder</span>
             <br />
