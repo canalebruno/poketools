@@ -764,6 +764,10 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
             !pkmn.family.includes(690)
           );
         });
+      case "tm":
+        return list.filter((pkmn) => {
+          return pkmn.paldeaTMDex;
+        });
       case "pla":
         return list.filter((pkmn) => {
           return pkmn.hisuiDex;
