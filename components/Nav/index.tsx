@@ -37,11 +37,16 @@ export default function Nav() {
     },
     {
       id: 2,
+      title: "Teal Mask",
+      slug: "/teal-mask-boxes",
+    },
+    {
+      id: 3,
       title: "Home",
       slug: "/homeboxes",
     },
     {
-      id: 3,
+      id: 4,
       title: "Builder (Beta)",
       slug: "/boxtracker",
     },
