@@ -6,7 +6,14 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Games, List, Pokemon, PokemonCustomBox } from "../utils/types";
+import {
+  Games,
+  List,
+  ListOnStorage,
+  Pokemon,
+  PokemonCustomBox,
+  PokemonCustomBoxShort,
+} from "../utils/types";
 
 interface PokedexProviderProps {
   children: ReactNode;
@@ -58,8 +65,8 @@ interface PokedexContextData {
   // shiny tracker
   shinyDex: Pokemon[];
   setShinyDex: (p: Pokemon[]) => void;
-  customBoxes: List[];
-  setCustomBoxes: (l: List[]) => void;
+  customBoxes: ListOnStorage[];
+  setCustomBoxes: (l: ListOnStorage[]) => void;
   handleAddPokemon: (id: string, shouldAddShiny: boolean) => void;
   pageBox: List;
   setPageBox: (l: List) => void;
@@ -80,6 +87,10 @@ interface PokedexContextData {
   ) => void;
   handleSelectGame: (value: string) => void;
   huntGameSelection: string;
+  setLocalStorage: (data: ListOnStorage[]) => void;
+  expandPokemonList: (list: PokemonCustomBoxShort[]) => PokemonCustomBox[];
+  compactPokemonList: (list: PokemonCustomBox[]) => PokemonCustomBoxShort[];
+  getLocalStorage: () => ListOnStorage[] | undefined;
 }
 
 const PokedexContext = createContext<PokedexContextData>(
@@ -670,7 +681,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   const [shinyDex, setShinyDex] = useState<Pokemon[]>([] as Pokemon[]);
   const [pageBox, setPageBox] = useState<List>({} as List);
-  const [customBoxes, setCustomBoxes] = useState<List[]>([] as List[]);
+  const [customBoxes, setCustomBoxes] = useState<ListOnStorage[]>(
+    [] as ListOnStorage[]
+  );
   const [fullShinyDex, setFullShinyDex] = useState<Pokemon[]>([] as Pokemon[]);
   const [showChecked, setShowChecked] = useState(false);
   const [showUnchecked, setShowUnchecked] = useState(false);
@@ -697,6 +710,56 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   //     passThroughFilters();
   //   }
   // }, [showChecked]);
+
+  function setLocalStorage(data: ListOnStorage[]) {
+    setCustomBoxes(data);
+    localStorage.setItem("localBoxes", JSON.stringify(data));
+  }
+
+  function expandPokemonList(list: PokemonCustomBoxShort[]) {
+    let fullData: Pokemon[];
+
+    // continue from fetch HERE
+    fetch("/api/shinydex")
+      .then((res) => res.json())
+      .then((data) => {
+        fullData = data;
+      });
+
+    return list.map((pkmn) => {
+      const extraInfo = fullData.find((item: any) => {
+        return item.id === pkmn.id;
+      });
+
+      // if (extraInfo) {
+      return {
+        customBoxId: pkmn.customBoxId,
+        isShiny: pkmn.isShiny,
+        isChecked: pkmn.isChecked,
+        ...extraInfo!,
+      };
+      // } else {
+      //   throw Error;
+      // }
+    });
+  }
+
+  function compactPokemonList(list: PokemonCustomBox[]) {
+    return list.map((pkmn) => {
+      return {
+        customBoxId: pkmn.customBoxId,
+        isShiny: pkmn.isShiny,
+        isChecked: pkmn.isChecked,
+        id: pkmn.id,
+      };
+    });
+  }
+
+  function getLocalStorage() {
+    const data = localStorage.getItem("localBoxes");
+
+    return data ? JSON.parse(data) : undefined;
+  }
 
   function filterListByChecked(list: PokemonCustomBox[]) {
     if (showChecked && !showUnchecked) {
@@ -1043,6 +1106,10 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         passThroughFilters,
         handleSelectGame,
         huntGameSelection,
+        setLocalStorage,
+        expandPokemonList,
+        compactPokemonList,
+        getLocalStorage,
       }}
     >
       {children}

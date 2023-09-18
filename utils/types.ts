@@ -33,6 +33,13 @@ export interface PokemonCustomBox extends Pokemon {
   isChecked: boolean
 }
 
+export interface PokemonCustomBoxShort {
+  customBoxId: string;
+  isShiny: boolean;
+  isChecked: boolean
+  id: string
+}
+
 // Interface to define Pokemon on the frontend
 export interface SVLocation {
   _id?: string;
@@ -50,12 +57,10 @@ export interface List {
   pokemon: PokemonCustomBox[];
 }
 
-export type Games = "s" | "v" | "pla" | "sw" | "sh" | "ioa" | "ct" 
+export interface ListOnStorage {
+  id: string;
+  name: string;
+  pokemon: PokemonCustomBoxShort[];
+}
 
-// // Interface to defining our object of response functions
-// export interface ResponseFuncs {
-//   GET?: Function
-//   POST?: Function
-//   PUT?: Function
-//   DELETE?: Function
-// }
+export type Games = "s" | "v" | "pla" | "sw" | "sh" | "ioa" | "ct" 

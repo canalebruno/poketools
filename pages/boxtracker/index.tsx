@@ -3,7 +3,12 @@ import masterStyles from "../../styles/Home.module.scss";
 import styles from "./styles.module.scss";
 import { usePokedex } from "../../hooks/usePokedex";
 import { useEffect, useState } from "react";
-import { List, Pokemon, PokemonCustomBox } from "../../utils/types";
+import {
+  List,
+  ListOnStorage,
+  Pokemon,
+  PokemonCustomBox,
+} from "../../utils/types";
 import Link from "next/link";
 import ImportOldBoxes from "../../components/ImportOldBoxes";
 import Head from "next/head";
@@ -12,7 +17,15 @@ import InputContainer from "../../components/Inputs/InputContainer";
 import Button from "../../components/Button";
 
 export default function BoxTrackerMain() {
-  const { setCustomBoxes, customBoxes, setPokedexShown } = usePokedex();
+  const {
+    setCustomBoxes,
+    customBoxes,
+    setPokedexShown,
+    getLocalStorage,
+    setLocalStorage,
+    expandPokemonList,
+    compactPokemonList,
+  } = usePokedex();
 
   const [newBoxName, setNewBoxName] = useState("");
   const [shinydex, setShinydex] = useState([] as Pokemon[]);
@@ -31,10 +44,11 @@ export default function BoxTrackerMain() {
         setShinydex(data);
       });
 
-    const localBoxes = localStorage.getItem("localBoxes");
+    // const localBoxes = localStorage.getItem("localBoxes");
+    const localBoxes = getLocalStorage();
 
     if (localBoxes) {
-      setCustomBoxes(JSON.parse(localBoxes));
+      setCustomBoxes(localBoxes);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -58,15 +72,16 @@ export default function BoxTrackerMain() {
       return;
     }
 
-    const newCustomBox: List = {
+    const newCustomBox: ListOnStorage = {
       id: newSlug,
       name: newBoxName,
-      pokemon: findTemplate(),
+      pokemon: compactPokemonList(findTemplate()),
     };
 
-    const updatedLists: List[] = [...customBoxes, newCustomBox];
-    setCustomBoxes(updatedLists);
-    localStorage.setItem("localBoxes", JSON.stringify(updatedLists));
+    const updatedLists: ListOnStorage[] = [...customBoxes, newCustomBox];
+    // setCustomBoxes(updatedLists);
+    setLocalStorage(updatedLists);
+    // localStorage.setItem("localBoxes", JSON.stringify(updatedLists));
     handleNewBoxModalClose();
   }
 

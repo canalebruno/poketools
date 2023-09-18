@@ -30,6 +30,7 @@ export default function CustomBoxTracker() {
     handleToggleCheck,
     showAllCheckedAndUnchecked,
     huntGameSelection,
+    expandPokemonList,
   } = usePokedex();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -60,7 +61,13 @@ export default function CustomBoxTracker() {
     const getPageBox = customBoxes.find((box) => box.id === pageSlug);
 
     if (getPageBox) {
-      setPageBox(getPageBox);
+      const expandPageBox = {
+        id: getPageBox.id,
+        name: getPageBox.name,
+        pokemon: expandPokemonList(getPageBox.pokemon),
+      };
+
+      setPageBox(expandPageBox);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageBox, customBoxes]);
