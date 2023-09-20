@@ -27,7 +27,7 @@ export default function BoxBuilderAddPokemonModal({
       if (isShiny) {
         setFilteredDex(
           fullPokedex.filter((pkmn) => {
-            return pkmn.homeShinyPic !== "";
+            return pkmn.images.homeShinyRender !== "";
           })
         );
       } else {
@@ -42,7 +42,7 @@ export default function BoxBuilderAddPokemonModal({
 
       if (isShiny) {
         newFilter = newFilter.filter((pkmn) => {
-          return pkmn.homeShinyPic !== "";
+          return pkmn.images.homeShinyRender !== "";
         });
       }
 
@@ -97,7 +97,9 @@ export default function BoxBuilderAddPokemonModal({
                     width={100}
                     height={100}
                     src={`/home/${
-                      isShiny ? pokemon.homeShinyPic : pokemon.homePic
+                      isShiny
+                        ? pokemon.images.homeShinyRender
+                        : pokemon.images.homeRender
                     }`}
                     alt={handleName(pokemon, false, "National", true)}
                   />

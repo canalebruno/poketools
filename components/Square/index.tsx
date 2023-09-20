@@ -27,7 +27,7 @@ export default function Square({
       title={handleName(
         pokemon,
         router.pathname !== "/svboxes" ||
-          (router.pathname === "/svboxes" && pokemon.paldeaDex! < 500),
+          (router.pathname === "/svboxes" && pokemon.dex.paldeaDex! < 500),
         router.pathname,
         true
       )}
@@ -49,16 +49,16 @@ export default function Square({
           height={25}
           src={`/${imageSource}/${
             imageSource === "svicons"
-              ? pokemon.icon
+              ? pokemon.images.icon
               : !("customBoxId" in pokemon) ||
                 ("isShiny" in pokemon && !pokemon.isShiny)
-              ? pokemon.homePic
-              : pokemon.homeShinyPic
+              ? pokemon.images.homeRender
+              : pokemon.images.homeShinyRender
           }`}
           alt={`#${
             router.pathname === "/svboxes"
-              ? pokemon.paldeaDex
-              : pokemon.nationalDex
+              ? pokemon.dex.paldeaDex
+              : pokemon.dex.nationalDex
           } - ${pokemon.name}`}
         />
       </div>

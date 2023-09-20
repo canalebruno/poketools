@@ -17,7 +17,7 @@ export default function LocationCard({ name, pokemon }: LocationCardProps) {
           <>
             <Image
               unoptimized
-              src={`svicons/${pokemon.icon}`}
+              src={`svicons/${pokemon.images.icon}`}
               alt={name}
               width={80}
               height={80}

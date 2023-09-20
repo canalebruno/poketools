@@ -131,7 +131,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     if (!customOptions.includes("repeat")) {
       notRepeatablePokemon = [
         ...notRepeatablePokemon,
-        ...options[randomIndex].family,
+        ...options[randomIndex].data.family,
       ];
     }
 
@@ -179,7 +179,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
         "625_00",
       ];
 
-      return pkmn.nationalDex > 905 || crossGenPokemon.includes(pkmn.id);
+      return pkmn.dex.nationalDex > 905 || crossGenPokemon.includes(pkmn.id);
     });
   }
 
@@ -189,7 +189,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     }
 
     return pokemon.filter((pkmn) => {
-      return pkmn.stage < 0 || (pkmn.stage === 0 && !pkmn.hasBaby);
+      return pkmn.data.stage < 0 || (pkmn.data.stage === 0 && !pkmn.data.hasBaby);
     });
   }
 
@@ -201,7 +201,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     let locationPokemon = pokemon;
 
     return locationPokemon.filter((pkmn) => {
-      return !notRepeatablePokemon.includes(pkmn.nationalDex);
+      return !notRepeatablePokemon.includes(pkmn.dex.nationalDex);
     });
   }
 
@@ -215,8 +215,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     if (type === "dark") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0133_00" ||
           pkmn.id === "0246_00" ||
           pkmn.id === "0331_00" ||
@@ -229,8 +229,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "dragon") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0333_00" ||
           pkmn.id === "0690_00"
         );
@@ -238,16 +238,16 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "electric") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0133_00"
         );
       });
     } else if (type === "fairy") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0133_00" ||
           pkmn.id === "0856_00" ||
           pkmn.id === "0857_00"
@@ -256,8 +256,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "fighting") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0280_00" ||
           pkmn.id === "0281_00" ||
           pkmn.id === "0912_00" ||
@@ -269,8 +269,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "fire") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0951_00" ||
           pkmn.id === "0837_00" ||
           pkmn.id === "0661_00" ||
@@ -280,8 +280,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "flying") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0147_00" ||
           pkmn.id === "0148_00" ||
           pkmn.id === "0283_00" ||
@@ -295,8 +295,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "ghost") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0056_00" ||
           pkmn.id === "0361_00" ||
           pkmn.id === "0935_00" ||
@@ -306,24 +306,24 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "grass") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0133_00"
         );
       });
     } else if (type === "ground") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0422_00"
         );
       });
     } else if (type === "ice") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0133_00" ||
           pkmn.id === "0090_00"
         );
@@ -331,8 +331,8 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "psychic") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0953_00" ||
           pkmn.id === "0935_00" ||
           pkmn.id === "0133_00"
@@ -341,16 +341,16 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "rock") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0833_00"
         );
       });
     } else if (type === "steel") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0204_00" ||
           pkmn.id === "0447_00" ||
           pkmn.id === "0821_00" ||
@@ -362,15 +362,15 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
     } else if (type === "water") {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type ||
-          pkmn.type2.toLowerCase() === type ||
+          pkmn.data.type1.toLowerCase() === type ||
+          pkmn.data.type2.toLowerCase() === type ||
           pkmn.id === "0133_00"
         );
       });
     } else {
       pokemonByType = pokemon.filter((pkmn) => {
         return (
-          pkmn.type1.toLowerCase() === type || pkmn.type2.toLowerCase() === type
+          pkmn.data.type1.toLowerCase() === type || pkmn.data.type2.toLowerCase() === type
         );
       });
     }

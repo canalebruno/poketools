@@ -267,7 +267,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       } else {
         updatePokedex(
           fullListPokedex.filter((pkmn) => {
-            return !pkmn.genderDifference;
+            return !pkmn.data.genderDifference;
           })
         );
       }
@@ -286,13 +286,13 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 */
   function filterByGender() {
     return pokedexShown.filter((pkmn) => {
-      return !pkmn.genderDifference;
+      return !pkmn.data.genderDifference;
     });
   }
 
   function filterListByGender(list: PokemonCustomBox[]) {
     return list.filter((pkmn) => {
-      return !pkmn.genderDifference;
+      return !pkmn.data.genderDifference;
     });
   }
 
@@ -392,62 +392,62 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   }
 
   function sortByPaldeaDex(a: Pokemon, b: Pokemon) {
-    if (a.paldeaDex === b.paldeaDex) {
+    if (a.dex.paldeaDex === b.dex.paldeaDex) {
       return sortByNationalDex(a, b);
-    } else if (!a.paldeaDex || !b.paldeaDex) {
+    } else if (!a.dex.paldeaDex || !b.dex.paldeaDex) {
       return 0;
     } else {
-      return a.paldeaDex - b.paldeaDex;
+      return a.dex.paldeaDex - b.dex.paldeaDex;
     }
   }
 
   function sortByKitakamiDex(a: Pokemon, b: Pokemon) {
-    if (a.paldeaTMDex === b.paldeaTMDex) {
+    if (a.dex.paldeaTMDex === b.dex.paldeaTMDex) {
       return sortByNationalDex(a, b);
-    } else if (!a.paldeaTMDex || !b.paldeaTMDex) {
+    } else if (!a.dex.paldeaTMDex || !b.dex.paldeaTMDex) {
       return 0;
     } else {
-      return a.paldeaTMDex - b.paldeaTMDex;
+      return a.dex.paldeaTMDex - b.dex.paldeaTMDex;
     }
   }
 
   function sortByGalarDex(a: Pokemon, b: Pokemon) {
-    if (a.galarDex === b.galarDex) {
+    if (a.dex.galarDex === b.dex.galarDex) {
       return sortByNationalDex(a, b);
-    } else if (!a.galarDex || !b.galarDex) {
+    } else if (!a.dex.galarDex || !b.dex.galarDex) {
       return 0;
     } else {
-      return a.galarDex - b.galarDex;
+      return a.dex.galarDex - b.dex.galarDex;
     }
   }
 
   function sortByIsleOfArmorDex(a: Pokemon, b: Pokemon) {
-    if (a.galarIoaDex === b.galarIoaDex) {
+    if (a.dex.galarIoaDex === b.dex.galarIoaDex) {
       return sortByNationalDex(a, b);
-    } else if (!a.galarIoaDex || !b.galarIoaDex) {
+    } else if (!a.dex.galarIoaDex || !b.dex.galarIoaDex) {
       return 0;
     } else {
-      return a.galarIoaDex - b.galarIoaDex;
+      return a.dex.galarIoaDex - b.dex.galarIoaDex;
     }
   }
 
   function sortByCrownTundraDex(a: Pokemon, b: Pokemon) {
-    if (a.galarCtDex === b.galarCtDex) {
+    if (a.dex.galarCtDex === b.dex.galarCtDex) {
       return sortByNationalDex(a, b);
-    } else if (!a.galarCtDex || !b.galarCtDex) {
+    } else if (!a.dex.galarCtDex || !b.dex.galarCtDex) {
       return 0;
     } else {
-      return a.galarCtDex - b.galarCtDex;
+      return a.dex.galarCtDex - b.dex.galarCtDex;
     }
   }
 
   function sortByHisuiDex(a: Pokemon, b: Pokemon) {
-    if (a.hisuiDex === b.hisuiDex) {
+    if (a.dex.hisuiDex === b.dex.hisuiDex) {
       return sortByNationalDex(a, b);
-    } else if (!a.hisuiDex || !b.hisuiDex) {
+    } else if (!a.dex.hisuiDex || !b.dex.hisuiDex) {
       return 0;
     } else {
-      return a.hisuiDex - b.hisuiDex;
+      return a.dex.hisuiDex - b.dex.hisuiDex;
     }
   }
 
@@ -479,68 +479,68 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     switch (order) {
       case "paldean":
         notInDex = list.filter((pkmn) => {
-          return !pkmn.paldeaDex;
+          return !pkmn.dex.paldeaDex;
         });
 
         inDex = list
           .filter((pkmn) => {
-            return pkmn.paldeaDex;
+            return pkmn.dex.paldeaDex;
           })
           .sort((a, b) => sortByPaldeaDex(a, b));
         break;
       case "paldean-tm":
         notInDex = list.filter((pkmn) => {
-          return !pkmn.paldeaTMDex;
+          return !pkmn.dex.paldeaTMDex;
         });
 
         inDex = list
           .filter((pkmn) => {
-            return pkmn.paldeaTMDex;
+            return pkmn.dex.paldeaTMDex;
           })
           .sort((a, b) => sortByKitakamiDex(a, b));
         break;
       case "hisuian":
         notInDex = list.filter((pkmn) => {
-          return !pkmn.hisuiDex;
+          return !pkmn.dex.hisuiDex;
         });
 
         inDex = list
           .filter((pkmn) => {
-            return pkmn.hisuiDex;
+            return pkmn.dex.hisuiDex;
           })
           .sort((a, b) => sortByHisuiDex(a, b));
         break;
       case "galarian":
         notInDex = list.filter((pkmn) => {
-          return !pkmn.galarDex;
+          return !pkmn.dex.galarDex;
         });
 
         inDex = list
           .filter((pkmn) => {
-            return pkmn.galarDex;
+            return pkmn.dex.galarDex;
           })
           .sort((a, b) => sortByGalarDex(a, b));
         break;
       case "galarian-ioa":
         notInDex = list.filter((pkmn) => {
-          return !pkmn.galarIoaDex;
+          return !pkmn.dex.galarIoaDex;
         });
 
         inDex = list
           .filter((pkmn) => {
-            return pkmn.galarIoaDex;
+            return pkmn.dex.galarIoaDex;
           })
           .sort((a, b) => sortByIsleOfArmorDex(a, b));
 
         break;
       case "galarian-ct":
         notInDex = list.filter((pkmn) => {
-          return !pkmn.galarCtDex;
+          return !pkmn.dex.galarCtDex;
         });
 
         inDex = list
           .filter((pkmn) => {
-            return pkmn.galarCtDex;
+            return pkmn.dex.galarCtDex;
           })
           .sort((a, b) => sortByCrownTundraDex(a, b));
 
@@ -686,72 +686,72 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       case "s":
         return list.filter((pkmn) => {
           return (
-            pkmn.paldeaDex &&
+            pkmn.dex.paldeaDex &&
             pkmn.id !== "0128_03" &&
-            pkmn.nationalDex !== 766 &&
-            pkmn.nationalDex !== 875 &&
-            pkmn.nationalDex !== 990 &&
-            pkmn.nationalDex !== 991 &&
-            pkmn.nationalDex !== 992 &&
-            pkmn.nationalDex !== 993 &&
-            pkmn.nationalDex !== 994 &&
-            pkmn.nationalDex !== 995 &&
-            pkmn.nationalDex !== 1006 &&
-            pkmn.nationalDex !== 1008 &&
-            pkmn.nationalDex !== 1010 &&
-            !pkmn.family.includes(200) &&
-            !pkmn.family.includes(316) &&
-            !pkmn.family.includes(371) &&
-            !pkmn.family.includes(692) &&
-            !pkmn.family.includes(885)
+            pkmn.dex.nationalDex !== 766 &&
+            pkmn.dex.nationalDex !== 875 &&
+            pkmn.dex.nationalDex !== 990 &&
+            pkmn.dex.nationalDex !== 991 &&
+            pkmn.dex.nationalDex !== 992 &&
+            pkmn.dex.nationalDex !== 993 &&
+            pkmn.dex.nationalDex !== 994 &&
+            pkmn.dex.nationalDex !== 995 &&
+            pkmn.dex.nationalDex !== 1006 &&
+            pkmn.dex.nationalDex !== 1008 &&
+            pkmn.dex.nationalDex !== 1010 &&
+            !pkmn.data.family.includes(200) &&
+            !pkmn.data.family.includes(316) &&
+            !pkmn.data.family.includes(371) &&
+            !pkmn.data.family.includes(692) &&
+            !pkmn.data.family.includes(885)
           );
         });
       case "v":
         return list.filter((pkmn) => {
           return (
-            pkmn.paldeaDex &&
+            pkmn.dex.paldeaDex &&
             pkmn.id !== "0128_02" &&
-            pkmn.nationalDex !== 765 &&
-            pkmn.nationalDex !== 874 &&
-            pkmn.nationalDex !== 984 &&
-            pkmn.nationalDex !== 985 &&
-            pkmn.nationalDex !== 986 &&
-            pkmn.nationalDex !== 987 &&
-            pkmn.nationalDex !== 988 &&
-            pkmn.nationalDex !== 989 &&
-            pkmn.nationalDex !== 1005 &&
-            pkmn.nationalDex !== 1007 &&
-            pkmn.nationalDex !== 1009 &&
-            !pkmn.family.includes(246) &&
-            !pkmn.family.includes(425) &&
-            !pkmn.family.includes(434) &&
-            !pkmn.family.includes(633) &&
-            !pkmn.family.includes(690)
+            pkmn.dex.nationalDex !== 765 &&
+            pkmn.dex.nationalDex !== 874 &&
+            pkmn.dex.nationalDex !== 984 &&
+            pkmn.dex.nationalDex !== 985 &&
+            pkmn.dex.nationalDex !== 986 &&
+            pkmn.dex.nationalDex !== 987 &&
+            pkmn.dex.nationalDex !== 988 &&
+            pkmn.dex.nationalDex !== 989 &&
+            pkmn.dex.nationalDex !== 1005 &&
+            pkmn.dex.nationalDex !== 1007 &&
+            pkmn.dex.nationalDex !== 1009 &&
+            !pkmn.data.family.includes(246) &&
+            !pkmn.data.family.includes(425) &&
+            !pkmn.data.family.includes(434) &&
+            !pkmn.data.family.includes(633) &&
+            !pkmn.data.family.includes(690)
           );
         });
       case "tm":
         return list.filter((pkmn) => {
-          return pkmn.paldeaTMDex;
+          return pkmn.dex.paldeaTMDex;
         });
       case "pla":
         return list.filter((pkmn) => {
-          return pkmn.hisuiDex;
+          return pkmn.dex.hisuiDex;
         });
       case "sw":
         return list.filter((pkmn) => {
-          return pkmn.galarDex;
+          return pkmn.dex.galarDex;
         });
       case "sh":
         return list.filter((pkmn) => {
-          return pkmn.galarDex;
+          return pkmn.dex.galarDex;
         });
       case "ioa":
         return list.filter((pkmn) => {
-          return pkmn.galarIoaDex;
+          return pkmn.dex.galarIoaDex;
         });
       case "ct":
         return list.filter((pkmn) => {
-          return pkmn.galarCtDex;
+          return pkmn.dex.galarCtDex;
         });
       default:
         return list;
@@ -832,7 +832,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         pageBox.pokemon && pageBox.pokemon.length > 0
           ? [...pageBox.pokemon, pokemonToAdd]
           : // .sort((a, b) => {
-            //     if (a.nationalDex === b.nationalDex) {
+            //     if (a.dex.nationalDex === b.dex.nationalDex) {
             //       if (a.id < b.id) {
             //         return -1;
             //       } else if (a.id > b.id) {
@@ -841,7 +841,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
             //         return 0;
             //       }
             //     } else {
-            //       return a.nationalDex - b.nationalDex;
+            //       return a.dex.nationalDex - b.dex.nationalDex;
             //     }
             //   })
             [pokemonToAdd],

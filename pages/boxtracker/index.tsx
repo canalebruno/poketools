@@ -90,7 +90,7 @@ export default function BoxTrackerMain() {
       case "gender":
         // Filter by females with genderDifference
         const females = fullPokedex.filter((pkmn) => {
-          return pkmn.genderDifference;
+          return pkmn.data.genderDifference;
         });
 
         // New array with the males from the females array
@@ -110,7 +110,7 @@ export default function BoxTrackerMain() {
         // Compiling males and females, and filtering duplicate females
         const malesFemales = [
           ...males.filter((male) => {
-            return !male.genderDifference;
+            return !male.data.genderDifference;
           }),
           ...females,
         ];
@@ -122,13 +122,14 @@ export default function BoxTrackerMain() {
         break;
       case "hisui":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.hisuiDex;
+          return pkmn.dex.hisuiDex;
         });
         break;
       case "paldea":
         templateDone = fullPokedex.filter((pkmn) => {
           return (
-            (pkmn.paldeaDex && pkmn.paldeaDex <= 400) || pkmn.nationalDex > 1000
+            (pkmn.dex.paldeaDex && pkmn.dex.paldeaDex <= 400) ||
+            pkmn.dex.nationalDex > 1000
           );
         });
         break;
@@ -154,47 +155,47 @@ export default function BoxTrackerMain() {
         break;
       case "gen1":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.generation === 1;
+          return pkmn.dex.generation === 1;
         });
         break;
       case "gen2":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.generation === 2;
+          return pkmn.dex.generation === 2;
         });
         break;
       case "gen3":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.generation === 3;
+          return pkmn.dex.generation === 3;
         });
         break;
       case "gen4":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.generation === 4;
+          return pkmn.dex.generation === 4;
         });
         break;
       case "gen5":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.generation === 5;
+          return pkmn.dex.generation === 5;
         });
         break;
       case "gen6":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.generation === 6;
+          return pkmn.dex.generation === 6;
         });
         break;
       case "gen7":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.generation === 7;
+          return pkmn.dex.generation === 7;
         });
         break;
       case "gen8":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.generation === 8 || pkmn.generation === 8.5;
+          return pkmn.dex.generation === 8 || pkmn.dex.generation === 8.5;
         });
         break;
       case "gen9":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.generation === 9;
+          return pkmn.dex.generation === 9;
         });
         break;
       case "multiple":
@@ -211,7 +212,7 @@ export default function BoxTrackerMain() {
         const originalForm = multipleForm.map((multi) => {
           const original = fullPokedex.find((pkmn) => {
             return (
-              pkmn.nationalDex === multi.nationalDex &&
+              pkmn.dex.nationalDex === multi.dex.nationalDex &&
               pkmn.formOrder === "00" &&
               pkmn.id !== "128_00"
             );
@@ -234,29 +235,31 @@ export default function BoxTrackerMain() {
         break;
       case "galar":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.galarDex;
+          return pkmn.dex.galarDex;
         });
         break;
       case "ioa":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.galarIoaDex;
+          return pkmn.dex.galarIoaDex;
         });
         break;
       case "ct":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.galarCtDex;
+          return pkmn.dex.galarCtDex;
         });
         break;
       case "swsh":
         templateDone = fullPokedex.filter((pkmn) => {
-          return pkmn.galarDex || pkmn.galarIoaDex || pkmn.galarCtDex;
+          return (
+            pkmn.dex.galarDex || pkmn.dex.galarIoaDex || pkmn.dex.galarCtDex
+          );
         });
         break;
     }
 
     if (templateDone && isAllShiny) {
       templateDone = templateDone.filter((pkmn) => {
-        return pkmn.homeShinyPic !== "";
+        return pkmn.images.homeShinyRender !== "";
       });
     }
 
@@ -276,7 +279,7 @@ export default function BoxTrackerMain() {
             return 0;
           }
 
-          if (a.nationalDex === b.nationalDex) {
+          if (a.dex.nationalDex === b.dex.nationalDex) {
             if (a.id < b.id) {
               return -1;
             } else if (a.id > b.id) {
@@ -285,7 +288,7 @@ export default function BoxTrackerMain() {
               return 0;
             }
           } else {
-            return a.nationalDex - b.nationalDex;
+            return a.dex.nationalDex - b.dex.nationalDex;
           }
         });
     } else {

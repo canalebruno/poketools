@@ -31,7 +31,7 @@ export function handleName(
       prefixName += pokemon.uniqueForm + " ";
     }
 
-    if (pokemon.genderDifference) {
+    if (pokemon.data.genderDifference) {
       prefixName += "Female ";
     }
   }
@@ -39,13 +39,13 @@ export function handleName(
   if (number) {
     switch (dex) {
       case "/svboxes":
-        prefixNumber = "#" + handleNumber(pokemon.paldeaDex!, 3) + " - ";
+        prefixNumber = "#" + handleNumber(pokemon.dex.paldeaDex!, 3) + " - ";
         break;
       case "/teal-mask-boxes":
-        prefixNumber = "#" + handleNumber(pokemon.paldeaTMDex!, 3) + " - ";
+        prefixNumber = "#" + handleNumber(pokemon.dex.paldeaTMDex!, 3) + " - ";
         break;
       default:
-        prefixNumber = "#" + handleNumber(pokemon.nationalDex, 4) + " - ";
+        prefixNumber = "#" + handleNumber(pokemon.dex.nationalDex, 4) + " - ";
     }
   }
 

@@ -16,17 +16,17 @@ export default function TopNumber({ pokemon = null }: TopNumberProps) {
     switch (router.pathname) {
       case "/svboxes":
         number =
-          pokemon.paldeaDex && pokemon.paldeaDex <= 400
-            ? pokemon.paldeaDex
+          pokemon.dex.paldeaDex && pokemon.dex.paldeaDex <= 400
+            ? pokemon.dex.paldeaDex
             : 400;
         decimals = 3;
         break;
       case "/teal-mask-boxes":
-        number = pokemon.paldeaTMDex;
+        number = pokemon.dex.paldeaTMDex;
         decimals = 3;
         break;
       default:
-        number = pokemon.nationalDex;
+        number = pokemon.dex.nationalDex;
         decimals = 4;
     }
   }

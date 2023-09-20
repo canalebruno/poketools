@@ -80,7 +80,9 @@ export default function BoxBuilderRemovePokemonModal({
                     width={100}
                     height={100}
                     src={`/home/${
-                      pokemon.isShiny ? pokemon.homeShinyPic : pokemon.homePic
+                      pokemon.isShiny
+                        ? pokemon.images.homeShinyRender
+                        : pokemon.images.homeRender
                     }`}
                     alt={handleName(pokemon, false, "National", true)}
                   />

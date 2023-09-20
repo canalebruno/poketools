@@ -49,10 +49,10 @@ export default function SearchBox() {
                   (pkmn.formOrder === "00" ||
                     pkmn.id === "128_01" ||
                     pkmn.id === "194_01") &&
-                  !pkmn.genderDifference
+                  !pkmn.data.genderDifference
                 );
               default:
-                return pkmn.formOrder === "00" && !pkmn.genderDifference;
+                return pkmn.formOrder === "00" && !pkmn.data.genderDifference;
             }
           })
           .map((pkmn) => {
@@ -60,7 +60,7 @@ export default function SearchBox() {
               label: handleName(
                 pkmn,
                 router.pathname !== "/svboxes" ||
-                  (router.pathname === "/svboxes" && pkmn.paldeaDex! < 500),
+                  (router.pathname === "/svboxes" && pkmn.dex.paldeaDex! < 500),
                 router.pathname === "/svboxes" ? "Paldean" : "National",
                 false
               ),

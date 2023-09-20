@@ -1,5 +1,5 @@
 // Interface to define Pokemon on the frontend
-export interface Pokemon {
+export interface OldPokemon {
   _id?: string;
   id: string;
   nationalDex: number;
@@ -25,6 +25,42 @@ export interface Pokemon {
   galarDex: number | null,
   galarIoaDex: number | null,
   paldeaTMDex: number | null
+}
+
+export interface Pokemon {
+  _id?: string;
+  id: string;
+  formOrder: string;
+  name: string;
+  generalForm: string;
+  uniqueForm: string;
+  data: {
+    type1: string;
+    type2: string;
+    stage: number;
+    genderDifference: boolean;
+    hasBaby: boolean;
+    family: number[];
+  }
+  avalability: {
+    homeDepositable: boolean;
+    shinyReleased: boolean;
+  }
+  dex: {
+    generation: number;
+    nationalDex: number;
+    galarDex: number | null,
+    galarIoaDex: number | null,
+    galarCtDex: number | null,
+    hisuiDex: null | number;
+    paldeaDex: null | number;
+    paldeaTMDex: number | null
+  }
+  images: {
+    icon: string;
+    homeRender: string;
+    homeShinyRender: string;
+  }
 }
 
 export interface PokemonCustomBox extends Pokemon {

@@ -61,7 +61,7 @@ export default function Box({
         }
       } else {
         const latestGen = pokedexShown.reduce(
-          (a, b) => Math.max(a, b.generation),
+          (a, b) => Math.max(a, b.dex.generation),
           -Infinity
         );
 
@@ -70,7 +70,7 @@ export default function Box({
         // Generation Iteration
         for (let g = 1; g <= latestGen; g++) {
           const generationDex = pokedexShown.filter((pkmn) => {
-            return pkmn.generation === g;
+            return pkmn.dex.generation === g;
           });
 
           // Quantity iteration
@@ -92,7 +92,7 @@ export default function Box({
             for (let j = 1; j < 10; j++) {
               const boxPokemon = pokedexShown
                 .filter((pkmn) => {
-                  return pkmn.generation === 8.5;
+                  return pkmn.dex.generation === 8.5;
                 })
                 .slice(30 * j - 30, 30 * j);
 
