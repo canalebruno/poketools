@@ -6,7 +6,7 @@ async function pokedexAPI (req: NextApiRequest, res: NextApiResponse)  {
     const client = await clientPromise;
     const db = client.db("pokedex");
 
-    const pokemon = await db.collection("pokedex").find({}).toArray();
+    const pokemon = await db.collection("pokedex").find({id:{$ne:"0670_05"}}).toArray();
 
     res.json(pokemon);
   } catch (e: any) {

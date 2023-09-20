@@ -59,6 +59,15 @@
     align-items: center;
 }
 
+.inputGroup {
+    display: flex;
+    gap: 1rem;
+
+    div {
+        flex: 1;
+    }
+}
+
 // Desktop
 @media (min-width: 720px) {
     .topSection {

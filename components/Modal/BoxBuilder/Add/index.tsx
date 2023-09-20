@@ -24,17 +24,31 @@ export default function BoxBuilderAddPokemonModal({
 
   useEffect(() => {
     if (term === "") {
-      setFilteredDex(fullPokedex);
+      if (isShiny) {
+        setFilteredDex(
+          fullPokedex.filter((pkmn) => {
+            return pkmn.homeShinyPic !== "";
+          })
+        );
+      } else {
+        setFilteredDex(fullPokedex);
+      }
     } else {
-      const newFilter = fullPokedex.filter((pokemon) => {
+      let newFilter = fullPokedex.filter((pokemon) => {
         return handleName(pokemon, true, "National", true)
           .toLowerCase()
           .includes(term.toLowerCase());
       });
 
+      if (isShiny) {
+        newFilter = newFilter.filter((pkmn) => {
+          return pkmn.homeShinyPic !== "";
+        });
+      }
+
       setFilteredDex(newFilter);
     }
-  }, [term, fullPokedex]);
+  }, [term, fullPokedex, isShiny]);
 
   return (
     <Modal open={isOpen} onClose={() => onClose(false)}>

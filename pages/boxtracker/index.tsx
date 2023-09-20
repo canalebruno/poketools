@@ -25,6 +25,7 @@ export default function BoxTrackerMain() {
     setLocalStorage,
     expandPokemonList,
     compactPokemonList,
+    fullPokedex,
   } = usePokedex();
 
   const [newBoxName, setNewBoxName] = useState("");
@@ -44,7 +45,6 @@ export default function BoxTrackerMain() {
         setShinydex(data);
       });
 
-    // const localBoxes = localStorage.getItem("localBoxes");
     const localBoxes = getLocalStorage();
 
     if (localBoxes) {
@@ -79,9 +79,7 @@ export default function BoxTrackerMain() {
     };
 
     const updatedLists: ListOnStorage[] = [...customBoxes, newCustomBox];
-    // setCustomBoxes(updatedLists);
     setLocalStorage(updatedLists);
-    // localStorage.setItem("localBoxes", JSON.stringify(updatedLists));
     handleNewBoxModalClose();
   }
 
@@ -91,13 +89,13 @@ export default function BoxTrackerMain() {
     switch (templateListSelection) {
       case "gender":
         // Filter by females with genderDifference
-        const females = shinydex.filter((pkmn) => {
+        const females = fullPokedex.filter((pkmn) => {
           return pkmn.genderDifference;
         });
 
         // New array with the males from the females array
         const males = females.map((female) => {
-          const male = shinydex.find((pkmn) => {
+          const male = fullPokedex.find((pkmn) => {
             return pkmn.id === female.id.slice(0, -2);
           });
 
@@ -120,22 +118,22 @@ export default function BoxTrackerMain() {
         templateDone = malesFemales;
         break;
       case "national":
-        templateDone = shinydex;
+        templateDone = fullPokedex;
         break;
       case "hisui":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.hisuiDex;
         });
         break;
       case "paldea":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return (
             (pkmn.paldeaDex && pkmn.paldeaDex <= 400) || pkmn.nationalDex > 1000
           );
         });
         break;
       case "regionals":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return (
             pkmn.generalForm === "Hisuian" ||
             pkmn.generalForm === "Alolan" ||
@@ -145,62 +143,62 @@ export default function BoxTrackerMain() {
         });
         break;
       case "mega":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generalForm === "Mega" || pkmn.uniqueForm === "Primal";
         });
         break;
       case "gigantamax":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generalForm === "Gigantamax";
         });
         break;
       case "gen1":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generation === 1;
         });
         break;
       case "gen2":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generation === 2;
         });
         break;
       case "gen3":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generation === 3;
         });
         break;
       case "gen4":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generation === 4;
         });
         break;
       case "gen5":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generation === 5;
         });
         break;
       case "gen6":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generation === 6;
         });
         break;
       case "gen7":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generation === 7;
         });
         break;
       case "gen8":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generation === 8 || pkmn.generation === 8.5;
         });
         break;
       case "gen9":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.generation === 9;
         });
         break;
       case "multiple":
-        const multipleForm = shinydex.filter((pkmn) => {
+        const multipleForm = fullPokedex.filter((pkmn) => {
           return (
             (pkmn.uniqueForm &&
               pkmn.generalForm !== "Mega" &&
@@ -211,7 +209,7 @@ export default function BoxTrackerMain() {
         });
 
         const originalForm = multipleForm.map((multi) => {
-          const original = shinydex.find((pkmn) => {
+          const original = fullPokedex.find((pkmn) => {
             return (
               pkmn.nationalDex === multi.nationalDex &&
               pkmn.formOrder === "00" &&
@@ -235,25 +233,31 @@ export default function BoxTrackerMain() {
         );
         break;
       case "galar":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.galarDex;
         });
         break;
       case "ioa":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.galarIoaDex;
         });
         break;
       case "ct":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.galarCtDex;
         });
         break;
       case "swsh":
-        templateDone = shinydex.filter((pkmn) => {
+        templateDone = fullPokedex.filter((pkmn) => {
           return pkmn.galarDex || pkmn.galarIoaDex || pkmn.galarCtDex;
         });
         break;
+    }
+
+    if (templateDone && isAllShiny) {
+      templateDone = templateDone.filter((pkmn) => {
+        return pkmn.homeShinyPic !== "";
+      });
     }
 
     if (templateDone) {
@@ -360,20 +364,22 @@ export default function BoxTrackerMain() {
             </optgroup>
           </select>
         </InputContainer>
-        <InputContainer label="Add All Shiny" valueOn={"s"}>
-          <input
-            type="checkbox"
-            checked={isAllShiny}
-            onChange={() => setIsAllShiny(!isAllShiny)}
-          />
-        </InputContainer>
-        <InputContainer label="Start All Checked" valueOn={"s"}>
-          <input
-            type="checkbox"
-            checked={isAllChecked}
-            onChange={() => setIsAllChecked(!isAllChecked)}
-          />
-        </InputContainer>
+        <div className={styles.inputGroup}>
+          <InputContainer label="Add All Shiny" valueOn={"s"}>
+            <input
+              type="checkbox"
+              checked={isAllShiny}
+              onChange={() => setIsAllShiny(!isAllShiny)}
+            />
+          </InputContainer>
+          <InputContainer label="Start All Checked" valueOn={"s"}>
+            <input
+              type="checkbox"
+              checked={isAllChecked}
+              onChange={() => setIsAllChecked(!isAllChecked)}
+            />
+          </InputContainer>
+        </div>
         <div className={styles.buttonGroup} style={{ margin: "0 auto" }}>
           <Button
             label="Cancel"
