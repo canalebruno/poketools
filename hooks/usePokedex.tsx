@@ -690,6 +690,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const [showAllCheckedAndUnchecked, setShowAllCheckedAndUnchecked] =
     useState(true);
   const [huntGameSelection, setHuntGameSelection] = useState("");
+  const [fullPokedex, setFullPokedex] = useState([] as Pokemon[]);
 
   useEffect(() => {
     fetch("/api/shinydex")
@@ -702,14 +703,18 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   }, []);
 
   useEffect(() => {
+    fetch("/api/pokedex")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setFullPokedex(data);
+      });
+  }, []);
+
+  useEffect(() => {
     setPokedexShown(pageBox.pokemon);
   }, [pageBox]);
-
-  // useEffect(() => {
-  //   if (pageBox.pokemon && pageBox.pokemon.length > 0) {
-  //     passThroughFilters();
-  //   }
-  // }, [showChecked]);
 
   function setLocalStorage(data: ListOnStorage[]) {
     setCustomBoxes(data);
@@ -717,30 +722,17 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   }
 
   function expandPokemonList(list: PokemonCustomBoxShort[]) {
-    let fullData: Pokemon[];
-
-    // continue from fetch HERE
-    fetch("/api/shinydex")
-      .then((res) => res.json())
-      .then((data) => {
-        fullData = data;
-      });
-
     return list.map((pkmn) => {
-      const extraInfo = fullData.find((item: any) => {
+      const extraInfo = fullPokedex.find((item: any) => {
         return item.id === pkmn.id;
       });
 
-      // if (extraInfo) {
       return {
         customBoxId: pkmn.customBoxId,
         isShiny: pkmn.isShiny,
         isChecked: pkmn.isChecked,
         ...extraInfo!,
       };
-      // } else {
-      //   throw Error;
-      // }
     });
   }
 

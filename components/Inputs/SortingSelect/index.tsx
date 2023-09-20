@@ -47,10 +47,6 @@ export default function SortingSelect() {
 
   const { handleSorting, orderList } = usePokedex();
 
-  useEffect(() => {
-    console.log(orderList);
-  }, []);
-
   function handleSelectChange(selection: string) {
     const orderListValues = options.map((option) => {
       return option.value;
