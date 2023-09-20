@@ -91,6 +91,7 @@ interface PokedexContextData {
   compactPokemonList: (list: PokemonCustomBox[]) => PokemonCustomBoxShort[];
   getLocalStorage: () => ListOnStorage[] | undefined;
   fullPokedex: Pokemon[];
+  resetPage: () => void;
   // SORTING
   handleSorting: (value: SortingLists) => void;
   sortByNationalDex: (a: Pokemon, b: Pokemon) => number;
@@ -143,16 +144,20 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     setPokedexShown(loadingPokedex);
   }
 
+  function resetPage() {
+    setPokedexShown([] as PokemonShown[]);
+  }
+
   function resetControls() {
     switch (router.pathname) {
       case "/svboxes":
-        handleSorting("paldean");
+        setOrderList("paldean");
         break;
       case "/teal-mask-boxes":
-        handleSorting("paldean-tm");
+        setOrderList("paldean-tm");
         break;
       default:
-        handleSorting("national");
+        setOrderList("national");
     }
 
     setFilterValues(["gender"]);
@@ -454,101 +459,22 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     setOrderList(value);
 
-    if (value === "national") {
-      pokedexShown.sort((a, b) => sortByNationalDex(a, b));
-      return;
-    }
+    const sortedList = sortList(pokedexShown, value) as Pokemon[];
 
-    let notInDex = [] as Pokemon[];
-
-    let inDex = [] as Pokemon[];
-
-    switch (value) {
-      case "paldean":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.paldeaDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.paldeaDex;
-          })
-          .sort((a, b) => sortByPaldeaDex(a, b));
-        break;
-      case "paldean-tm":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.paldeaTMDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.paldeaTMDex;
-          })
-          .sort((a, b) => sortByKitakamiDex(a, b));
-        break;
-      case "hisuian":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.hisuiDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.hisuiDex;
-          })
-          .sort((a, b) => sortByHisuiDex(a, b));
-        break;
-      case "galarian":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.galarDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.galarDex;
-          })
-          .sort((a, b) => sortByGalarDex(a, b));
-        break;
-      case "galarian-ioa":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.galarIoaDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.galarIoaDex;
-          })
-          .sort((a, b) => sortByIsleOfArmorDex(a, b));
-
-        break;
-      case "galarian-ct":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.galarCtDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.galarCtDex;
-          })
-          .sort((a, b) => sortByCrownTundraDex(a, b));
-        break;
-    }
-
-    setPokedexShown([
-      ...inDex,
-      ...notInDex.sort((a, b) => {
-        return a.id > b.id ? 1 : -1;
-      }),
-    ]);
+    setPokedexShown(sortedList);
   }
 
-  function sortList(list: PokemonCustomBox[], order: SortingLists) {
+  function sortList(
+    list: PokemonCustomBox[] | Pokemon[],
+    order: SortingLists
+  ): PokemonCustomBox[] | Pokemon[] {
     if (order === "national") {
       return list.sort((a, b) => sortByNationalDex(a, b));
     }
 
-    let notInDex;
+    let notInDex = [] as PokemonCustomBox[] | Pokemon[];
 
-    let inDex;
+    let inDex = [] as PokemonCustomBox[] | Pokemon[];
 
     switch (order) {
       case "paldean":
@@ -617,10 +543,23 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
             return pkmn.galarCtDex;
           })
           .sort((a, b) => sortByCrownTundraDex(a, b));
+
         break;
     }
 
-    return [...inDex, ...notInDex.sort((a, b) => sortByNationalDex(a, b))];
+    if ("customBoxId" in inDex[0]) {
+      const sortedList: PokemonCustomBox[] = [
+        ...inDex,
+        ...notInDex.sort((a, b) => sortByNationalDex(a, b)),
+      ] as PokemonCustomBox[];
+      return sortedList;
+    } else {
+      const sortedList: Pokemon[] = [
+        ...inDex,
+        ...notInDex.sort((a, b) => sortByNationalDex(a, b)),
+      ] as Pokemon[];
+      return sortedList;
+    }
   }
 
   // AQUI
@@ -827,7 +766,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   ) {
     const sortedList: List = {
       ...updatedList,
-      pokemon: sortList(updatedList.pokemon, orderList),
+      pokemon: sortList(updatedList.pokemon, orderList) as PokemonCustomBox[],
     };
 
     const newCustomBoxes = [
@@ -851,7 +790,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     if (preventPokedexShown) {
       sortedList = {
         ...updatedList,
-        pokemon: sortList(updatedList.pokemon, orderList),
+        pokemon: sortList(updatedList.pokemon, orderList) as PokemonCustomBox[],
       };
     } else {
       sortedList = updatedList;
@@ -1025,6 +964,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   return (
     <PokedexContext.Provider
       value={{
+        resetPage,
         pokedexShown,
         viewGenderDifference,
         viewOnlyOneForm,

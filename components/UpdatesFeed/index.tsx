@@ -30,9 +30,12 @@ export default function UpdatesFeed() {
             <div key={update.id}>
               <p>{update.date}</p>
               <ul>
-                {update.updates.flatMap((item) => {
+                {update.updates.flatMap((item, index) => {
                   return (
-                    <li dangerouslySetInnerHTML={{ __html: item.toString() }} />
+                    <li
+                      key={`${update.id}-${index}`}
+                      dangerouslySetInnerHTML={{ __html: item.toString() }}
+                    />
                   );
                 })}
               </ul>
