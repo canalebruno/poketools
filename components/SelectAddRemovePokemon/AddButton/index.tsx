@@ -6,34 +6,36 @@ import { handleName } from "../../../utils/NameFormatting";
 import styles from "../styles.module.scss";
 import Image from "next/image";
 import InputContainer from "../../Inputs/InputContainer";
+import List from "../../Modal/BoxBuilder/List";
 
 export default function AddPokemonButton() {
-  const { handleAddPokemon, pokedexShown } = usePokedex();
+  const { handleAddPokemon, pokedexShown, fullPokedex, sortByNationalDex } =
+    usePokedex();
 
   const [term, setTerm] = useState("");
-  const [loadedList, setLoadedList] = useState<Pokemon[]>([] as Pokemon[]);
+  // const [loadedList, setLoadedList] = useState<Pokemon[]>([] as Pokemon[]);
   const [filteredDex, setFilteredDex] = useState(pokedexShown);
   const [isShiny, setIsShiny] = useState(false);
 
-  const fetchUserData = () => {
-    fetch("/api/shinydex")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setLoadedList(data);
-      });
-  };
+  // const fetchUserData = () => {
+  //   fetch("/api/shinydex")
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setLoadedList(data);
+  //     });
+  // };
 
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+  // useEffect(() => {
+  //   fetchUserData();
+  // }, []);
 
   useEffect(() => {
     if (term === "") {
-      setFilteredDex(loadedList);
+      setFilteredDex(fullPokedex);
     } else {
-      const newFilter = loadedList.filter((pokemon) => {
+      const newFilter = fullPokedex.filter((pokemon) => {
         return handleName(pokemon, true, "National", true)
           .toLowerCase()
           .includes(term.toLowerCase());
@@ -41,7 +43,7 @@ export default function AddPokemonButton() {
 
       setFilteredDex(newFilter);
     }
-  }, [term, loadedList]);
+  }, [term, fullPokedex]);
 
   return (
     <div className={styles.container}>
@@ -62,32 +64,7 @@ export default function AddPokemonButton() {
           onChange={() => setIsShiny(!isShiny)}
         />
       </InputContainer>
-      <div className={styles.listContainer}>
-        {filteredDex &&
-          filteredDex.map((pokemon) => {
-            return (
-              <button
-                key={pokemon.id}
-                className={styles.listCard}
-                onClick={() => {
-                  handleAddPokemon(pokemon.id, isShiny);
-                }}
-                id={pokemon.id}
-              >
-                <Image
-                  unoptimized
-                  width={100}
-                  height={100}
-                  src={`/home/${
-                    isShiny ? pokemon.homeShinyPic : pokemon.homePic
-                  }`}
-                  alt={handleName(pokemon, false, "National", true)}
-                />
-                <span>{handleName(pokemon, true, "National", true)}</span>
-              </button>
-            );
-          })}
-      </div>
+      <List isShiny={isShiny} listShown={filteredDex} />
     </div>
   );
 }

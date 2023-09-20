@@ -10,6 +10,7 @@ import AddPokemonButton from "../SelectAddRemovePokemon/AddButton";
 import Link from "next/link";
 import Modal from "../Modal";
 import Button from "../Button";
+import BoxBuilderAddPokemonModal from "../Modal/BoxBuilder/Add";
 
 export default function ShinyTrackerControl() {
   const [addPokemonModalOpen, setAddPokemonModalOpen] = useState(false);
@@ -57,7 +58,7 @@ export default function ShinyTrackerControl() {
           />
         </div>
       </Modal>
-      <Modal
+      {/* <Modal
         open={addPokemonModalOpen}
         onClose={() => setAddPokemonModalOpen(false)}
       >
@@ -70,7 +71,11 @@ export default function ShinyTrackerControl() {
           />
         </div>
         <AddPokemonButton />
-      </Modal>
+      </Modal> */}
+      <BoxBuilderAddPokemonModal
+        isOpen={addPokemonModalOpen}
+        onClose={() => setAddPokemonModalOpen(false)}
+      />
       <Modal
         open={removePokemonModalOpen}
         onClose={() => setRemovePokemonModalOpen(false)}

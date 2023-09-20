@@ -91,6 +91,8 @@ interface PokedexContextData {
   expandPokemonList: (list: PokemonCustomBoxShort[]) => PokemonCustomBox[];
   compactPokemonList: (list: PokemonCustomBox[]) => PokemonCustomBoxShort[];
   getLocalStorage: () => ListOnStorage[] | undefined;
+  fullPokedex: Pokemon[];
+  sortByNationalDex: (a: Pokemon, b: Pokemon) => number;
 }
 
 const PokedexContext = createContext<PokedexContextData>(
@@ -517,6 +519,10 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     setPokedexShown(finalList);
   }
 
+  function sortByNationalDex(a: Pokemon, b: Pokemon) {
+    return a.id > b.id ? 1 : -1;
+  }
+
   function sortList(list: PokemonCustomBox[], order: SortingLists) {
     if (order === "national") {
       return list.sort((a, b) => {
@@ -708,7 +714,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         return response.json();
       })
       .then((data) => {
-        setFullPokedex(data);
+        setFullPokedex(
+          data.sort((a: Pokemon, b: Pokemon) => sortByNationalDex(a, b))
+        );
       });
   }, []);
 
@@ -1102,6 +1110,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         expandPokemonList,
         compactPokemonList,
         getLocalStorage,
+        fullPokedex,
+        sortByNationalDex,
       }}
     >
       {children}
