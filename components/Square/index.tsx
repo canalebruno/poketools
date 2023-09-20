@@ -43,10 +43,10 @@ export default function Square({
           highlightPokemon === pokemon.id && styles.cardActive
         } ${"isChecked" in pokemon && pokemon.isChecked && styles.checked} `}
       >
-        <img
-          // unoptimized
-          // width={25}
-          // height={25}
+        <Image
+          unoptimized
+          width={25}
+          height={25}
           src={`/${imageSource}/${
             imageSource === "svicons"
               ? pokemon.icon
