@@ -1,40 +1,22 @@
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { useState } from "react";
 import styles from "./styles.module.scss";
-import SelectAddRemovePokemon from "../SelectAddRemovePokemon";
 import { usePokedex } from "../../hooks/usePokedex";
-import { useEffect } from "react";
-import { Pokemon } from "../../utils/types";
 import { useRouter } from "next/router";
-import AddPokemonButton from "../SelectAddRemovePokemon/AddButton";
 import Link from "next/link";
 import Modal from "../Modal";
 import Button from "../Button";
 import BoxBuilderAddPokemonModal from "../Modal/BoxBuilder/Add";
+import BoxBuilderRemovePokemonModal from "../Modal/BoxBuilder/Remove";
 
 export default function ShinyTrackerControl() {
   const [addPokemonModalOpen, setAddPokemonModalOpen] = useState(false);
   const [removePokemonModalOpen, setRemovePokemonModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [addPokemonList, setAddPokemonList] = useState<Pokemon[]>();
 
   const router = useRouter();
 
   const pageSlug = router.asPath.replace("/boxtracker/", "");
-
-  const fetchUserData = () => {
-    fetch("/api/shinydex")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setAddPokemonList(data);
-      });
-  };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
   const { handleDeleteList, pageBox } = usePokedex();
 
@@ -58,38 +40,14 @@ export default function ShinyTrackerControl() {
           />
         </div>
       </Modal>
-      {/* <Modal
-        open={addPokemonModalOpen}
-        onClose={() => setAddPokemonModalOpen(false)}
-      >
-        <div className={styles.header}>
-          <h3>Add Pokémon</h3>
-          <Button
-            onClick={() => setAddPokemonModalOpen(false)}
-            variant="outlined"
-            label="Close"
-          />
-        </div>
-        <AddPokemonButton />
-      </Modal> */}
       <BoxBuilderAddPokemonModal
         isOpen={addPokemonModalOpen}
         onClose={() => setAddPokemonModalOpen(false)}
       />
-      <Modal
-        open={removePokemonModalOpen}
+      <BoxBuilderRemovePokemonModal
+        isOpen={removePokemonModalOpen}
         onClose={() => setRemovePokemonModalOpen(false)}
-      >
-        <div className={styles.header}>
-          <h3>Remove Pokémon</h3>
-          <Button
-            onClick={() => setRemovePokemonModalOpen(false)}
-            variant="outlined"
-            label="Close"
-          />
-        </div>
-        <SelectAddRemovePokemon kind="remove" pokemonList={pageBox.pokemon} />
-      </Modal>
+      />
       <div className={styles.container}>
         <Link href="/boxtracker">
           <KeyboardArrowLeftIcon />
@@ -103,6 +61,9 @@ export default function ShinyTrackerControl() {
             onClick={() => setAddPokemonModalOpen(true)}
           />
           <Button
+            disabled={
+              pageBox.pokemon && pageBox.pokemon.length > 0 ? false : true
+            }
             label="Remove Pokémon"
             onClick={() => setRemovePokemonModalOpen(true)}
           />

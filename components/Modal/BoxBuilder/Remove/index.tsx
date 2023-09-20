@@ -7,26 +7,25 @@ import { usePokedex } from "../../../../hooks/usePokedex";
 import { handleName } from "../../../../utils/NameFormatting";
 import Image from "next/image";
 
-interface BoxBuilderAddPokemonModalProps {
+interface BoxBuilderRemovePokemonModalProps {
   isOpen: boolean;
   onClose: (b: boolean) => void;
 }
 
-export default function BoxBuilderAddPokemonModal({
+export default function BoxBuilderRemovePokemonModal({
   isOpen,
   onClose,
-}: BoxBuilderAddPokemonModalProps) {
-  const { pokedexShown, fullPokedex, handleAddPokemon } = usePokedex();
+}: BoxBuilderRemovePokemonModalProps) {
+  const { pokedexShown, pageBox, handleRemovePokemon } = usePokedex();
 
   const [term, setTerm] = useState("");
   const [filteredDex, setFilteredDex] = useState(pokedexShown);
-  const [isShiny, setIsShiny] = useState(false);
 
   useEffect(() => {
     if (term === "") {
-      setFilteredDex(fullPokedex);
+      setFilteredDex(pageBox.pokemon);
     } else {
-      const newFilter = fullPokedex.filter((pokemon) => {
+      const newFilter = pageBox.pokemon.filter((pokemon) => {
         return handleName(pokemon, true, "National", true)
           .toLowerCase()
           .includes(term.toLowerCase());
@@ -34,47 +33,45 @@ export default function BoxBuilderAddPokemonModal({
 
       setFilteredDex(newFilter);
     }
-  }, [term, fullPokedex]);
+  }, [term, pageBox]);
 
   return (
     <Modal open={isOpen} onClose={() => onClose(false)}>
       <div className={styles.header}>
-        <h3>Add Pokémon</h3>
+        <h3>Remove Pokémon</h3>
         <Button
           onClick={() => onClose(false)}
           variant="outlined"
           label="Close"
         />
       </div>
-      <div className={styles.container}>
-        <div className={styles.inputGroup}>
-          <InputContainer fullWidth label="Pokémon" valueOn={term}>
-            <input
-              type="text"
-              placeholder="Pokémon"
-              value={term}
-              onChange={(e) => {
-                setTerm(e.target.value);
-              }}
-            />
-          </InputContainer>
-          <InputContainer label="Shiny" valueOn={"s"}>
-            <input
-              type="checkbox"
-              checked={isShiny}
-              onChange={() => setIsShiny(!isShiny)}
-            />
-          </InputContainer>
-        </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          minHeight: "20vh",
+        }}
+      >
+        <InputContainer fullWidth label="Pokémon" valueOn={term}>
+          <input
+            type="text"
+            placeholder="Pokémon"
+            value={term}
+            onChange={(e) => {
+              setTerm(e.target.value);
+            }}
+          />
+        </InputContainer>
         <div className={styles.listContainer}>
           {filteredDex &&
             filteredDex.map((pokemon) => {
               return (
                 <button
-                  key={pokemon.id}
+                  key={pokemon.customBoxId}
                   className={styles.listCard}
                   onClick={() => {
-                    handleAddPokemon(pokemon.id, isShiny);
+                    handleRemovePokemon(pokemon.customBoxId);
                   }}
                   id={pokemon.id}
                 >
@@ -83,7 +80,7 @@ export default function BoxBuilderAddPokemonModal({
                     width={100}
                     height={100}
                     src={`/home/${
-                      isShiny ? pokemon.homeShinyPic : pokemon.homePic
+                      pokemon.isShiny ? pokemon.homeShinyPic : pokemon.homePic
                     }`}
                     alt={handleName(pokemon, false, "National", true)}
                   />
