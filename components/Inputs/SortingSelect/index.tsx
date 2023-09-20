@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { usePokedex } from "../../../hooks/usePokedex";
 import InputContainer from "../InputContainer";
-import { useEffect } from "react";
 
 export default function SortingSelect() {
   const router = useRouter();

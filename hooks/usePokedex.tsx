@@ -47,7 +47,6 @@ interface PokedexContextData {
   handleViewOnlyOneForm: () => void;
   filterByGender: () => Pokemon[];
   filterByOnlyOneForm: () => Pokemon[];
-  handleSorting: (value: SortingLists) => void;
   loadPokedex: (loadingPokedex: Pokemon[]) => void;
   resetControls: () => void;
   updatePokedex: (pokedexToUpdate: Pokemon[]) => void;
@@ -92,7 +91,15 @@ interface PokedexContextData {
   compactPokemonList: (list: PokemonCustomBox[]) => PokemonCustomBoxShort[];
   getLocalStorage: () => ListOnStorage[] | undefined;
   fullPokedex: Pokemon[];
+  // SORTING
+  handleSorting: (value: SortingLists) => void;
   sortByNationalDex: (a: Pokemon, b: Pokemon) => number;
+  sortByPaldeaDex: (a: Pokemon, b: Pokemon) => number;
+  sortByKitakamiDex: (a: Pokemon, b: Pokemon) => number;
+  sortByHisuiDex: (a: Pokemon, b: Pokemon) => number;
+  sortByGalarDex: (a: Pokemon, b: Pokemon) => number;
+  sortByIsleOfArmorDex: (a: Pokemon, b: Pokemon) => number;
+  sortByCrownTundraDex: (a: Pokemon, b: Pokemon) => number;
 }
 
 const PokedexContext = createContext<PokedexContextData>(
@@ -158,25 +165,22 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     setHuntGameSelection("");
   }
 
+  // AQUI HERE
   function updatePokedex(pokedexToUpdate: Pokemon[]) {
-    if (orderList !== "paldean" && orderList !== "national") {
-      return;
-    }
+    // if (orderList !== "paldean" && orderList !== "national") {
+    //   return;
+    // }
 
     let pokedexToUpdateOrederd = [] as Pokemon[];
 
     if (orderList === "paldean") {
-      pokedexToUpdateOrederd = pokedexToUpdate.sort((a, b) => {
-        if (a.paldeaDex !== b.paldeaDex) {
-          return a.paldeaDex! - b.paldeaDex!;
-        } else {
-          return a.id > b.id ? 1 : -1;
-        }
-      });
+      pokedexToUpdateOrederd = pokedexToUpdate.sort((a, b) =>
+        sortByPaldeaDex(a, b)
+      );
     } else {
-      pokedexToUpdateOrederd = pokedexToUpdate.sort((a, b) => {
-        return a.nationalDex - b.nationalDex;
-      });
+      pokedexToUpdateOrederd = pokedexToUpdate.sort((a, b) =>
+        sortByNationalDex(a, b)
+      );
     }
 
     setPokedexShown(pokedexToUpdateOrederd);
@@ -321,149 +325,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     });
   }
 
-  function handleSorting(value: SortingLists) {
-    if (!pokedexShown) {
-      return;
-    }
-
-    setOrderList(value);
-
-    if (value === "national") {
-      pokedexShown.sort((a, b) => {
-        return a.id > b.id ? 1 : -1;
-      });
-      return;
-    }
-
-    let notInDex = [] as Pokemon[];
-
-    let inDex = [] as Pokemon[];
-
-    switch (value) {
-      case "paldean":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.paldeaDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.paldeaDex;
-          })
-          .sort((a, b) => {
-            if (a.paldeaDex === b.paldeaDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.paldeaDex || !b.paldeaDex) {
-              return 0;
-            } else {
-              return a.paldeaDex - b.paldeaDex;
-            }
-          });
-        break;
-      case "paldean-tm":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.paldeaTMDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.paldeaTMDex;
-          })
-          .sort((a, b) => {
-            if (a.paldeaTMDex === b.paldeaTMDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.paldeaTMDex || !b.paldeaTMDex) {
-              return 0;
-            } else {
-              return a.paldeaTMDex - b.paldeaTMDex;
-            }
-          });
-        break;
-      case "hisuian":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.hisuiDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.hisuiDex;
-          })
-          .sort((a, b) => {
-            if (a.hisuiDex === b.hisuiDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.hisuiDex || !b.hisuiDex) {
-              return 0;
-            } else {
-              return a.hisuiDex - b.hisuiDex;
-            }
-          });
-        break;
-      case "galarian":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.galarDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.galarDex;
-          })
-          .sort((a, b) => {
-            if (a.galarDex === b.galarDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.galarDex || !b.galarDex) {
-              return 0;
-            } else {
-              return a.galarDex - b.galarDex;
-            }
-          });
-        break;
-      case "galarian-ioa":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.galarIoaDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.galarIoaDex;
-          })
-          .sort((a, b) => {
-            if (a.galarIoaDex === b.galarIoaDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.galarIoaDex || !b.galarIoaDex) {
-              return 0;
-            } else {
-              return a.galarIoaDex - b.galarIoaDex;
-            }
-          });
-
-        break;
-      case "galarian-ct":
-        notInDex = pokedexShown.filter((pkmn) => {
-          return !pkmn.galarCtDex;
-        });
-
-        inDex = pokedexShown
-          .filter((pkmn) => {
-            return pkmn.galarCtDex;
-          })
-          .sort((a, b) => {
-            if (a.galarCtDex === b.galarCtDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.galarCtDex || !b.galarCtDex) {
-              return 0;
-            } else {
-              return a.galarCtDex - b.galarCtDex;
-            }
-          });
-        break;
-    }
-
-    setPokedexShown([
-      ...inDex,
-      ...notInDex.sort((a, b) => {
-        return a.id > b.id ? 1 : -1;
-      }),
-    ]);
-  }
+  // volta aqui
 
   function handleBreakByGen() {
     const newSetting = !breakByGen;
@@ -519,15 +381,169 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     setPokedexShown(finalList);
   }
 
+  // SORTING
   function sortByNationalDex(a: Pokemon, b: Pokemon) {
     return a.id > b.id ? 1 : -1;
   }
 
+  function sortByPaldeaDex(a: Pokemon, b: Pokemon) {
+    if (a.paldeaDex === b.paldeaDex) {
+      return sortByNationalDex(a, b);
+    } else if (!a.paldeaDex || !b.paldeaDex) {
+      return 0;
+    } else {
+      return a.paldeaDex - b.paldeaDex;
+    }
+  }
+
+  function sortByKitakamiDex(a: Pokemon, b: Pokemon) {
+    if (a.paldeaTMDex === b.paldeaTMDex) {
+      return sortByNationalDex(a, b);
+    } else if (!a.paldeaTMDex || !b.paldeaTMDex) {
+      return 0;
+    } else {
+      return a.paldeaTMDex - b.paldeaTMDex;
+    }
+  }
+
+  function sortByGalarDex(a: Pokemon, b: Pokemon) {
+    if (a.galarDex === b.galarDex) {
+      return sortByNationalDex(a, b);
+    } else if (!a.galarDex || !b.galarDex) {
+      return 0;
+    } else {
+      return a.galarDex - b.galarDex;
+    }
+  }
+
+  function sortByIsleOfArmorDex(a: Pokemon, b: Pokemon) {
+    if (a.galarIoaDex === b.galarIoaDex) {
+      return sortByNationalDex(a, b);
+    } else if (!a.galarIoaDex || !b.galarIoaDex) {
+      return 0;
+    } else {
+      return a.galarIoaDex - b.galarIoaDex;
+    }
+  }
+
+  function sortByCrownTundraDex(a: Pokemon, b: Pokemon) {
+    if (a.galarCtDex === b.galarCtDex) {
+      return sortByNationalDex(a, b);
+    } else if (!a.galarCtDex || !b.galarCtDex) {
+      return 0;
+    } else {
+      return a.galarCtDex - b.galarCtDex;
+    }
+  }
+
+  function sortByHisuiDex(a: Pokemon, b: Pokemon) {
+    if (a.hisuiDex === b.hisuiDex) {
+      return sortByNationalDex(a, b);
+    } else if (!a.hisuiDex || !b.hisuiDex) {
+      return 0;
+    } else {
+      return a.hisuiDex - b.hisuiDex;
+    }
+  }
+
+  // AQUI pq duas funcoes parecidas? handleSorting e sortList
+  function handleSorting(value: SortingLists) {
+    if (!pokedexShown) {
+      return;
+    }
+
+    setOrderList(value);
+
+    if (value === "national") {
+      pokedexShown.sort((a, b) => sortByNationalDex(a, b));
+      return;
+    }
+
+    let notInDex = [] as Pokemon[];
+
+    let inDex = [] as Pokemon[];
+
+    switch (value) {
+      case "paldean":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.paldeaDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.paldeaDex;
+          })
+          .sort((a, b) => sortByPaldeaDex(a, b));
+        break;
+      case "paldean-tm":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.paldeaTMDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.paldeaTMDex;
+          })
+          .sort((a, b) => sortByKitakamiDex(a, b));
+        break;
+      case "hisuian":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.hisuiDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.hisuiDex;
+          })
+          .sort((a, b) => sortByHisuiDex(a, b));
+        break;
+      case "galarian":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.galarDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.galarDex;
+          })
+          .sort((a, b) => sortByGalarDex(a, b));
+        break;
+      case "galarian-ioa":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.galarIoaDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.galarIoaDex;
+          })
+          .sort((a, b) => sortByIsleOfArmorDex(a, b));
+
+        break;
+      case "galarian-ct":
+        notInDex = pokedexShown.filter((pkmn) => {
+          return !pkmn.galarCtDex;
+        });
+
+        inDex = pokedexShown
+          .filter((pkmn) => {
+            return pkmn.galarCtDex;
+          })
+          .sort((a, b) => sortByCrownTundraDex(a, b));
+        break;
+    }
+
+    setPokedexShown([
+      ...inDex,
+      ...notInDex.sort((a, b) => {
+        return a.id > b.id ? 1 : -1;
+      }),
+    ]);
+  }
+
   function sortList(list: PokemonCustomBox[], order: SortingLists) {
     if (order === "national") {
-      return list.sort((a, b) => {
-        return a.id > b.id ? 1 : -1;
-      });
+      return list.sort((a, b) => sortByNationalDex(a, b));
     }
 
     let notInDex;
@@ -544,15 +560,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           .filter((pkmn) => {
             return pkmn.paldeaDex;
           })
-          .sort((a, b) => {
-            if (a.paldeaDex === b.paldeaDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.paldeaDex || !b.paldeaDex) {
-              return 0;
-            } else {
-              return a.paldeaDex - b.paldeaDex;
-            }
-          });
+          .sort((a, b) => sortByPaldeaDex(a, b));
         break;
       case "paldean-tm":
         notInDex = list.filter((pkmn) => {
@@ -563,15 +571,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           .filter((pkmn) => {
             return pkmn.paldeaTMDex;
           })
-          .sort((a, b) => {
-            if (a.paldeaTMDex === b.paldeaTMDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.paldeaTMDex || !b.paldeaTMDex) {
-              return 0;
-            } else {
-              return a.paldeaTMDex - b.paldeaTMDex;
-            }
-          });
+          .sort((a, b) => sortByKitakamiDex(a, b));
         break;
       case "hisuian":
         notInDex = list.filter((pkmn) => {
@@ -582,15 +582,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           .filter((pkmn) => {
             return pkmn.hisuiDex;
           })
-          .sort((a, b) => {
-            if (a.hisuiDex === b.hisuiDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.hisuiDex || !b.hisuiDex) {
-              return 0;
-            } else {
-              return a.hisuiDex - b.hisuiDex;
-            }
-          });
+          .sort((a, b) => sortByHisuiDex(a, b));
         break;
       case "galarian":
         notInDex = list.filter((pkmn) => {
@@ -601,15 +593,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           .filter((pkmn) => {
             return pkmn.galarDex;
           })
-          .sort((a, b) => {
-            if (a.galarDex === b.galarDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.galarDex || !b.galarDex) {
-              return 0;
-            } else {
-              return a.galarDex - b.galarDex;
-            }
-          });
+          .sort((a, b) => sortByGalarDex(a, b));
         break;
       case "galarian-ioa":
         notInDex = list.filter((pkmn) => {
@@ -620,15 +604,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           .filter((pkmn) => {
             return pkmn.galarIoaDex;
           })
-          .sort((a, b) => {
-            if (a.galarIoaDex === b.galarIoaDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.galarIoaDex || !b.galarIoaDex) {
-              return 0;
-            } else {
-              return a.galarIoaDex - b.galarIoaDex;
-            }
-          });
+          .sort((a, b) => sortByIsleOfArmorDex(a, b));
 
         break;
       case "galarian-ct":
@@ -640,24 +616,11 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           .filter((pkmn) => {
             return pkmn.galarCtDex;
           })
-          .sort((a, b) => {
-            if (a.galarCtDex === b.galarCtDex) {
-              return a.id > b.id ? 1 : -1;
-            } else if (!a.galarCtDex || !b.galarCtDex) {
-              return 0;
-            } else {
-              return a.galarCtDex - b.galarCtDex;
-            }
-          });
+          .sort((a, b) => sortByCrownTundraDex(a, b));
         break;
     }
 
-    return [
-      ...inDex,
-      ...notInDex.sort((a, b) => {
-        return a.id > b.id ? 1 : -1;
-      }),
-    ];
+    return [...inDex, ...notInDex.sort((a, b) => sortByNationalDex(a, b))];
   }
 
   // AQUI
@@ -1070,7 +1033,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         handleViewOnlyOneForm,
         filterByGender,
         filterByOnlyOneForm,
-        handleSorting,
         loadPokedex,
         resetControls,
         updatePokedex,
@@ -1111,7 +1073,15 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         compactPokemonList,
         getLocalStorage,
         fullPokedex,
+        // SORTING
+        handleSorting,
         sortByNationalDex,
+        sortByPaldeaDex,
+        sortByKitakamiDex,
+        sortByGalarDex,
+        sortByIsleOfArmorDex,
+        sortByCrownTundraDex,
+        sortByHisuiDex,
       }}
     >
       {children}
