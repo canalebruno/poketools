@@ -38,7 +38,7 @@ export default function CustomBoxTracker() {
 
     let getPageBox = customBoxes.find((box) => box.id === pageSlug);
 
-    if (getPageBox && !pageBox.id) {
+    if (getPageBox) {
       setIsLoading(false);
 
       setPageBox(getPageBox);

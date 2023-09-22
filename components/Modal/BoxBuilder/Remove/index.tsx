@@ -65,6 +65,7 @@ export default function BoxBuilderRemovePokemonModal({
         </InputContainer>
         <div className={styles.listContainer}>
           {filteredDex &&
+            filteredDex.length > 0 &&
             filteredDex.map((pokemon) => {
               return (
                 <button
