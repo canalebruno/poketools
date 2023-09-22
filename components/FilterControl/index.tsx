@@ -29,17 +29,10 @@ export default function FilterControl({ sortingDefault }: FilterControlProps) {
     setIsOpen(open);
   }
 
-  const {
-    handleSorting,
-    resetControls,
-    pokedexShown,
-    firstLoad,
-    setFirstLoad,
-  } = usePokedex();
+  const { resetControls, pokedexShown, firstLoad, setFirstLoad } = usePokedex();
 
   useEffect(() => {
     if (firstLoad) {
-      // handleSorting(sortingDefault);
       resetControls();
       setFirstLoad(false);
     }

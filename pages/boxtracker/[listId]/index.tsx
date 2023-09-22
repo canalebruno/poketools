@@ -14,63 +14,37 @@ import HuntGameSelect from "../../../components/HuntGameSelect";
 
 export default function CustomBoxTracker() {
   const router = useRouter();
-  const pageSlug = router.asPath.replace("/boxtracker/", "");
+
   const {
     setPageBox,
     customBoxes,
     pageBox,
-    setCustomBoxes,
     showChecked,
     showUnchecked,
-    setShowChecked,
-    setShowUnchecked,
-    passListThroughFilters,
-    viewGenderDifference,
-    viewOnlyOneForm,
     handleToggleCheck,
     showAllCheckedAndUnchecked,
-    huntGameSelection,
-    expandPokemonList,
   } = usePokedex();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const localBoxes = localStorage.getItem("localBoxes");
-
-    if (localBoxes) {
-      setCustomBoxes(JSON.parse(localBoxes));
+    if (customBoxes) {
       setIsLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (pageBox.pokemon && pageBox.pokemon.length > 0) {
-      passListThroughFilters();
-    }
-  }, [
-    showChecked,
-    showUnchecked,
-    viewGenderDifference,
-    viewOnlyOneForm,
-    showAllCheckedAndUnchecked,
-    huntGameSelection,
-  ]);
+    const pageSlug = router.asPath.replace("/boxtracker/", "");
 
-  useEffect(() => {
-    const getPageBox = customBoxes.find((box) => box.id === pageSlug);
+    let getPageBox = customBoxes.find((box) => box.id === pageSlug);
 
-    if (getPageBox) {
-      const expandPageBox = {
-        id: getPageBox.id,
-        name: getPageBox.name,
-        pokemon: expandPokemonList(getPageBox.pokemon),
-      };
+    if (getPageBox && !pageBox.id) {
+      setIsLoading(false);
 
-      setPageBox(expandPageBox);
+      setPageBox(getPageBox);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageBox, customBoxes]);
+  }, [pageBox, customBoxes, router]);
 
   return (
     <div className={styles.container}>

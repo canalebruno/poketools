@@ -10,7 +10,6 @@ import {
   PokemonCustomBox,
 } from "../../utils/types";
 import Link from "next/link";
-import ImportOldBoxes from "../../components/ImportOldBoxes";
 import Head from "next/head";
 import Modal from "../../components/Modal";
 import InputContainer from "../../components/Inputs/InputContainer";
@@ -18,38 +17,25 @@ import Button from "../../components/Button";
 
 export default function BoxTrackerMain() {
   const {
-    setCustomBoxes,
     customBoxes,
     setPokedexShown,
     getLocalStorage,
     setLocalStorage,
-    expandPokemonList,
     compactPokemonList,
     fullPokedex,
   } = usePokedex();
 
   const [newBoxName, setNewBoxName] = useState("");
-  const [shinydex, setShinydex] = useState([] as Pokemon[]);
   const [newBoxModalOpen, setNewBoxModalOpen] = useState(false);
   const [templateListSelection, setTemplateListSelection] = useState("none");
   const [isAllShiny, setIsAllShiny] = useState(false);
   const [isAllChecked, setIsAllChecked] = useState(false);
-  const [importValue, setImportValue] = useState("");
 
   useEffect(() => {
     setPokedexShown([] as Pokemon[]);
 
-    fetch("/api/shinydex")
-      .then((res) => res.json())
-      .then((data) => {
-        setShinydex(data);
-      });
+    // getLocalStorage();
 
-    const localBoxes = getLocalStorage();
-
-    if (localBoxes) {
-      setCustomBoxes(localBoxes);
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -79,7 +65,7 @@ export default function BoxTrackerMain() {
     };
 
     const updatedLists: ListOnStorage[] = [...customBoxes, newCustomBox];
-    setLocalStorage(updatedLists);
+    setLocalStorage(updatedLists as List[]);
     handleNewBoxModalClose();
   }
 
@@ -391,7 +377,7 @@ export default function BoxTrackerMain() {
           />
           <Button
             label="Create"
-            disabled={!newBoxName || !shinydex}
+            disabled={!newBoxName || !fullPokedex}
             onClick={handleCreateCustomBox}
           />
         </div>

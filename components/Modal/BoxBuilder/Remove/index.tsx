@@ -71,7 +71,7 @@ export default function BoxBuilderRemovePokemonModal({
                   key={pokemon.customBoxId}
                   className={styles.listCard}
                   onClick={() => {
-                    handleRemovePokemon(pokemon.customBoxId);
+                    handleRemovePokemon(pokemon.customBoxId as string);
                   }}
                   id={pokemon.id}
                 >

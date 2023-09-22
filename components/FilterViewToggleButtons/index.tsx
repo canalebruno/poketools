@@ -15,7 +15,7 @@ export default function FilterViewToggleButtons({
     breakByGen,
     handleViewGenderDifference,
     handleViewOnlyOneForm,
-    handleBreakByGen,
+    setBreakByGen,
   } = usePokedex();
 
   return (
@@ -31,7 +31,7 @@ export default function FilterViewToggleButtons({
         label="Only 1 Form"
       />
       <ToggleButton
-        onClick={handleBreakByGen}
+        onClick={() => setBreakByGen(!breakByGen)}
         controller={breakByGen}
         label="Break by Gen"
       />

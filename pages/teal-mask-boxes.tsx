@@ -16,13 +16,7 @@ interface SVBoxesProps {
 }
 
 export default function SVBoxes({ staticDex }: SVBoxesProps) {
-  const {
-    loadPokedex,
-    passThroughFilters,
-    viewGenderDifference,
-    viewOnlyOneForm,
-    pokedexShown,
-  } = usePokedex();
+  const { loadPokedex, pokedexShown } = usePokedex();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,10 +30,6 @@ export default function SVBoxes({ staticDex }: SVBoxesProps) {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    passThroughFilters();
-  }, [viewGenderDifference, viewOnlyOneForm]);
 
   return (
     <div className={styles.container}>

@@ -1,8 +1,6 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
-import { handleNumber } from "../../utils/NameFormatting";
 import { Pokemon, PokemonCustomBox } from "../../utils/types";
 import Square from "../Square";
 import BoxLoading from "../BoxLoading";
@@ -29,8 +27,6 @@ export default function Box({
 
   const { orderList, pokedexShown, breakByGen, loadPokedex, customBoxes } =
     usePokedex();
-
-  const router = useRouter();
 
   useEffect(() => {
     loadPokedex(pokemonListShown);
@@ -116,48 +112,14 @@ export default function Box({
 
   return (
     <>
-      {pokedexShown ? (
+      {pokedexShown && pokeBox.length > 0 ? (
         pokeBox.map((box) => {
           return (
             <div key={box.box} className={styles.boxContainer}>
               <div className={styles.boxHeader}>
-                {/* {router.pathname === "/svboxes" ? (
-                  orderList === "paldean" && !breakByGen ? (
-                    <span>{`#${handleNumber(
-                      box.pokemon[0]?.paldeaDex!,
-                      3
-                    )}`}</span>
-                  ) : (
-                    <span />
-                  )
-                ) : (
-                  <span>{`#${handleNumber(
-                    box.pokemon[0]?.nationalDex,
-                    3
-                  )}`}</span>
-                )} */}
                 <TopNumber pokemon={box.pokemon[0]} />
                 <span>Box {box.box}</span>
                 <TopNumber pokemon={box.pokemon[box.pokemon.length - 1]} />
-                {/* {router.pathname === "/svboxes" ? (
-                  orderList === "paldean" && !breakByGen ? (
-                    <span>{`#${
-                      box.pokemon[box.pokemon.length - 1]?.paldeaDex! <= 400
-                        ? handleNumber(
-                            box.pokemon[box.pokemon.length - 1]?.paldeaDex!,
-                            3
-                          )
-                        : 400
-                    }`}</span>
-                  ) : (
-                    <span />
-                  )
-                ) : (
-                  <span>{`#${handleNumber(
-                    box.pokemon[box.pokemon.length - 1]?.nationalDex,
-                    3
-                  )}`}</span>
-                )} */}
               </div>
               <div className={styles.boxGrid}>
                 {box.pokemon.map((pkmn) => {
