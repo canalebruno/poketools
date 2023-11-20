@@ -367,7 +367,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           pokemon.id !== "0666_00"
         );
       default:
-        return pokemon.formOrder === "00";
+        return pokemon.formOrder === "00" || pokemon.id === '0774_01';
     }
   }
 
