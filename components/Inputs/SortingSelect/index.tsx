@@ -19,6 +19,10 @@ export default function SortingSelect() {
       label: "Teal Mask Dex",
     },
     {
+      value: "paldean-bb",
+      label: "Bluebarry Academy Dex",
+    },
+    {
       value: "hisuian",
       label: "Hisui Dex",
     },

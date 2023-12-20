@@ -14,7 +14,7 @@ export interface Pokemon {
     hasBaby: boolean;
     family: number[];
   }
-  avalability: {
+  availability: {
     homeDepositable: boolean;
     shinyReleased: boolean;
   }
@@ -26,7 +26,8 @@ export interface Pokemon {
     galarCtDex: number | null,
     hisuiDex: null | number;
     paldeaDex: null | number;
-    paldeaTMDex: number | null
+    paldeaTMDex: number | null;
+    paldeaBBDex: number | null
   }
   images: {
     icon: string;

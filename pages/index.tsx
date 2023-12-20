@@ -37,6 +37,20 @@ export default function Home() {
             <span className={styles.subtitle}>Boxes</span>
           </div>
         </Link>
+        <Link href="/bluebarry-academy-boxes">
+          {/* <Image
+            unoptimized
+            src="appicons/pokemon-teal-mask.png"
+            width={10}
+            height={10}
+            alt="Pokémon Scarlet and Violet"
+          /> */}
+          <div>
+            <span className={styles.title}>BB Academy</span>
+            <br />
+            <span className={styles.subtitle}>Boxes</span>
+          </div>
+        </Link>
         <Link href="/homeboxes">
           <Image
             unoptimized

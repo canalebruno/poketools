@@ -42,11 +42,16 @@ export default function Nav() {
     },
     {
       id: 3,
+      title: "BB Academy",
+      slug: "/bluebarry-academy-boxes",
+    },
+    {
+      id: 4,
       title: "Home",
       slug: "/homeboxes",
     },
     {
-      id: 4,
+      id: 5,
       title: "Builder (Beta)",
       slug: "/boxtracker",
     },

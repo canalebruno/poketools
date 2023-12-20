@@ -18,7 +18,8 @@ interface FilterControlProps {
     | "galarian"
     | "galarian-ioa"
     | "galarian-ct"
-    | "paldean-tm";
+    | "paldean-tm"
+    | "paldean-bb";
 }
 
 export default function FilterControl({ sortingDefault }: FilterControlProps) {

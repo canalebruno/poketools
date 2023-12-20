@@ -25,7 +25,8 @@ type SortingLists =
   | "galarian"
   | "galarian-ioa"
   | "galarian-ct"
-  | "paldean-tm";
+  | "paldean-tm"
+  | "paldean-bb";
 
 interface PokedexContextData {
   // VARIABLES
@@ -75,6 +76,7 @@ interface PokedexContextData {
   orderList:
     | "paldean"
     | "paldean-tm"
+    | "paldean-bb"
     | "national"
     | "hisuian"
     | "galarian"
@@ -239,6 +241,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const [orderList, setOrderList] = useState<
     | "paldean"
     | "paldean-tm"
+    | "paldean-bb"
     | "national"
     | "hisuian"
     | "galarian"
@@ -444,6 +447,21 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   }
 
   /**
+   * Sorting with the Kitakami Dex property from the Teal Mask DLC.
+   * @param a This is the first Pokémon to be tested
+   * @param b This is the second Pokémon to be tested
+   */
+  function sortByBBAcademyDex(a: Pokemon, b: Pokemon) {
+    if (a.dex.paldeaBBDex === b.dex.paldeaBBDex) {
+      return sortByNationalDex(a, b);
+    } else if (!a.dex.paldeaBBDex || !b.dex.paldeaBBDex) {
+      return 0;
+    } else {
+      return a.dex.paldeaBBDex - b.dex.paldeaBBDex;
+    }
+  }
+
+  /**
    * Sorting with the Galar Dex property.
    * @param a This is the first Pokémon to be tested
    * @param b This is the second Pokémon to be tested
@@ -564,6 +582,17 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
             return pkmn.dex.paldeaTMDex;
           })
           .sort((a, b) => sortByKitakamiDex(a, b));
+        break;
+      case "paldean-bb":
+        notInDex = list.filter((pkmn) => {
+          return !pkmn.dex.paldeaBBDex;
+        });
+
+        inDex = list
+          .filter((pkmn) => {
+            return pkmn.dex.paldeaBBDex;
+          })
+          .sort((a, b) => sortByBBAcademyDex(a, b));
         break;
       case "hisuian":
         notInDex = list.filter((pkmn) => {

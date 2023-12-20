@@ -1,28 +1,28 @@
-import Box from "../components/Box";
-import FilterControl from "../components/FilterControl";
-import SearchBox from "../components/Inputs/SearchBox";
 import styles from "../styles/Home.module.scss";
-import { usePokedex } from "../hooks/usePokedex";
-import { useEffect, useState } from "react";
 import { GetStaticProps } from "next";
+import Box from "../components/Box";
+import { usePokedex } from "../hooks/usePokedex";
+import FilterControl from "../components/FilterControl";
+import { useEffect, useState } from "react";
+import SearchBox from "../components/Inputs/SearchBox";
 import { Pokemon } from "../utils/types";
 import clientPromise from "../utils/mongodb";
 import Head from "next/head";
-import BoxGridLayout from "../components/BoxGridLayout";
 import BoxLoading from "../components/BoxLoading";
+import BoxGridLayout from "../components/BoxGridLayout";
 
-interface HomeBoxesProps {
-  homedex: Pokemon[];
+interface SVBoxesProps {
+  staticDex: Pokemon[];
 }
 
-export default function HomeBoxes({ homedex }: HomeBoxesProps) {
-  const { loadPokedex } = usePokedex();
+export default function SVBoxes({ staticDex }: SVBoxesProps) {
+  const { loadPokedex, pokedexShown } = usePokedex();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadPokedex(homedex);
+    loadPokedex(staticDex);
 
-    fetch("/api/homedex")
+    fetch("/api/indigodisk")
       .then((res) => res.json())
       .then((data) => {
         loadPokedex(data);
@@ -34,17 +34,20 @@ export default function HomeBoxes({ homedex }: HomeBoxesProps) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Pokémon Tools | Home Boxes</title>
+        <title>Pokémon Tools | Bluebarry Academy Boxes</title>
         <meta
           property="og:title"
-          content="Pokémon Tools | Home Boxes"
+          content="Pokémon Tools | Bluebarry Academy Boxes"
           key="title"
         />
       </Head>
-      <FilterControl sortingDefault="national" />
+      <h1>Bluebarry Academy Boxes</h1>
+      <FilterControl sortingDefault="paldean-tm" />
       <SearchBox />
       <BoxGridLayout>
-        <Box imageSource="home" pokemonListShown={homedex} />
+        {pokedexShown && (
+          <Box imageSource="svicons" pokemonListShown={pokedexShown} />
+        )}
         {loading && <BoxLoading />}
       </BoxGridLayout>
     </div>
@@ -55,14 +58,14 @@ export const getStaticProps: GetStaticProps = async () => {
   const client = await clientPromise;
   const db = client.db("pokedex");
 
-  const homedex = await db
+  const staticDex = await db
     .collection("pokedex")
-    .find({ "availability.homeDepositable": true })
-    .sort({ "dex.nationalDex": 1, id: 1 })
+    .find({ dex: { paldeaBBDex: { $gte: 1 } } })
+    .sort({ "dex.paldeaBBDex": 1, id: 1 })
     .limit(240)
     .toArray();
 
   return {
-    props: { homedex: JSON.parse(JSON.stringify(homedex)) },
+    props: { staticDex: JSON.parse(JSON.stringify(staticDex)) },
   };
 };
