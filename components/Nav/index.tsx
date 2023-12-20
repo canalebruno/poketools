@@ -43,7 +43,7 @@ export default function Nav() {
     {
       id: 3,
       title: "BB Academy",
-      slug: "/bluebarry-academy-boxes",
+      slug: "/blueberry-academy-boxes",
     },
     {
       id: 4,

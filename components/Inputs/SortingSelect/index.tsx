@@ -20,7 +20,7 @@ export default function SortingSelect() {
     },
     {
       value: "paldean-bb",
-      label: "Bluebarry Academy Dex",
+      label: "Blueberry Academy Dex",
     },
     {
       value: "hisuian",

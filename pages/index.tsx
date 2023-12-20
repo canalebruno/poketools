@@ -37,7 +37,7 @@ export default function Home() {
             <span className={styles.subtitle}>Boxes</span>
           </div>
         </Link>
-        <Link href="/bluebarry-academy-boxes">
+        <Link href="/blueberry-academy-boxes">
           {/* <Image
             unoptimized
             src="appicons/pokemon-teal-mask.png"

@@ -34,14 +34,14 @@ export default function SVBoxes({ staticDex }: SVBoxesProps) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Pokémon Tools | Bluebarry Academy Boxes</title>
+        <title>Pokémon Tools | Blueberry Academy Boxes</title>
         <meta
           property="og:title"
-          content="Pokémon Tools | Bluebarry Academy Boxes"
+          content="Pokémon Tools | Blueberry Academy Boxes"
           key="title"
         />
       </Head>
-      <h1>Bluebarry Academy Boxes</h1>
+      <h1>Blueberry Academy Boxes</h1>
       <FilterControl sortingDefault="paldean-tm" />
       <SearchBox />
       <BoxGridLayout>
