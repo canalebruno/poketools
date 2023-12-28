@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const staticDex = await db
     .collection("pokedex")
-    .find({ dex: { paldeaBBDex: { $gte: 1 } } })
+    .find({ dex: { paldeaBBDex: { $gte: 1 }}, availability: {homeDepositable: true}  })
     .sort({ "dex.paldeaBBDex": 1, id: 1 })
     .limit(240)
     .toArray();
