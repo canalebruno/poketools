@@ -113,10 +113,24 @@ export default function BoxTrackerMain() {
         break;
       case "paldea":
         templateDone = fullPokedex.filter((pkmn) => {
+          return pkmn.dex.paldeaDex;
+        });
+        break;
+      case "sv":
+        templateDone = fullPokedex.filter((pkmn) => {
           return (
-            (pkmn.dex.paldeaDex && pkmn.dex.paldeaDex <= 400) ||
-            pkmn.dex.nationalDex > 1000
+            pkmn.dex.paldeaDex || pkmn.dex.paldeaBBDex || pkmn.dex.paldeaTMDex
           );
+        });
+        break;
+      case "paldea-tm":
+        templateDone = fullPokedex.filter((pkmn) => {
+          return pkmn.dex.paldeaTMDex;
+        });
+        break;
+      case "paldea-bb":
+        templateDone = fullPokedex.filter((pkmn) => {
+          return pkmn.dex.paldeaBBDex;
         });
         break;
       case "regionals":
@@ -331,7 +345,12 @@ export default function BoxTrackerMain() {
               <option value={"ioa"}>Isle of Armor Dex</option>
               <option value={"ct"}>Crown Tundra Dex</option>
               <option value={"hisui"}>Hisui Dex</option>
+              <option value={"sv"}>
+                SV Dex (Paldea + Kitakami + Blueberry)
+              </option>
               <option value={"paldea"}>Paldea Dex</option>
+              <option value={"paldea-tm"}>Kitakami Dex</option>
+              <option value={"paldea-bb"}>Blueberry Academy Dex</option>
             </optgroup>
             <optgroup label="Forms">
               <option value={"gender"}>Gender Differences</option>
