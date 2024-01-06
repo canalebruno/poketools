@@ -370,7 +370,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           pokemon.id !== "0666_00"
         );
       default:
-        return pokemon.formOrder === "00" || pokemon.id === '0774_01';
+        return pokemon.formOrder === "00" || pokemon.id === "0774_01";
     }
   }
 
@@ -397,7 +397,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     if (router.pathname.includes("boxtracker/")) {
       finalList = [...filterListByGame(finalList as PokemonCustomBox[])];
-
       finalList = [...filterListByChecked(finalList as PokemonCustomBox[])];
     }
 
@@ -693,7 +692,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   }, [fullPokedex]);
 
   useEffect(() => {
-    setPokedexShown(pageBox.pokemon);
+    // setPokedexShown(pageBox.pokemon);
+    passThroughFilters();
   }, [pageBox]);
 
   function setLocalStorage(data: List[]) {
@@ -864,7 +864,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     setCustomBoxes(newCustomBoxes);
     setPageBox(sortedList);
-    setPokedexShown(sortedList.pokemon);
+    passThroughFilters();
+    // setPokedexShown(sortedList.pokemon);
 
     setLocalStorage(newCustomBoxes as List[]);
   }
