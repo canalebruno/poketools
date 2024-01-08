@@ -163,6 +163,11 @@ interface PokedexContextData {
    */
   handleRemovePokemon: (customBoxId: string) => void;
   /**
+   * Removes all checked or all unchecked Pokémon.
+   * @param removeChecked If true removes all checked Pokémon. If false removes all unchecked.
+   */
+  handleBulkRemovePokemon: (removeChecked: boolean) => void;
+  /**
    * Checks or unchecks a Pokémon.
    * @param id The Pokémon id that will be checked or unchecked.
    */
@@ -920,6 +925,27 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     handleUpdateActiveList(updatedActiveList);
   }
 
+  function handleBulkRemovePokemon(removeChecked: boolean) {
+    let newList = pageBox.pokemon;
+
+    if (removeChecked) {
+      newList = newList.filter((pkmn) => {
+        return !pkmn.isChecked;
+      });
+    } else {
+      newList = newList.filter((pkmn) => {
+        return pkmn.isChecked;
+      });
+    }
+
+    const updatedActiveList = {
+      ...pageBox,
+      pokemon: newList,
+    };
+
+    handleUpdateActiveList(updatedActiveList);
+  }
+
   function handleDeleteList(slug: string) {
     const updatedLists = customBoxes.filter((list) => list.id !== slug);
 
@@ -999,6 +1025,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         pageBox,
         setPageBox,
         handleRemovePokemon,
+        handleBulkRemovePokemon,
         handleDeleteList,
         handleCheck,
         showChecked,
