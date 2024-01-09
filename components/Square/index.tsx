@@ -22,12 +22,20 @@ export default function Square({
   const { highlightPokemon, handleCheck } = usePokedex();
   const router = useRouter();
 
+  const { windowWidth } = useWindowSize();
+
+  const mobile = windowWidth <= 1024;
+
   return (
     <Tooltip
+      isCheckable={isCheckable}
       title={handleName(
         pokemon,
-        router.pathname !== "/svboxes" ||
-          (router.pathname === "/svboxes" && pokemon.dex.paldeaDex! < 500),
+        !mobile &&
+          !isCheckable &&
+          (router.pathname !== "/svboxes" ||
+            (router.pathname === "/svboxes" && pokemon.dex.paldeaDex! < 500)),
+
         router.pathname,
         true
       )}
