@@ -19,6 +19,10 @@ export function handleName(
   dex: string,
   form: boolean = true
 ) {
+  if (!pokemon.data) {
+    return "Loading...";
+  }
+
   let prefixName = "";
   let prefixNumber = "";
 

@@ -16,6 +16,7 @@ export default function HuntGameSelect() {
         <option value="s">Scarlet</option>
         <option value="v">Violet</option>
         <option value="tm">Teal Mask</option>
+        <option value="bb">Indigo Disk</option>
         <option value="pla">Legends: Arceus</option>
         <option value="sw">Sword</option>
         <option value="sh">Shield</option>

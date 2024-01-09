@@ -26,8 +26,12 @@ export default function TopNumber({ pokemon = null }: TopNumberProps) {
         decimals = 3;
         break;
       default:
-        number = pokemon.dex.nationalDex;
-        decimals = 4;
+        if (router.pathname.includes("/boxtracker")) {
+          number = null;
+        } else {
+          number = pokemon.dex.nationalDex;
+          decimals = 4;
+        }
     }
   }
 

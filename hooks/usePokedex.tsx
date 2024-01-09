@@ -389,7 +389,11 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     let finalList;
 
     if (router.pathname.includes("boxtracker/")) {
-      finalList = pageBox.pokemon;
+      if (pageBox.pokemon) {
+        finalList = pageBox.pokemon;
+      } else {
+        return;
+      }
     } else {
       finalList = backupPokedex;
     }
@@ -828,6 +832,10 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       case "tm":
         return list.filter((pkmn) => {
           return pkmn.dex.paldeaTMDex;
+        });
+      case "bb":
+        return list.filter((pkmn) => {
+          return pkmn.dex.paldeaBBDex;
         });
       case "pla":
         return list.filter((pkmn) => {

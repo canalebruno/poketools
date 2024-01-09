@@ -85,27 +85,29 @@ export default function BoxBuilderRemovePokemonModal({
               filteredDex.length > 0 &&
               filteredDex.map((pokemon) => {
                 return (
-                  <button
-                    key={pokemon.customBoxId}
-                    className={styles.listCard}
-                    onClick={() => {
-                      handleRemovePokemon(pokemon.customBoxId as string);
-                    }}
-                    id={pokemon.id}
-                  >
-                    <Image
-                      unoptimized
-                      width={100}
-                      height={100}
-                      src={`/home/${
-                        pokemon.isShiny
-                          ? pokemon.images.homeShinyRender
-                          : pokemon.images.homeRender
-                      }`}
-                      alt={handleName(pokemon, false, "National", true)}
-                    />
-                    <span>{handleName(pokemon, true, "National", true)}</span>
-                  </button>
+                  pokemon.images && (
+                    <button
+                      key={pokemon.customBoxId}
+                      className={styles.listCard}
+                      onClick={() => {
+                        handleRemovePokemon(pokemon.customBoxId as string);
+                      }}
+                      id={pokemon.id}
+                    >
+                      <Image
+                        unoptimized
+                        width={100}
+                        height={100}
+                        src={`/home/${
+                          pokemon.isShiny
+                            ? pokemon.images.homeShinyRender
+                            : pokemon.images.homeRender
+                        }`}
+                        alt={handleName(pokemon, false, "National", true)}
+                      />
+                      <span>{handleName(pokemon, true, "National", true)}</span>
+                    </button>
+                  )
                 );
               })}
           </div>

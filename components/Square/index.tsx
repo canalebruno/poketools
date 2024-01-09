@@ -43,24 +43,26 @@ export default function Square({
           highlightPokemon === pokemon.id && styles.cardActive
         } ${"isChecked" in pokemon && pokemon.isChecked && styles.checked} `}
       >
-        <Image
-          unoptimized
-          width={25}
-          height={25}
-          src={`/${imageSource}/${
-            imageSource === "svicons"
-              ? pokemon.images.icon
-              : !("customBoxId" in pokemon) ||
-                ("isShiny" in pokemon && !pokemon.isShiny)
-              ? pokemon.images.homeRender
-              : pokemon.images.homeShinyRender
-          }`}
-          alt={`#${
-            router.pathname === "/svboxes"
-              ? pokemon.dex.paldeaDex
-              : pokemon.dex.nationalDex
-          } - ${pokemon.name}`}
-        />
+        {pokemon.images && (
+          <Image
+            unoptimized
+            width={25}
+            height={25}
+            src={`/${imageSource}/${
+              imageSource === "svicons"
+                ? pokemon.images.icon
+                : !("customBoxId" in pokemon) ||
+                  ("isShiny" in pokemon && !pokemon.isShiny)
+                ? pokemon.images.homeRender
+                : pokemon.images.homeShinyRender
+            }`}
+            alt={`#${
+              router.pathname === "/svboxes"
+                ? pokemon.dex.paldeaDex
+                : pokemon.dex.nationalDex
+            } - ${pokemon.name}`}
+          />
+        )}
       </div>
     </Tooltip>
   );
