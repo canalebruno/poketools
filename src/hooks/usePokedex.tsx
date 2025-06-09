@@ -228,6 +228,9 @@ interface PokedexContextData {
   compactPokemonList: (list: PokemonCustomBox[]) => PokemonCustomBoxShort[];
   setCustomBoxes: (list: List[]) => void;
   setCloudStorage: (user: User) => void;
+  cloudStorage: User;
+  currentTrackerList: string;
+  setCurrentTrackerList: (newValue: string) => void;
 }
 
 const PokedexContext = createContext<PokedexContextData>(
@@ -677,6 +680,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   // Se livrar do pagebox
   const [pageBox, setPageBox] = useState<List>({} as List);
+  const [currentTrackerList, setCurrentTrackerList] = useState("");
   const [customBoxes, setCustomBoxes] = useState<List[]>([] as List[]);
   const [showChecked, setShowChecked] = useState(false);
   const [showUnchecked, setShowUnchecked] = useState(false);
@@ -700,27 +704,12 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     showUnchecked,
     showAllCheckedAndUnchecked,
     huntGameSelection,
+    cloudStorage,
   ]);
-
-  // useEffect(() => {
-  //   fetch("/api/pokedex")
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setFullPokedex(
-  //         data.sort((a: Pokemon, b: Pokemon) => sortByNationalDex(a, b))
-  //       );
-  //     });
-  // }, []);
 
   useEffect(() => {
     getLocalStorage();
   }, [fullPokedex]);
-
-  // useEffect(() => {
-  //   passThroughFilters();
-  // }, [pageBox]);
 
   function expandPokemonList(list: PokemonCustomBoxShort[]) {
     return list.map((pkmn) => {
@@ -972,21 +961,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   // ORGANIZAR OS OUTROS FILTROS
 
-  function handleUpdateActiveList(updatedList: List) {
-    // let sortedList = {
-    //   ...updatedList,
-    //   pokemon: sortList(updatedList.pokemon, orderList) as PokemonCustomBox[],
-    // };
-    // const newCustomBoxes = [
-    //   ...customBoxes.filter((list) => updatedList.id !== list.id),
-    //   sortedList,
-    // ];
-    // setCustomBoxes(newCustomBoxes);
-    // setPageBox(sortedList);
-    // passThroughFilters();
-    // setPokedexShown(sortedList.pokemon);
-  }
-
   async function handleAddPokemon(id: string, shouldAddShiny: boolean) {
     const findPokemonToAdd = fullPokedex.find((pokemon) => {
       return pokemon.id === id;
@@ -1015,13 +989,22 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     })
       .then((response) => response.json())
       .then((data) => {
-        updatePageBox(data.updatedBox);
+        // aqui
+        console.log("adicionou");
+        console.log(data.updatedUser);
+        updatePageBox(data.updatedUser);
       });
   }
 
-  function updatePageBox(latestPageBox: List) {
-    setPageBox(latestPageBox);
-    passThroughFilters(latestPageBox);
+  function updatePageBox(updatedUser: User) {
+    setCloudStorage(updatedUser);
+
+    const findCurrentBox = updatedUser.boxes.find(
+      (b) => b.name === pageBox.name
+    );
+    console.log(findCurrentBox);
+    setPageBox(findCurrentBox!);
+    passThroughFilters(findCurrentBox);
   }
 
   async function handleRemovePokemon(customBoxId: string) {
@@ -1037,27 +1020,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     )
       .then((response) => response.json())
       .then((data) => {
-        updatePageBox(data.updatedBox);
+        //aqui
+        updatePageBox(data.updatedUser);
       });
-
-    // const indexToRemove = pageBox.pokemon.findIndex((pokemon) => {
-    //   return pokemon.customBoxId === customBoxId;
-    // });
-
-    // if (!indexToRemove && indexToRemove !== 0) {
-    //   return;
-    // }
-
-    // let list = pageBox.pokemon;
-
-    // list.splice(indexToRemove, 1);
-
-    // const updatedActiveList = {
-    //   ...pageBox,
-    //   pokemon: list,
-    // };
-
-    // handleUpdateActiveList(updatedActiveList);
   }
 
   async function handleBulkRemovePokemon(removeChecked: boolean) {
@@ -1085,15 +1050,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     })
       .then((response) => response.json())
       .then((data) => {
-        updatePageBox(data.updatedBox);
+        // aqui
+        updatePageBox(data.updatedUser);
       });
-
-    // const updatedActiveList = {
-    //   ...pageBox,
-    //   pokemon: newList,
-    // };
-
-    // handleUpdateActiveList(updatedActiveList);
   }
 
   async function handleDeleteList(slug: string, email: string) {
@@ -1104,7 +1063,11 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     await fetch(`/api/users/${email}/${pageBox.name}`, {
       cache: "no-store",
       method: "DELETE",
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCloudStorage(data.updatedUser);
+      });
   }
 
   function handleToggleCheck(
@@ -1153,6 +1116,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     pageBox.pokemon[findPokemonIndex].isChecked = !currentCheck;
 
+    console.log("pokedexShown");
+    console.log(pokedexShown);
+
     await fetch(`/api/users/${idUser}/${pageBox.name}/${idPokemon}`, {
       cache: "no-store",
       method: "PUT",
@@ -1165,10 +1131,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     })
       .then((response) => response.json())
       .then((data) => {
-        updatePageBox(data.updatedBox);
+        updatePageBox(data.updatedUser);
       });
-
-    // handleUpdateActiveList(pageBox);
   }
 
   return (
@@ -1212,6 +1176,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         fullPokedex,
         handleSorting,
         setFullPokedex,
+        currentTrackerList,
+        setCurrentTrackerList,
+        cloudStorage,
       }}
     >
       {children}

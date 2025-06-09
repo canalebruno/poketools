@@ -28,46 +28,21 @@ export default function BoxBuilderRemovePokemonModal({
   const [filteredDex, setFilteredDex] = useState([] as PokemonCustomBox[]);
   const [bulkRemoveModalOpen, setBulkRemoveModalOpen] = useState(false);
 
-  // useEffect(() => {
-  //   console.log("entrou");
-  //   console.log("pagebox");
-  //   console.log(pageBox.pokemon);
-  //   console.log("filtered");
-  //   console.log(filteredDex);
-  //   if (term === "") {
-  //     console.log("p3");
-  //     setFilteredDex(pageBox.pokemon);
-  //     console.log("new filteredDex");
-  //     console.log(filteredDex);
-  //   } else {
-  //     console.log("p4");
-  //     const newFilter = pageBox.pokemon.filter((pokemon) => {
-  //       return handleName(pokemon, true, "National", true)
-  //         .toLowerCase()
-  //         .includes(term.toLowerCase());
-  //     });
-
-  //     setFilteredDex(newFilter);
-  //   }
-  // }, [term, pageBox]);
-
   useEffect(() => {
-    console.log("useEffect");
-    console.log(pageBox.pokemon);
     if (term === "") {
       console.log("1");
-      setFilteredDex(pageBox.pokemon);
+      setFilteredDex(pokedexShown as PokemonCustomBox[]);
     } else {
       console.log("2");
-      const newFilter = pageBox.pokemon.filter((pokemon) => {
+      const newFilter = pokedexShown.filter((pokemon) => {
         return handleName(pokemon, true, "National", true)
           .toLowerCase()
           .includes(term.toLowerCase());
       });
 
-      setFilteredDex(newFilter);
+      setFilteredDex(newFilter as PokemonCustomBox[]);
     }
-  }, [term, pageBox]);
+  }, [term, pageBox, pokedexShown]);
 
   return (
     <>

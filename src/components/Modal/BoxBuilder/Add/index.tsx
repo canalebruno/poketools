@@ -90,7 +90,7 @@ export default function BoxBuilderAddPokemonModal({
                   key={pokemon.id}
                   className={styles.listCard}
                   onClick={() => {
-                    handleAddPokemon(pokemon.id, isShiny, loggedUser.email);
+                    handleAddPokemon(pokemon.id, isShiny);
                   }}
                   id={pokemon.id}
                 >

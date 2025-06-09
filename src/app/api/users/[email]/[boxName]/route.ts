@@ -17,13 +17,13 @@ export async function DELETE(request: Request ,{params}: Params) {
 
     console.log("delte");
     try {
-        await Users.findOneAndUpdate(
+        const updatedUser: User = await Users.findOneAndUpdate(
             { "email": email },
             { $pull: { "boxes": { "name": boxName } } },
             { new: true }
         )
         
-        return NextResponse.json({success: true, message:"Pokemon check updated."})
+        return NextResponse.json({success: true, message:"Pokemon check updated.", updatedUser})
     } catch (error) {
         return NextResponse.json({success: false, message: `No data found. Error: ${error}`})
     }
@@ -41,7 +41,7 @@ export async function PUT(request: Request ,{params}: Params) {
             { new: true, arrayFilters: [{ "e1.name": boxName }] }
         )
         
-        return NextResponse.json({success: true, message:"Box updated.", updatedBox: updatedUser.boxes.find(b => {return b.name === boxName})})
+        return NextResponse.json({success: true, message:"Box updated.", updatedUser})
     } catch (error) {
         return NextResponse.json({success: false, message: `No data found. Error: ${error}`})
     }
@@ -59,7 +59,7 @@ export async function POST(request: Request ,{params}: Params) {
             { new: true, arrayFilters: [{ "e1.name": boxName }] }
         )
         
-        return NextResponse.json({success: true, message:"Box updated. Pokemon added.", updatedBox: updatedUser.boxes.find(b => {return b.name === boxName})})
+        return NextResponse.json({success: true, message:"Box updated. Pokemon added.", updatedUser})
     } catch (error) {
         return NextResponse.json({success: false, message: `No data found. Error: ${error}`})
     }

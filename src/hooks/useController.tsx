@@ -198,24 +198,6 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
   }
 
   async function updateBoxes(id: string, updatedBoxes: List[]) {
-    // function compactPokemonList(list: PokemonCustomBox[]) {
-    //   return list.map((pkmn) => {
-    //     return {
-    //       customBoxId: pkmn.customBoxId,
-    //       isShiny: pkmn.isShiny,
-    //       isChecked: pkmn.isChecked,
-    //       id: pkmn.id,
-    //     };
-    //   });
-    // }
-
-    // const compactedData = updatedBoxes.map((item) => {
-    //   return {
-    //     ...item,
-    //     pokemon: compactPokemonList(item.pokemon),
-    //   };
-    // });
-
     const response = await fetch(`/api/users/${id}`, {
       cache: "no-store",
       method: "PUT",

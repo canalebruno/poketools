@@ -19,8 +19,13 @@ import Button from "../Button";
 import { useController } from "@/hooks/useController";
 
 export default function CustomBoxManager() {
-  const { customBoxes, setPokedexShown, compactPokemonList, fullPokedex } =
-    usePokedex();
+  const {
+    customBoxes,
+    setPokedexShown,
+    compactPokemonList,
+    fullPokedex,
+    cloudStorage,
+  } = usePokedex();
 
   const { getByFullPokedex, loggedUser, updateBoxes } = useController();
 
@@ -415,9 +420,9 @@ export default function CustomBoxManager() {
           />
         </div>
         <div className={styles.main}>
-          {loggedUser?.boxes !== undefined &&
-            loggedUser.boxes.length > 0 &&
-            loggedUser.boxes
+          {cloudStorage?.boxes !== undefined &&
+            cloudStorage.boxes.length > 0 &&
+            cloudStorage.boxes
               .sort((a, b) => {
                 if (a.id < b.id) {
                   return -1;

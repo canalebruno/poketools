@@ -17,7 +17,6 @@ import { useParams, usePathname } from "next/navigation";
 import { useController } from "@/hooks/useController";
 
 export default function CustomBoxTracker() {
-  // const router = useRouter();
   const { listId } = useParams();
 
   const {
@@ -56,7 +55,7 @@ export default function CustomBoxTracker() {
       setPageBox(getPageBox);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageBox, customBoxes, listId]);
+  }, [customBoxes, listId]);
 
   return (
     <div className={styles.container}>
