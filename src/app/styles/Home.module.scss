@@ -1,0 +1,65 @@
+.container {
+  padding: 2rem;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.buttonsSection {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1rem;
+  
+  a {
+    display: grid;
+    padding: 0.5rem;
+    border: 2px solid #4bcdcf;
+    background-color: #1ca3a680;
+    border-radius: 0.5rem;
+    position: relative;
+    
+    transition: 0.1s;
+    
+    .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    
+    &:hover {
+      background-color: #1ca3a6;
+    }
+
+    img {
+      height: 2.25rem;
+      width: auto;
+      border-radius: 0.25rem;
+      opacity: 0.8;
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+    }
+    
+    svg {
+      font-size: 2.5rem;
+      opacity: 0.8;
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      color: #ffffff;
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    padding: 1rem;
+    h1 {
+      text-align: center;
+    }
+  }
+
+  .buttonsSection {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

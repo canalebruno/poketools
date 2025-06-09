@@ -1,0 +1,94 @@
+[
+    {
+        "id": 1,
+        "date": "30.12.2022",
+        "updates": [
+            "Added Break by Gen Feature to start a new box for each generation",
+            "Added Search Feature",
+            "Added available Pokémon in Scarlet and Violet that aren't in the Pokédex. <i>Speacially Scorbunny family that's just debuted</i>",
+            "Updated filters design",
+            "Added name labels when mouse over images",
+            "Added first and last numbers for each box",
+            "Created Homepage"
+        ]
+    },
+    {
+        "id": 2,
+        "date": "04.01.2023",
+        "updates": [
+            "Fixed Vivillon wasn't showing"
+        ]
+    },
+    {
+        "id": 3,
+        "date": "15.01.2023",
+        "updates": [
+            "Fixed SV Pokémon National Dex numbers",
+            "Added new Feature: <i>Scarlet and Violet Nuzlocke Random Hunt Generator</i>. Now you can generate a random hunting plan to be used alongside the Nuzlocke Challenge"
+        ]
+    },
+    {
+        "id": 4,
+        "date": "04.02.2023",
+        "updates": [
+            "Added Froakie family to the SV Boxes"
+        ]
+    },
+    {
+        "id": 5,
+        "date": "02.03.2023",
+        "updates": [
+            "Added Walking Wake, Iron Leaves, Vivillon patterns available in Pokémon GO and Hisuian Zorua family to the SV Boxes",
+            "Fixed Vivillon order in Home Boxes"
+        ]
+    },
+    {
+        "id": 6,
+        "date": "29.03.2023",
+        "updates": [
+            "Added Rowlet family to the SV Boxes"
+        ]
+    },
+    {
+        "id": 7,
+        "date": "01.04.2023",
+        "updates": [
+            "Added Oshawott family to the SV Boxes"
+        ]
+    },
+    {
+        "id": 8,
+        "date": "17.04.2023",
+        "updates": [
+            "Added Cyndaquil family to the SV Boxes"
+        ]
+    },
+    {
+        "id": 9,
+        "date": "02.05.2023",
+        "updates": [
+            "Added Sobble family to the SV Boxes"
+        ]
+    },
+    {
+        "id": 10,
+        "date": "13.05.2023",
+        "updates": [
+            "Added Chespin family to the SV Boxes"
+        ]
+    },
+    {
+        "id": 11,
+        "date": "31.05.2023",
+        "updates": [
+            "Added Gen 9 Pokémon to the Home Boxes"
+        ]
+    },
+    {
+        "id": 12,
+        "date": "13.09.2023",
+        "updates": [
+            "Added Teal Mask Boxes page"
+        ]
+    }
+]

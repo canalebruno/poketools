@@ -1,0 +1,82 @@
+.topSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main {
+    display: grid;
+    margin-top: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    
+    .boxCard {
+        border: 1px solid black;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.modalContainer {
+    background-color: white;
+    width: 450px;
+    max-height: 80vh;
+    margin: auto;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    &:not(&.small) {
+         height: 80vh;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+            h3 {
+                padding: 0;
+                margin: 0;
+                font-size: 1.5rem;
+            }
+
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.inputGroup {
+    display: flex;
+    gap: 1rem;
+
+    div {
+        flex: 1;
+    }
+}
+
+// Desktop
+@media (min-width: 720px) {
+    .topSection {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .main {
+        grid-template-columns: repeat(4,1fr);
+        
+    }
+}

@@ -1,0 +1,40 @@
+.container {
+  background-color: #1ca3a6;
+  border-top: 3px solid #4bcdcf;
+  margin-top: auto;
+
+  .content {
+    padding: 1rem 2rem;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    nav {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      gap: 1rem;
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .rights {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    .content {
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

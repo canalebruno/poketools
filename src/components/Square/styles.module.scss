@@ -1,0 +1,49 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.5rem;
+  border-radius: 1rem;
+
+  position: relative;
+  aspect-ratio: 1/1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.1));
+  }
+
+  p {
+    position: absolute;
+    background: white;
+    bottom: 0;
+    z-index: 10;
+    font-size: small;
+    opacity: 0.8;
+  }
+}
+
+.cardActive {
+  background-color: #4bcdcf80;
+}
+
+.checked {
+  background-color: #cfdb5d80;
+  border: 1px solid yellow;
+}
+
+@media (max-width: 980px) {
+  .card {
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}

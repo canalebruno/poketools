@@ -1,0 +1,63 @@
+    
+    .container {
+        padding: 1rem 0.75rem;
+        position: relative;
+        min-height: 3rem;
+
+        fieldset {
+            border: 1px #00000050 solid;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 0.45rem);
+            margin: 0;
+            pointer-events: none;
+        }
+
+        input, select {
+            font-size: 1rem;
+            background: none;
+            border: none;
+            width: 100%;
+            z-index: 10;
+            
+            &:focus {
+                outline: none;
+            }
+
+            &:focus::placeholder {
+                color: transparent;
+              }
+        }
+        
+        legend {
+            font-size: 0.75rem;
+            padding: 0 5px;
+        }
+        
+        &:hover {
+            fieldset{
+                border: 1px #000000 solid;
+            }
+        }
+        
+        &:focus-within {
+            fieldset{
+                border: 2px #1ca3a6 solid ;
+                
+            }
+
+            legend {
+                color: #1ca3a6;
+            }
+        }
+    }
+
+
+@media(min-width: 720px) {
+    .container:not(.fullWidth) {
+        max-width: 300px;
+    }
+} 

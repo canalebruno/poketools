@@ -1,0 +1,48 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: -1rem;
+
+    svg {
+      fill: rgba(97, 97, 97, 0.92);
+    }
+
+    .titleWrapper {
+      background-color: #c6c6c6;
+      text-align: center;
+      font-size: 0.6875rem;
+      background-color: rgba(97, 97, 97, 0.92);
+      border-radius: 4px;
+      color: #fff;
+      padding: 4px 8px;
+      z-index: 100;
+      width: max-content;
+    }
+  }
+}
+
+.fixedWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  .titleBoxFixed {
+    background-color: rgba(97, 97, 97, 0.92);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.2rem;
+    text-align: center;
+    font-size: 70%;
+    white-space: nowrap;
+    overflow-y: scroll;
+  }
+}
