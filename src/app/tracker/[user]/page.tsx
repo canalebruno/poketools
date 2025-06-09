@@ -18,6 +18,7 @@ export default function Profile() {
   const router = useRouter();
 
   const [username, setUsername] = useState("");
+  const [iAgree, setIAgree] = useState(false);
   const [oldLocalStorage, setOldLocalStorage] = useState([] as List[]);
   const [isBuggedList, setIsBuggedList] = useState(false);
 
@@ -90,7 +91,19 @@ export default function Profile() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <button onClick={() => handleRegistration()}>Register</button>
+          <p>
+            <input
+              type="checkbox"
+              checked={iAgree}
+              onChange={() => setIAgree(!iAgree)}
+            />{" "}
+            *I agree to store my email in the database to link it with the boxes
+            I create. I understand that I can delete all my data from the
+            database at any time.{" "}
+          </p>
+          <button disabled={!iAgree} onClick={() => handleRegistration()}>
+            Register
+          </button>
           <button>Cancel Registration</button>
         </div>
       </>
