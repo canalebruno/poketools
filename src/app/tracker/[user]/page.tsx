@@ -4,16 +4,58 @@ import Button from "@/components/Button";
 import { useController } from "@/hooks/useController";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BoxTrackerMain from "../../boxtracker/page";
 import CustomBoxManager from "@/components/CustomBoxManagegr";
+import { usePokedex } from "@/hooks/usePokedex";
+import { List } from "@/utils/types";
 
 export default function Profile() {
   const { data, status } = useSession();
-  const { addNewUser, loggedUser, deleteUser, getUserData } = useController();
+  const { addNewUser, loggedUser, deleteUser, getUserData, updateBoxes } =
+    useController();
+  const { getLocalStorage } = usePokedex();
   const router = useRouter();
 
   const [username, setUsername] = useState("");
+  const [oldLocalStorage, setOldLocalStorage] = useState([] as List[]);
+  const [isBuggedList, setIsBuggedList] = useState(false);
+
+  useEffect(() => {
+    const retrievedLocalStorage = getLocalStorage();
+
+    if (retrievedLocalStorage) {
+      setOldLocalStorage(retrievedLocalStorage);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (loggedUser.boxes?.length > 0) {
+      const updatedLists = loggedUser.boxes.filter((box) => {
+        return box.id !== undefined;
+      });
+
+      updateBoxes(loggedUser?._id as string, updatedLists as List[]);
+    }
+  }, [isBuggedList]);
+
+  function incorporateOldLists() {
+    const updatedLists =
+      loggedUser?.boxes !== undefined && loggedUser.boxes.length > 0
+        ? [...loggedUser.boxes, ...oldLocalStorage]
+        : [...oldLocalStorage];
+
+    localStorage.removeItem("localBoxes");
+
+    if (updateBoxes.length > 0) {
+      updateBoxes(
+        loggedUser?._id as string,
+        updatedLists.filter((box) => {
+          return box.id !== undefined;
+        }) as List[]
+      );
+    }
+  }
 
   async function handleRegistration() {
     if (data?.user?.email === undefined) {
@@ -66,6 +108,20 @@ export default function Profile() {
             }
           }}
         />
+        {oldLocalStorage.length > 0 && (
+          <Button
+            label="Load Local Storage Boxes"
+            onClick={() => {
+              if (
+                confirm(
+                  "Your local storage boxes will be loaded in the current user's database and deleted from the local storage. After this you can access those boxes whenever you login."
+                )
+              ) {
+                incorporateOldLists();
+              }
+            }}
+          />
+        )}
       </div>
     );
   }

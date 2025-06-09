@@ -215,7 +215,7 @@ interface PokedexContextData {
   /**
    * Retrieve custom lists from local storage
    */
-  getLocalStorage: () => void;
+  getLocalStorage: () => void | List[];
   /**
    * After getting list from storage it adds the pokemon properties
    * @param list This is the compacted list to be expanded
@@ -751,8 +751,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           pokemon: expandPokemonList(box.pokemon),
         };
       });
-
-      setCustomBoxes(expandedData);
+      return expandedData;
     }
   }
 
