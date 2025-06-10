@@ -706,10 +706,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     cloudStorage,
   ]);
 
-  useEffect(() => {
-    getLocalStorage();
-  }, [fullPokedex]);
-
   function expandPokemonList(list: PokemonCustomBoxShort[]) {
     return list.map((pkmn) => {
       const extraInfo = fullPokedex.find((item: any) => {
@@ -737,9 +733,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   function getLocalStorage() {
     const data = localStorage.getItem("localBoxes");
 
-    if (fullPokedex.length < 1) {
-      return;
-    }
+    // if (fullPokedex.length < 1) {
+    //   return;
+    // }
 
     if (data) {
       const jsonData: ListOnStorage[] = JSON.parse(data);
@@ -750,6 +746,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           pokemon: expandPokemonList(box.pokemon),
         };
       });
+
       return expandedData;
     }
   }
@@ -988,8 +985,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       .then((response) => response.json())
       .then((data) => {
         // aqui
-        console.log("adicionou");
-        console.log(data.updatedUser);
         updatePageBox(data.updatedUser);
       });
   }
@@ -1047,8 +1042,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.message);
-        console.log("3");
         updatePageBox(data.updatedUser);
       });
   }
@@ -1062,8 +1055,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       .then((data) => {
         setCloudStorage(data.updatedUser);
       });
-
-    console.log("done delete");
   }
 
   function handleToggleCheck(
@@ -1112,9 +1103,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     pageBox.pokemon[findPokemonIndex].isChecked = !currentCheck;
 
-    console.log("pokedexShown");
-    console.log(pokedexShown);
-
     await fetch(`/api/users/${idUser}/${pageBox.name}/${idPokemon}`, {
       cache: "no-store",
       method: "PUT",
@@ -1127,8 +1115,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.message);
-        console.log("1");
         updatePageBox(data.updatedUser);
       });
   }

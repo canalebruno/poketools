@@ -39,10 +39,7 @@ export default function CustomBoxManager() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    console.log("cloudStorage");
-    console.log(cloudStorage);
-  }, [cloudStorage]);
+  useEffect(() => {}, [cloudStorage]);
 
   function convertNameToSlug(name: string) {
     const slug = name

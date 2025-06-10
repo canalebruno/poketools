@@ -60,10 +60,8 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
 
   useEffect(() => {
     if (data?.user) {
-      console.log(status);
       getUserData(data?.user?.email as string);
     } else {
-      console.log(status);
       setLoggedUser({} as User);
     }
   }, [data, change]);
@@ -82,7 +80,6 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     });
 
     const data = await response.json();
-    console.log(data);
 
     if (data.success) {
       if (data.data.pokemon !== undefined) {
@@ -165,15 +162,12 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
   }
 
   async function deleteUser(id: string) {
-    console.log("enter delete");
     const response = await fetch(`/api/users/${id}`, {
       cache: "no-store",
       method: "DELETE",
     });
 
     const data = await response.json();
-
-    console.log(data.success);
 
     if (data.success) {
       signOut({ redirectTo: "localhost:3000" });
@@ -210,8 +204,6 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     const data = await response.json();
 
     if (data.success) {
-      console.log(data.message);
-      console.log("2");
       setChange(String(new Date()));
     }
   }

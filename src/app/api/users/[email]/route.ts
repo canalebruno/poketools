@@ -22,7 +22,6 @@ export async function GET(request: Request ,{params}: Params) {
 export async function DELETE(request: Request ,{params}: Params) {
     //_id
     const email = (await params).email
-    console.log(email);
 
     try {
         await Users.findByIdAndDelete(email)
@@ -35,7 +34,6 @@ export async function DELETE(request: Request ,{params}: Params) {
 }
 
 export async function PUT(request: Request ,{params}: Params) {
-    console.log("c");
     //_id
     const email = (await params).email
     const boxes = await request.json()

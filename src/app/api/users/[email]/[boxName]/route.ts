@@ -22,7 +22,6 @@ export async function DELETE(request: Request ,{params}: Params) {
             { new: true }
         )
         
-        console.log(updatedUser);
 
         return NextResponse.json({success: true, message:"Pokemon check updated.", updatedUser})
     } catch (error) {
@@ -31,7 +30,6 @@ export async function DELETE(request: Request ,{params}: Params) {
 }
 
 export async function PUT(request: Request ,{params}: Params) {
-    console.log("b");
     const email = (await params).email
     const boxName = (await params).boxName
     const { updatedBox }  = await request.json()

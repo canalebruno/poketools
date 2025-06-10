@@ -105,7 +105,6 @@ export default function HuntOptions({ isOpen, onClose }: HuntOptionsProps) {
 
   useEffect(() => {
     if (huntGameOptionsSelected) {
-      console.log("entrou");
       let exclusivesToSet = [...huntGameOptionsSelected.baseGame];
 
       if (huntGameOptionsSelected.dlc) {

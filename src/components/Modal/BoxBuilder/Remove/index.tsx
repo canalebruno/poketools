@@ -30,10 +30,8 @@ export default function BoxBuilderRemovePokemonModal({
 
   useEffect(() => {
     if (term === "") {
-      console.log("1");
       setFilteredDex(pokedexShown as PokemonCustomBox[]);
     } else {
-      console.log("2");
       const newFilter = pokedexShown.filter((pokemon) => {
         return handleName(pokemon, true, "National", true)
           .toLowerCase()

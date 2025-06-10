@@ -3,7 +3,6 @@
 import Button from "@/components/Button";
 import { useController } from "@/hooks/useController";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import CustomBoxManager from "@/components/CustomBoxManagegr";
 import { usePokedex } from "@/hooks/usePokedex";
@@ -14,20 +13,22 @@ export default function Profile() {
   const { addNewUser, loggedUser, deleteUser, getUserData, updateBoxes } =
     useController();
   const { getLocalStorage } = usePokedex();
-  const router = useRouter();
 
   const [username, setUsername] = useState("");
   const [iAgree, setIAgree] = useState(false);
+  const [hasOldLocalStorage, setHasOldLocalStorage] = useState(false);
   const [oldLocalStorage, setOldLocalStorage] = useState([] as List[]);
-  const [isBuggedList, setIsBuggedList] = useState(false);
 
   useEffect(() => {
     const retrievedLocalStorage = getLocalStorage();
 
-    if (retrievedLocalStorage) {
+    if (retrievedLocalStorage && retrievedLocalStorage.length > 0) {
+      setHasOldLocalStorage(true);
       setOldLocalStorage(retrievedLocalStorage);
+    } else {
+      setHasOldLocalStorage(false);
     }
-  }, []);
+  }, [hasOldLocalStorage]);
 
   function incorporateOldLists() {
     const updatedLists =
@@ -110,7 +111,7 @@ export default function Profile() {
             }
           }}
         />
-        {oldLocalStorage.length > 0 && (
+        {hasOldLocalStorage && (
           <Button
             label="Load Local Storage Boxes"
             onClick={() => {

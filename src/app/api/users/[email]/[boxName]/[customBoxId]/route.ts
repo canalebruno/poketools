@@ -10,7 +10,6 @@ type Params = {
 }
 
 export async function PUT(request: Request ,{params}: Params) {
-    console.log("A");
     const email = (await params).email
     const boxName = (await params).boxName
     const customBoxId = (await params).customBoxId
