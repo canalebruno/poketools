@@ -19,13 +19,7 @@ import Button from "../Button";
 import { useController } from "@/hooks/useController";
 
 export default function CustomBoxManager() {
-  const {
-    customBoxes,
-    setPokedexShown,
-    compactPokemonList,
-    fullPokedex,
-    cloudStorage,
-  } = usePokedex();
+  const { setPokedexShown, fullPokedex, cloudStorage } = usePokedex();
 
   const { getByFullPokedex, loggedUser, updateBoxes } = useController();
 
@@ -42,10 +36,13 @@ export default function CustomBoxManager() {
       getByFullPokedex();
     }
 
-    // getLocalStorage();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    console.log("cloudStorage");
+    console.log(cloudStorage);
+  }, [cloudStorage]);
 
   function convertNameToSlug(name: string) {
     const slug = name

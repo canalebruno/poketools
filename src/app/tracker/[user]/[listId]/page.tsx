@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "../../../styles/Home.module.scss";
 import Box from "../../../../components/Box";

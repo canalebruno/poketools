@@ -20,16 +20,11 @@ export async function POST(request: Request) {
     try {
         const checkUsername = await Users.findOne({username})
 
-        console.log("entrou com"+username+email);
-
         if(checkUsername) {
-            console.log("nao passou no check");
             return NextResponse.json({success: false, message: "The username is already taken."})
         }
 
         const newUser = new Users({username,email})
-
-        console.log(newUser);
 
         await newUser.save()
         return NextResponse.json({success: true, message: "New user registered."})

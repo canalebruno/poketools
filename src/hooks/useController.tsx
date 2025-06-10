@@ -210,6 +210,8 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     const data = await response.json();
 
     if (data.success) {
+      console.log(data.message);
+      console.log("2");
       setChange(String(new Date()));
     }
   }

@@ -21,7 +21,6 @@ export default function ShinyTrackerControl() {
   const { loggedUser } = useController();
 
   const router = useRouter();
-  const { listId } = useParams();
 
   const { handleDeleteList, pageBox } = usePokedex();
 
@@ -38,7 +37,7 @@ export default function ShinyTrackerControl() {
           <Button
             label="Yes, Delete List"
             onClick={() => {
-              handleDeleteList(listId as string, loggedUser.email);
+              handleDeleteList();
               setDeleteModalOpen(false);
               router.push(`/tracker/${loggedUser?.username}`);
             }}

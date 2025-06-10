@@ -15,7 +15,6 @@ export async function DELETE(request: Request ,{params}: Params) {
     const email = (await params).email
     const boxName = (await params).boxName
 
-    console.log("delte");
     try {
         const updatedUser: User = await Users.findOneAndUpdate(
             { "email": email },
@@ -23,6 +22,8 @@ export async function DELETE(request: Request ,{params}: Params) {
             { new: true }
         )
         
+        console.log(updatedUser);
+
         return NextResponse.json({success: true, message:"Pokemon check updated.", updatedUser})
     } catch (error) {
         return NextResponse.json({success: false, message: `No data found. Error: ${error}`})
@@ -30,10 +31,11 @@ export async function DELETE(request: Request ,{params}: Params) {
 }
 
 export async function PUT(request: Request ,{params}: Params) {
+    console.log("b");
     const email = (await params).email
     const boxName = (await params).boxName
     const { updatedBox }  = await request.json()
-    console.log("put");
+
     try {
         const updatedUser: User = await Users.findOneAndUpdate(
             { "email": email },

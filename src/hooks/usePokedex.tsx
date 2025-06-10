@@ -156,7 +156,7 @@ interface PokedexContextData {
   /**
    * Deletes the active list.
    */
-  handleDeleteList: (slug: string, email: string) => void;
+  handleDeleteList: () => void;
   /**
    * Adds a new pokémon to the active custom box.
    * @param id The pokémon id to be added.
@@ -266,7 +266,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   >("national");
   const [highlightPokemon, setHighlightPokemon] = useState("");
   const [firstLoad, setFirstLoad] = useState(true);
-  const [loadingNewUpdate, setLoadingNewUpdate] = useState(false);
 
   const pathname = usePathname();
 
@@ -1001,7 +1000,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     const findCurrentBox = updatedUser.boxes.find(
       (b) => b.name === pageBox.name
     );
-    console.log(findCurrentBox);
+
     setPageBox(findCurrentBox!);
     passThroughFilters(findCurrentBox);
   }
@@ -1019,7 +1018,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     )
       .then((response) => response.json())
       .then((data) => {
-        //aqui
         updatePageBox(data.updatedUser);
       });
   }
@@ -1049,17 +1047,14 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // aqui
+        console.log(data.message);
+        console.log("3");
         updatePageBox(data.updatedUser);
       });
   }
 
-  async function handleDeleteList(slug: string, email: string) {
-    const updatedLists = customBoxes.filter((list) => list.id !== slug);
-
-    setCustomBoxes(updatedLists);
-
-    await fetch(`/api/users/${email}/${pageBox.name}`, {
+  async function handleDeleteList() {
+    await fetch(`/api/users/${cloudStorage.email}/${pageBox.name}`, {
       cache: "no-store",
       method: "DELETE",
     })
@@ -1067,6 +1062,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       .then((data) => {
         setCloudStorage(data.updatedUser);
       });
+
+    console.log("done delete");
   }
 
   function handleToggleCheck(
@@ -1130,6 +1127,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.message);
+        console.log("1");
         updatePageBox(data.updatedUser);
       });
   }

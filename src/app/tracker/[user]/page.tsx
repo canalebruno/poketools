@@ -5,7 +5,6 @@ import { useController } from "@/hooks/useController";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import BoxTrackerMain from "../../boxtracker/page";
 import CustomBoxManager from "@/components/CustomBoxManagegr";
 import { usePokedex } from "@/hooks/usePokedex";
 import { List } from "@/utils/types";
@@ -29,16 +28,6 @@ export default function Profile() {
       setOldLocalStorage(retrievedLocalStorage);
     }
   }, []);
-
-  useEffect(() => {
-    if (loggedUser.boxes?.length > 0) {
-      const updatedLists = loggedUser.boxes.filter((box) => {
-        return box.id !== undefined;
-      });
-
-      updateBoxes(loggedUser?._id as string, updatedLists as List[]);
-    }
-  }, [isBuggedList]);
 
   function incorporateOldLists() {
     const updatedLists =
