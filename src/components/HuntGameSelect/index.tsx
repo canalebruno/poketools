@@ -1,10 +1,10 @@
-import { usePokedex } from "../../hooks/usePokedex";
-import InputContainer from "../Inputs/InputContainer";
 import SettingsIcon from "@mui/icons-material/Settings";
-import styles from "./styles.module.scss";
-import HuntOptions from "./HuntOptions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { usePokedex } from "../../hooks/usePokedex";
 import { GameSelection } from "../../utils/types";
+import InputContainer from "../Inputs/InputContainer";
+import HuntOptions from "./HuntOptions";
+import styles from "./styles.module.scss";
 
 export default function HuntGameSelect() {
   const { handleSelectGame, huntGameSelection } = usePokedex();

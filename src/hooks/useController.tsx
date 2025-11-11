@@ -1,32 +1,31 @@
 "use client";
-
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
-import { usePokedex } from "./usePokedex";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import {
   Gamedex,
   List,
   ListOnStorage,
   Pokemon,
-  PokemonCustomBox,
-  PokemonCustomBoxShort,
   SVLocation,
   User,
 } from "@/utils/types";
-import { useNuzlocke } from "./useNuzlocke";
 import { signOut, useSession } from "next-auth/react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { useNuzlocke } from "./useNuzlocke";
+import { usePokedex } from "./usePokedex";
 
 interface ControllerProviderProps {
   children: ReactNode;
 }
 
 interface ControllerContextData {
-  getByPokedex: (gamedex: Gamedex) => void;
+  getByPokedex: (gamedex: Gamedex, callback: Function) => void;
   getNuzlocke: () => void;
   getByFullPokedex: () => void;
   addNewUser: (newUser: {
@@ -53,7 +52,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     setCloudStorage,
   } = usePokedex();
   const { setNuzlockeJson } = useNuzlocke();
-  const { data, status } = useSession();
+  const { data } = useSession();
 
   const [loggedUser, setLoggedUser] = useState<User>({} as User);
   const [change, setChange] = useState("");
@@ -64,6 +63,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     } else {
       setLoggedUser({} as User);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, change]);
 
   useEffect(() => {
@@ -72,6 +72,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     } else {
       setCloudStorage({} as User);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedUser]);
 
   async function getUserData(email: string) {
@@ -107,11 +108,12 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     return data;
   }
 
-  async function getByPokedex(gamedex: Gamedex) {
+  async function getByPokedex(gamedex: Gamedex, callback: Function) {
     const data = await getDataByPokedex(gamedex);
 
     if (data.success) {
       loadPokedex(data.data);
+      callback();
     }
   }
 
@@ -231,3 +233,5 @@ export function useController(): ControllerContextData {
 
   return context;
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
+/* eslint-enable @typescript-eslint/no-unsafe-function-type */

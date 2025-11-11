@@ -1,7 +1,6 @@
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { usePokedex } from "../../../hooks/usePokedex";
 import InputContainer from "../InputContainer";
-import { usePathname } from "next/navigation";
 
 export default function SortingSelect() {
   const pathname = usePathname();
@@ -63,6 +62,7 @@ export default function SortingSelect() {
         selection as
           | "paldean"
           | "paldean-tm"
+          | "paldean-bb"
           | "national"
           | "hisuian"
           | "galarian"

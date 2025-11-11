@@ -27,6 +27,7 @@ interface FilterControlProps {
 export default function FilterControl({ sortingDefault }: FilterControlProps) {
   const { windowWidth } = useWindowSize();
   const [isOpne, setIsOpen] = useState(false);
+  console.log(sortingDefault);
 
   function toggleDrawer(open: boolean) {
     setIsOpen(open);

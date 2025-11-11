@@ -1,19 +1,17 @@
 "use client";
 
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import MenuIcon from "@mui/icons-material/Menu";
+import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import styles from "./styles.module.scss";
+import { useState } from "react";
 import Drawer from "../Drawer";
-import { auth, signOut } from "@/auth";
-import { useSession } from "next-auth/react";
 import Login from "../Login";
+import styles from "./styles.module.scss";
 
 // REFATORAR AQUI LIST, LIST ITEM, ICON BUTTON
 
@@ -117,7 +115,7 @@ export default function Nav() {
           <>
             <IconButton
               aria-label="menu"
-              onClick={(e) => toggleDrawer(true)}
+              onClick={() => toggleDrawer(true)}
               sx={{ m: "1rem 0" }}
             >
               <MenuIcon />

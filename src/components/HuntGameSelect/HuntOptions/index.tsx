@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import Modal from "../../Modal";
 import { usePokedex } from "../../../hooks/usePokedex";
+import Modal from "../../Modal";
 import styles from "../styles.module.scss";
-import { CleaningServices } from "@mui/icons-material";
 
 interface HuntOptionsProps {
   isOpen: boolean;
@@ -101,6 +100,7 @@ export default function HuntOptions({ isOpen, onClose }: HuntOptionsProps) {
         setOptionsShown(null);
         setHuntGameOptionsSelected(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [huntGameSelection?.baseGame]);
 
   useEffect(() => {
@@ -116,6 +116,7 @@ export default function HuntOptions({ isOpen, onClose }: HuntOptionsProps) {
         exclusives: exclusivesToSet,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [huntGameOptionsSelected]);
 
   function handleOptionCheck(value: string) {

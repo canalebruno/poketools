@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { Pokemon, PokemonCustomBox } from "../../utils/types";
-import { handleName } from "../../utils/NameFormatting";
-import { usePathname } from "next/navigation";
-import styles from "./styles.module.scss";
+import { useController } from "@/hooks/useController";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { usePokedex } from "../../hooks/usePokedex";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { handleName } from "../../utils/NameFormatting";
+import { Pokemon, PokemonCustomBox } from "../../utils/types";
 import Tooltip from "../Tooltip";
-import { useController } from "@/hooks/useController";
+import styles from "./styles.module.scss";
 
 interface SquareProps {
   pokemon: Pokemon | PokemonCustomBox;

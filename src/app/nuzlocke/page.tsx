@@ -6,9 +6,7 @@ import LocationCard from "../../components/LocationCard";
 import NuzlockeFilterControl from "../../components/NuzlockeFilterControl";
 import Button from "@mui/material/Button";
 import { useNuzlocke } from "../../hooks/useNuzlocke";
-import { Pokemon, SVLocation } from "../../utils/types";
 import { useState, useEffect } from "react";
-import Head from "next/head";
 import { useController } from "@/hooks/useController";
 
 // interface NuzlockeProps {
@@ -22,8 +20,7 @@ import { useController } from "@/hooks/useController";
 // }
 
 export default function Nuzlocke() {
-  const { handleGenerateNuzlockeHunt, hunt, setNuzlockeJson, nuzlockeJson } =
-    useNuzlocke();
+  const { handleGenerateNuzlockeHunt, hunt, nuzlockeJson } = useNuzlocke();
   const { getNuzlocke } = useController();
   const [loading, setLoading] = useState(true);
 

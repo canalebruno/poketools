@@ -1,12 +1,11 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import Modal from "../..";
+import { usePokedex } from "../../../../hooks/usePokedex";
+import { handleName } from "../../../../utils/NameFormatting";
 import Button from "../../../Button";
 import InputContainer from "../../../Inputs/InputContainer";
 import styles from "../styles.module.scss";
-import { usePokedex } from "../../../../hooks/usePokedex";
-import { handleName } from "../../../../utils/NameFormatting";
-import Image from "next/image";
-import { useController } from "@/hooks/useController";
 
 interface BoxBuilderAddPokemonModalProps {
   isOpen: boolean;
@@ -18,7 +17,6 @@ export default function BoxBuilderAddPokemonModal({
   onClose,
 }: BoxBuilderAddPokemonModalProps) {
   const { pokedexShown, fullPokedex, handleAddPokemon } = usePokedex();
-  const { loggedUser } = useController();
 
   const [term, setTerm] = useState("");
   const [filteredDex, setFilteredDex] = useState(pokedexShown);

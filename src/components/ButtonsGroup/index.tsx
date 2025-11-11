@@ -1,6 +1,4 @@
 import { ReactNode } from "react";
-import { usePokedex } from "../../hooks/usePokedex";
-import ToggleButton from "./ToggleButton";
 import styles from "./styles.module.scss";
 
 interface ButtonsGroupProps {

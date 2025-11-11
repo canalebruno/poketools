@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useState } from "react";
-import styles from "./styles.module.scss";
+import { ReactNode, useState } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import styles from "./styles.module.scss";
 
 interface TooltipProps {
   children: ReactNode;

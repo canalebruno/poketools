@@ -1,17 +1,16 @@
 "use client";
 
+import { useController } from "@/hooks/useController";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import { useState } from "react";
-import styles from "./styles.module.scss";
-import { usePokedex } from "../../hooks/usePokedex";
-import { useParams } from "next/navigation";
 import Link from "next/link";
-import Modal from "../Modal";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { usePokedex } from "../../hooks/usePokedex";
 import Button from "../Button";
+import Modal from "../Modal";
 import BoxBuilderAddPokemonModal from "../Modal/BoxBuilder/Add";
 import BoxBuilderRemovePokemonModal from "../Modal/BoxBuilder/Remove";
-import { useRouter } from "next/navigation";
-import { useController } from "@/hooks/useController";
+import styles from "./styles.module.scss";
 
 export default function ShinyTrackerControl() {
   const [addPokemonModalOpen, setAddPokemonModalOpen] = useState(false);

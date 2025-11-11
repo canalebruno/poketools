@@ -139,7 +139,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
 
     return options[randomIndex];
   }
-
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   function filterAvailablePokemon(pokemon: Pokemon[] | any, type: string) {
     let availablePokemon = pokemon;
 
@@ -161,6 +161,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
 
     return availablePokemon;
   }
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   function filterNewGen(pokemon: Pokemon[] | undefined) {
     if (pokemon === undefined) {
@@ -202,7 +203,7 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
       return undefined;
     }
 
-    let locationPokemon = pokemon;
+    const locationPokemon = pokemon;
 
     return locationPokemon.filter((pkmn) => {
       return !notRepeatablePokemon.includes(pkmn.dex.nationalDex);
@@ -417,11 +418,11 @@ export function useNuzlocke(): NuzlockeContextData {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let nuzlockeResponse = await fetch(`${process.env.API_URL}nuzlocke`);
-  let nuzlockeJsonPoor: SVLocation[] = await nuzlockeResponse.json();
+  const nuzlockeResponse = await fetch(`${process.env.API_URL}nuzlocke`);
+  const nuzlockeJsonPoor: SVLocation[] = await nuzlockeResponse.json();
 
-  let paldeaDexResponse = await fetch(`${process.env.API_URL}paldeadex`);
-  let pokedex: Pokemon[] = await paldeaDexResponse.json();
+  const paldeaDexResponse = await fetch(`${process.env.API_URL}paldeadex`);
+  const pokedex: Pokemon[] = await paldeaDexResponse.json();
 
   const nuzlockeJson = await nuzlockeJsonPoor.map((loc) => {
     return {

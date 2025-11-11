@@ -4,13 +4,11 @@ import ButtonsGroup from "../ButtonsGroup";
 import ToggleButton from "../ButtonsGroup/ToggleButton";
 import InputContainer from "../Inputs/InputContainer";
 
-interface FilterControlProps {
-  vertical?: boolean;
-}
+// interface FilterControlProps {
+//   vertical?: boolean;
+// }
 
-export default function NuzlockeFilterControl({
-  vertical = false,
-}: FilterControlProps) {
+export default function NuzlockeFilterControl() {
   const {
     gameExclusive,
     setGameExclusive,

@@ -1,22 +1,17 @@
 "use client";
 
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import masterStyles from "../../app/styles/Home.module.scss";
-import styles from "./styles.module.scss";
-import { usePokedex } from "../../hooks/usePokedex";
-import { useEffect, useState } from "react";
-import {
-  List,
-  ListOnStorage,
-  Pokemon,
-  PokemonCustomBox,
-} from "../../utils/types";
-import Link from "next/link";
-import Head from "next/head";
-import Modal from "../Modal";
-import InputContainer from "../Inputs/InputContainer";
-import Button from "../Button";
 import { useController } from "@/hooks/useController";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import Head from "next/head";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import masterStyles from "../../app/styles/Home.module.scss";
+import { usePokedex } from "../../hooks/usePokedex";
+import { List, Pokemon, PokemonCustomBox } from "../../utils/types";
+import Button from "../Button";
+import InputContainer from "../Inputs/InputContainer";
+import Modal from "../Modal";
+import styles from "./styles.module.scss";
 
 export default function CustomBoxManager() {
   const { setPokedexShown, fullPokedex, cloudStorage } = usePokedex();

@@ -17,8 +17,6 @@ import {
   PokemonCustomBoxShort,
   User,
 } from "../utils/types";
-import { useController } from "./useController";
-import { NextResponse } from "next/server";
 
 interface PokedexProviderProps {
   children: ReactNode;
@@ -231,13 +229,14 @@ interface PokedexContextData {
   cloudStorage: User;
   currentTrackerList: string;
   setCurrentTrackerList: (newValue: string) => void;
+  passThroughFilters: (latestPageBox?: List) => void;
 }
 
 const PokedexContext = createContext<PokedexContextData>(
   {} as PokedexContextData
 );
 
-interface PokemonShown extends Pokemon {
+export interface PokemonShown extends Pokemon {
   customBoxId?: string;
   isShiny?: boolean;
   isChecked?: boolean;
@@ -270,10 +269,11 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const pathname = usePathname();
 
   useEffect(() => {
-    loadPokedex([] as Pokemon[]);
+    loadPokedex([] as PokemonShown[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  function loadPokedex(loadingPokedex: Pokemon[]) {
+  function loadPokedex(loadingPokedex: PokemonShown[]) {
     setFirstLoad(true);
     setBackupPokedex(loadingPokedex);
     setPokedexShown(loadingPokedex);
@@ -287,6 +287,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         break;
       case "/teal-mask-boxes":
         setOrderList("paldean-tm");
+        break;
+      case "/blueberry-academy-boxes":
+        setOrderList("paldean-bb");
         break;
       default:
         setOrderList("national");
@@ -321,49 +324,49 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
   }
 
-  function filterByGender() {
-    return pokedexShown.filter((pkmn) => {
-      return !pkmn.data.genderDifference;
-    });
-  }
+  // function filterByGender() {
+  //   return pokedexShown.filter((pkmn) => {
+  //     return !pkmn.data.genderDifference;
+  //   });
+  // }
 
   function NEWfilterByGender(pokemon: Pokemon) {
     return !pokemon.data.genderDifference;
   }
 
-  function filterListByGender(list: PokemonCustomBox[]) {
-    return list.filter((pkmn) => {
-      return !pkmn.data.genderDifference;
-    });
-  }
+  // function filterListByGender(list: PokemonCustomBox[]) {
+  //   return list.filter((pkmn) => {
+  //     return !pkmn.data.genderDifference;
+  //   });
+  // }
 
-  function filterByOnlyOneForm() {
-    return filterByGender().filter((pkmn) => {
-      switch (pathname) {
-        case "/teal-mask-boxes":
-          return (
-            (pkmn.formOrder === "00" ||
-              pkmn.id === "0741_03" ||
-              pkmn.id === "0550_02" ||
-              pkmn.id === "0901_01") &&
-            pkmn.id !== "0741_00" &&
-            pkmn.id !== "0901_00" &&
-            pkmn.id !== "0550_00"
-          );
-        case "/svboxes":
-          return (
-            (pkmn.formOrder === "00" ||
-              pkmn.id === "0128_01" ||
-              pkmn.id === "0194_01" ||
-              pkmn.id === "0666_19") &&
-            pkmn.id !== "0194_00" &&
-            pkmn.id !== "0666_00"
-          );
-        default:
-          return pkmn.formOrder === "00";
-      }
-    });
-  }
+  // function filterByOnlyOneForm() {
+  //   return filterByGender().filter((pkmn) => {
+  //     switch (pathname) {
+  //       case "/teal-mask-boxes":
+  //         return (
+  //           (pkmn.formOrder === "00" ||
+  //             pkmn.id === "0741_03" ||
+  //             pkmn.id === "0550_02" ||
+  //             pkmn.id === "0901_01") &&
+  //           pkmn.id !== "0741_00" &&
+  //           pkmn.id !== "0901_00" &&
+  //           pkmn.id !== "0550_00"
+  //         );
+  //       case "/svboxes":
+  //         return (
+  //           (pkmn.formOrder === "00" ||
+  //             pkmn.id === "0128_01" ||
+  //             pkmn.id === "0194_01" ||
+  //             pkmn.id === "0666_19") &&
+  //           pkmn.id !== "0194_00" &&
+  //           pkmn.id !== "0666_00"
+  //         );
+  //       default:
+  //         return pkmn.formOrder === "00";
+  //     }
+  //   });
+  // }
 
   function NEWfilterByOnlyOneForm(pokemon: Pokemon) {
     if (!NEWfilterByGender(pokemon)) {
@@ -395,11 +398,11 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
   }
 
-  function filterListByOnlyOneForm(list: PokemonCustomBox[]) {
-    return filterListByGender(list).filter((pkmn) => {
-      return pkmn.formOrder === "00";
-    });
-  }
+  // function filterListByOnlyOneForm(list: PokemonCustomBox[]) {
+  //   return filterListByGender(list).filter((pkmn) => {
+  //     return pkmn.formOrder === "00";
+  //   });
+  // }
 
   function passThroughFilters(latestPageBox?: List) {
     let finalList;
@@ -696,6 +699,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     ) {
       passThroughFilters();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     viewGenderDifference,
     viewOnlyOneForm,
@@ -708,7 +712,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   function expandPokemonList(list: PokemonCustomBoxShort[]) {
     return list.map((pkmn) => {
-      const extraInfo = fullPokedex.find((item: any) => {
+      const extraInfo = fullPokedex.find((item) => {
         return item.id === pkmn.id;
       });
 
@@ -1163,6 +1167,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         currentTrackerList,
         setCurrentTrackerList,
         cloudStorage,
+        passThroughFilters,
       }}
     >
       {children}

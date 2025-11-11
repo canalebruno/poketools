@@ -1,19 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import styles from "../../../styles/Home.module.scss";
-import Box from "../../../../components/Box";
-import HuntControl from "../../../../components/ShinyTrackerControl";
-import { usePokedex } from "../../../../hooks/usePokedex";
-import FilterControl from "../../../../components/FilterControl";
+import { useController } from "@/hooks/useController";
 import Head from "next/head";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import Box from "../../../../components/Box";
 import BoxGridLayout from "../../../../components/BoxGridLayout";
 import BoxLoading from "../../../../components/BoxLoading";
 import ButtonsGroup from "../../../../components/ButtonsGroup";
 import ToggleButton from "../../../../components/ButtonsGroup/ToggleButton";
+import FilterControl from "../../../../components/FilterControl";
 import HuntGameSelect from "../../../../components/HuntGameSelect";
-import { useParams, usePathname } from "next/navigation";
-import { useController } from "@/hooks/useController";
+import HuntControl from "../../../../components/ShinyTrackerControl";
+import { usePokedex } from "../../../../hooks/usePokedex";
+import styles from "../../../styles/Home.module.scss";
 
 export default function CustomBoxTracker() {
   const { listId } = useParams();
@@ -46,7 +46,7 @@ export default function CustomBoxTracker() {
   }, []);
 
   useEffect(() => {
-    let getPageBox = loggedUser?.boxes?.find((box) => box.id === listId);
+    const getPageBox = loggedUser?.boxes?.find((box) => box.id === listId);
 
     if (getPageBox !== undefined) {
       setIsLoading(false);

@@ -28,6 +28,7 @@ export default function Profile() {
     } else {
       setHasOldLocalStorage(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasOldLocalStorage]);
 
   function incorporateOldLists() {

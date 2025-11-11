@@ -1,30 +1,28 @@
 "use client";
 
-import styles from "../styles/Home.module.scss";
+import { useController } from "@/hooks/useController";
+import { useEffect, useState } from "react";
 import Box from "../../components/Box";
+import BoxGridLayout from "../../components/BoxGridLayout";
+import BoxLoading from "../../components/BoxLoading";
 import FilterControl from "../../components/FilterControl";
 import SearchBox from "../../components/Inputs/SearchBox";
 import { usePokedex } from "../../hooks/usePokedex";
-import { useEffect, useState } from "react";
-import { GetStaticProps } from "next";
-import { Pokemon } from "../../utils/types";
-import Head from "next/head";
-import BoxGridLayout from "../../components/BoxGridLayout";
-import BoxLoading from "../../components/BoxLoading";
-import { useController } from "@/hooks/useController";
+import styles from "../styles/Home.module.scss";
 
-interface HomeBoxesProps {
-  homedex: Pokemon[];
-}
+// interface HomeBoxesProps {
+//   homedex: Pokemon[];
+// }
 
-export default function HomeBoxes({ homedex }: HomeBoxesProps) {
+export default function HomeBoxes() {
   const { getByPokedex } = useController();
   const { pokedexShown } = usePokedex();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const success = getByPokedex("homedex");
-  }, []);
+    getByPokedex("homedex", () => setLoading(true));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   useEffect(() => {
     if (pokedexShown.length > 0) {

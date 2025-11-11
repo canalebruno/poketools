@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePokedex } from "../../../hooks/usePokedex";
 import { handleName } from "../../../utils/NameFormatting";
-import styles from "../styles.module.scss";
 import InputContainer from "../InputContainer";
 
 interface Option {

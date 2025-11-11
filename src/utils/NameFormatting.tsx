@@ -1,4 +1,3 @@
-import { usePathname } from "next/navigation";
 import { Pokemon } from "./types";
 
 export function handleNumber(pokemonNumber: number, charQuantity: 3 | 4) {
