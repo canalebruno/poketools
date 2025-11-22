@@ -29,9 +29,9 @@ export default function CustomBoxTracker() {
     fullPokedex,
   } = usePokedex();
 
-  const { loggedUser } = useController();
+  const { loggedUser, getByFullPokedex } = useController();
 
-  const { getByFullPokedex } = useController();
+  const { expandPokemonList } = usePokedex();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -51,7 +51,10 @@ export default function CustomBoxTracker() {
     if (getPageBox !== undefined) {
       setIsLoading(false);
 
-      setPageBox(getPageBox);
+      setPageBox({
+        ...getPageBox,
+        pokemon: expandPokemonList(getPageBox.pokemon),
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customBoxes, listId]);

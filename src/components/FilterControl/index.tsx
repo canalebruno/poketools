@@ -27,18 +27,27 @@ interface FilterControlProps {
 export default function FilterControl({ sortingDefault }: FilterControlProps) {
   const { windowWidth } = useWindowSize();
   const [isOpne, setIsOpen] = useState(false);
-  console.log(sortingDefault);
 
   function toggleDrawer(open: boolean) {
     setIsOpen(open);
   }
 
-  const { resetControls, pokedexShown, firstLoad, setFirstLoad } = usePokedex();
+  const {
+    resetControls,
+    pokedexShown,
+    firstLoad,
+    setFirstLoad,
+    handleSorting,
+  } = usePokedex();
 
   useEffect(() => {
     if (firstLoad) {
       resetControls();
       setFirstLoad(false);
+
+      if (sortingDefault) {
+        handleSorting(sortingDefault);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firstLoad]);

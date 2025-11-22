@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
 import { Pokemon, PokemonCustomBox } from "../../utils/types";
@@ -27,15 +27,34 @@ export default function Box({
   const [boxQuantity, setBoxQuantity] = useState(0);
   const [pokeBox, setPokeBox] = useState<Box[]>([] as Box[]);
 
-  const { orderList, pokedexShown, breakByGen, loadPokedex, customBoxes } =
-    usePokedex();
+  const {
+    orderList,
+    pokedexShown,
+    breakByGen,
+    loadPokedex,
+    customBoxes,
+    setPokedexShown,
+    firstLoad,
+    setBackupPokedex,
+  } = usePokedex();
+
+  // useEffect(() => {
+  //   if (pokemonListShown && pokemonListShown.length > 0) {
+  //     loadPokedex(pokemonListShown);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [pokemonListShown, pokedexShown]);
 
   useEffect(() => {
-    if (pokemonListShown && pokemonListShown?.length > 0) {
-      loadPokedex(pokemonListShown);
+    if (
+      pokemonListShown &&
+      pokemonListShown.length > 0 &&
+      pokedexShown.length < 1
+    ) {
+      setPokedexShown(pokemonListShown);
+      setBackupPokedex(pokemonListShown);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [pokemonListShown, pokedexShown]);
 
   useEffect(() => {
     if (pokedexShown && pokedexShown.length > 0) {

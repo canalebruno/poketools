@@ -230,6 +230,7 @@ interface PokedexContextData {
   currentTrackerList: string;
   setCurrentTrackerList: (newValue: string) => void;
   passThroughFilters: (latestPageBox?: List) => void;
+  setBackupPokedex: (pokedex: Pokemon[]) => void;
 }
 
 const PokedexContext = createContext<PokedexContextData>(
@@ -246,8 +247,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   const [pokedexShown, setPokedexShown] = useState<PokemonShown[]>(
     [] as PokemonShown[]
   );
-  const [backupPokedex, setBackupPokedex] = useState<Pokemon[]>(
-    [] as Pokemon[]
+  const [backupPokedex, setBackupPokedex] = useState<PokemonShown[]>(
+    [] as PokemonShown[]
   );
   const [cloudStorage, setCloudStorage] = useState<User>({} as User);
   const [viewGenderDifference, setViewGenderDifference] = useState(true);
@@ -276,8 +277,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   function loadPokedex(loadingPokedex: PokemonShown[]) {
     setFirstLoad(true);
     setBackupPokedex(loadingPokedex);
-    setPokedexShown(loadingPokedex);
-    passThroughFilters();
+    // setPokedexShown(loadingPokedex);
   }
 
   function resetControls() {
@@ -309,9 +309,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     setViewOnlyOneForm(newSetting);
 
-    if (newSetting) {
-      setViewGenderDifference(false);
-    }
+    // if (newSetting) {
+    //   setViewGenderDifference(false);
+    // }
   }
 
   function handleViewGenderDifference() {
@@ -319,9 +319,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
     setViewGenderDifference(newSetting);
 
-    if (newSetting) {
-      setViewOnlyOneForm(false);
-    }
+    // if (newSetting) {
+    //   setViewOnlyOneForm(false);
+    // }
   }
 
   // function filterByGender() {
@@ -369,12 +369,12 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   // }
 
   function NEWfilterByOnlyOneForm(pokemon: Pokemon) {
-    if (!NEWfilterByGender(pokemon)) {
-      return false;
-    }
+    // if (!NEWfilterByGender(pokemon)) {
+    //   return false;
+    // }
 
-    switch (pathname) {
-      case "/teal-mask-boxes":
+    switch (true) {
+      case /kitakami/.test(pathname):
         return (
           (pokemon.formOrder === "00" ||
             pokemon.id === "0741_03" ||
@@ -384,7 +384,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           pokemon.id !== "0901_00" &&
           pokemon.id !== "0550_00"
         );
-      case "/svboxes":
+      case /paldea/.test(pathname):
         return (
           (pokemon.formOrder === "00" ||
             pokemon.id === "0128_01" ||
@@ -420,8 +420,12 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
 
     if (viewOnlyOneForm) {
-      finalList = finalList.filter((pkmn) => NEWfilterByOnlyOneForm(pkmn));
-    } else if (!viewGenderDifference) {
+      finalList = finalList.filter((pkmn) => {
+        return NEWfilterByOnlyOneForm(pkmn);
+      });
+    }
+
+    if (!viewGenderDifference) {
       finalList = finalList.filter((pkmn) => NEWfilterByGender(pkmn));
     }
 
@@ -431,6 +435,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
 
     finalList = sortList(finalList, orderList);
+    console.log(finalList);
 
     setPokedexShown(finalList);
   }
@@ -979,7 +984,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
 
     await fetch(`/api/users/${cloudStorage.email}/${pageBox.name}`, {
-      cache: "no-store",
+      // cache: "no-store",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -996,19 +1001,19 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   function updatePageBox(updatedUser: User) {
     setCloudStorage(updatedUser);
 
-    const findCurrentBox = updatedUser.boxes.find(
-      (b) => b.name === pageBox.name
-    );
+    let findCurrentBox = updatedUser.boxes.find((b) => b.name === pageBox.name);
 
-    setPageBox(findCurrentBox!);
-    passThroughFilters(findCurrentBox);
+    findCurrentBox!.pokemon = expandPokemonList(findCurrentBox!.pokemon);
+
+    setPageBox(findCurrentBox! as List);
+    passThroughFilters(findCurrentBox as List);
   }
 
   async function handleRemovePokemon(customBoxId: string) {
     await fetch(
       `/api/users/${cloudStorage.email}/${pageBox.name}/${customBoxId}`,
       {
-        cache: "no-store",
+        // cache: "no-store",
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -1035,7 +1040,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
 
     await fetch(`/api/users/${cloudStorage.email}/${pageBox.name}`, {
-      cache: "no-store",
+      // cache: "no-store",
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -1052,7 +1057,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   async function handleDeleteList() {
     await fetch(`/api/users/${cloudStorage.email}/${pageBox.name}`, {
-      cache: "no-store",
+      // cache: "no-store",
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -1108,7 +1113,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     pageBox.pokemon[findPokemonIndex].isChecked = !currentCheck;
 
     await fetch(`/api/users/${idUser}/${pageBox.name}/${idPokemon}`, {
-      cache: "no-store",
+      // cache: "no-store",
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -1144,6 +1149,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         setFirstLoad,
         setPokedexShown,
         backupPokedex,
+        setBackupPokedex,
         customBoxes,
         handleAddPokemon,
         pageBox,

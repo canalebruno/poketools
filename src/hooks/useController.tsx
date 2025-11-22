@@ -6,6 +6,7 @@ import {
   List,
   ListOnStorage,
   Pokemon,
+  PokemonCustomBoxShort,
   SVLocation,
   User,
 } from "@/utils/types";
@@ -37,6 +38,7 @@ interface ControllerContextData {
   deleteUser: (id: string) => void;
   updateBoxes: (id: string, updatedBoxes: List[]) => void;
   getUserData: (ematil: string) => void;
+  getDataByPokedex: (gamedex: Gamedex) => Promise<any>;
 }
 
 const ControllerContext = createContext<ControllerContextData>(
@@ -76,9 +78,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
   }, [loggedUser]);
 
   async function getUserData(email: string) {
-    const response = await fetch(`/api/users/${email}`, {
-      cache: "default",
-    });
+    const response = await fetch(`/api/users/${email}`);
 
     const data = await response.json();
 
@@ -99,9 +99,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
   }
 
   async function getDataByPokedex(gamedex: Gamedex) {
-    const response = await fetch(`/api/pokedex/${gamedex}`, {
-      cache: "no-store",
-    });
+    const response = await fetch(`/api/pokedex/${gamedex}`);
 
     const data = await response.json();
 
@@ -118,9 +116,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
   }
 
   async function getByFullPokedex() {
-    const response = await fetch(`/api/pokedex/`, {
-      cache: "no-store",
-    });
+    const response = await fetch(`/api/pokedex/`);
 
     const data = await response.json();
 
@@ -130,9 +126,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
   }
 
   async function getNuzlocke() {
-    const responseNuzlocke = await fetch("/api/svlocations", {
-      cache: "no-store",
-    });
+    const responseNuzlocke = await fetch("/api/svlocations");
 
     const dataNuzlocke = await responseNuzlocke.json();
 
@@ -165,7 +159,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
 
   async function deleteUser(id: string) {
     const response = await fetch(`/api/users/${id}`, {
-      cache: "no-store",
+      // cache: "no-store",
       method: "DELETE",
     });
 
@@ -180,7 +174,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
 
   async function addNewUser(newUser: { email: string; username: string }) {
     const response = await fetch("/api/users/", {
-      cache: "no-store",
+      // cache: "no-store",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -195,7 +189,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
 
   async function updateBoxes(id: string, updatedBoxes: List[]) {
     const response = await fetch(`/api/users/${id}`, {
-      cache: "no-store",
+      // cache: "no-store",
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -221,6 +215,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
         deleteUser,
         updateBoxes,
         getUserData,
+        getDataByPokedex,
       }}
     >
       {children}
