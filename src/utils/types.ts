@@ -25,6 +25,7 @@ export interface Pokemon {
     galarIoaDex: number | null,
     galarCtDex: number | null,
     hisuiDex: null | number;
+    zaLumioseDex: null | number;
     paldeaDex: null | number;
     paldeaTMDex: number | null;
     paldeaBBDex: number | null;

@@ -30,6 +30,7 @@ type SortingLists =
   | "galarian-ioa"
   | "galarian-ct"
   | "paldean-tm"
+  | "lumiose"
   | "paldean-bb";
 
 interface PokedexContextData {
@@ -85,6 +86,7 @@ interface PokedexContextData {
     | "hisuian"
     | "galarian"
     | "galarian-ioa"
+    | "lumiose"
     | "galarian-ct";
   /**
    * If true it will separate the boxes by generations.
@@ -262,6 +264,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     | "hisuian"
     | "galarian"
     | "galarian-ioa"
+    | "lumiose"
     | "galarian-ct"
   >("national");
   const [highlightPokemon, setHighlightPokemon] = useState("");

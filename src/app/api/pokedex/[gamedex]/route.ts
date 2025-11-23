@@ -39,6 +39,46 @@ export async function GET(request: Request ,{params}: Params) {
                 "dex.paldeaTMDex": 1, id: 1
             }
             break;
+        case "lumiose":
+            filter = {
+                    'dex.zaLumioseDex': { $gte: 1 } 
+            }
+            sortOptions = {
+                "dex.zaLumioseDex": 1, id: 1
+            }
+            break;
+        case "hisui":
+            filter = {
+                    'dex.hisuiDex': { $gte: 1 } 
+            }
+            sortOptions = {
+                "dex.hisuiDex": 1, id: 1
+            }
+            break;
+        case "galar":
+            filter = {
+                    'dex.galarDex': { $gte: 1 } 
+            }
+            sortOptions = {
+                "dex.galarDex": 1, id: 1
+            }
+            break;
+        case "galarIoa":
+            filter = {
+                    'dex.galarIoaDex': { $gte: 1 } 
+            }
+            sortOptions = {
+                "dex.galarIoaDex": 1, id: 1
+            }
+            break;
+        case "galarCt":
+            filter = {
+                    'dex.galarCtDex': { $gte: 1 } 
+            }
+            sortOptions = {
+                "dex.galarCtDex": 1, id: 1
+            }
+            break;
         case "homedex":
             filter = {
                     "availability.homeDepositable": true 

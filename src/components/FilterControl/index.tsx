@@ -21,6 +21,7 @@ interface FilterControlProps {
     | "galarian-ioa"
     | "galarian-ct"
     | "paldean-tm"
+    | "lumiose"
     | "paldean-bb";
 }
 

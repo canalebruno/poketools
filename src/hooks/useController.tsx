@@ -39,6 +39,7 @@ interface ControllerContextData {
   updateBoxes: (id: string, updatedBoxes: List[]) => void;
   getUserData: (ematil: string) => void;
   getDataByPokedex: (gamedex: Gamedex) => Promise<any>;
+  getStorageDex: (listId: string) => Promise<List>;
 }
 
 const ControllerContext = createContext<ControllerContextData>(
@@ -204,6 +205,20 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     }
   }
 
+  async function getStorageDex(listId: string) {
+    // const response = await fetch(`/api/users/${data!.user!.email}/${listId}`);
+    const resolvedDex = await fetch(`/api/users/${data!.user!.email}/${listId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        return {
+          ...data.data,
+          pokemon: expandPokemonList(data.data.pokemon),
+        };
+      });
+
+    return resolvedDex;
+  }
+
   return (
     <ControllerContext.Provider
       value={{
@@ -216,6 +231,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
         updateBoxes,
         getUserData,
         getDataByPokedex,
+        getStorageDex,
       }}
     >
       {children}

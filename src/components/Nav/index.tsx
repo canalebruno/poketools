@@ -35,23 +35,48 @@ export default function Nav() {
   const menuNavItems = [
     {
       id: 1,
-      title: "Scarlet and Violet",
-      slug: "/svboxes",
+      title: "Lumiose",
+      slug: "/pokedex/legends-za/lumiose",
     },
     {
       id: 2,
-      title: "Teal Mask",
-      slug: "/teal-mask-boxes",
+      title: "Scarlet and Violet",
+      slug: "/pokedex/scarlet-violet/paldea",
     },
     {
       id: 3,
+      title: "Kitakami",
+      slug: "/pokedex/scarlet-violet/kitakami",
+    },
+    {
+      id: 4,
       title: "BB Academy",
-      slug: "/blueberry-academy-boxes",
+      slug: "/pokedex/scarlet-violet/blueberry",
+    },
+    {
+      id: 5,
+      title: "Hisui",
+      slug: "/pokedex/legends-arceus/hisui",
+    },
+    {
+      id: 6,
+      title: "Galar",
+      slug: "/pokedex/sword-shield/galar",
+    },
+    {
+      id: 7,
+      title: "Isle of Armor",
+      slug: "/pokedex/sword-shield/isle-of-armor",
+    },
+    {
+      id: 8,
+      title: "Crown Thundra",
+      slug: "/pokedex/sword-shield/crown-thundra",
     },
     {
       id: 4,
       title: "Home",
-      slug: "/homeboxes",
+      slug: "/pokedex/home",
     },
     {
       id: 5,

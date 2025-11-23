@@ -2,7 +2,8 @@ import { connect } from "@/utils/dbConnect/dbConnect"
 import Users from "@/utils/schema/UsersSchema"
 import { NextResponse } from "next/server"
 import {
-  User
+  User, List,
+  Pokemon
 } from "../../../../../utils/types";
 
 connect()
@@ -60,6 +61,30 @@ export async function POST(request: Request ,{params}: Params) {
         )
         
         return NextResponse.json({success: true, message:"Box updated. Pokemon added.", updatedUser})
+    } catch (error) {
+        return NextResponse.json({success: false, message: `No data found. Error: ${error}`})
+    }
+}
+
+export async function GET(request: Request ,{params}: Params) {
+    const username = (await params).email
+    const boxName = (await params).boxName
+
+    try {
+        const checkEmail: User = await Users.findOne({username})
+
+        const checkBox = checkEmail.boxes.find(list => {return list.id === boxName})
+
+        const fullPokedexResponse = await fetch(`http://localhost:3000/api/pokedex`)
+
+        const fullPokedex = await fullPokedexResponse.json()
+
+        const expandedBox = {...checkBox, pokemon: checkBox?.pokemon.map(pkmn => {
+            const extraInfo = fullPokedex.data.find(full => {return full.id === pkmn.id})
+            return {...pkmn, ...extraInfo}
+        })}
+
+        return NextResponse.json({success: true, data:expandedBox})
     } catch (error) {
         return NextResponse.json({success: false, message: `No data found. Error: ${error}`})
     }

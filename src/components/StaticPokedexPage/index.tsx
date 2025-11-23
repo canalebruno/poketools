@@ -14,13 +14,16 @@ interface StaticPokedexPageProps {
     | "galarian-ioa"
     | "galarian-ct"
     | "paldean-tm"
-    | "paldean-bb";
+    | "paldean-bb"
+    | "lumiose";
   pokedex: Pokemon[];
+  imageSource?: "svicons" | "home";
 }
 
 export default function StaticPokedexPage({
   pokedex = [] as Pokemon[],
   sortingDefault,
+  imageSource = "svicons",
 }: StaticPokedexPageProps) {
   return (
     <>
@@ -28,7 +31,7 @@ export default function StaticPokedexPage({
       <SearchBox />
       <BoxGridLayout>
         {pokedex.length > 0 ? (
-          <Box pokemonListShown={pokedex} imageSource="svicons" />
+          <Box pokemonListShown={pokedex} imageSource={imageSource} />
         ) : (
           <BoxLoading />
         )}

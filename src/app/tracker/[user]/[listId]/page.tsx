@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { useController } from "@/hooks/useController";
 import Head from "next/head";
@@ -14,106 +14,31 @@ import HuntGameSelect from "../../../../components/HuntGameSelect";
 import HuntControl from "../../../../components/ShinyTrackerControl";
 import { usePokedex } from "../../../../hooks/usePokedex";
 import styles from "../../../styles/Home.module.scss";
+import DynamicPokedexPage from "@/components/DynamicPokedexPage";
+import { Pokemon } from "@/utils/types";
+import { useSession } from "next-auth/react";
+import { resolve } from "path";
 
-export default function CustomBoxTracker() {
-  const { listId } = useParams();
-
-  const {
-    setPageBox,
-    customBoxes,
-    pageBox,
-    showChecked,
-    showUnchecked,
-    handleToggleCheck,
-    showAllCheckedAndUnchecked,
-    fullPokedex,
-  } = usePokedex();
-
-  const { loggedUser, getByFullPokedex } = useController();
-
-  const { expandPokemonList } = usePokedex();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (customBoxes) {
-      setIsLoading(false);
-    }
-
-    if (fullPokedex.length < 1) {
-      getByFullPokedex();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    const getPageBox = loggedUser?.boxes?.find((box) => box.id === listId);
-
-    if (getPageBox !== undefined) {
-      setIsLoading(false);
-
-      setPageBox({
-        ...getPageBox,
-        pokemon: expandPokemonList(getPageBox.pokemon),
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [customBoxes, listId]);
+export default async function CustomBoxTracker({
+  params,
+}: {
+  params: { user: string; listId: string };
+}) {
+  const resolvedDex = await fetch(
+    `http://localhost:3000/api/users/${(await params).user}/${
+      (
+        await params
+      ).listId
+    }`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      return data.data;
+    });
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Pokémon Tools | My Box: {pageBox && pageBox.name}</title>
-        <meta
-          property="og:title"
-          content={`Pokémon Tools | My Box: ${pageBox && pageBox.name}`}
-          key="title"
-        />
-      </Head>
-      <HuntControl />
-      <FilterControl sortingDefault="national" />
-      <ButtonsGroup>
-        <ToggleButton
-          onClick={() => {
-            handleToggleCheck("uncheck", !showUnchecked);
-          }}
-          label="Show Only Unchecked"
-          controller={showUnchecked}
-        />
-        <ToggleButton
-          onClick={() => {
-            handleToggleCheck("check", !showChecked);
-          }}
-          label="Show Only Checked"
-          controller={showChecked}
-        />
-        <ToggleButton
-          onClick={() => {
-            handleToggleCheck("all", !showAllCheckedAndUnchecked);
-          }}
-          label="Show All"
-          controller={showAllCheckedAndUnchecked}
-        />
-      </ButtonsGroup>
-      <HuntGameSelect />
-      {pageBox !== undefined && (
-        <>
-          <h2>{pageBox.name}</h2>
-          {
-            <BoxGridLayout>
-              {pageBox.pokemon !== undefined && pageBox.pokemon.length > 0 && (
-                <>
-                  <Box
-                    imageSource="home"
-                    isCheckable
-                    pokemonListShown={pageBox.pokemon}
-                  />
-                </>
-              )}
-              {isLoading && <BoxLoading />}
-            </BoxGridLayout>
-          }
-        </>
-      )}
+      <DynamicPokedexPage pokedex={resolvedDex} />
     </div>
   );
 }
