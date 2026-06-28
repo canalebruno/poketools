@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePokedex } from "../../hooks/usePokedex";
 import styles from "./styles.module.scss";
 import { Pokemon, PokemonCustomBox } from "../../utils/types";
@@ -31,10 +31,8 @@ export default function Box({
     orderList,
     pokedexShown,
     breakByGen,
-    loadPokedex,
     customBoxes,
     setPokedexShown,
-    firstLoad,
     setBackupPokedex,
   } = usePokedex();
 
@@ -54,6 +52,8 @@ export default function Box({
       setPokedexShown(pokemonListShown);
       setBackupPokedex(pokemonListShown);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemonListShown, pokedexShown]);
 
   useEffect(() => {
@@ -66,6 +66,29 @@ export default function Box({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokedexShown, boxQuantity, orderList, breakByGen, customBoxes]);
+
+  useEffect(() => {
+    if (
+      pokemonListShown &&
+      pokemonListShown.length > 0 &&
+      pokedexShown.length > 0
+    ) {
+      // 1. Perform the mapping directly on the current array snapshot
+      const updatedList = pokedexShown.map((currentPkmn) => {
+        const updatedPkmn = (pokemonListShown as any[]).find(
+          (p) =>
+            p.customBoxId === currentPkmn.customBoxId ||
+            p.id === currentPkmn.id,
+        );
+        return updatedPkmn
+          ? { ...currentPkmn, isChecked: updatedPkmn.isChecked }
+          : currentPkmn;
+      });
+
+      // 2. Pass the final processed array directly to your setter
+      setPokedexShown(updatedList);
+    }
+  }, [pokemonListShown]);
 
   function handleBoxQuantity() {
     const newPokeBox = [];
@@ -81,7 +104,7 @@ export default function Box({
       } else {
         const latestGen = pokedexShown.reduce(
           (a, b) => Math.max(a, b.dex.generation),
-          -Infinity
+          -Infinity,
         );
 
         let boxNumber = 1;
@@ -146,12 +169,14 @@ export default function Box({
               </div>
               <div className={styles.boxGrid}>
                 {box.pokemon.map((pkmn) => {
+                  const stableKey =
+                    "customBoxId" in pkmn ? pkmn.customBoxId : pkmn.id;
                   return (
                     <Square
                       isCheckable={isCheckable}
                       imageSource={imageSource}
                       pokemon={pkmn}
-                      key={"customBoxId" in pkmn ? pkmn.customBoxId : pkmn.id}
+                      key={stableKey}
                     />
                   );
                 })}

@@ -38,7 +38,7 @@ export default function Square({
             (pathname === "/svboxes" && pokemon.dex.paldeaDex! < 500)),
 
         pathname,
-        true
+        true,
       )}
     >
       <div
@@ -61,9 +61,9 @@ export default function Square({
               imageSource === "svicons"
                 ? pokemon.images.icon
                 : !("customBoxId" in pokemon) ||
-                  ("isShiny" in pokemon && !pokemon.isShiny)
-                ? pokemon.images.homeRender
-                : pokemon.images.homeShinyRender
+                    ("isShiny" in pokemon && !pokemon.isShiny)
+                  ? pokemon.images.homeRender
+                  : pokemon.images.homeShinyRender
             }`}
             alt={`#${
               pathname === "/svboxes"

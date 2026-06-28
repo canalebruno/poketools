@@ -4,13 +4,15 @@ import { NextResponse } from "next/server"
 
 connect()
 
+// Criar um filtro para mostrar so a forma original do jogo corrente
+
 type Params = {
     params: Promise<{gamedex: string}>
 }
 
 export async function GET(request: Request ,{params}: Params) {
     const gamedex = (await params).gamedex
-
+console.log(gamedex)
     let filter = {}
     let sortOptions = {}
 
@@ -41,10 +43,18 @@ export async function GET(request: Request ,{params}: Params) {
             break;
         case "lumiose":
             filter = {
-                    'dex.zaLumioseDex': { $gte: 1 } 
+                'dex.zaLumioseDex': { $gte: 1 } 
             }
             sortOptions = {
                 "dex.zaLumioseDex": 1, id: 1
+            }
+            break;
+        case "lumioseHyperspace":
+            filter = {
+                    "dex.lumioseHyperspaceDex": { $gte: 1 } 
+            }
+            sortOptions = {
+                "dex.lumioseHyperspaceDex": 1, id: 1
             }
             break;
         case "hisui":
@@ -93,7 +103,9 @@ export async function GET(request: Request ,{params}: Params) {
     }
 
     try {
+        filter = {...filter, "availability.homeDepositable": true}
         const pokedex = await Pokedex.find(filter).sort(sortOptions)
+
 
         return NextResponse.json({success: true, data:pokedex})
     } catch (error) {

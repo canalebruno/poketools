@@ -9,7 +9,7 @@ export default function Home() {
     <div className={styles.container}>
       <h1>Pokémon Tools</h1>
       <section className={styles.buttonsSection}>
-        <Link href="/svboxes">
+        <Link href="/pokedex/scarlet-violet/paldea">
           <Image
             unoptimized
             src="appicons/pokemon-sv.jpg"
@@ -23,7 +23,7 @@ export default function Home() {
             <span className={styles.subtitle}>Boxes</span>
           </div>
         </Link>
-        <Link href="/teal-mask-boxes">
+        <Link href="/pokedex/scarlet-violet/kitakami">
           <Image
             unoptimized
             src="appicons/pokemon-teal-mask.png"
@@ -37,7 +37,7 @@ export default function Home() {
             <span className={styles.subtitle}>Boxes</span>
           </div>
         </Link>
-        <Link href="/blueberry-academy-boxes">
+        <Link href="/pokedex/scarlet-violet/blueberry">
           {/* <Image
             unoptimized
             src="appicons/pokemon-teal-mask.png"

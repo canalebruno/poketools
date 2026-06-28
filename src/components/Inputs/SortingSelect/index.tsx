@@ -38,6 +38,14 @@ export default function SortingSelect() {
       value: "galarian-ct",
       label: "Crown Tundra Dex",
     },
+    {
+      value: "lumiose",
+      label: "Lumiose Dex",
+    },
+    {
+      value: "lumiose-hyperspace",
+      label: "Lumiose Hyperspace Dex",
+    },
   ].filter((option) => {
     if (pathname === "/svboxes") {
       return option.value === "national" || option.value === "paldean";
@@ -68,6 +76,8 @@ export default function SortingSelect() {
           | "galarian"
           | "galarian-ioa"
           | "galarian-ct"
+          | "lumiose"
+          | "lumiose-hyperspace",
       );
     }
   }

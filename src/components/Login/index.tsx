@@ -9,7 +9,8 @@ export default function Login() {
   const { data } = useSession();
   const { loggedUser } = useController();
 
-  const url = `http://localhost:3000`;
+  // const url = `http://localhost:3000`;
+  const url = `https://poketools-blue.vercel.app/`;
 
   return data?.user ? (
     <>

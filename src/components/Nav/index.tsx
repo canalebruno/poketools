@@ -39,6 +39,11 @@ export default function Nav() {
       slug: "/pokedex/legends-za/lumiose",
     },
     {
+      id: 1.1,
+      title: "Lumiose Hyperspace",
+      slug: "/pokedex/legends-za/hyperspace",
+    },
+    {
       id: 2,
       title: "Scarlet and Violet",
       slug: "/pokedex/scarlet-violet/paldea",
@@ -74,12 +79,12 @@ export default function Nav() {
       slug: "/pokedex/sword-shield/crown-thundra",
     },
     {
-      id: 4,
+      id: 9,
       title: "Home",
       slug: "/pokedex/home",
     },
     {
-      id: 5,
+      id: 10,
       title: "Builder (Beta)",
       slug: "/tracker",
     },

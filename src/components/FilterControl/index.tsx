@@ -9,20 +9,12 @@ import styles from "./styles.module.scss";
 import SortingSelect from "../Inputs/SortingSelect";
 import FilterViewToggleButtons from "../FilterViewToggleButtons";
 import Drawer from "../Drawer";
+import { SortingList } from "@/utils/types";
 
 // REFATORAR AQUI FAB
 
 interface FilterControlProps {
-  sortingDefault:
-    | "paldean"
-    | "national"
-    | "hisuian"
-    | "galarian"
-    | "galarian-ioa"
-    | "galarian-ct"
-    | "paldean-tm"
-    | "lumiose"
-    | "paldean-bb";
+  sortingDefault: SortingList;
 }
 
 export default function FilterControl({ sortingDefault }: FilterControlProps) {

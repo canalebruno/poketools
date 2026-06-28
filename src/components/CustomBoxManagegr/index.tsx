@@ -230,7 +230,7 @@ export default function CustomBoxManager() {
 
         // Remove duplicates
         templateDone = compiled.filter(
-          (item, index) => compiled.indexOf(item) === index
+          (item, index) => compiled.indexOf(item) === index,
         );
         break;
       case "galar":
@@ -426,7 +426,7 @@ export default function CustomBoxManager() {
                   <Link
                     key={list.id}
                     className={styles.boxCard}
-                    href={`/tracker/${loggedUser.username}/${list.id}`}
+                    href={`/tracker/${loggedUser.email}/${list.id}`}
                   >
                     <span>{list.name}</span>
                     <ArrowRightAltIcon />

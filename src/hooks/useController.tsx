@@ -6,7 +6,6 @@ import {
   List,
   ListOnStorage,
   Pokemon,
-  PokemonCustomBoxShort,
   SVLocation,
   User,
 } from "@/utils/types";
@@ -159,6 +158,9 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
   }
 
   async function deleteUser(id: string) {
+    // const url = `http://localhost:3000`;
+    const url = `https://poketools-blue.vercel.app/`;
+
     const response = await fetch(`/api/users/${id}`, {
       // cache: "no-store",
       method: "DELETE",
@@ -167,7 +169,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     const data = await response.json();
 
     if (data.success) {
-      signOut({ redirectTo: "localhost:3000" });
+      signOut({ redirectTo: url });
     } else {
       alert("Something went wrong. Try again later.");
     }

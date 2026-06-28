@@ -26,6 +26,7 @@ export interface Pokemon {
     galarCtDex: number | null,
     hisuiDex: null | number;
     zaLumioseDex: null | number;
+    lumioseHyperspaceDex: null | number;
     paldeaDex: null | number;
     paldeaTMDex: number | null;
     paldeaBBDex: number | null;
@@ -83,6 +84,17 @@ export type GameSelection = null | {
 }
 
 export type Gamedex = "paldea" | "paldeaBB" | "paldeaTM" | "homedex"
+
+export type SortingList = "paldean"
+    | "national"
+    | "hisuian"
+    | "galarian"
+    | "galarian-ioa"
+    | "galarian-ct"
+    | "paldean-tm"
+    | "lumiose"
+    | "lumiose-hyperspace"
+    | "paldean-bb";
 
 export interface User {
   _id: string,

@@ -24,6 +24,7 @@ const pokedexSchema = new mongoose.Schema({
       paldeaDex: Number,
       paldeaTMDex: Number,
       zaLumioseDex: Number,
+      lumioseHyperspaceDex: Number,
       paldeaBBDex: Number,
       svHomeAvailable: Boolean,
       swshHomeAvailable: Boolean

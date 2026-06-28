@@ -2,9 +2,8 @@ import { connect } from "@/utils/dbConnect/dbConnect"
 import Users from "@/utils/schema/UsersSchema"
 import { NextResponse } from "next/server"
 import {
-  User, List,
-  Pokemon
-} from "../../../../../utils/types";
+    Pokemon,
+  User} from "../../../../../utils/types";
 
 connect()
 
@@ -66,26 +65,40 @@ export async function POST(request: Request ,{params}: Params) {
     }
 }
 
-export async function GET(request: Request ,{params}: Params) {
-    const username = (await params).email
-    const boxName = (await params).boxName
+export async function GET(request: Request, { params }: Params) {
+    // 1. Unpack parameters cleanly matching your folder names
+    const { email, boxName } = await params;
 
     try {
-        const checkEmail: User = await Users.findOne({username})
+        const checkEmail: User | null = await Users.findOne({ email });
 
-        const checkBox = checkEmail.boxes.find(list => {return list.id === boxName})
+        if (!checkEmail) {
+            return NextResponse.json({ success: false, message: `User with email ${email} not found.` }, { status: 404 });
+        }
 
-        const fullPokedexResponse = await fetch(`http://localhost:3000/api/pokedex`)
+        const checkBox = checkEmail.boxes.find(list => list.id === boxName);
 
-        const fullPokedex = await fullPokedexResponse.json()
+        // 5. Prevent crashing if the specific box name doesn't exist
+        if (!checkBox) {
+            return NextResponse.json({ success: false, message: `Box "${boxName}" not found for this user.` }, { status: 404 });
+        }
 
-        const expandedBox = {...checkBox, pokemon: checkBox?.pokemon.map(pkmn => {
-            const extraInfo = fullPokedex.data.find(full => {return full.id === pkmn.id})
-            return {...pkmn, ...extraInfo}
-        })}
+        // 6. Fetch full Pokedex details
+        const fullPokedexResponse = await fetch(`${process.env.BASE_URL}/api/pokedex`);
+        const fullPokedex = await fullPokedexResponse.json();
 
-        return NextResponse.json({success: true, data:expandedBox})
+        // 7. Map details cleanly
+        const expandedBox = {
+            ...checkBox,
+            pokemon: checkBox.pokemon.map(pkmn => {
+                const extraInfo = fullPokedex.data.find((full: Pokemon) => full.id === pkmn.id);
+                return { ...pkmn, ...extraInfo };
+            })
+        };
+
+        return NextResponse.json({ success: true, data: expandedBox });
+        
     } catch (error) {
-        return NextResponse.json({success: false, message: `No data found. Error: ${error}`})
+        return NextResponse.json({ success: false, message: `Server Error: ${error}` }, { status: 500 });
     }
 }

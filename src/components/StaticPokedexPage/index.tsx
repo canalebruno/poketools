@@ -3,19 +3,10 @@ import BoxGridLayout from "../BoxGridLayout";
 import BoxLoading from "../BoxLoading";
 import FilterControl from "../FilterControl";
 import SearchBox from "../Inputs/SearchBox";
-import { Pokemon } from "@/utils/types";
+import { Pokemon, SortingList } from "@/utils/types";
 
 interface StaticPokedexPageProps {
-  sortingDefault:
-    | "paldean"
-    | "national"
-    | "hisuian"
-    | "galarian"
-    | "galarian-ioa"
-    | "galarian-ct"
-    | "paldean-tm"
-    | "paldean-bb"
-    | "lumiose";
+  sortingDefault: SortingList;
   pokedex: Pokemon[];
   imageSource?: "svicons" | "home";
 }

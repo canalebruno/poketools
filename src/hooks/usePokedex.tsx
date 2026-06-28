@@ -15,23 +15,13 @@ import {
   Pokemon,
   PokemonCustomBox,
   PokemonCustomBoxShort,
+  SortingList,
   User,
 } from "../utils/types";
 
 interface PokedexProviderProps {
   children: ReactNode;
 }
-
-type SortingLists =
-  | "paldean"
-  | "national"
-  | "hisuian"
-  | "galarian"
-  | "galarian-ioa"
-  | "galarian-ct"
-  | "paldean-tm"
-  | "lumiose"
-  | "paldean-bb";
 
 interface PokedexContextData {
   // VARIABLES
@@ -78,16 +68,7 @@ interface PokedexContextData {
    * It is the order it is sorted:
    * National, Galar, Isle of Armor, Crown Tundra, Hisui, Paldea or Kitakami Dex.
    */
-  orderList:
-    | "paldean"
-    | "paldean-tm"
-    | "paldean-bb"
-    | "national"
-    | "hisuian"
-    | "galarian"
-    | "galarian-ioa"
-    | "lumiose"
-    | "galarian-ct";
+  orderList: SortingList;
   /**
    * If true it will separate the boxes by generations.
    * If false the generations will continue on the same box.
@@ -150,7 +131,7 @@ interface PokedexContextData {
    * Sets a new sorting order in OrderList and sorts the PokedexShown array.
    * @param value Is the new sorting order to be set.
    */
-  handleSorting: (value: SortingLists) => void;
+  handleSorting: (value: SortingList) => void;
 
   // // BUILDER BOX
   /**
@@ -190,7 +171,7 @@ interface PokedexContextData {
    */
   handleToggleCheck: (
     kind: "check" | "uncheck" | "all",
-    value: boolean
+    value: boolean,
   ) => void;
   /**
    * Will filter by the selected game.
@@ -236,7 +217,7 @@ interface PokedexContextData {
 }
 
 const PokedexContext = createContext<PokedexContextData>(
-  {} as PokedexContextData
+  {} as PokedexContextData,
 );
 
 export interface PokemonShown extends Pokemon {
@@ -247,10 +228,10 @@ export interface PokemonShown extends Pokemon {
 
 export function PokedexProvider({ children }: PokedexProviderProps) {
   const [pokedexShown, setPokedexShown] = useState<PokemonShown[]>(
-    [] as PokemonShown[]
+    [] as PokemonShown[],
   );
   const [backupPokedex, setBackupPokedex] = useState<PokemonShown[]>(
-    [] as PokemonShown[]
+    [] as PokemonShown[],
   );
   const [cloudStorage, setCloudStorage] = useState<User>({} as User);
   const [viewGenderDifference, setViewGenderDifference] = useState(true);
@@ -265,6 +246,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     | "galarian"
     | "galarian-ioa"
     | "lumiose"
+    | "lumiose-hyperspace"
     | "galarian-ct"
   >("national");
   const [highlightPokemon, setHighlightPokemon] = useState("");
@@ -438,8 +420,6 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
 
     finalList = sortList(finalList, orderList);
-    console.log(finalList);
-
     setPokedexShown(finalList);
   }
 
@@ -571,7 +551,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
   }
 
-  function handleSorting(value: SortingLists) {
+  function handleSorting(value: SortingList) {
     if (!pokedexShown) {
       return;
     }
@@ -585,7 +565,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   function sortList(
     list: PokemonCustomBox[] | Pokemon[],
-    order: SortingLists
+    order: SortingList,
   ): PokemonCustomBox[] | Pokemon[] {
     if (order === "national") {
       return list
@@ -1004,7 +984,9 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
   function updatePageBox(updatedUser: User) {
     setCloudStorage(updatedUser);
 
-    let findCurrentBox = updatedUser.boxes.find((b) => b.name === pageBox.name);
+    const findCurrentBox = updatedUser.boxes.find(
+      (b) => b.name === pageBox.name,
+    );
 
     findCurrentBox!.pokemon = expandPokemonList(findCurrentBox!.pokemon);
 
@@ -1021,7 +1003,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     )
       .then((response) => response.json())
       .then((data) => {
@@ -1071,7 +1053,7 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
 
   function handleToggleCheck(
     kind: "check" | "uncheck" | "all",
-    value: boolean
+    value: boolean,
   ) {
     if (kind === "check") {
       if (value) {
@@ -1107,28 +1089,39 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
       return pkmn.customBoxId === idPokemon;
     });
 
-    if (findPokemonIndex < 0) {
-      return;
-    }
+    if (findPokemonIndex < 0) return;
 
     const currentCheck = pageBox.pokemon[findPokemonIndex].isChecked;
+    const nextCheckValue = !currentCheck;
+    const backUpPokemonList = [...pageBox.pokemon];
 
-    pageBox.pokemon[findPokemonIndex].isChecked = !currentCheck;
+    // 1. UPDATE LOCAL STATE IMMUTABLY (Instant UI reaction, no resync loop)
+    const updatedPokemonList = [...pageBox.pokemon];
+    updatedPokemonList[findPokemonIndex] = {
+      ...updatedPokemonList[findPokemonIndex],
+      isChecked: nextCheckValue,
+    };
 
-    await fetch(`/api/users/${idUser}/${pageBox.name}/${idPokemon}`, {
-      // cache: "no-store",
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        newCheck: !currentCheck,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        updatePageBox(data.updatedUser);
+    setPageBox({
+      ...pageBox,
+      pokemon: updatedPokemonList,
+    });
+
+    // 2. FIRE AND FORGET TO THE DATABASE
+    try {
+      await fetch(`/api/users/${idUser}/${pageBox.name}/${idPokemon}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newCheck: nextCheckValue }),
       });
+      // Do not call updatePageBox with server data here!
+    } catch (error) {
+      console.error("Failed to sync checkmark to database", error);
+      setPageBox({
+        ...pageBox,
+        pokemon: backUpPokemonList,
+      });
+    }
   }
 
   return (
