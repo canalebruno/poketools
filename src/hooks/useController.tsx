@@ -169,7 +169,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     const data = await response.json();
 
     if (data.success) {
-      signOut({ redirectTo: url });
+      signOut({ callbackUrl: url });
     } else {
       alert("Something went wrong. Try again later.");
     }

@@ -37,7 +37,7 @@ interface Hunt {
 }
 
 const NuzlockeContext = createContext<NuzlockeContextData>(
-  {} as NuzlockeContextData
+  {} as NuzlockeContextData,
 );
 
 export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
@@ -90,22 +90,22 @@ export function NuzlockeProvider({ children }: NuzlockeProviderProps) {
           pokemon = randomPokemon(
             filterAvailablePokemon(
               [...loc.general, ...loc.violet, ...loc.scarlet],
-              filteredType
-            )
+              filteredType,
+            ),
           );
         } else if (gameExclusive === "scarlet") {
           pokemon = randomPokemon(
             filterAvailablePokemon(
               [...loc.general, ...loc.scarlet],
-              filteredType
-            )
+              filteredType,
+            ),
           );
         } else if (gameExclusive === "violet") {
           pokemon = randomPokemon(
             filterAvailablePokemon(
               [...loc.general, ...loc.violet],
-              filteredType
-            )
+              filteredType,
+            ),
           );
         } else {
           pokemon = undefined;
@@ -418,11 +418,13 @@ export function useNuzlocke(): NuzlockeContextData {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const nuzlockeResponse = await fetch(`${process.env.BASE_URL}/api/nuzlocke`);
+  const nuzlockeResponse = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/nuzlocke`,
+  );
   const nuzlockeJsonPoor: SVLocation[] = await nuzlockeResponse.json();
 
   const paldeaDexResponse = await fetch(
-    `${process.env.BASE_URL}/api/paldeadex`
+    `${process.env.NEXTAUTH_URL}/api/paldeadex`,
   );
   const pokedex: Pokemon[] = await paldeaDexResponse.json();
 

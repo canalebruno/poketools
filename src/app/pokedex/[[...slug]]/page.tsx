@@ -4,6 +4,7 @@ import { connect } from "@/utils/dbConnect/dbConnect";
 import Pokedex from "@/utils/schema/PokedexSchema";
 import { SortingList } from "@/utils/types";
 import { notFound } from "next/navigation";
+import { SortOrder } from "mongoose";
 
 // 1. Define the configuration for each Pokedex page
 const POKEDEX_CONFIGO: Record<
@@ -114,7 +115,7 @@ export default async function PokedexTemplatePage({ params }: PageProps) {
   const rawData = await Pokedex.find({
     ...config.queryValue.find,
     "availability.homeDepositable": true,
-  }).sort(config.queryValue.sort);
+  }).sort(config.queryValue.sort as { [key: string]: SortOrder });
   const pokedexData = JSON.parse(JSON.stringify(rawData));
 
   return (

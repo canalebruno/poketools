@@ -14,7 +14,7 @@ export default async function CustomBoxTracker({
   const { email, boxName } = await params;
 
   const res = await fetch(
-    `${process.env.BASE_URL}/api/users/${email}/${boxName}`,
+    `${process.env.NEXTAUTH_URL}/api/users/${email}/${boxName}`,
   );
 
   if (!res.ok) {

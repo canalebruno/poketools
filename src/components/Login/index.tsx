@@ -9,8 +9,11 @@ export default function Login() {
   const { data } = useSession();
   const { loggedUser } = useController();
 
-  // const url = `http://localhost:3000`;
-  const url = `https://poketools-blue.vercel.app/`;
+  // Switch between localhost for dev and vercel for production
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://poketools-blue.vercel.app";
 
   return data?.user ? (
     <>
@@ -20,7 +23,8 @@ export default function Login() {
       <Button
         label="Sign Out"
         onClick={() => {
-          signOut({ redirectTo: url });
+          // Fixed parameter: callbackUrl
+          signOut({ callbackUrl: url });
         }}
       />
     </>
@@ -28,8 +32,9 @@ export default function Login() {
     <Button
       label="Sign In"
       onClick={() => {
+        // Fixed parameter: callbackUrl
         signIn("google", {
-          redirectTo: `${url}/tracker/`,
+          callbackUrl: `${url}/tracker/`,
         });
       }}
     />

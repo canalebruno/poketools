@@ -34,14 +34,20 @@ export async function DELETE(request: Request ,{params}: Params) {
     const customBoxId = (await params).customBoxId
 
     try {
-         const updatedUser: User = await Users.findOneAndUpdate(
+         // 1. Allow the type to be User or null
+         const updatedUser: User | null = await Users.findOneAndUpdate(
             {"email": email, "boxes.name": boxName},
             { $pull: { "boxes.$[e1].pokemon": { "customBoxId": customBoxId } } },
             { arrayFilters: [{ "e1.name": boxName }], new: true }
-        )
+         )
+         
+         // 2. Add a fallback check in case the user wasn't found
+         if (!updatedUser) {
+             return NextResponse.json({ success: false, message: "User or Box not found." }, { status: 404 })
+         }
     
         return NextResponse.json({success: true, message:"Pokemon removed from the list.", updatedUser})
-} catch (error) {
+    } catch (error) {
         return NextResponse.json({success: false, message: `No data found. Error: ${error}`})
     }
 }

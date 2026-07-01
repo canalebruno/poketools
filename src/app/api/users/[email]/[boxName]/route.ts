@@ -16,13 +16,18 @@ export async function DELETE(request: Request ,{params}: Params) {
     const boxName = (await params).boxName
 
     try {
-        const updatedUser: User = await Users.findOneAndUpdate(
+        // 1. Accept that it could return User or null
+        const updatedUser: User | null = await Users.findOneAndUpdate(
             { "email": email },
             { $pull: { "boxes": { "name": boxName } } },
             { new: true }
         )
         
-
+        // 2. Add the safety check
+        if (!updatedUser) {
+            return NextResponse.json({ success: false, message: "User not found." }, { status: 404 })
+        }
+        
         return NextResponse.json({success: true, message:"Pokemon check updated.", updatedUser})
     } catch (error) {
         return NextResponse.json({success: false, message: `No data found. Error: ${error}`})
@@ -35,11 +40,15 @@ export async function PUT(request: Request ,{params}: Params) {
     const { updatedBox }  = await request.json()
 
     try {
-        const updatedUser: User = await Users.findOneAndUpdate(
+        const updatedUser: User | null = await Users.findOneAndUpdate(
             { "email": email },
             { $set: { "boxes.$[e1].pokemon": updatedBox } },
             { new: true, arrayFilters: [{ "e1.name": boxName }] }
         )
+
+        if (!updatedUser) {
+            return NextResponse.json({ success: false, message: "User not found." }, { status: 404 })
+        }
         
         return NextResponse.json({success: true, message:"Box updated.", updatedUser})
     } catch (error) {
@@ -53,11 +62,15 @@ export async function POST(request: Request ,{params}: Params) {
     const newPokemon  = await request.json()
 
     try {
-        const updatedUser: User = await Users.findOneAndUpdate(
+        const updatedUser: User | null = await Users.findOneAndUpdate(
             { "email": email },
             { $push: { "boxes.$[e1].pokemon": newPokemon } },
             { new: true, arrayFilters: [{ "e1.name": boxName }] }
         )
+
+        if (!updatedUser) {
+            return NextResponse.json({ success: false, message: "User not found." }, { status: 404 })
+        }
         
         return NextResponse.json({success: true, message:"Box updated. Pokemon added.", updatedUser})
     } catch (error) {
@@ -84,7 +97,7 @@ export async function GET(request: Request, { params }: Params) {
         }
 
         // 6. Fetch full Pokedex details
-        const fullPokedexResponse = await fetch(`${process.env.BASE_URL}/api/pokedex`);
+        const fullPokedexResponse = await fetch(`${process.env.NEXTAUTH_URL}/api/pokedex`);
         const fullPokedex = await fullPokedexResponse.json();
 
         // 7. Map details cleanly
