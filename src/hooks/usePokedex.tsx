@@ -186,7 +186,7 @@ interface PokedexContextData {
   /**
    * Sets the current page pokedex to be used as backup.
    */
-  loadPokedex: (loadingPokedex: Pokemon[]) => void; // GIVE DESCRIPTION
+  loadPokedex: (loadingPokedex: Pokemon[], targetSort: SortingList) => void; // GIVE DESCRIPTION
   /**
    * When loading a new page it resets the filter variables to the page's default.
    */
@@ -259,10 +259,16 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  function loadPokedex(loadingPokedex: PokemonShown[]) {
+  function loadPokedex(
+    loadingPokedex: PokemonShown[],
+    targetSort: SortingList = "national",
+  ) {
     setFirstLoad(true);
-    setBackupPokedex(loadingPokedex);
-    // setPokedexShown(loadingPokedex);
+    setOrderList(targetSort);
+
+    const freshlySorted = sortList(loadingPokedex, targetSort);
+    setBackupPokedex(freshlySorted);
+    setPokedexShown(freshlySorted);
   }
 
   function resetControls() {
@@ -689,6 +695,8 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
+    pathname,
+    backupPokedex,
     viewGenderDifference,
     viewOnlyOneForm,
     showChecked,

@@ -42,7 +42,7 @@ interface ControllerContextData {
 }
 
 const ControllerContext = createContext<ControllerContextData>(
-  {} as ControllerContextData
+  {} as ControllerContextData,
 );
 
 export function ControllerProvider({ children }: ControllerProviderProps) {
@@ -110,7 +110,7 @@ export function ControllerProvider({ children }: ControllerProviderProps) {
     const data = await getDataByPokedex(gamedex);
 
     if (data.success) {
-      loadPokedex(data.data);
+      loadPokedex(data.data, "national");
       callback();
     }
   }

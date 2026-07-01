@@ -16,7 +16,7 @@ export async function PUT(request: Request ,{params}: Params) {
     const { newCheck }  = await request.json()
 
     try {
-         const updatedUser: User = await Users.findOneAndUpdate(
+         await Users.findOneAndUpdate(
             {"email": email, "boxes.name": boxName},
             { $set: { "boxes.$[e1].pokemon.$[e2].isChecked": newCheck } },
             { arrayFilters: [{ "e1.name": boxName }, { "e2.customBoxId": customBoxId }], new: true }

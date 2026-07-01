@@ -75,19 +75,28 @@ export default function Box({
     ) {
       // 1. Perform the mapping directly on the current array snapshot
       const updatedList = pokedexShown.map((currentPkmn) => {
-        const updatedPkmn = (pokemonListShown as any[]).find(
-          (p) =>
-            p.customBoxId === currentPkmn.customBoxId ||
-            p.id === currentPkmn.id,
-        );
-        return updatedPkmn
-          ? { ...currentPkmn, isChecked: updatedPkmn.isChecked }
-          : currentPkmn;
+        // Loop safely over the typed union array item signatures
+        const updatedPkmn = pokemonListShown.find((p) => {
+          const pCustomBoxId = "customBoxId" in p ? p.customBoxId : undefined;
+          return (
+            (pCustomBoxId && pCustomBoxId === currentPkmn.customBoxId) ||
+            p.id === currentPkmn.id
+          );
+        });
+
+        // Safely access properties using type narrowing guardrails
+        const isChecked =
+          updatedPkmn && "isChecked" in updatedPkmn
+            ? updatedPkmn.isChecked
+            : currentPkmn.isChecked;
+
+        return updatedPkmn ? { ...currentPkmn, isChecked } : currentPkmn;
       });
 
       // 2. Pass the final processed array directly to your setter
       setPokedexShown(updatedList);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemonListShown]);
 
   function handleBoxQuantity() {

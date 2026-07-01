@@ -121,6 +121,7 @@ export default async function PokedexTemplatePage({ params }: PageProps) {
     <div className={styles.container}>
       <h1>{config.title}</h1>
       <StaticPokedexPage
+        key={currentPath}
         sortingDefault={config.sorting}
         pokedex={pokedexData}
       />
