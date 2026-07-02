@@ -426,7 +426,7 @@ export default function CustomBoxManager() {
                   <Link
                     key={list.id}
                     className={styles.boxCard}
-                    href={`/tracker/${loggedUser.email}/${list.id}`}
+                    href={`/tracker/${loggedUser.username}/${list.id}`}
                   >
                     <span>{list.name}</span>
                     <ArrowRightAltIcon />
