@@ -46,15 +46,7 @@ export default function SortingSelect() {
       value: "lumiose-hyperspace",
       label: "Lumiose Hyperspace Dex",
     },
-  ].filter((option) => {
-    if (pathname === "/svboxes") {
-      return option.value === "national" || option.value === "paldean";
-    } else if (pathname === "/teal-mask-boxes") {
-      return option.value === "national" || option.value === "paldean-tm";
-    } else {
-      return option;
-    }
-  });
+  ];
 
   const { handleSorting, orderList } = usePokedex();
 

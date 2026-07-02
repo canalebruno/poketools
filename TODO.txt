@@ -1,10 +1,8 @@
 filter
-show transfer only forms
+show only catchable pokemon
 
 new number order for forms where the native one stays in the front 1 / 1.01 / 1.02
 
 swap between icons
-
-za only one form not working
 
 the click is checking two same pokemons
