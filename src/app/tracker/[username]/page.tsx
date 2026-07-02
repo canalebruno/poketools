@@ -39,12 +39,14 @@ export default function Profile() {
 
     localStorage.removeItem("localBoxes");
 
+    setHasOldLocalStorage(false);
+
     if (updateBoxes.length > 0) {
       updateBoxes(
         loggedUser?._id as string,
         updatedLists.filter((box) => {
           return box.id !== undefined;
-        }) as List[]
+        }) as List[],
       );
     }
   }
@@ -118,7 +120,7 @@ export default function Profile() {
             onClick={() => {
               if (
                 confirm(
-                  "Your local storage boxes will be loaded in the current user's database and deleted from the local storage. After this you can access those boxes whenever you login."
+                  "Your local storage boxes will be loaded in the current user's database and deleted from the local storage. After this you can access those boxes whenever you login.",
                 )
               ) {
                 incorporateOldLists();
