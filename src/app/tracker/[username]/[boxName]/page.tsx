@@ -61,10 +61,12 @@ export default async function CustomBoxTracker({
       }),
     };
 
+    const serializedBox = JSON.parse(JSON.stringify(expandedBox));
+
     // 7. Pass the fully expanded array down to the client layout component
     return (
       <div className={styles.container}>
-        <DynamicPokedexPage pokedex={expandedBox} />
+        <DynamicPokedexPage pokedex={serializedBox} />
       </div>
     );
   } catch (error) {

@@ -115,9 +115,13 @@ export default async function PokedexTemplatePage({ params }: PageProps) {
   const rawData = await Pokedex.find({
     ...config.queryValue.find,
     "availability.homeDepositable": true,
-  }).sort(config.queryValue.sort as { [key: string]: SortOrder });
-  const pokedexData = JSON.parse(JSON.stringify(rawData));
-
+  })
+    .sort(config.queryValue.sort as { [key: string]: SortOrder })
+    .lean();
+  const pokedexData = rawData.map((doc: any) => ({
+    ...doc,
+    _id: doc._id ? doc._id.toString() : "",
+  }));
   return (
     <div className={styles.container}>
       <h1>{config.title}</h1>
