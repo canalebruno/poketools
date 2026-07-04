@@ -2,15 +2,14 @@ import styles from "../../../styles/Home.module.scss";
 import DynamicPokedexPage from "@/components/DynamicPokedexPage";
 import { connect } from "@/utils/dbConnect/dbConnect";
 import Users from "@/utils/schema/UsersSchema";
-import Pokedex from "@/utils/schema/PokedexSchema"; //
-import { Pokemon, User } from "@/utils/types";
+import Pokedex from "@/utils/schema/PokedexSchema";
+import { User } from "@/utils/types";
 
 interface PageParams {
   username: string;
   boxName: string;
 }
 
-// Forces Next.js to run this as a dynamic server-rendered page (ignores build-time caching)
 export const dynamic = "force-dynamic";
 
 export default async function CustomBoxTracker({
@@ -18,14 +17,12 @@ export default async function CustomBoxTracker({
 }: {
   params: Promise<PageParams>;
 }) {
-  // 1. Await and extract the dynamic URL parameters
   const { username, boxName } = await params;
 
   try {
-    // 2. Open the direct connection to MongoDB
     await connect();
 
-    // 3. Query the user document matching the username in the URL
+    // 1. Grab the user document
     const userDoc = (await Users.findOne({ username }).lean()) as User | null;
 
     if (!userDoc) {
@@ -36,7 +33,7 @@ export default async function CustomBoxTracker({
       );
     }
 
-    // 4. Locate the specific box within the user's boxes array
+    // 2. Find the requested box
     const checkBox = userDoc.boxes?.find(
       (list: any) => list.id === boxName || list.name === boxName,
     );
@@ -49,21 +46,31 @@ export default async function CustomBoxTracker({
       );
     }
 
-    // 5. Query the full database collection using your Pokedex Mongoose model
-    const fullPokedexData = (await Pokedex.find({}).lean()) as any[];
+    // 3. Extract just the IDs we need to look up
+    const targetIds = checkBox.pokemon.map((pkmn: any) => pkmn.id);
 
-    // 6. Map through the box items and merge them safely with complete Pokedex metadata
+    // 4. Batch query ONLY the matching pokemon from MongoDB ($in is incredibly fast)
+    const matchingPokedexData = (await Pokedex.find({
+      id: { $in: targetIds },
+    }).lean()) as any[];
+
+    // 5. Create a fast Key-Value lookup map so we don't do nested loops
+    const pokedexMap = new Map(
+      matchingPokedexData.map((item) => [item.id, item]),
+    );
+
+    // 6. Merge the user's box items with the fetched metadata
     const expandedBox = {
       ...checkBox,
       pokemon: checkBox.pokemon.map((pkmn: any) => {
-        const extraInfo = fullPokedexData.find((full) => full.id === pkmn.id);
+        const extraInfo = pokedexMap.get(pkmn.id) || {};
         return { ...pkmn, ...extraInfo };
       }),
     };
 
+    // Safe serialization for Next.js Server Components
     const serializedBox = JSON.parse(JSON.stringify(expandedBox));
 
-    // 7. Pass the fully expanded array down to the client layout component
     return (
       <div className={styles.container}>
         <DynamicPokedexPage pokedex={serializedBox} />
