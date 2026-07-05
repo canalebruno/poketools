@@ -495,6 +495,57 @@ export function PokedexProvider({ children }: PokedexProviderProps) {
           });
         }
         return initialList;
+      case "frlg":
+        initialList = list.filter((pkmn) => {
+          return pkmn.dex.frlgDex;
+        });
+
+        if (!huntGameSelection?.exclusives?.includes("frlg-lg")) {
+          return initialList.filter((pkmn) => {
+            return (
+              !pkmn.data.family.includes(27) &&
+              !pkmn.data.family.includes(37) &&
+              !pkmn.data.family.includes(69) &&
+              !pkmn.data.family.includes(79) &&
+              !pkmn.data.family.includes(120) &&
+              !pkmn.data.family.includes(126) &&
+              !pkmn.data.family.includes(127) &&
+              !pkmn.data.family.includes(298) &&
+              !pkmn.data.family.includes(200) &&
+              !pkmn.data.family.includes(215) &&
+              !pkmn.data.family.includes(223) &&
+              !pkmn.data.family.includes(226)
+            );
+          });
+        } else if (!huntGameSelection?.exclusives?.includes("frlg-fr")) {
+          return initialList.filter((pkmn) => {
+            return (
+              !pkmn.data.family.includes(23) &&
+              !pkmn.data.family.includes(43) &&
+              !pkmn.data.family.includes(54) &&
+              !pkmn.data.family.includes(58) &&
+              !pkmn.data.family.includes(90) &&
+              !pkmn.data.family.includes(125) &&
+              !pkmn.data.family.includes(123) &&
+              !pkmn.data.family.includes(194) &&
+              !pkmn.data.family.includes(198) &&
+              !pkmn.data.family.includes(211) &&
+              !pkmn.data.family.includes(225) &&
+              !pkmn.data.family.includes(227)
+            );
+          });
+        }
+        return initialList;
+      case "plza":
+        initialList = list.filter((pkmn) => {
+          return (
+            pkmn.dex.zaLumioseDex ||
+            (huntGameSelection?.exclusives?.includes("plza-hs") &&
+              pkmn.dex.lumioseHyperspaceDex)
+          );
+        });
+
+        return initialList;
       case "pla":
         return list.filter((pkmn) => pkmn.dex.hisuiDex);
       default:

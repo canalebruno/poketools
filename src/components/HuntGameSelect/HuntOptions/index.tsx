@@ -17,7 +17,7 @@ type DLC = {
 
 type HuntGameOptionsSelected = {
   baseGame: string[];
-  dlc: undefined | string[];
+  dlc?: string[];
 };
 
 export default function HuntOptions({ isOpen, onClose }: HuntOptionsProps) {
@@ -80,6 +80,36 @@ export default function HuntOptions({ isOpen, onClose }: HuntOptionsProps) {
     },
   ];
 
+  const plzaDLC: DLC[] = [
+    {
+      id: 1,
+      name: "Legends ZA",
+      value: "plza-base",
+      kind: "base",
+    },
+    {
+      id: 2,
+      name: "Legends ZA Hyperspace",
+      value: "plza-hs",
+      kind: "dlc",
+    },
+  ];
+
+  const frlgDLC: DLC[] = [
+    {
+      id: 1,
+      name: "FireRed",
+      value: "frlg-fr",
+      kind: "base",
+    },
+    {
+      id: 2,
+      name: "LeafGreen",
+      value: "frlg-lg",
+      kind: "base",
+    },
+  ];
+
   useEffect(() => {
     switch (huntGameSelection?.baseGame) {
       case "sv":
@@ -94,6 +124,20 @@ export default function HuntOptions({ isOpen, onClose }: HuntOptionsProps) {
         setHuntGameOptionsSelected({
           baseGame: ["swsh-sw", "swsh-sh"],
           dlc: ["swsh-ioa", "swsh-ct"],
+        });
+        break;
+      case "frlg":
+        setOptionsShown(frlgDLC);
+        setHuntGameOptionsSelected({
+          baseGame: ["frlg-fr", "frlg-lg"],
+          dlc: [],
+        });
+        break;
+      case "plza":
+        setOptionsShown(plzaDLC);
+        setHuntGameOptionsSelected({
+          baseGame: ["plza-base"],
+          dlc: ["plza-hs"],
         });
         break;
       default:
@@ -162,6 +206,18 @@ export default function HuntOptions({ isOpen, onClose }: HuntOptionsProps) {
               setHuntGameOptionsSelected({
                 dlc: huntGameOptionsSelected.dlc,
                 baseGame: ["swsh-sw"],
+              });
+              break;
+            case "frlg-fr":
+              setHuntGameOptionsSelected({
+                dlc: huntGameOptionsSelected.dlc,
+                baseGame: ["frlg-lg"],
+              });
+              break;
+            case "frlg-lg":
+              setHuntGameOptionsSelected({
+                dlc: huntGameOptionsSelected.dlc,
+                baseGame: ["frlg-fr"],
               });
               break;
           }

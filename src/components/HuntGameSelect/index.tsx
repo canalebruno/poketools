@@ -10,7 +10,8 @@ export default function HuntGameSelect() {
   const { handleSelectGame, huntGameSelection } = usePokedex();
   const [isOpen, setIsOpen] = useState(false);
 
-  const validOptions = ["sv", "swsh"];
+  // Games with DLC or Version Exclusive
+  const validOptions = ["sv", "swsh", "plza", "frlg"];
 
   return (
     <>
@@ -36,6 +37,8 @@ export default function HuntGameSelect() {
           <option value="sv">Scarlet & Violet</option>
           <option value="pla">Legends: Arceus</option>
           <option value="swsh">Sword & Shield</option>
+          <option value="plza">Legends: ZA</option>
+          <option value="frlg">FireRed & LeafGreen</option>
         </select>
         {huntGameSelection &&
           validOptions.includes(huntGameSelection.baseGame) && (

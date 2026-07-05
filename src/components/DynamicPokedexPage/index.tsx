@@ -7,6 +7,8 @@ import BoxGridLayout from "../BoxGridLayout";
 import FilterControl from "../FilterControl";
 import { List } from "@/utils/types";
 import ShinyTrackerControl from "../ShinyTrackerControl";
+import HuntOptions from "../HuntGameSelect/HuntOptions";
+import HuntGameSelect from "../HuntGameSelect";
 
 interface DynamicPokedexPageProps {
   pokedex: List;
@@ -32,6 +34,7 @@ export default function DynamicPokedexPage({
     <>
       <ShinyTrackerControl />
       <FilterControl sortingDefault="national" />
+      <HuntGameSelect />
 
       {pokedex && (
         <>
