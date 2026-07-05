@@ -49,39 +49,44 @@ export default function Nav() {
       slug: "/pokedex/scarlet-violet/paldea",
     },
     {
-      id: 3,
+      id: 2.1,
       title: "Kitakami",
       slug: "/pokedex/scarlet-violet/kitakami",
     },
     {
-      id: 4,
+      id: 2.2,
       title: "BB Academy",
       slug: "/pokedex/scarlet-violet/blueberry",
     },
     {
-      id: 5,
+      id: 3,
       title: "Hisui",
       slug: "/pokedex/legends-arceus/hisui",
     },
     {
-      id: 6,
+      id: 4,
       title: "Galar",
       slug: "/pokedex/sword-shield/galar",
     },
     {
-      id: 7,
+      id: 4.1,
       title: "Isle of Armor",
       slug: "/pokedex/sword-shield/isle-of-armor",
     },
     {
-      id: 8,
+      id: 4.2,
       title: "Crown Thundra",
       slug: "/pokedex/sword-shield/crown-thundra",
     },
     {
-      id: 9,
+      id: 6,
       title: "Home",
       slug: "/pokedex/home",
+    },
+    {
+      id: 5,
+      title: "FireRed and LeafGreen",
+      slug: "/pokedex/firered-leafgreen/national",
     },
     {
       id: 10,

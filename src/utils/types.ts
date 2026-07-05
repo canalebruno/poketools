@@ -30,6 +30,7 @@ export interface Pokemon {
     paldeaDex: null | number;
     paldeaTMDex: number | null;
     paldeaBBDex: number | null;
+    frlgDex: number | null;
     svHomeAvailable: boolean;
     swshHomeAvailable: boolean;
   }

@@ -92,6 +92,14 @@ const POKEDEX_CONFIGO: Record<
     },
     sorting: "galarian-ioa",
   },
+  "firered-leafgreen/national": {
+    title: "FireRed and LeafGreen - National Dex",
+    queryValue: {
+      find: { "dex.frlgDex": { $gte: 1 } },
+      sort: { "dex.frlgDex": 1, id: 1 },
+    },
+    sorting: "national",
+  },
 };
 
 interface PageProps {

@@ -12,6 +12,9 @@
 !.yarn/versions
 
 # testing
+TODO.txt
+
+# testing
 /coverage
 
 # next.js
